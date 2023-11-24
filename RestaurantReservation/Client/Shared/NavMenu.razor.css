@@ -69,3 +69,13 @@
     }
 }
 
+.adjust {
+    min-height: 150px;
+    background-color: #F8D568;
+}
+
+#logo{
+    width:130px;
+}
+
+
