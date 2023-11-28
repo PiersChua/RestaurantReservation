@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@inject NavigationManager Navigation
+@inherits LayoutComponentBase
 
 <div class="page">
     <div class="sidebar">
@@ -6,8 +7,58 @@
     </div>
 
     <main>
+        <div class="top-row px-4 auth adjust">
+                <form action="" class="searchbar">
+                    <input type="text" name="search" placeholder="Book a Reservation now!">
+                    <button type="submit" class="search"><img src="images/search.png"></button>
+                </form>
+             <AuthorizeView>
+                <Authorized>
+                    <div>
+                        <a href="authentication/profile">
+                            <span class="oi oi-person" aria-hidden="true"></span> Hello, @context.User.Identity?.Name!
+                        </a>
+                    </div>
+                    <div>
+                        <a class="nav-link" href="#" @onclick="BeginLogOut">
+                            <span class="oi oi-account-logout" aria-hidden="true"></span> Log out
+                        </a>
+                    </div>
+
+                </Authorized>
+                <NotAuthorized>
+                    <div>
+                        <a href="authentication/register">
+                            <span class="oi oi-person" aria-hidden="true"></span> Register
+                        </a>
+                    </div>
+                    <div>
+                        <a href="authentication/login" @onclick="BeginLogOut">
+                            <span class="oi oi-account-login" aria-hidden="true"></span> Log in
+                        </a>
+                    </div>
+                </NotAuthorized>
+            </AuthorizeView> 
+ @*        <AuthorizeView>
+    <Authorized>
+        <a href="authentication/profile">Hello, @context.User.Identity?.Name!</a>
+        <button class="nav-link btn btn-link" @onclick="BeginLogOut">Log out</button>
+    </Authorized>
+    <NotAuthorized>
+        <a href="authentication/register">Register</a>
+        <a href="authentication/login">Log in</a>
+    </NotAuthorized>
+</AuthorizeView> *@
+        </div>
         <article class="content px-4">
             @Body
         </article>
     </main>
 </div>
+
+@code{
+    private void BeginLogOut()
+    {
+        Navigation.NavigateToLogout("authentication/logout");
+    }
+}
