@@ -2,16 +2,16 @@
 @inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
     <main>
-        <div class="top-row px-4 auth adjust">
-                <form action="" class="searchbar">
-                    <input type="text" name="search" placeholder="Book a Reservation now!">
-                    <button type="submit" class="search"><img src="images/search.png"></button>
-                </form>
+        <div class="top-row adjust">
+            <div>
+                <a href="/"><img src="images/appIcon.png" id="logo"></a>
+            </div>
+            <form action="" class="searchbar">
+                <input type="text" name="search" placeholder="Book a Reservation now!">
+                <button type="submit" class="search"><img src="images/search.png"></button>
+            </form>
 
             <AuthorizeView>
                 <Authorized>
@@ -24,20 +24,58 @@
                 <NotAuthorized>
                     <div>
                         <a class="adjust-icon" href="authentication/register">
-                            <span class="oi oi-person adjust-login" aria-hidden="true"></span>
+                            <span class="oi oi-person" aria-hidden="true"></span>
                         </a>
                     </div>
                 </NotAuthorized>
             </AuthorizeView>
-
         </div>
-        <article class="content px-4">
+        <div class= "navbar ps-5">
+            <AuthorizeView>
+                <Authorized>
+                    <div class="nav-div">
+                        <a class="nav-a" href="#" @onclick="BeginLogOut">
+                            <span class="oi oi-account-logout" aria-hidden="true"></span>Log out
+                        </a>
+                    </div>
+                </Authorized>
+            </AuthorizeView>
+            <div class="nav-div">
+                <a class="nav-a" href="" Match="NavLinkMatch.All">
+                    <span class="oi bi bi-house-fill" aria-hidden="true"></span> Home
+                </a>
+            </div>
+            <div class="nav-div">
+                <a class="nav-a" href="/restaurants">
+                    <span class="oi oi-spreadsheet" aria-hidden="true"></span> Restaurants
+                </a>
+            </div>
+            <div class="nav-div">
+                <a class="nav-a" href="/reservations">
+                    <span class="oi oi-calendar" aria-hidden="true"></span> Reservations
+                </a>
+            </div>
+            <div class="nav-div">
+                <a class="nav-a" href="/more">
+                    <span class="oi bi bi-three-dots" aria-hidden="true"></span> More
+                </a>
+            </div>
+        </div>
+        <article>
             @Body
         </article>
     </main>
 </div>
 
 @code{
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
     private void BeginLogOut()
     {
         Navigation.NavigateToLogout("authentication/logout");
