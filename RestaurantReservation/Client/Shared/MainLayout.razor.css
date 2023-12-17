@@ -145,12 +145,17 @@ main {
 .nav-a {
     text-decoration: none;
     color: #FFFFFF;
+    transition: 0.5s;
 }
+    .nav-a:hover {
+        color: #575757;
+    }
+  
 
 .nav-div {
     font-size: 20px;
-
 }
+
 .body{
     padding-top:50px;
 }

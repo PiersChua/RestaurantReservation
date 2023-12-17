@@ -1,5 +1,6 @@
 ﻿.restaurant-search{
     background-color:#EDEDED;
+    padding:30px;
 }
 
 h2{
@@ -23,7 +24,6 @@ select {
     background-color:#EDEDED;
 }
 .filter-search h4{
-    margin-left:20px;
     font-size:20px;
     font-family:sans-serif;
 
