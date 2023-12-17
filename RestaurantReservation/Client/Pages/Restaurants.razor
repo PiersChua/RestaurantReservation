@@ -1,7 +1,27 @@
 ﻿@page "/restaurants"
+<div class="restaurant-search">
+	<AuthorizeView>
+		<Authorized>
+			<h2> Welcome @context.User.Identity.! Where would you like to dine in today?</h2>
+		</Authorized>
+		<NotAuthorized>
+			<h2> Welcome Guest! Where would you like to dine in today?</h2>
+		</NotAuthorized>
+	</AuthorizeView>
+	<div class="filter-search">
+		<h4> Filter <span class="oi bi bi-funnel"></span></h4>
+		<select @bind="filter">
+			<option value="" disabled selected hidden>Select</option>
+			@foreach (var item in selections)
+			{
+				<option value="@item">@item</option>
+			}
+		</select>
+	</div>
+</div>
 
-<h3>Restaurants</h3>
 
 @code {
-
+	private string filter;
+	private List<string> selections = new List<string> { "Cusine", "Location", "Price" };
 }
