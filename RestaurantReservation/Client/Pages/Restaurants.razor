@@ -2,7 +2,7 @@
 <div class="restaurant-search">
 	<AuthorizeView>
 		<Authorized>
-			<h2> Welcome @context.User.Identity.! Where would you like to dine in today?</h2>
+			<h2> Welcome @context.User.Identity.Name! Where would you like to dine in today?</h2>
 		</Authorized>
 		<NotAuthorized>
 			<h2> Welcome Guest! Where would you like to dine in today?</h2>
@@ -10,9 +10,23 @@
 	</AuthorizeView>
 	<div class="filter-search">
 		<h4> Filter <span class="oi bi bi-funnel"></span></h4>
-		<select @bind="filter">
-			<option value="" disabled selected hidden>Select</option>
-			@foreach (var item in selections)
+		<select @bind="cuisine">
+			<option value="" disabled selected hidden>Cuisines</option>
+			@foreach (var item in cuisineSelections)
+			{
+				<option value="@item">@item</option>
+			}
+		</select>
+		<select @bind="location">
+			<option value="" disabled selected hidden>Locations</option>
+			@foreach (var item in locationSelections)
+			{
+				<option value="@item">@item</option>
+			}
+		</select>
+		<select @bind="price">
+			<option value="" disabled selected hidden>Price range</option>
+			@foreach (var item in priceSelections)
 			{
 				<option value="@item">@item</option>
 			}
@@ -22,6 +36,12 @@
 
 
 @code {
-	private string filter;
-	private List<string> selections = new List<string> { "Cusine", "Location", "Price" };
+	private string cuisine;
+	private List<string> cuisineSelections = new List<string> { "Chinese", "Malay", "Eurasian","Indian" };
+
+	private string location;
+	private List<string> locationSelections = new List<string> { "North", "South", "East","West" };
+
+	private string price;
+	private List<string> priceSelections = new List<string> { "High-Low", "Low-High"};
 }

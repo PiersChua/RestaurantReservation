@@ -32,3 +32,38 @@
         font-weight: bold;
         font-family: sans-serif;
     }
+
+.wrapper {
+    margin:30px 0;
+    border: 1px solid #575757;
+    display: flex;
+    overflow-x: scroll;
+    max-width:1400px;
+}
+
+.item{
+    border:1px solid #000000;
+    min-width:300px;
+    height:250px;
+    line-height:240px;
+    text-align:center;
+    background-color:#575757;
+}
+
+.menu-title {
+    font-weight: bold;
+    font-family: sans-serif;
+    margin: 20px 0 20px 20px;
+    color:#575757;
+}
+.red-color {
+    color:#FF0000;
+}
+
+.grey-color {
+    color: #088F8F;
+}
+
+.green-color {
+   color: #008000;
+}
