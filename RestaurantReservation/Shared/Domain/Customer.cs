@@ -11,5 +11,9 @@
 		public int? PhoneNumber { get; set; }
 		public string? Status { get; set; }
 		public virtual List<Reservation>? Reservations { get; set; }
+		public virtual List<Favourite>? Favourites { get; set; }
+		public virtual List<RestaurantApplication>? RestaurantApplications { get; set; }	
+		public virtual List<PaymentMethod>? PaymentMethods { get; set; }
+		public virtual List<Review>? Reviews { get; set; }
 	}
 }

@@ -3,7 +3,8 @@
 	public class Reservation
 	{
 		public int Id { get; set; }
-		public DateTime? DateTime { get; set; }
+		public DateOnly? Date { get; set; }
+		public TimeOnly? Time { get; set; }
 		public int? Guest { get; set; }
 		public string? Request { get; set; }
 		public int CustomerId { get; set; }

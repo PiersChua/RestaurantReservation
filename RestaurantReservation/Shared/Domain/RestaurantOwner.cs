@@ -7,5 +7,6 @@
 		public virtual Restaurant? Restaurant { get; set; }
 		public int CustomerId { get; set; }
 		public virtual Customer? Customer { get; set; }
+		public virtual List<Restaurant>? Restaurants { get; set; }
 	}
 }

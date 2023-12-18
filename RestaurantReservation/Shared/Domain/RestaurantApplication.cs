@@ -4,6 +4,7 @@ namespace RestaurantReservation.Server.Domain
 {
 	public class RestaurantApplication
 	{
+		public int Id { get; set; }
         public string? RestaurantName { get; set; }
 		public string? Email { get; set; }
 		public string? Cuisine { get; set; }
@@ -14,6 +15,5 @@ namespace RestaurantReservation.Server.Domain
 		public virtual Customer? Customer { get; set;}
 		public int StaffId { get; set; }
 		public virtual Staff? Staff { get; set; }
-
     }
 }
