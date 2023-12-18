@@ -16,7 +16,7 @@ namespace RestaurantReservation.Shared.Domain
 
         public DateTime? ClosingTime { get; set; }
 
-        public int RestaurantId { get; set; }
+        public int? RestaurantId { get; set; }
 
         public virtual Restaurant? Restaurant { get; set; }
 

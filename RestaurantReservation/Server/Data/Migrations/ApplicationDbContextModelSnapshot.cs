@@ -370,13 +370,13 @@ namespace RestaurantReservation.Shared.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("FavourtieName")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RestaurantId")
+                    b.Property<int?>("RestaurantId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -411,7 +411,7 @@ namespace RestaurantReservation.Shared.Data.Migrations
                     b.Property<double?>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("RestaurantId")
+                    b.Property<int?>("RestaurantId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -438,7 +438,7 @@ namespace RestaurantReservation.Shared.Data.Migrations
                     b.Property<DateTime?>("OpeningTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("RestaurantId")
+                    b.Property<int?>("RestaurantId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -462,7 +462,7 @@ namespace RestaurantReservation.Shared.Data.Migrations
                     b.Property<int?>("CardNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DateOfExpiry")
@@ -511,25 +511,25 @@ namespace RestaurantReservation.Shared.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("DateTime")
+                    b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("Guest")
+                    b.Property<int>("Guest")
                         .HasColumnType("int");
 
-                    b.Property<int>("PromotionId")
+                    b.Property<int?>("PromotionId")
                         .HasColumnType("int");
 
                     b.Property<string>("Request")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ReservationStatusId")
+                    b.Property<int?>("ReservationStatusId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RestaurantId")
+                    b.Property<int?>("RestaurantId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -587,10 +587,10 @@ namespace RestaurantReservation.Shared.Data.Migrations
                     b.Property<int?>("PhoneNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("RestaurantOwnerId")
+                    b.Property<int?>("RestaurantOwnerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubscriptionId")
+                    b.Property<int?>("SubscriptionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -615,7 +615,7 @@ namespace RestaurantReservation.Shared.Data.Migrations
                     b.Property<string>("Cuisine")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -630,7 +630,7 @@ namespace RestaurantReservation.Shared.Data.Migrations
                     b.Property<string>("RestaurantName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StaffId")
+                    b.Property<int?>("StaffId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
@@ -671,7 +671,7 @@ namespace RestaurantReservation.Shared.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DateTime")
@@ -683,7 +683,7 @@ namespace RestaurantReservation.Shared.Data.Migrations
                     b.Property<int?>("Rating")
                         .HasColumnType("int");
 
-                    b.Property<int>("RestaurantId")
+                    b.Property<int?>("RestaurantId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -709,7 +709,7 @@ namespace RestaurantReservation.Shared.Data.Migrations
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("RestaurantId")
+                    b.Property<int?>("RestaurantId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -907,15 +907,11 @@ namespace RestaurantReservation.Shared.Data.Migrations
                 {
                     b.HasOne("RestaurantReservation.Shared.Domain.Customer", "Customer")
                         .WithMany("Favourites")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("RestaurantReservation.Shared.Domain.Restaurant", "Restaurant")
                         .WithMany("Favourites")
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RestaurantId");
 
                     b.Navigation("Customer");
 
@@ -926,9 +922,7 @@ namespace RestaurantReservation.Shared.Data.Migrations
                 {
                     b.HasOne("RestaurantReservation.Shared.Domain.Restaurant", "Restaurant")
                         .WithMany("Menus")
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RestaurantId");
 
                     b.Navigation("Restaurant");
                 });
@@ -937,9 +931,7 @@ namespace RestaurantReservation.Shared.Data.Migrations
                 {
                     b.HasOne("RestaurantReservation.Shared.Domain.Restaurant", "Restaurant")
                         .WithMany("OperatingHours")
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RestaurantId");
 
                     b.Navigation("Restaurant");
                 });
@@ -948,9 +940,7 @@ namespace RestaurantReservation.Shared.Data.Migrations
                 {
                     b.HasOne("RestaurantReservation.Shared.Domain.Customer", "Customer")
                         .WithMany("PaymentMethods")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.Navigation("Customer");
                 });
@@ -959,27 +949,19 @@ namespace RestaurantReservation.Shared.Data.Migrations
                 {
                     b.HasOne("RestaurantReservation.Shared.Domain.Customer", "Customer")
                         .WithMany("Reservations")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("RestaurantReservation.Shared.Domain.Promotion", "Promotion")
                         .WithMany()
-                        .HasForeignKey("PromotionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PromotionId");
 
                     b.HasOne("RestaurantReservation.Shared.Domain.ReservationStatus", "ReservationStatus")
                         .WithMany("Reservations")
-                        .HasForeignKey("ReservationStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ReservationStatusId");
 
                     b.HasOne("RestaurantReservation.Shared.Domain.Restaurant", "Restaurant")
                         .WithMany("Reservations")
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RestaurantId");
 
                     b.Navigation("Customer");
 
@@ -1000,15 +982,11 @@ namespace RestaurantReservation.Shared.Data.Migrations
 
                     b.HasOne("RestaurantReservation.Shared.Domain.RestaurantOwner", "RestaurantOwner")
                         .WithMany("Restaurants")
-                        .HasForeignKey("RestaurantOwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RestaurantOwnerId");
 
                     b.HasOne("RestaurantReservation.Shared.Domain.Subscription", "Subscription")
                         .WithMany("Restaurants")
-                        .HasForeignKey("SubscriptionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SubscriptionId");
 
                     b.Navigation("Address");
 
@@ -1021,15 +999,11 @@ namespace RestaurantReservation.Shared.Data.Migrations
                 {
                     b.HasOne("RestaurantReservation.Shared.Domain.Customer", "Customer")
                         .WithMany("RestaurantApplications")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("RestaurantReservation.Shared.Domain.Staff", "Staff")
                         .WithMany("RestaurantApplications")
-                        .HasForeignKey("StaffId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StaffId");
 
                     b.Navigation("Customer");
 
@@ -1051,15 +1025,11 @@ namespace RestaurantReservation.Shared.Data.Migrations
                 {
                     b.HasOne("RestaurantReservation.Shared.Domain.Customer", "Customer")
                         .WithMany("Reviews")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("RestaurantReservation.Shared.Domain.Restaurant", "Restaurant")
                         .WithMany("Reviews")
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RestaurantId");
 
                     b.Navigation("Customer");
 
@@ -1070,9 +1040,7 @@ namespace RestaurantReservation.Shared.Data.Migrations
                 {
                     b.HasOne("RestaurantReservation.Shared.Domain.Restaurant", "Restaurant")
                         .WithMany("SeatingCapacities")
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RestaurantId");
 
                     b.Navigation("Restaurant");
                 });

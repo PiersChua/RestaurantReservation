@@ -12,7 +12,7 @@ namespace RestaurantReservation.Shared.Domain
 		public int? CardNumber { get; set; }
 		public DateTime? DateOfExpiry { get; set; }
 		public int? CVV { get; set; }
-		public int CustomerId { get; set; }
+		public int? CustomerId { get; set; }
 		public virtual Customer? Customer { get; set; }
 	}
 }

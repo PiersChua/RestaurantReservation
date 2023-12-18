@@ -15,9 +15,9 @@ namespace RestaurantReservation.Shared.Domain
 		public int? PhoneNumber { get; set; }
 		public string? Description { get; set; }
 		public string? Status { get; set; }
-		public int CustomerId { get; set; }
+		public int? CustomerId { get; set; }
 		public virtual Customer? Customer { get; set;}
-		public int StaffId { get; set; }
+		public int? StaffId { get; set; }
 		public virtual Staff? Staff { get; set; }
     }
 }
