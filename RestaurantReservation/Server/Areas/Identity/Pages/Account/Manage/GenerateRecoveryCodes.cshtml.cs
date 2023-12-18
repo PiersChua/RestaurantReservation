@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using RestaurantReservation.Server.Models;
+using RestaurantReservation.Shared.Models;
 
-namespace RestaurantReservation.Server.Areas.Identity.Pages.Account.Manage
+namespace RestaurantReservation.Shared.Areas.Identity.Pages.Account.Manage
 {
     public class GenerateRecoveryCodesModel : PageModel
     {

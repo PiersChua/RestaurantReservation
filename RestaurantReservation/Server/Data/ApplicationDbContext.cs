@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using RestaurantReservation.Server.Models;
+using RestaurantReservation.Shared.Models;
 
-namespace RestaurantReservation.Server.Data
+namespace RestaurantReservation.Shared.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {

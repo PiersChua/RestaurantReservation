@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Mvc;
 
-namespace RestaurantReservation.Server.Controllers
+namespace RestaurantReservation.Shared.Controllers
 {
     public class OidcConfigurationController : Controller
     {

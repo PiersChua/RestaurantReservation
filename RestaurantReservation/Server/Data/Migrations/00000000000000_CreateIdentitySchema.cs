@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace RestaurantReservation.Server.Data.Migrations
+namespace RestaurantReservation.Shared.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

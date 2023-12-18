@@ -13,9 +13,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using RestaurantReservation.Server.Models;
+using RestaurantReservation.Shared.Models;
 
-namespace RestaurantReservation.Server.Areas.Identity.Pages.Account
+namespace RestaurantReservation.Shared.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ResendEmailConfirmationModel : PageModel

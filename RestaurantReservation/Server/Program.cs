@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
-using RestaurantReservation.Server.Data;
-using RestaurantReservation.Server.Models;
+using RestaurantReservation.Shared.Data;
+using RestaurantReservation.Shared.Models;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);

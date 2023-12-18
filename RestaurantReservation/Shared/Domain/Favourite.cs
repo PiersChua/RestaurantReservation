@@ -1,4 +1,4 @@
-﻿namespace RestaurantReservation.Server.Domain
+﻿namespace RestaurantReservation.Shared.Domain
 {
 	public class Favourite
 	{

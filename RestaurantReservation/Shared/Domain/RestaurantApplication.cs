@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RestaurantReservation.Shared.Domain;
+using System.ComponentModel.DataAnnotations;
 
-namespace RestaurantReservation.Server.Domain
+namespace RestaurantReservation.Shared.Domain
 {
 	public class RestaurantApplication
 	{

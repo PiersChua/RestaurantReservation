@@ -1,4 +1,6 @@
-﻿namespace RestaurantReservation.Server.Domain
+﻿using RestaurantReservation.Shared.Domain;
+
+namespace RestaurantReservation.Shared.Domain
 {
 	public class RestaurantOwner
 	{

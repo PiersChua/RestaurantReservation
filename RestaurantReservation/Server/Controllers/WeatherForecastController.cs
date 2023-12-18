@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantReservation.Shared;
 
-namespace RestaurantReservation.Server.Controllers
+namespace RestaurantReservation.Shared.Controllers
 {
     [Authorize]
     [ApiController]
