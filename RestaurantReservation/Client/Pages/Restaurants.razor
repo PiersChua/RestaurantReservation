@@ -1,4 +1,6 @@
 ﻿@page "/restaurants"
+@* @attribute [Authorize(Roles = "Customer")] *@
+
 <div class="restaurant-search">
 	<AuthorizeView>
 		<Authorized>
