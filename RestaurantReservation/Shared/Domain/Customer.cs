@@ -10,5 +10,6 @@
 		public string? Gender { get; set; }
 		public int? PhoneNumber { get; set; }
 		public string? Status { get; set; }
+		public virtual List<Reservation>? Reservations { get; set; }
 	}
 }
