@@ -22,13 +22,13 @@ namespace RestaurantReservation.Shared.Domain
 
         public string? Gender { get; set;}
 
-        public DateOnly? DOB { get; set; }
+        public DateTime? DOB { get; set; }
 
         public string? NRIC { get; set; }
 
-        public DateOnly? ContactStart { get; set; }
+        public DateTime? ContactStart { get; set; }
 
-        public DateOnly? ContactEnd { get; set; }
+        public DateTime? ContactEnd { get; set; }
 
         public string? Nationality { get; set; }   
 

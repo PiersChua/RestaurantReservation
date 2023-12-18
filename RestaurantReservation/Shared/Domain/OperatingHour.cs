@@ -10,11 +10,11 @@ namespace RestaurantReservation.Shared.Domain
     {
         public int Id { get; set; }
 
-        public DateOnly? Date { get; set; }
+        public string? Day { get; set; }
 
-        public TimeOnly? OpeningTime { get; set; }
+        public DateTime? OpeningTime { get; set; }
 
-        public TimeOnly? ClosingTime { get; set; }
+        public DateTime? ClosingTime { get; set; }
 
         public int RestaurantId { get; set; }
 

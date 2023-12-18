@@ -1,10 +1,15 @@
-﻿namespace RestaurantReservation.Shared.Domain
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RestaurantReservation.Shared.Domain
 {
 	public class Reservation
 	{
 		public int Id { get; set; }
-		public DateOnly? Date { get; set; }
-		public TimeOnly? Time { get; set; }
+		public DateTime? DateTime { get; set; }
 		public int? Guest { get; set; }
 		public string? Request { get; set; }
 		public int CustomerId { get; set; }

@@ -17,8 +17,8 @@ namespace RestaurantReservation.Shared.Domain
         public double? Price { get; set; }
 
         public string? AllergyContents { get; set; }
-
-        public int RestaurantId { get; set; }
+		public string? ImagePath { get; set; }
+		public int RestaurantId { get; set; }
 
         public virtual Restaurant? Restaurant { get; set; }
     }
