@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RestaurantReservation.Shared.Data;
+using RestaurantReservation.Server.Data;
 
 #nullable disable
 
-namespace RestaurantReservation.Shared.Data.Migrations
+namespace RestaurantReservation.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20231218152901_addedApplicationTables")]

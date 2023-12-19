@@ -13,61 +13,61 @@ namespace RestaurantReservation.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RestaurantsController : ControllerBase
+    public class AddressesController : ControllerBase
     {
         //Refactored
         //private readonly ApplicationDbContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RestaurantsController(IUnitOfWork unitOfWork)
+        public AddressesController(IUnitOfWork unitOfWork)
         {
             //Refactored
             //_context = context;
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/Restaurants
+        // GET: api/Addresses
         [HttpGet]
         //Refactored
-        //public async Task<ActionResult<IEnumerable<Restaurant>>> GetRestaurants()
-        public async Task<IActionResult> GetRestaurants()
+        //public async Task<ActionResult<IEnumerable<Address>>> GetAddresses()
+        public async Task<IActionResult> GetAddresses()
         {
             //Refactored
-            //return await _context.Restaurants.ToListAsync();
-            var restaurants = await _unitOfWork.Restaurants.GetAll();
-            return Ok(restaurants);
+            //return await _context.Addresses.ToListAsync();
+            var addresss = await _unitOfWork.Addresses.GetAll();
+            return Ok(addresss);
         }
 
-        // GET: api/Restaurants/5
+        // GET: api/Addresses/5
         [HttpGet("{id}")]
         //Refactored
-        //public async Task<ActionResult<Restaurant>> GetRestaurant(int id)
-        public async Task<IActionResult> GetRestaurant(int id)
+        //public async Task<ActionResult<Address>> GetAddress(int id)
+        public async Task<IActionResult> GetAddress(int id)
         {
             //Refactored    
-            //var restaurant = await _context.Restaurants.FindAsync(id);
-            var restaurant = await _unitOfWork.Restaurants.Get(q => q.Id == id);
+            //var address = await _context.Addresses.FindAsync(id);
+            var address = await _unitOfWork.Addresses.Get(q => q.Id == id);
 
-            if (restaurant == null)
+            if (address == null)
             {
                 return NotFound();
             }
             //Refactored
-            return Ok(restaurant);
+            return Ok(address);
         }
 
-        // PUT: api/Restaurants/5
+        // PUT: api/Addresses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRestaurant(int id, Restaurant restaurant)
+        public async Task<IActionResult> PutAddress(int id, Address address)
         {
-            if (id != restaurant.Id)
+            if (id != address.Id)
             {
                 return BadRequest();
             }
             //Refactored
-            //_context.Entry(restaurant).State = EntityState.Modified;
-            _unitOfWork.Restaurants.Update(restaurant);
+            //_context.Entry(address).State = EntityState.Modified;
+            _unitOfWork.Addresses.Update(address);
 
             try
             {
@@ -78,8 +78,8 @@ namespace RestaurantReservation.Server.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 //Refactored
-                // if(!RestaurantExists(id))
-                if (!await RestaurantExists(id))
+                // if(!AddressExists(id))
+                if (!await AddressExists(id))
                 {
                     return NotFound();
                 }
@@ -92,47 +92,47 @@ namespace RestaurantReservation.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Restaurants
+        // POST: api/Addresses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Restaurant>> PostRestaurant(Restaurant restaurant)
+        public async Task<ActionResult<Address>> PostAddress(Address address)
         {
             //Refactored
-            //_context.Restaurants.Add(restaurant);
+            //_context.Addresses.Add(address);
             //await _context.SaveChangesAsync();
-            await _unitOfWork.Restaurants.Insert(restaurant);
+            await _unitOfWork.Addresses.Insert(address);
             await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetRestaurant", new { id = restaurant.Id }, restaurant);
+            return CreatedAtAction("GetAddress", new { id = address.Id }, address);
         }
 
-        // DELETE: api/Restaurants/5
+        // DELETE: api/Addresses/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRestaurant(int id)
+        public async Task<IActionResult> DeleteAddress(int id)
         {
             //Refactored
-            //var restaurant = await _context.Restaurants.FindAsync(id);
-            var restaurant = await _unitOfWork.Restaurants.Get(q => q.Id == id);
-            if (restaurant == null)
+            //var address = await _context.Addresses.FindAsync(id);
+            var address = await _unitOfWork.Addresses.Get(q => q.Id == id);
+            if (address == null)
             {
                 return NotFound();
             }
 
             //Refactored
-            //_context.Restaurants.Remove(restaurant);
+            //_context.Addresses.Remove(address);
             //await _context.SaveChangesAsync();
-            await _unitOfWork.Restaurants.Delete(id);
+            await _unitOfWork.Addresses.Delete(id);
             await _unitOfWork.Save(HttpContext);
 
             return NoContent();
         }
 
-        private async Task<bool> RestaurantExists(int id)
+        private async Task<bool> AddressExists(int id)
         {
             //Refactored
-            //return (_context.Restaurants?.Any(e => e.Id == id)).GetValueOrDefault();
-            var restaurant = await _unitOfWork.Restaurants.Get(q => q.Id == id);
-            return restaurant != null;
+            //return (_context.Addresses?.Any(e => e.Id == id)).GetValueOrDefault();
+            var address = await _unitOfWork.Addresses.Get(q => q.Id == id);
+            return address != null;
         }
     }
 }

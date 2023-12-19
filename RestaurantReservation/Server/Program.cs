@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
-using RestaurantReservation.Shared.Data;
+using RestaurantReservation.Server.Data;
 using RestaurantReservation.Server.Models;
 using Microsoft.AspNetCore.Identity;
+using RestaurantReservation.Server.IRepository;
+using RestaurantReservation.Server.Repository;
+using RestaurantReservationServer.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +24,7 @@ builder.Services.AddIdentityServer()
 
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

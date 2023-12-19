@@ -1,4 +1,6 @@
 ﻿@page "/"
+@inject HttpClient _client
+@inject IJSRuntime js
 
 
 <div class="hero">
@@ -11,6 +13,12 @@
 
 <h2 class="menu-title"><span class="oi bi bi-fire red-color"></span> Korean BBQ</h2>
 <div class="wrapper">
+	@* @foreach(var restaurant in Restaurants)
+	{
+		<div class"item"> 
+			<img src="@restaurant.ImagePath">
+		</div>
+	 }*@
 	<div class="item">Restaurant 1</div>
 	<div class="item">Restaurant 2</div>
 	<div class="item">Restaurant 3</div>
@@ -36,4 +44,28 @@
 	<div class="item">Restaurant 5</div>
 </div>
 
+
+@code{
+
+	private List<Restaurant>? Restaurants;
+
+	protected override async Task OnInitializedAsync()
+	{
+		Restaurants = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
+	}
+
+	async Task Delete(int restaurantId)
+	{
+		if (Restaurants != null)
+		{
+			var restaurant = Restaurants.First(q => q.Id == restaurantId);
+			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete? {restaurant.Name}?");
+			if (confirm)
+			{
+				await _client.DeleteAsync($"{Endpoints.RestaurantsEndpoint}/{restaurantId}");
+				await OnInitializedAsync();
+			}
+		}
+	}
+}
 
