@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace RestaurantReservation.Shared.Data.Migrations
+namespace RestaurantReservation.Server.Data.Migrations
 {
     /// <inheritdoc />
     public partial class addedApplicationTables : Migration

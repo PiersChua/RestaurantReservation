@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using RestaurantReservation.Server.Configurations.Entities;
 using RestaurantReservation.Shared.Domain;
-using RestaurantReservation.Shared.Models;
+using RestaurantReservation.Server.Models;
 
-namespace RestaurantReservation.Shared.Data
+namespace RestaurantReservation.Server.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
@@ -30,6 +31,16 @@ namespace RestaurantReservation.Shared.Data
 		public DbSet<SeatingCapacity> SeatingCapacities { get; set; }
 		public DbSet<Staff> Staffs { get; set; }
 		public DbSet<Subscription> Subscriptions { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder builder)
+		{
+			base.OnModelCreating(builder);
+			builder.ApplyConfiguration(new RestaurantSeedConfiguration());
+			builder.ApplyConfiguration(new AddressSeedConfiguration());
+			builder.ApplyConfiguration(new RoleSeedConfiguration());
+			builder.ApplyConfiguration(new UserRoleSeedConfiguration());
+			builder.ApplyConfiguration(new UserSeedConfiguration());
+		}
 	}
 
     

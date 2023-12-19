@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using RestaurantReservation.Shared.Models;
+using RestaurantReservation.Server.Models;
 
 namespace RestaurantReservation.Shared.Areas.Identity.Pages.Account.Manage
 {

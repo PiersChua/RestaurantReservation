@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace RestaurantReservation.Shared.Models
+namespace RestaurantReservation.Server.Models
 {
     public class ApplicationUser : IdentityUser
     {
