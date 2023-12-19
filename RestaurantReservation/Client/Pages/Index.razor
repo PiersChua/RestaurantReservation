@@ -1,6 +1,7 @@
 ﻿@page "/"
 @inject HttpClient _client
 @inject IJSRuntime js
+@attribute [Authorize]
 
 
 <div class="hero">
@@ -10,39 +11,50 @@
 		<h2>anywhere,everywhere</h2>
 	</div>
 </div>
+@if (Restaurants != null)
+{
+	<h2 class="menu-title"><span class="oi oi-people grey-color"></span> Everyday Hotpot</h2>
+	<div class="wrapper">
+		@foreach (var restaurant in Restaurants)
+		{
+			<div class="item">
+				<img src="@restaurant.ImagePath"/>
+				<a href="#">@restaurant.Name</a>
+			</div>
+		}
+		@* <div class="item">Restaurant 1</div>
+		<div class="item">Restaurant 2</div>
+		<div class="item">Restaurant 3</div>
+		<div class="item">Restaurant 4</div>
+		<div class="item">Restaurant 5</div> *@
+	</div>
 
-<h2 class="menu-title"><span class="oi bi bi-fire red-color"></span> Korean BBQ</h2>
-<div class="wrapper">
-	@* @foreach(var restaurant in Restaurants)
-	{
-		<div class"item"> 
-			<img src="@restaurant.ImagePath">
+	<h2 class="menu-title"><span class="oi bi bi-fire red-color"></span> Korean BBQ</h2>
+	<div class="wrapper">
+		<div class="item">
+			<div class="item-txt">
+				<a href="#">Restaurant 1</a>
+			</div>
 		</div>
-	 }*@
-	<div class="item">Restaurant 1</div>
-	<div class="item">Restaurant 2</div>
-	<div class="item">Restaurant 3</div>
-	<div class="item">Restaurant 4</div>
-	<div class="item">Restaurant 5</div>
-</div> 
+		<div class="item">Restaurant 2</div>
+		<div class="item">Restaurant 3</div>
+		<div class="item">Restaurant 4</div>
+		<div class="item">Restaurant 5</div>
+	</div>
 
-<h2 class="menu-title"><span class="oi oi-people grey-color"></span> Everyday Hotpot</h2>
-<div class="wrapper">
-	<div class="item">Restaurant 1</div>
-	<div class="item">Restaurant 2</div>
-	<div class="item">Restaurant 3</div>
-	<div class="item">Restaurant 4</div>
-	<div class="item">Restaurant 5</div>
-</div>
-
-<h2 class="menu-title"><span class="oi bi bi-tags-fill green-color"></span> Amazing Deals</h2>
-<div class="wrapper">
-	<div class="item">Restaurant 1</div>
-	<div class="item">Restaurant 2</div>
-	<div class="item">Restaurant 3</div>
-	<div class="item">Restaurant 4</div>
-	<div class="item">Restaurant 5</div>
-</div>
+	<h2 class="menu-title"><span class="oi bi bi-tags-fill green-color"></span> Amazing Deals</h2>
+	<div class="wrapper">
+		<div class="item">Restaurant 1</div>
+		<div class="item">Restaurant 2</div>
+		<div class="item">Restaurant 3</div>
+		<div class="item">Restaurant 4</div>
+		<div class="item">Restaurant 5</div>
+	</div>
+}
+else
+{
+	<p>No restaurants available.</p>
+}
 
 
 @code{
@@ -67,5 +79,5 @@
 			}
 		}
 	}
-}
+} 
 
