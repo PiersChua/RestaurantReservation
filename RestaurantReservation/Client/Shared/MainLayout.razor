@@ -9,12 +9,17 @@
                 <a href="/"><img src="images/appIcon.png" id="logo"></a>
             </div>
             <form action="" class="searchbar">
-                <input type="text" name="search" placeholder="Book a Reservation now!">
+                <input @onclick="NavigateToRestaurants" type="text" name="search" placeholder="Book a Reservation now!">
                 <button type="submit" class="search"><img src="images/search.png"></button>
             </form>
 
             <AuthorizeView>
                 <Authorized>
+                    <div class="bell">
+                        <a class="adjust-icon" href="#">
+                            <span class="oi bi bi-bell-fill" aria-hidden="true"></span>
+                        </a>
+                    </div>
                     <div>
                         <a class="adjust-icon" href="authentication/profile">
                             <span class="oi oi-person" aria-hidden="true"></span>
@@ -35,7 +40,7 @@
                 <Authorized>
                     <div class="nav-div">
                         <a class="nav-a" href="#" @onclick="BeginLogOut">
-                            <span class="oi oi-account-logout" aria-hidden="true"></span>Log out
+                            <span class="oi oi-account-logout" aria-hidden="true"></span> Log out
                         </a>
                     </div>
                 </Authorized>
@@ -51,7 +56,7 @@
                 </a>
             </div>
             <div class="nav-div">
-                <a class="nav-a" href="/reservations">
+                <a class="nav-a" href="/reservationhistory">
                     <span class="oi oi-calendar" aria-hidden="true"></span> Reservations
                 </a>
             </div>
@@ -92,4 +97,9 @@
     {
         Navigation.NavigateToLogout("authentication/logout");
     }
+
+    private void NavigateToRestaurants()
+	{
+		Navigation.NavigateTo("/restaurants");
+	}
 }

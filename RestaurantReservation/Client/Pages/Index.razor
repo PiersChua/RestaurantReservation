@@ -1,7 +1,9 @@
 ﻿@page "/"
 @inject HttpClient _client
 @inject IJSRuntime js
+@inject NavigationManager Navigation
 @attribute [Authorize]
+
 
 
 <div class="hero">
@@ -21,7 +23,7 @@
 			{
 				<div class="item">
 					<img src="@restaurant.ImagePath"/>
-				<a href="#">@restaurant.Name</a>
+					<a onclick="@(() => MakeReservation(restaurant.Id))">@restaurant.Name</a>
 				</div>
 			}
 		}
@@ -48,7 +50,7 @@
 }
 else
 {
-	<p>No restaurants available.</p>
+	<h1>Loading Restaurants.</h1>
 }
 
 
@@ -74,5 +76,24 @@ else
 			}
 		}
 	}
+	private void MakeReservation(int resId)
+	{
+		if (Restaurants!=null)
+			{
+				var restaurant = Restaurants.First(q => q.Id == resId);
+				Restaurant res = new Restaurant
+				{
+		 			Name=restaurant.Name,
+		 			Email=restaurant.Email,
+		 			Cuisine=restaurant.Cuisine,
+		 			PhoneNumber=restaurant.PhoneNumber,
+					Address=restaurant.Address,
+
+				};
+				string serializedObject = System.Text.Json.JsonSerializer.Serialize(res);
+				Navigation.NavigateTo($"/reservation?data={Uri.EscapeDataString(serializedObject)}");
+			}
+	}
+
 } 
 

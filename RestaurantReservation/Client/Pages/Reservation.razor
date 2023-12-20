@@ -1,0 +1,60 @@
+﻿@page "/reservation"
+@inject HttpClient _client
+@inject IJSRuntime js
+@inject NavigationManager Navigation
+@attribute [Authorize]
+
+<h3>Reservation</h3>
+<table class="table table-responsive">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Cuisine</th>
+			<th>Phone Number</th>
+			<th>Address</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				@restaurant.Name
+			</td>
+			<td>
+				@restaurant.Email
+			</td>
+			<td>
+				@restaurant.Cuisine
+			</td>
+			<td>
+				@restaurant.PhoneNumber
+			</td>
+			<td>
+				Street: @restaurant.Address?.Street<br />Building: @restaurant.Address?.Building<br />Level: @restaurant.Address?.Level<br />Unit: @restaurant.Address?.UnitNumber<br />Postal Code: @restaurant.Address?.PostalCode
+			</td>
+
+		</tr>
+	</tbody>
+</table>
+
+@code {
+	private Restaurant restaurant;
+	protected override void OnInitialized()
+	{
+		// Get the current URL
+		var uri = new Uri(Navigation.Uri);
+
+		// Parse the query parameters
+		var query = uri.Query;
+		var queryString = System.Web.HttpUtility.ParseQueryString(query);
+
+		// Get the value of the "data" parameter
+		string serializedObject = queryString["data"];
+
+		// Deserialize the object if the value is not null or empty
+		if (!string.IsNullOrEmpty(serializedObject))
+		{
+			restaurant = System.Text.Json.JsonSerializer.Deserialize<Restaurant>(serializedObject);
+	}
+	}
+}

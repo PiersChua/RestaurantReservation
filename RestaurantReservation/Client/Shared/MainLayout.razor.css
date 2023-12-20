@@ -157,3 +157,14 @@ main {
 .nav-div {
     font-size: 20px;
 }
+@keyframes shake {
+      0% { transform: translateX(0); }
+      20% { transform: translateX(-5px) rotate(5deg); }
+      40% { transform: translateX(5px) rotate(-5deg); }
+      60% { transform: translateX(-5px) rotate(5deg); }
+      80% { transform: translateX(5px) rotate(-5deg); }
+      100% { transform: translateX(0); }
+    }
+.bell:hover {
+    animation: shake 0.5s ease-in-out;
+}
