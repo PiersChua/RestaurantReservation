@@ -35,7 +35,8 @@ namespace RestaurantReservation.Server.Data
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
-			builder.ApplyConfiguration(new RestaurantSeedConfiguration());
+            builder.ApplyConfiguration(new ReservationSeedConfiguration());
+            builder.ApplyConfiguration(new RestaurantSeedConfiguration());
 			builder.ApplyConfiguration(new AddressSeedConfiguration());
 			builder.ApplyConfiguration(new RoleSeedConfiguration());
 			builder.ApplyConfiguration(new UserRoleSeedConfiguration());
