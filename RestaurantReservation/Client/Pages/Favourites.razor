@@ -1,8 +1,16 @@
 ﻿@attribute [Authorize]
 @page "/favourites"
 
-<h3>Favourites</h3>
-
-@code {
+@if (Favourite != null)
+{
 
 }
+else
+{
+	<h1>Loading Favourites...</h1>
+}
+
+@code {
+	private List<Reservation> Favourite;
+}
+

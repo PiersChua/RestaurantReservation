@@ -1,7 +1,14 @@
 ﻿@page "/promotions"
-
-<h3>Promotions</h3>
-
-@code {
+@if (Promo != null)
+{
 
 }
+else
+{
+	<h1>Loading Promotions...</h1>
+}
+
+@code {
+	private List<Promotion>? Promo;
+}
+
