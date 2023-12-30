@@ -5,27 +5,28 @@
 
 <h3>Reservation History</h3>
 <br />
-@if ( Reservations == null)
-{
-    <div class="alert alert-info">Loading Reservations...</div>
-}
-else
+@if ( Reservations != null)
 {
     <table class="table table-responsive">
-        <thread>
+        <thead>
             <tr>
                 <th>Name</th>
             </tr>
-        </thread>
+        </thead>
         <tbody>
             @foreach (var reservation in Reservations)
             {
                 <tr>
-                    <td>@reservation.Restaurant.Name</td>
+                    <td>@reservation?.Restaurant?.Name</td>
                 </tr>
             }
         </tbody>
     </table>
+    
+}
+else
+{
+    <div class="alert alert-info">Loading Reservations...</div>
 }
 
 @code {
