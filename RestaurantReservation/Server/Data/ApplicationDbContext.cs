@@ -41,7 +41,12 @@ namespace RestaurantReservation.Server.Data
 			builder.ApplyConfiguration(new RoleSeedConfiguration());
 			builder.ApplyConfiguration(new UserRoleSeedConfiguration());
 			builder.ApplyConfiguration(new UserSeedConfiguration());
-		}
+			
+			builder.ApplyConfiguration(new FavouriteSeedConfiguration());
+            builder.ApplyConfiguration(new SeatingCapacitySeedConfiguration());
+            builder.ApplyConfiguration(new SubscriptionSeedConfiguration());
+
+        }
 	}
 
     
