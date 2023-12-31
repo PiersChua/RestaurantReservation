@@ -1,5 +1,7 @@
 ﻿@inject NavigationManager Navigation
 @inherits LayoutComponentBase
+@inject HttpClient _client
+@inject IJSRuntime js
 
 <div class="page">
 
@@ -9,8 +11,8 @@
                 <a href="/"><img src="images/appIcon.png" id="logo"></a>
             </div>
             <form action="" class="searchbar">
-                <input @onclick="NavigateToRestaurants" type="text" name="search" placeholder="Book a Reservation now!">
-                <button type="submit" class="search"><img src="images/search.png"></button>
+                <input @onclick="NavigateToRestaurants" type="text" bind=@searchItem placeholder="Book a Reservation now!">
+                <button type="submit" class="search" @onclick="Search"><img src="images/search.png"></button>
             </form>
 
             <AuthorizeView>
@@ -99,7 +101,18 @@
     }
 
     private void NavigateToRestaurants()
-	{
-		Navigation.NavigateTo("/restaurants");
+    {
+        Navigation.NavigateTo("/restaurants");
+    }
+
+
+    private void Search()
+    {
+        if (searchItem != null)
+        {
+            string serializedObject = System.Text.Json.JsonSerializer.Serialize(searchItem);
+            Navigation.NavigateTo($"/restaurants?data={Uri.EscapeDataString(serializedObject)}");
+        }
 	}
+    private string searchItem;
 }
