@@ -46,6 +46,9 @@ namespace RestaurantReservation.Server.Data
             builder.ApplyConfiguration(new SeatingCapacitySeedConfiguration());
             builder.ApplyConfiguration(new SubscriptionSeedConfiguration());
 
+            builder.ApplyConfiguration(new RestaurantApplicationSeedConfiguration());
+            builder.ApplyConfiguration(new PaymentMethodSeedConfiguration());
+            builder.ApplyConfiguration(new ReservationStatusSeedConfiguration());
         }
 	}
 
