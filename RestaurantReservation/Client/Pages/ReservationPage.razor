@@ -4,41 +4,37 @@
 @inject NavigationManager Navigation
 @attribute [Authorize]
 
-<h3>Reservation</h3>
-<table class="table table-responsive">
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Email</th>
-			<th>Cuisine</th>
-			<th>Phone Number</th>
-			<th>Address</th>
-		</tr>
-	</thead>
-	<tbody>
-		@if (restaurant != null)
-		{
-			<tr>
-				<td>
-					@restaurant.Name
-				</td>
-				<td>
-					@restaurant.Email
-				</td>
-				<td>
-					@restaurant.Cuisine
-				</td>
-				<td>
-					@restaurant.PhoneNumber
-				</td>
-				<td>
-					Street: @restaurant.Address?.Street<br />Building: @restaurant.Address?.Building<br />Level: @restaurant.Address?.Level<br />Unit: @restaurant.Address?.UnitNumber<br />Postal Code: @restaurant.Address?.PostalCode
-				</td>
-
-			</tr>
-		}
-	</tbody>
-</table>
+<div class="res-container">
+	@if (restaurant != null)
+	{
+		<div class="res-hero">
+			<h2>@restaurant.Name<span class="oi bi bi-bookmark-plus bookmark"></span></h2>
+			<img src="@restaurant.ImagePath" />
+			<button class="btn btn-secondary" @onclick="NavigateToReview"><span class="bi bi-star-fill"></span> View Ratings</button>
+			<h2>Menu</h2>
+			<button class="btn btn-secondary" @onclick="Reserve"><span class="bi bi-calendar-plus"></span> Reserve Now</button>
+		</div>
+		<div class="res-details">
+		<h3>Restaurant Details</h3>
+			<div class="details">
+				<h4>Address</h4>
+				<p>Street: @restaurant.Address?.Street<br />Building: @restaurant.Address?.Building<br />Level @restaurant.Address?.Level<br />Unit: @restaurant.Address?.UnitNumber<br />Postal Code: @restaurant.Address?.PostalCode</p>
+			</div>
+			<div class="details">
+				<h4>Phone Number</h4>
+				<p>@restaurant.PhoneNumber</p>
+			</div>
+			<div class="details">
+				<h4>Cuisine</h4>
+				<p>@restaurant.Cuisine</p>
+			</div>
+			<div class="details">
+				<h4>Category</h4>
+				<p>@restaurant.Category</p>
+			</div>
+		</div>
+	}
+</div>
 
 @code {
 	private Restaurant? restaurant;
@@ -52,6 +48,14 @@
 		{
 			restaurant = Restaurants.First(q => q.Id == id);
 		}
+	}
+	private void NavigateToReview()
+	{
+		Navigation.NavigateTo($"/review/{id}");
+	}
+	private void Reserve()
+	{
+		Navigation.NavigateTo($"/reservation/create/{id}");
 	}
 	// protected override void OnInitialized()
 	// {
@@ -73,4 +77,3 @@
 	
 	}
 	
-}

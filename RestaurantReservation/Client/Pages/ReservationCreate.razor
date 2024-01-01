@@ -1,0 +1,55 @@
+﻿@page "/reservation/create/{id:int}"
+@inject HttpClient _client
+@inject IJSRuntime js
+@inject NavigationManager Navigation
+@attribute [Authorize]
+@if (restaurant != null)
+{
+	<EditForm Model="@restaurant" OnValidSubmit="CreateReservation">
+		<DataAnnotationsValidator />
+		<ValidationSummary />
+		<div class="col-md-6 form-group">
+			<label>No. of guests</label>
+			<div>
+				<InputNumber @bind-Value="@reservation.Guest" class="form-control" />
+				<ValidationMessage For="@(() => reservation.Guest)" />
+			</div>
+		</div>
+		<div class="col-md-6 form-group">
+			<label>Reservation Date</label>
+			<div>
+				<InputDate Type="InputDateType.DateTimeLocal" @bind-Value="reservation.DateTime" class="form-control" />
+				<ValidationMessage For="@(() => reservation.DateTime)" />
+			</div>
+		</div>
+		<div class="col-md-6 form-group">
+			<label>Special Request</label>
+			<div>
+				<InputText @bind-Value="@reservation.Request" class="form-control" />
+				<ValidationMessage For="@(() => reservation.Request)" />
+			</div>
+		</div>
+		<button type="submit" class="btn btn-success btn-block">Submit Reservation</button>
+
+	</EditForm>
+}
+@code {
+	private Restaurant? restaurant;
+	private List<Restaurant>? Restaurants;
+	[Parameter]
+	public int id { get; set; }
+	Reservation reservation = new Reservation();
+
+	protected async override Task OnInitializedAsync()
+	{
+		Restaurants = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
+		if (Restaurants != null)
+		{
+			restaurant = Restaurants.First(q => q.Id == id);
+		}
+	}
+	private async Task CreateReservation()
+	{
+		await _client.PostAsJsonAsync($"{Endpoints.ReservationsEndpoint}", reservation);
+	}
+}

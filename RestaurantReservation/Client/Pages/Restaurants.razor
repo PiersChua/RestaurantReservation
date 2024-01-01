@@ -16,21 +16,21 @@
 	<div class="filter-search">
 		<h4> Filter <span class="oi bi bi-funnel"></span></h4>
 		<select @bind="cuisine">
-			<option value="" disabled selected hidden>Cuisines</option>
+			<option value="" disabled selected hidden>--Cuisine--</option>
 			@foreach (var item in cuisineSelections)
 			{
 				<option value="@item">@item</option>
 			}
 		</select>
 		<select @bind="location">
-			<option value="" disabled selected hidden>Locations</option>
+			<option value="" disabled selected hidden>--Location--</option>
 			@foreach (var item in locationSelections)
 			{
 				<option value="@item">@item</option>
 			}
 		</select>
-		<select @bind="price">
-			<option value="" disabled selected hidden>Price range</option>
+		<select @bind="category">
+			<option value="" disabled selected hidden>--Category--</option>
 			@foreach (var item in priceSelections)
 			{
 				<option value="@item">@item</option>
@@ -86,10 +86,10 @@ else
 	private List<string> cuisineSelections = new List<string> { "Chinese", "Malay", "Eurasian","Indian" };
 
 	private string location;
-	private List<string> locationSelections = new List<string> { "North", "South", "East","West" };
+	private List<string> locationSelections = new List<string> { "North", "South", "East","West","NorthEast","NorthWest","SouthEast","SouthWest" };
 
-	private string price;
-	private List<string> priceSelections = new List<string> { "High-Low", "Low-High"};
+	private string category;
+	private List<string> priceSelections = new List<string> {"Hotpot","Buffet","High Tea"};
 
 	private List<Restaurant>? Res;
 	private List<Restaurant>? filteredRestaurant;
