@@ -23,7 +23,7 @@ namespace RestaurantReservation.Shared.Domain
         public virtual RestaurantOwner? RestaurantOwner { get; set; }
         public int? SubscriptionId { get; set; }
         public virtual Subscription? Subscription { get; set; }
-        //public virtual List<Reservation>? Reservations { get; set;}
+        public virtual List<Reservation>? Reservations { get; set;}
         public virtual List<Favourite>? Favourites { get; set; }
         public virtual List<Review>? Reviews { get; set; }
         public virtual List<Menu>? Menus { get; set; }

@@ -11,7 +11,7 @@
                 <a href="/"><img src="images/appIcon.png" id="logo"></a>
             </div>
             <form action="" class="searchbar">
-                <input @onclick="NavigateToRestaurants" type="text" bind=@searchItem placeholder="Book a Reservation now!">
+                <input type="text" @bind="searchTerm" placeholder="Book a Reservation now!">
                 <button type="submit" class="search" @onclick="Search"><img src="images/search.png"></button>
             </form>
 
@@ -100,19 +100,9 @@
         Navigation.NavigateToLogout("authentication/logout");
     }
 
-    private void NavigateToRestaurants()
-    {
-        Navigation.NavigateTo("/restaurants");
-    }
-
-
+    private string searchTerm;
     private void Search()
     {
-        if (searchItem != null)
-        {
-            string serializedObject = System.Text.Json.JsonSerializer.Serialize(searchItem);
-            Navigation.NavigateTo($"/restaurants?data={Uri.EscapeDataString(serializedObject)}");
-        }
+        Navigation.NavigateTo($"/restaurants?search={searchTerm}");
 	}
-    private string searchItem;
 }

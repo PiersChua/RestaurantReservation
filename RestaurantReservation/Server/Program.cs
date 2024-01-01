@@ -26,7 +26,10 @@ builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+	.AddNewtonsoftJson(op =>op.SerializerSettings.ReferenceLoopHandling =Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
