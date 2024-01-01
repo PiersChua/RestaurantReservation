@@ -23,7 +23,8 @@
 			{
 				<div class="item">
 					<img src="@restaurant.ImagePath"/>
-					<a onclick="@(() => Reserve(restaurant))">@restaurant.Name</a>
+					<a href="/reservation/@restaurant.Id">@restaurant.Name</a>
+					@* <a @onclick="(()=>Reserve(restaurant))">@restaurant.Name</a> *@
 				</div>
 			}
 		}
@@ -76,14 +77,14 @@ else
 			}
 		}
 	}
-	private void Reserve(Restaurant res)
-	{
-		if (Restaurants!=null)
-			{
-				string serializedObject = System.Text.Json.JsonSerializer.Serialize(res);
-				Navigation.NavigateTo($"/reservation?data={Uri.EscapeDataString(serializedObject)}");
-			}
-	}
+	// private void Reserve(Restaurant res)
+	// {
+	// 	if (Restaurants!=null)
+	// 		{
+	// 			string serializedObject = System.Text.Json.JsonSerializer.Serialize(res);
+	// 			Navigation.NavigateTo($"/reservations?data={Uri.EscapeDataString(serializedObject)}");
+	// 		}
+	// }
 
 } 
 
