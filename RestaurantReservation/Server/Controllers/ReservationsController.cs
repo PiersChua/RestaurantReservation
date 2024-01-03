@@ -10,7 +10,7 @@ using RestaurantReservation.Shared.Domain;
 using RestaurantReservation.Server.Data;
 
 
-namespace ReservationReservation.Server.Controllers
+namespace RestaurantReservation.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

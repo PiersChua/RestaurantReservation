@@ -48,8 +48,11 @@
 			restaurant = Restaurants.First(q => q.Id == id);
 		}
 	}
+
 	private async Task CreateReservation()
 	{
+		reservation.RestaurantId = id;
 		await _client.PostAsJsonAsync($"{Endpoints.ReservationsEndpoint}", reservation);
+		Navigation.NavigateTo("/reservationhistory");
 	}
 }
