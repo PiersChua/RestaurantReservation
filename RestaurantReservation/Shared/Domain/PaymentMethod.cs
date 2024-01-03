@@ -9,7 +9,7 @@ namespace RestaurantReservation.Shared.Domain
 	public class PaymentMethod
 	{
 		public int Id { get; set; }
-		public string? CardNumber { get; set; }
+		public int? CardNumber { get; set; }
 		public DateTime? DateOfExpiry { get; set; }
 		public int? CVV { get; set; }
 		public int? CustomerId { get; set; }

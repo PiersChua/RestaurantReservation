@@ -20,7 +20,6 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     Status = "Active",
                     CustomerId = null,
                     StaffId = null,
-                    AddressId = null,
                 },
                 new RestaurantApplication
                 {
@@ -33,7 +32,6 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     Status = "Active",
                     CustomerId = null,
                     StaffId = null,
-                    AddressId = null,
                 }
                 );
 

@@ -12,7 +12,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                 new PaymentMethod
                 {
                     Id = 1,
-                    CardNumber = "1234123412341234",
+                    CardNumber = 1,
                     DateOfExpiry = DateTime.Now.AddYears(1),
                     CVV = 123,
                     CustomerId = null
@@ -20,7 +20,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                 new PaymentMethod
                 {
                     Id = 2,
-                    CardNumber = "1234123412341234",
+                    CardNumber = 2,
                     DateOfExpiry = DateTime.Now.AddYears(1),
                     CVV = 321,
                     CustomerId = null
