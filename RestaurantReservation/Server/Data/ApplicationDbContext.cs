@@ -49,6 +49,11 @@ namespace RestaurantReservation.Server.Data
             builder.ApplyConfiguration(new RestaurantApplicationSeedConfiguration());
             builder.ApplyConfiguration(new PaymentMethodSeedConfiguration());
             builder.ApplyConfiguration(new ReservationStatusSeedConfiguration());
+
+            builder.ApplyConfiguration(new MenuSeedConfiguration());
+            builder.ApplyConfiguration(new OperatingHourSeedConfiguration());
+            builder.ApplyConfiguration(new PromotionSeedConfiguration());
+            builder.ApplyConfiguration(new ReviewSeedConfiguration());
         }
 	}
 
