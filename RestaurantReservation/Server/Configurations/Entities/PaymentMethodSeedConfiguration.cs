@@ -27,7 +27,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                 }
 
                 );
-            
+            ;
 
         }
     }
