@@ -168,3 +168,6 @@ main {
 .bell:hover {
     animation: shake 0.5s ease-in-out;
 }
+.grey-color{
+    color:#575757;
+}

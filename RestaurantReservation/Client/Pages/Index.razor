@@ -22,8 +22,10 @@
 			if (restaurant.Category == "Hotpot")
 			{
 				<div class="item">
-					<img src="@restaurant.ImagePath"/>
-					<a href="/reservation/@restaurant.Id">@restaurant.Name</a>
+					<a href="/reservation/@restaurant.Id"><img src="@restaurant.ImagePath" /></a>	
+					<div class="overlay-name">
+						<p>@restaurant.Name</p>
+					</div>
 					@* <a @onclick="(()=>Reserve(restaurant))">@restaurant.Name</a> *@
 				</div>
 			}

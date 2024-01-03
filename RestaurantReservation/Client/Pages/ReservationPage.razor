@@ -3,55 +3,83 @@
 @inject IJSRuntime js
 @inject NavigationManager Navigation
 @attribute [Authorize]
-
-<div class="res-container">
-	@if (restaurant != null)
-	{
-		<div class="res-hero">
+@if (restaurant != null && menu !=null && reshour != null)
+{
+	<div class="res-container">
+		<div class="res-img">
 			<h2>@restaurant.Name<span class="oi bi bi-bookmark-plus bookmark"></span></h2>
 			<img src="@restaurant.ImagePath" />
-			<button class="btn btn-secondary" @onclick="NavigateToReview"><span class="bi bi-star-fill"></span> View Ratings</button>
-			<h2>Menu</h2>
-			<button class="btn btn-secondary" @onclick="Reserve"><span class="bi bi-calendar-plus"></span> Reserve Now</button>
 		</div>
+		<div class="menu-img">
+			<a href="@menu.ImagePath" target="_blank">
+				<img src="@menu.ImagePath" />
+				<span class="bi bi-box-arrow-up-right"></span>
+			</a>
+		</div>
+	</div>
+	<div class="res-details-head">
+		<h2>Details</h2>
 		<div class="res-details">
-		<h3>Restaurant Details</h3>
-			<div class="details">
-				<h4>Address</h4>
+			<div>
+				<h4 class="text-decoration-underline">Address</h4>
 				<p>Street: @restaurant.Address?.Street<br />Building: @restaurant.Address?.Building<br />Level @restaurant.Address?.Level<br />Unit: @restaurant.Address?.UnitNumber<br />Postal Code: @restaurant.Address?.PostalCode</p>
 			</div>
-			<div class="details">
-				<h4>Phone Number</h4>
+			<div class="vl"></div>
+			<div>
+				<h4 class="text-decoration-underline">Phone Number</h4>
 				<p>@restaurant.PhoneNumber</p>
 			</div>
-			<div class="details">
-				<h4>Cuisine</h4>
+			<div class="vl"></div>
+			<div>
+				<h4 class="text-decoration-underline">Cuisine</h4>
 				<p>@restaurant.Cuisine</p>
 			</div>
-			<div class="details">
-				<h4>Category</h4>
+			<div class="vl"></div>
+			<div>
+				<h4 class="text-decoration-underline">Category</h4>
 				<p>@restaurant.Category</p>
 			</div>
+			<div class="vl"></div>
+			<div>
+				<h4 class="text-decoration-underline">Opening Hours</h4>
+				@foreach (var hour in reshour)
+				{
+					<p>@hour.Day: @hour.OpeningTime?.ToString("HH:mm") - @hour.ClosingTime?.ToString("HH:mm")</p>
+				}	
+			</div>
 		</div>
-	}
-</div>
-
+		<button class="btn btn-secondary" @onclick="NavigateToReview"><span class="bi bi-star-fill"></span> View Ratings</button>
+		<button class="btn btn-secondary" @onclick="Reserve"><span class="bi bi-calendar-plus"></span> Reserve Now</button>
+	</div>
+}
 @code {
 	private Restaurant? restaurant;
+	private Menu? menu;
+	private List<OperatingHour>? OperatingHours;
+	private List<OperatingHour>? reshour;
 	private List<Restaurant>? Restaurants;
+	private List<Menu>? Menus;
 	[Parameter]
 	public int id { get; set; }
 	protected async override Task OnInitializedAsync()
 	{
 		Restaurants = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
-		if (Restaurants != null)
+		Menus = await _client.GetFromJsonAsync<List<Menu>>($"{Endpoints.MenusEndpoint}");
+		OperatingHours= await _client.GetFromJsonAsync<List<OperatingHour>>($"{Endpoints.OperatingHoursEndpoint}");
+		if (Restaurants != null && Menus != null && OperatingHours != null) 
 		{
 			restaurant = Restaurants.First(q => q.Id == id);
+			menu=Menus.First(q=>q.RestaurantId==id);
+			reshour=OperatingHours.Where(q=>q.RestaurantId==id).ToList();
 		}
 	}
 	private void NavigateToReview()
 	{
 		Navigation.NavigateTo($"/review/{id}");
+	}
+	private void NavigateToRealImg()
+	{
+		Navigation.NavigateTo($"{menu.ImagePath}");
 	}
 	private void Reserve()
 	{
