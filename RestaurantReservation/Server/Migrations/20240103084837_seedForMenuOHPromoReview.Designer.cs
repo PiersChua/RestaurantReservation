@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestaurantReservation.Server.Data;
 
@@ -11,9 +12,11 @@ using RestaurantReservation.Server.Data;
 namespace RestaurantReservation.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240103084837_seedForMenuOHPromoReview")]
+    partial class seedForMenuOHPromoReview
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -390,15 +393,15 @@ namespace RestaurantReservation.Server.Migrations
                         {
                             Id = "900de75c-2b44-4069-8c0d-d7d3a7ae4ffb",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fadeae77-6a0f-450e-bb0a-ecbd6da103ea",
+                            ConcurrencyStamp = "3e0419f3-4b16-4823-a8b6-44509e34abc4",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBuUMBUiZKsfD+efYcHHo2kOc19+OrZSGFSjlOQ/MdATNrZICec7oKLSxZNKJZNDQg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHa6wC3BDPKeL50XpeWk4TsB1yO1OtjXA/JT9/O7pqpkAJ1F4K2LSSpyowTYsdL4KA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "be2df61f-996e-457e-95de-6662101ec279",
+                            SecurityStamp = "1451baad-84e2-46cc-ad82-f080bdb6ba42",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -899,7 +902,7 @@ namespace RestaurantReservation.Server.Migrations
                             ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
                             Day = "Tuesday",
                             OpeningTime = new DateTime(2024, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            RestaurantId = 5
+                            RestaurantId = 3
                         },
                         new
                         {
@@ -975,14 +978,14 @@ namespace RestaurantReservation.Server.Migrations
                             Id = 1,
                             CVV = 123,
                             CardNumber = 1,
-                            DateOfExpiry = new DateTime(2025, 1, 3, 16, 56, 6, 180, DateTimeKind.Local).AddTicks(9212)
+                            DateOfExpiry = new DateTime(2025, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(3090)
                         },
                         new
                         {
                             Id = 2,
                             CVV = 321,
                             CardNumber = 2,
-                            DateOfExpiry = new DateTime(2025, 1, 3, 16, 56, 6, 180, DateTimeKind.Local).AddTicks(9219)
+                            DateOfExpiry = new DateTime(2025, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(3117)
                         });
                 });
 
@@ -1019,27 +1022,27 @@ namespace RestaurantReservation.Server.Migrations
                             Id = 1,
                             Description = "New year discount!",
                             Discount = 10.0,
-                            EndDate = new DateTime(2024, 2, 3, 16, 56, 6, 181, DateTimeKind.Local).AddTicks(870),
+                            EndDate = new DateTime(2024, 2, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(7618),
                             Name = "NewYear",
-                            StartDate = new DateTime(2024, 1, 3, 16, 56, 6, 181, DateTimeKind.Local).AddTicks(869)
+                            StartDate = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(7617)
                         },
                         new
                         {
                             Id = 2,
                             Description = "Chinese New Year discount!",
                             Discount = 10.0,
-                            EndDate = new DateTime(2024, 3, 3, 16, 56, 6, 181, DateTimeKind.Local).AddTicks(876),
+                            EndDate = new DateTime(2024, 3, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(7628),
                             Name = "ChineseNewYear",
-                            StartDate = new DateTime(2024, 2, 3, 16, 56, 6, 181, DateTimeKind.Local).AddTicks(875)
+                            StartDate = new DateTime(2024, 2, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(7627)
                         },
                         new
                         {
                             Id = 3,
                             Description = "Valentine's discount!",
                             Discount = 10.0,
-                            EndDate = new DateTime(2024, 4, 3, 16, 56, 6, 181, DateTimeKind.Local).AddTicks(878),
+                            EndDate = new DateTime(2024, 4, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(7630),
                             Name = "Valentine",
-                            StartDate = new DateTime(2024, 3, 3, 16, 56, 6, 181, DateTimeKind.Local).AddTicks(877)
+                            StartDate = new DateTime(2024, 3, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(7629)
                         });
                 });
 
@@ -1088,7 +1091,7 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DateTime = new DateTime(2024, 1, 3, 16, 56, 6, 119, DateTimeKind.Local).AddTicks(3526),
+                            DateTime = new DateTime(2024, 1, 3, 16, 48, 37, 235, DateTimeKind.Local).AddTicks(9090),
                             Guest = 2,
                             Request = "None",
                             ReservationStatusId = 1,
@@ -1097,7 +1100,7 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 2,
-                            DateTime = new DateTime(2024, 1, 3, 16, 56, 6, 119, DateTimeKind.Local).AddTicks(3536),
+                            DateTime = new DateTime(2024, 1, 3, 16, 48, 37, 235, DateTimeKind.Local).AddTicks(9099),
                             Guest = 3,
                             Request = "None",
                             ReservationStatusId = 2,
@@ -1106,7 +1109,7 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 3,
-                            DateTime = new DateTime(2024, 1, 3, 16, 56, 6, 119, DateTimeKind.Local).AddTicks(3538),
+                            DateTime = new DateTime(2024, 1, 3, 16, 48, 37, 235, DateTimeKind.Local).AddTicks(9100),
                             Guest = 4,
                             Request = "None",
                             ReservationStatusId = 3,
@@ -1115,7 +1118,7 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 4,
-                            DateTime = new DateTime(2024, 1, 3, 16, 56, 6, 119, DateTimeKind.Local).AddTicks(3540),
+                            DateTime = new DateTime(2024, 1, 3, 16, 48, 37, 235, DateTimeKind.Local).AddTicks(9102),
                             Guest = 2,
                             Request = "None",
                             ReservationStatusId = 4,
@@ -1375,40 +1378,40 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DateTime = new DateTime(2024, 1, 3, 16, 56, 6, 181, DateTimeKind.Local).AddTicks(1068),
-                            Description = "Hai di lao staff very attentive",
+                            DateTime = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(8304),
+                            Description = "description",
                             Rating = 4,
                             RestaurantId = 1
                         },
                         new
                         {
                             Id = 2,
-                            DateTime = new DateTime(2024, 1, 3, 16, 56, 6, 181, DateTimeKind.Local).AddTicks(1070),
-                            Description = "Good food",
+                            DateTime = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(8312),
+                            Description = "description",
                             Rating = 4,
                             RestaurantId = 2
                         },
                         new
                         {
                             Id = 3,
-                            DateTime = new DateTime(2024, 1, 3, 16, 56, 6, 181, DateTimeKind.Local).AddTicks(1071),
-                            Description = "Nice soup",
+                            DateTime = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(8316),
+                            Description = "description",
                             Rating = 4,
                             RestaurantId = 3
                         },
                         new
                         {
                             Id = 4,
-                            DateTime = new DateTime(2024, 1, 3, 16, 56, 6, 181, DateTimeKind.Local).AddTicks(1073),
-                            Description = "Cheap and affordable",
+                            DateTime = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(8318),
+                            Description = "description",
                             Rating = 4,
                             RestaurantId = 4
                         },
                         new
                         {
                             Id = 5,
-                            DateTime = new DateTime(2024, 1, 3, 16, 56, 6, 181, DateTimeKind.Local).AddTicks(1074),
-                            Description = "Great restaurant",
+                            DateTime = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(8323),
+                            Description = "description",
                             Rating = 4,
                             RestaurantId = 5
                         });
@@ -1442,35 +1445,35 @@ namespace RestaurantReservation.Server.Migrations
                         {
                             Id = 1,
                             Capacity = 15,
-                            Date = new DateTime(2024, 1, 3, 16, 56, 6, 180, DateTimeKind.Local).AddTicks(8635),
+                            Date = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(1997),
                             RestaurantId = 1
                         },
                         new
                         {
                             Id = 2,
                             Capacity = 15,
-                            Date = new DateTime(2024, 1, 3, 16, 56, 6, 180, DateTimeKind.Local).AddTicks(8646),
+                            Date = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(2066),
                             RestaurantId = 2
                         },
                         new
                         {
                             Id = 3,
                             Capacity = 15,
-                            Date = new DateTime(2024, 1, 3, 16, 56, 6, 180, DateTimeKind.Local).AddTicks(8648),
+                            Date = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(2070),
                             RestaurantId = 3
                         },
                         new
                         {
                             Id = 4,
                             Capacity = 15,
-                            Date = new DateTime(2024, 1, 3, 16, 56, 6, 180, DateTimeKind.Local).AddTicks(8649),
+                            Date = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(2072),
                             RestaurantId = 4
                         },
                         new
                         {
                             Id = 5,
                             Capacity = 15,
-                            Date = new DateTime(2024, 1, 3, 16, 56, 6, 180, DateTimeKind.Local).AddTicks(8650),
+                            Date = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(2074),
                             RestaurantId = 5
                         });
                 });
@@ -1546,16 +1549,16 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 1,
-                            EndDate = new DateTime(2024, 1, 3, 16, 56, 6, 180, DateTimeKind.Local).AddTicks(8854),
+                            EndDate = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(2479),
                             PlatformFee = 10.0,
-                            StartDate = new DateTime(2024, 1, 3, 16, 56, 6, 180, DateTimeKind.Local).AddTicks(8853)
+                            StartDate = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(2478)
                         },
                         new
                         {
                             Id = 2,
-                            EndDate = new DateTime(2024, 1, 3, 16, 56, 6, 180, DateTimeKind.Local).AddTicks(8856),
+                            EndDate = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(2491),
                             PlatformFee = 10.0,
-                            StartDate = new DateTime(2024, 1, 3, 16, 56, 6, 180, DateTimeKind.Local).AddTicks(8855)
+                            StartDate = new DateTime(2024, 1, 3, 16, 48, 37, 293, DateTimeKind.Local).AddTicks(2487)
                         });
                 });
 
