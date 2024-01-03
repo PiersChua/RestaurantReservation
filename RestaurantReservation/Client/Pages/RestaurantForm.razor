@@ -1,38 +1,61 @@
 ﻿@page "/restaurantapplication/create"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
 <div class="restaurant-form">
     <h2>Tell us more about your restaurant!</h2>
-    <div class="col-md-6">
-        <div class="mb-3">
-            <label for="RName" class="form-label">Restaurant Name:</label>
-            <input type="text" class="form-control" name="RName" />
+    <EditForm Model="@restaurantapplication" OnValidSubmit="CreateRestaurantApplication">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="mb-3 col-md-6 form-group">
+            <label class="white-color">Restaurant Name:</label>
+            <div>
+                <InputText @bind-Value="@restaurantapplication.RestaurantName" class="form-control" />
+                <ValidationMessage For="@(() => restaurantapplication.RestaurantName)" />
+            </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="mb-3">
-            <label for="Email" class="form-label">Email:</label>
-            <input type="email" class="form-control" name="Email" />
+        <div class="mb-3 col-md-6 form-group">
+            <label class="white-color">Email: </label>
+            <div>
+                <InputText @bind-Value="@restaurantapplication.Email" class="form-control" />
+                <ValidationMessage For="@(() => restaurantapplication.Email)" />
+            </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="mb-3">
-            <label for="Cuisine" class="form-label">Cuisine:</label>
-            <input type="text" class="form-control" name="Cuisine" />
+        <div class="mb-3 col-md-6 form-group">
+            <label class="white-color">Cuisine:</label>
+            <div>
+                <InputText @bind-Value="@restaurantapplication.Cuisine" class="form-control" />
+                <ValidationMessage For="@(() => restaurantapplication.Cuisine)" />
+            </div>
         </div>
-    </div>
-	<div class="col-md-6">
-        <div class="mb-3">
-            <label for="Number" class="form-label">Phone Number:</label>
-            <input type="tel" class="form-control" name="Number" />
+        <div class="mb-3 col-md-6 form-group">
+            <label class="white-color">Phone Number: </label>
+            <div>
+                <InputNumber @bind-Value="@restaurantapplication.PhoneNumber" class="form-control" />
+                <ValidationMessage For="@(() => restaurantapplication.PhoneNumber)" />
+            </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="mb-3">
-            <label for="Desc" class="form-label">Description:</label>
-            <input type="text" class="form-control" name="Desc" />
+        <div class="mb-3 col-md-6 form-group">
+            <label class="white-color">Description:</label>
+            <div>
+                <InputText @bind-Value="@restaurantapplication.Description" class="form-control" />
+                <ValidationMessage For="@(() => restaurantapplication.Description)" />
+            </div>
         </div>
-    </div>
+    </EditForm>
     <img src="images/form.jpg" />
     <button type="submit" class="btn btn-primary">Submit Application</button>
 </div>
+
+@code {
+    RestaurantApplication restaurantapplication = new RestaurantApplication();
+
+
+    private async Task CreateRestaurantApplication()
+    {
+        await _client.PostAsJsonAsync($"{Endpoints.RestaurantApplicationsEndpoint}", restaurantapplication);
+        _navManager.NavigateTo("/");
+    }
+}
 
 

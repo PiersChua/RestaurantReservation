@@ -16,6 +16,7 @@ namespace RestaurantReservation.Shared.Domain
         public string? Cuisine { get; set; }
         public string? Category { get; set; }
         public int? PhoneNumber { get; set; }
+        public string? Location { get; set; } // North south east west
 		public string? ImagePath { get; set; }
 		public int AddressId { get; set; }
         public virtual Address? Address { get; set; }
