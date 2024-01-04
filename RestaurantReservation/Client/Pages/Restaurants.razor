@@ -36,7 +36,7 @@
 				<option value="@item">@item</option>
 			}
 		</select>
-		<button type="submit" class="btn btn-primary">Apply</button>
+		<button type="submit" class="btn btn-primary" @onclick="ApplyFilter" >Apply</button>
 	</div>
 </div>
 @if (Res != null)
@@ -82,40 +82,50 @@ else
 
 
 @code {
-	private string cuisine;
+	private string? cuisine;
 	private List<string> cuisineSelections = new List<string> { "Chinese", "Malay", "Eurasian","Indian" };
 
-	private string location;
-	private List<string> locationSelections = new List<string> { "North", "South", "East","West","NorthEast","NorthWest","SouthEast","SouthWest" };
+	private string? location;
+	private List<string> locationSelections = new List<string> { "North", "South", "East","West","NorthEast","NorthWest","SouthEast","SouthWest", "Central"};
 
-	private string category;
+	private string? category;
 	private List<string> priceSelections = new List<string> {"Hotpot","Buffet","High Tea"};
 
 	private List<Restaurant>? Res;
 	private List<Restaurant>? filteredRestaurant;
+	private void ApplyFilter()
+	{
+		filteredRestaurant=Res.Where(r =>
+		(string.IsNullOrEmpty(cuisine) || r.Cuisine == cuisine) &&
+		(string.IsNullOrEmpty(location) || r.Location == location) &&
+		(string.IsNullOrEmpty(category) || r.Category == category))
+		.ToList();
+	}
+
 	protected override async Task OnInitializedAsync()
 	{
 		Res = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
-		// Get the current URL
-		var uri = new Uri(Navigation.Uri);
+		filteredRestaurant = Res;
+		// // Get the current URL
+		// var uri = new Uri(Navigation.Uri);
 
-		// Parse the query parameters
-		var query = uri.Query;
-		var queryString = System.Web.HttpUtility.ParseQueryString(query);
+		// // Parse the query parameters
+		// var query = uri.Query;
+		// var queryString = System.Web.HttpUtility.ParseQueryString(query);
 
-		// Get the value of the "data" parameter
-		string serializedObject = queryString["search"];
+		// // Get the value of the "data" parameter
+		// string serializedObject = queryString["search"];
 
-		// Deserialize the object if the value is not null or empty
-		if (!string.IsNullOrEmpty(serializedObject))
-		{
-			var searchTerm = System.Text.Json.JsonSerializer.Deserialize<String>(serializedObject);
-			filteredRestaurant = Res.Where(x => x.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
-		}
-		else
-		{
-			filteredRestaurant = Res;
-		}
+		// // Deserialize the object if the value is not null or empty
+		// if (!string.IsNullOrEmpty(serializedObject))
+		// {
+		// 	var searchTerm = System.Text.Json.JsonSerializer.Deserialize<String>(serializedObject);
+		// 	filteredRestaurant = Res.Where(x => x.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+		// }
+		// else
+		// {
+		// 	filteredRestaurant = Res;
+		// }
 
 	}
 	
