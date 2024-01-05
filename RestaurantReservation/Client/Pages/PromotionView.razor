@@ -1,0 +1,25 @@
+﻿@page "/promotions/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager Navigation
+
+@if(promo != null)
+{
+	<div>
+		<h1>@promo.Name</h1>
+		<h4>@promo.Description</h4>
+		<p>@promo.Discount% Discount from @promo.StartDate?.Date.ToString("yyyy-MM-dd")</p>
+		<p>Promotion is valid till @promo.EndDate?.Date.ToString("yyyy-MM-dd")</p>
+	</div>
+}
+
+@code {
+	[Parameter]
+	public int id { get; set; }
+
+	private Promotion? promo;
+
+	protected override async Task OnInitializedAsync()
+	{
+		promo = await _client.GetFromJsonAsync<Promotion>($"{Endpoints.PromotionsEndpoint}/{id}");
+	}
+}

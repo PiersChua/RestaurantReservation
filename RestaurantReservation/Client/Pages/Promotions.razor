@@ -1,7 +1,37 @@
 ﻿@page "/promotions"
+@inject NavigationManager Navigation
+@inject HttpClient _client
 
-<h3>Promotions</h3>
+<div class="promo-hero">
+	<div class="overlay-text-promo">
+		<h1>The No. 1 reservation app for all diners.</h1>
+		<p>Savor Exclusive Delights at Bookbite! Unleash a world of culinary bliss with our exclusive promotions, crafted just for you. <br />
+			From discounts to special treats, every reservation at Bookbite is a journey into indulgence. <br />
+			Elevate your dining experience with us today! </p>
+	</div>
+	<img src="images/promo.png" />
+</div>
+@if (Promos != null)
+{
+	@foreach (var promo in Promos)
+	{
+		<div class="promo-item" @onclick="() => ViewPromo(promo.Id)">
+			<h2>@promo.Name</h2>
+			<h4>Enjoy @promo.Discount% Discount</h4>
+		</div>
+	}
+}		
 
 @code {
+	private List<Promotion>? Promos;
 
+	protected override async Task OnInitializedAsync()
+	{
+		Promos = await _client.GetFromJsonAsync<List<Promotion>>($"{Endpoints.PromotionsEndpoint}");
+	}
+
+	private void ViewPromo(int id)
+	{
+		Navigation.NavigateTo($"/promotions/{id}");
+	}
 }

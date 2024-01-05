@@ -26,5 +26,16 @@ select {
 .filter-search h4{
     font-size:20px;
     font-family:sans-serif;
-
 }
+
+.res-link{
+    cursor:pointer;
+    padding-bottom:0;
+    font-size:16px;
+    font-family:sans-serif;
+    margin-bottom:-16px;
+}
+    .res-link:hover{
+        background-color:#EDEDED;
+        transition:0.5s;
+    }

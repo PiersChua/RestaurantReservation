@@ -12,7 +12,7 @@
             </div>
             <form action="" class="searchbar">
                 <input type="text" @bind="searchTerm" placeholder="Book a Reservation now!">
-                <button type="submit" class="search" @onclick="Search"><img src="images/search.png"></button>
+                <button type="submit" class="search" @onclick="() =>Search(searchTerm)"><img src="images/search.png"></button>
             </form>
 
             <AuthorizeView>
@@ -101,8 +101,9 @@
     }
 
     private string searchTerm;
-    private void Search()
+    private void Search(string search)
     {
-        Navigation.NavigateTo($"/restaurants?search={searchTerm}");
-	}
+        Navigation.NavigateTo($"/restaurants/{search}");
+    }
+
 }
