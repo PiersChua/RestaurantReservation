@@ -1,0 +1,38 @@
+﻿.promo-page {
+    display: flex;
+    min-height: 300px;
+    background: linear-gradient(to right, #87CEFA, #FFECB3);
+}
+
+
+    .promo-head {
+        padding-top: 40px;
+        width: 60%;
+        font-family: sans-serif;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .promo-head h1 {
+        font-weight: 900;
+        font-size: 70px;
+    }
+
+    .promo-head h2 {
+        font-size: 50px;
+    }
+
+    .promo-desc {
+        flex: 1;
+        padding-top: 80px;
+        padding-right:20px;
+        text-align:left;
+        font-family: sans-serif;
+        position: relative;
+    }
+
+    .promo-desc div {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }

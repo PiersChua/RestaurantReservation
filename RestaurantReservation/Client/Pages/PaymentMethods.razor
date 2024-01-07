@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="cc-number" class="form-label">Credit card number</label>
+                        <label for="cc-number" class="form-label">Card number</label>
                         <InputText @bind-Value="paymentMethod.CardNumber" class="form-control" />
                         <small class="text-body-secondary">Ensure there's no spacing between the numbers</small>
                         <ValidationMessage For="@(() => paymentMethod.CardNumber)" />
@@ -47,7 +47,7 @@
 
                     <div class="col-md-3">
                         <label for="cc-expiration" class="form-label">Expiration</label>
-                        <InputDate @bind-Value="paymentMethod.DateOfExpiry" class="form-control" />
+                        <InputDate min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="paymentMethod.DateOfExpiry" class="form-control" />
                         <ValidationMessage For="@(() => paymentMethod.DateOfExpiry)" />
                     </div>
 

@@ -1,0 +1,32 @@
+﻿@page "/promotions/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager Navigation
+
+@if(promo != null)
+{
+	<div class="promo-page">
+		<div class="promo-head">
+			<h1>@promo.Name Offer</h1><br />
+			<h2>@promo.Discount% off your next reservation! </h2>
+			<h4><span class="oi bi bi-megaphone-fill"></span> USE CODE: @promo.Code</h4>
+		</div>
+		<div class="promo-desc">
+			<p>@promo.Description</p>
+			<div>
+				<small>Valid from @promo.StartDate?.Date.ToString("dd MMM yyyy") - @promo.EndDate?.Date.ToString("dd MMM yyyy")</small>
+			</div>
+		</div>
+	</div>
+}
+
+@code {
+	[Parameter]
+	public int id { get; set; }
+
+	private Promotion? promo;
+
+	protected override async Task OnInitializedAsync()
+	{
+		promo = await _client.GetFromJsonAsync<Promotion>($"{Endpoints.PromotionsEndpoint}/{id}");
+	}
+}

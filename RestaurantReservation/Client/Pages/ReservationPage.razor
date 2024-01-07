@@ -59,6 +59,9 @@
 	private List<OperatingHour>? reshour;
 	private List<Restaurant>? Restaurants;
 	private List<Menu>? Menus;
+	private string empty="NA";
+
+
 	[Parameter]
 	public int id { get; set; }
 	protected async override Task OnInitializedAsync()
@@ -69,6 +72,10 @@
 		if (Restaurants != null && Menus != null && OperatingHours != null) 
 		{
 			restaurant = Restaurants.First(q => q.Id == id);
+			if(string.IsNullOrEmpty(restaurant.Address.UnitNumber))//checks if unit number is empty, other attributes are not checked as they are usually provided
+			{
+				restaurant.Address.UnitNumber=empty;
+			}
 			menu=Menus.First(q=>q.RestaurantId==id);
 			reshour=OperatingHours.Where(q=>q.RestaurantId==id).ToList();
 		}

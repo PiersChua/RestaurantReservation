@@ -11,19 +11,19 @@ namespace RestaurantReservation.Shared.Domain
 	{
 		public int Id { get; set; }
 
-        //[Required] name doesnt work idk why
-        //[StringLength(100, MinimumLength = 2, ErrorMessage = "Name does not meet length requirements")]
+        [Required]
+        [StringLength(32, MinimumLength = 2, ErrorMessage = "Name does not meet length requirements")]
         public string? Name { get; set; }
 
         [Required]
-        [RegularExpression(@"\d{16}$", ErrorMessage = "Invalid Card Credentials")]
+        [RegularExpression(@"^\d{16}$", ErrorMessage = "Invalid Card Credentials")]
         public string? CardNumber { get; set; }
 
 		[Required]
 		public DateTime? DateOfExpiry { get; set; }
 
         [Required]
-        [RegularExpression(@"\d{3}$", ErrorMessage = "Invalid CVV")]
+        [RegularExpression(@"^\d{3}$", ErrorMessage = "Invalid CVV")]
         public int? CVV { get; set; }
 
 		public int? CustomerId { get; set; }
