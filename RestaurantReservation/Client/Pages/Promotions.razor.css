@@ -10,6 +10,7 @@
         top: 50%;
         right: 5%;
         transform: translate(0,-50%);
+        filter: drop-shadow(0 0 0.75rem crimson);
     }
 .overlay-text-promo{
     position:absolute;
