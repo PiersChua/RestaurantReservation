@@ -7,3 +7,18 @@
 .row button{
     margin:20px;
 }
+
+.input-groups {
+    display: flex;
+    height:40px;
+}
+
+.input-groups input{
+    height:100%;
+    flex:4;
+}
+.input-groups button{
+    height:100%;
+    margin-top:0px;
+    flex:1;
+}
