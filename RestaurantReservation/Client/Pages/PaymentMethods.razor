@@ -112,12 +112,12 @@
     private async Task CreatePaymentMethod()
     {
         await _client.PostAsJsonAsync($"{Endpoints.PaymentMethodsEndpoint}", paymentMethod);
-        string prompted = await _js.InvokeAsync<string>("Payment Method created successfully!"); 
-        navigation.NavigateTo("/");
+        await _js.InvokeVoidAsync("alert", "Payment Method added!");
+        navigation.NavigateTo("");
     }
 
 
-    private async Task DeletePaymentMethod(int payMethodid)
+    async Task DeletePaymentMethod(int payMethodid)
     {
         if (PayMethods != null)
         {
@@ -125,7 +125,7 @@
             var confirm = await _js.InvokeAsync<bool>("confirm", $"Do you want to delete {paymethod.Name}?");
             if (confirm)
             {
-                await _client.DeleteAsync($"{Endpoints.RestaurantsEndpoint}/{payMethodid}");
+                await _client.DeleteAsync($"{Endpoints.PaymentMethodsEndpoint}/{payMethodid}");
                 await OnInitializedAsync();
             }
         }

@@ -34,21 +34,21 @@
 						<ValidationMessage For="@(() => reservation.Request)" />
 					</div>
 				</div>
-				<form class="card p-2">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Promo code">
-						<button type="submit" class="btn btn-secondary">Redeem</button>
-					</div>
-				</form>
 			</div>
+			</EditForm>
+		<div class="col-md-6 form-group">
+			<label>Promo Code</label>
+			<div class="input-groups">
+				<input type="text" @bind="code" class="form-control" placeholder="Promo code">
+				<button @onclick="VerifyCode" class="btn btn-secondary">Redeem</button>
+			</div>
+		</div>
 			<br />
 			<hr>
 			<div class="row">
 				<button class="btn btn-outline-dark btn-block col-md-2"><span class="oi oi-arrow-left"></span> Back</button>
 				<button type="submit" class="btn btn-secondary btn-block col-md-9">Submit Reservation</button>
 			</div>
-			
-		</EditForm>
 	</div>
 }
 @code {
@@ -57,7 +57,7 @@
 	[Parameter]
 	public int id { get; set; }
 	Reservation reservation = new Reservation();
-
+	private string? code;
 	protected async override Task OnInitializedAsync()
 	{
 		Restaurants = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
@@ -67,10 +67,24 @@
 		}
 	}
 
-	private async Task CreateReservation()
+	async Task CreateReservation()
 	{
 		reservation.RestaurantId = id;
 		await _client.PostAsJsonAsync($"{Endpoints.ReservationsEndpoint}", reservation);
+		await js.InvokeVoidAsync("alert", "Reservation Created! Please check reservation details under Reservation History");
 		Navigation.NavigateTo("/reservationhistory");
+	}
+
+	private void VerifyCode()
+	{
+		// if (code == restaurant.PromoCode)
+		// {
+		// 	reservation.PromoCode = code;
+		// 	Navigation.NavigateTo("/reservationhistory");
+		// }
+		// else
+		// {
+		// 	js.InvokeVoidAsync("alert", "Invalid Promo Code");
+		// }
 	}
 }
