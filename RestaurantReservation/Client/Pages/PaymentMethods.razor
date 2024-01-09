@@ -4,6 +4,32 @@
 @inject IJSRuntime _js
 
 <div class="container">
+    @if(PayMethods != null)
+	{
+		<div class="row">
+			@foreach (var pay in PayMethods)
+			{
+				<div class="card mb-2 shadow-sm">
+					<div class="card-body d-flex">
+                        <img src="images/mastercardLogo.png" /> 
+                        <div class="card-details">
+                            <p class="card-text">Name: @UpperCase(pay.Name)</p>
+                            <p>Card Number: @MaskCardNumber(pay.CardNumber)</p>
+                        </div>
+                        <div class="card-buttons">
+                            <button class="btn btn-secondary" @onclick="() => Edit(pay.Id)"><span class="bi bi-pencil-square"></span></button>
+							<button class="btn btn-danger" @onclick="() => DeletePaymentMethod(pay.Id)"><span class="bi bi-trash3-fill"></span></button>
+                        </div>
+                            
+					</div>
+				</div>
+			}
+		</div>
+	}
+	else
+	{
+		<h1>You currently have no payment Method</h1>
+	}
   <main>
     <div class="py-5 text-center">
       <img src="/images/appIcon.png" width="200" height="200">
@@ -79,6 +105,8 @@
 
 
 @code{
+    private List<PaymentMethod>? PayMethods;
+    private PaymentMethod paymethod;
     PaymentMethod paymentMethod = new PaymentMethod();
 
     private async Task CreatePaymentMethod()
@@ -86,5 +114,45 @@
         await _client.PostAsJsonAsync($"{Endpoints.PaymentMethodsEndpoint}", paymentMethod);
         string prompted = await _js.InvokeAsync<string>("Payment Method created successfully!"); 
         navigation.NavigateTo("/");
+    }
+
+
+    private async Task DeletePaymentMethod(int payMethodid)
+    {
+        if (PayMethods != null)
+        {
+            var paymethod = PayMethods.First(q => q.Id == payMethodid);
+            var confirm = await _js.InvokeAsync<bool>("confirm", $"Do you want to delete {paymethod.Name}?");
+            if (confirm)
+            {
+                await _client.DeleteAsync($"{Endpoints.RestaurantsEndpoint}/{payMethodid}");
+                await OnInitializedAsync();
+            }
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        PayMethods = await _client.GetFromJsonAsync<List<PaymentMethod>>($"{Endpoints.PaymentMethodsEndpoint}");
+    }
+    private string MaskCardNumber(string CardNumber)
+    {
+        if (CardNumber.Length >= 12)
+        {
+            string maskedDigits = new string('*', CardNumber.Length - 4); // Mask all digits except the last 4
+            return maskedDigits + CardNumber.Substring(CardNumber.Length - 4);
+        }
+        else
+        {
+            return null;
+        }
+    }
+    private string UpperCase(string name)
+    {
+        return name.ToUpper();
+    }
+    private void Edit(int id)
+    {
+        navigation.NavigateTo($"/paymentmethods/edit/{id}");
     }
 }

@@ -5,33 +5,51 @@
 @attribute [Authorize]
 @if (restaurant != null)
 {
-	<EditForm Model="@restaurant" OnValidSubmit="CreateReservation">
-		<DataAnnotationsValidator />
-		<ValidationSummary />
-		<div class="col-md-6 form-group">
-			<label>No. of guests</label>
-			<div>
-				<InputNumber @bind-Value="@reservation.Guest" class="form-control" />
-				<ValidationMessage For="@(() => reservation.Guest)" />
-			</div>
+	<div class="container">
+		<div class="text-center">
+			<img src="images/appIcon.png">
 		</div>
-		<div class="col-md-6 form-group">
-			<label>Reservation Date</label>
-			<div>
-				<InputDate Type="InputDateType.DateTimeLocal" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="reservation.DateTime" class="form-control" />
-				<ValidationMessage For="@(() => reservation.DateTime)" />
+		<EditForm Model="@restaurant" OnValidSubmit="CreateReservation">
+			<DataAnnotationsValidator />
+			<ValidationSummary />
+			<div class="row">
+				<div class="col-md-6 form-group">
+					<label>No. of guests</label>
+					<div>
+						<InputNumber @bind-Value="@reservation.Guest" class="form-control" />
+						<ValidationMessage For="@(() => reservation.Guest)" />
+					</div>
+				</div>
+				<div class="col-md-6 form-group">
+					<label>Reservation Date</label>
+					<div>
+						<InputDate Type="InputDateType.DateTimeLocal" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="reservation.DateTime" class="form-control" />
+						<ValidationMessage For="@(() => reservation.DateTime)" />
+					</div>
+				</div>
+				<div class="col-md-6 form-group">
+					<label>Special Request</label>
+					<div>
+						<InputText @bind-Value="@reservation.Request" class="form-control" />
+						<ValidationMessage For="@(() => reservation.Request)" />
+					</div>
+				</div>
+				<form class="card p-2">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Promo code">
+						<button type="submit" class="btn btn-secondary">Redeem</button>
+					</div>
+				</form>
 			</div>
-		</div>
-		<div class="col-md-6 form-group">
-			<label>Special Request</label>
-			<div>
-				<InputText @bind-Value="@reservation.Request" class="form-control" />
-				<ValidationMessage For="@(() => reservation.Request)" />
+			<br />
+			<hr>
+			<div class="row">
+				<button class="btn btn-outline-dark btn-block col-md-2"><span class="oi oi-arrow-left"></span> Back</button>
+				<button type="submit" class="btn btn-secondary btn-block col-md-9">Submit Reservation</button>
 			</div>
-		</div>
-		<button type="submit" class="btn btn-success btn-block">Submit Reservation</button>
-
-	</EditForm>
+			
+		</EditForm>
+	</div>
 }
 @code {
 	private Restaurant? restaurant;

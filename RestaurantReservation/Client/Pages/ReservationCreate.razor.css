@@ -1,0 +1,9 @@
+﻿.container{
+    max-width:960px;
+    background-color:#EDEDED;
+    padding-top:20px;   
+}
+
+.row button{
+    margin:20px;
+}
