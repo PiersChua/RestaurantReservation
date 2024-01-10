@@ -12,8 +12,8 @@ using RestaurantReservation.Server.Data;
 namespace RestaurantReservation.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240107150842_changedDescOfPromoSeed")]
-    partial class changedDescOfPromoSeed
+    [Migration("20240110171806_newdb")]
+    partial class newdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -393,15 +393,15 @@ namespace RestaurantReservation.Server.Migrations
                         {
                             Id = "900de75c-2b44-4069-8c0d-d7d3a7ae4ffb",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e169ac85-4a44-4a4b-9a5d-a13b2289f5f1",
+                            ConcurrencyStamp = "f9b6be2c-1b97-4a45-a827-aa5d2eb7e28e",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOjW/CPdtjWFJqlngqOYtHUjnerO5iYcndCnMFRoIkJjrOT/Gx2QvwmTFFhdlocPgg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHpmFTlv5G5i8FqJLEYT4hcGG9w4SP3F8jN/1dW0Y+eCMzpyknyxTq6eJO5e3vwo4w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5f18d3bf-0864-4f36-812f-ed3bc486622e",
+                            SecurityStamp = "736cf7a2-39b1-4535-b2b9-6cc56fe789e4",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -478,6 +478,51 @@ namespace RestaurantReservation.Server.Migrations
                             PostalCode = 48616,
                             Street = "1 Raffles Place",
                             UnitNumber = "#04-26/27/28"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Building = "Oriental plaza",
+                            Level = 1,
+                            PostalCode = 88756,
+                            Street = "291 New Bridge Rd",
+                            UnitNumber = "#01-01"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Building = "NTUC Income Tampines Junction",
+                            Level = 1,
+                            PostalCode = 529653,
+                            Street = "300 Tampines Ave 5",
+                            UnitNumber = "#01-06"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Building = "AMK Hub",
+                            Level = 4,
+                            PostalCode = 569933,
+                            Street = "53 Ang Mo Kio Ave 3",
+                            UnitNumber = "#04-04"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Building = "Plaza Singapura",
+                            Level = 2,
+                            PostalCode = 238839,
+                            Street = " 68 Orchard Rd",
+                            UnitNumber = "#02-01"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Building = "Tampines Mall",
+                            Level = 4,
+                            PostalCode = 529510,
+                            Street = "4 Tampines Central 5",
+                            UnitNumber = "#04-01"
                         });
                 });
 
@@ -617,6 +662,36 @@ namespace RestaurantReservation.Server.Migrations
                             Id = 5,
                             ImagePath = "images/cityhotpotMenu.jpg",
                             RestaurantId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ImagePath = "images/ssikkekMenu.jpg",
+                            RestaurantId = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ImagePath = "images/captainkimMenu.jpeg",
+                            RestaurantId = 7
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ImagePath = "images/imkimkoreanMenu.jpg",
+                            RestaurantId = 8
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ImagePath = "images/seoraeMenu.jpg",
+                            RestaurantId = 9
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ImagePath = "images/seoulgardenMenu.png",
+                            RestaurantId = 10
                         });
                 });
 
@@ -926,6 +1001,286 @@ namespace RestaurantReservation.Server.Migrations
                             Day = "Sunday",
                             OpeningTime = new DateTime(2024, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             RestaurantId = 5
+                        },
+                        new
+                        {
+                            Id = 36,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Monday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 6
+                        },
+                        new
+                        {
+                            Id = 37,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Tuesday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 6
+                        },
+                        new
+                        {
+                            Id = 38,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Wednesday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 6
+                        },
+                        new
+                        {
+                            Id = 39,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Thursday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 6
+                        },
+                        new
+                        {
+                            Id = 40,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Friday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 6
+                        },
+                        new
+                        {
+                            Id = 41,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Saturday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 6
+                        },
+                        new
+                        {
+                            Id = 42,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Sunday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 6
+                        },
+                        new
+                        {
+                            Id = 43,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Monday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 7
+                        },
+                        new
+                        {
+                            Id = 44,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Tuesday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 7
+                        },
+                        new
+                        {
+                            Id = 45,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Wednesday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 7
+                        },
+                        new
+                        {
+                            Id = 46,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Thursday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 7
+                        },
+                        new
+                        {
+                            Id = 47,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Friday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 7
+                        },
+                        new
+                        {
+                            Id = 48,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Saturday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 7
+                        },
+                        new
+                        {
+                            Id = 49,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Sunday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 7
+                        },
+                        new
+                        {
+                            Id = 50,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Monday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 8
+                        },
+                        new
+                        {
+                            Id = 51,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Tuesday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 8
+                        },
+                        new
+                        {
+                            Id = 52,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Wednesday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 8
+                        },
+                        new
+                        {
+                            Id = 53,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Thursday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 8
+                        },
+                        new
+                        {
+                            Id = 54,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Friday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 8
+                        },
+                        new
+                        {
+                            Id = 55,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Saturday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 8
+                        },
+                        new
+                        {
+                            Id = 56,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Sunday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 8
+                        },
+                        new
+                        {
+                            Id = 57,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Monday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 9
+                        },
+                        new
+                        {
+                            Id = 58,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Tuesday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 9
+                        },
+                        new
+                        {
+                            Id = 59,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Wednesday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 9
+                        },
+                        new
+                        {
+                            Id = 60,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Thursday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 9
+                        },
+                        new
+                        {
+                            Id = 61,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Friday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 9
+                        },
+                        new
+                        {
+                            Id = 62,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Saturday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 9
+                        },
+                        new
+                        {
+                            Id = 63,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Sunday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 9
+                        },
+                        new
+                        {
+                            Id = 64,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Monday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 10
+                        },
+                        new
+                        {
+                            Id = 65,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Tuesday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 10
+                        },
+                        new
+                        {
+                            Id = 66,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Wednesday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 10
+                        },
+                        new
+                        {
+                            Id = 67,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Thursday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 10
+                        },
+                        new
+                        {
+                            Id = 68,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Friday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 10
+                        },
+                        new
+                        {
+                            Id = 69,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Saturday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 10
+                        },
+                        new
+                        {
+                            Id = 70,
+                            ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            Day = "Sunday",
+                            OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 10
                         });
                 });
 
@@ -969,7 +1324,7 @@ namespace RestaurantReservation.Server.Migrations
                             Id = 1,
                             CVV = 123,
                             CardNumber = "1234123412341234",
-                            DateOfExpiry = new DateTime(2025, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(2952),
+                            DateOfExpiry = new DateTime(2025, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(7563),
                             Name = "Josh"
                         },
                         new
@@ -977,7 +1332,7 @@ namespace RestaurantReservation.Server.Migrations
                             Id = 2,
                             CVV = 321,
                             CardNumber = "1234123412341234",
-                            DateOfExpiry = new DateTime(2025, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(2962),
+                            DateOfExpiry = new DateTime(2025, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(7571),
                             Name = "Liza"
                         });
                 });
@@ -1019,9 +1374,9 @@ namespace RestaurantReservation.Server.Migrations
                             Code = "NY2024",
                             Description = "Celebrate the New Year with fantastic deals! Enjoy exclusive discounts on all reservations. Start 2024 in style with limited-time offers and extra savings just for you. Renew, refresh, and rejoice! Reserve now and make this year unforgettable. Cheers to a fantastic 2024!",
                             Discount = 10.0,
-                            EndDate = new DateTime(2024, 2, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(3798),
+                            EndDate = new DateTime(2024, 2, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8498),
                             Name = "NewYear",
-                            StartDate = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(3796)
+                            StartDate = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8496)
                         },
                         new
                         {
@@ -1029,9 +1384,9 @@ namespace RestaurantReservation.Server.Migrations
                             Code = "CNY2024",
                             Description = "Celebrate the Lunar New Year at Bookbite! Reserve your table now for an exquisite culinary journey featuring luck-filled banquets and exclusive dining packages. Indulge in authentic flavors that capture the essence of the season. Make your celebrations memorable with us. Gong Xi Fa Cai!",
                             Discount = 10.0,
-                            EndDate = new DateTime(2024, 3, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(3805),
+                            EndDate = new DateTime(2024, 3, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8504),
                             Name = "ChineseNewYear",
-                            StartDate = new DateTime(2024, 2, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(3804)
+                            StartDate = new DateTime(2024, 2, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8503)
                         },
                         new
                         {
@@ -1039,9 +1394,9 @@ namespace RestaurantReservation.Server.Migrations
                             Code = "LOVE2024",
                             Description = "Celebrate love at Bookbite! Book your romantic evening for an unforgettable Valentine's experience. Indulge in exquisite dining with our special menu, crafted to ignite the flames of love. Enjoy a romantic ambiance and impeccable service, setting the stage for a memorable evening. Delight in exclusive dishes designed to make hearts flutter. Love is in the air at Bookbite!",
                             Discount = 10.0,
-                            EndDate = new DateTime(2024, 4, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(3808),
+                            EndDate = new DateTime(2024, 4, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8507),
                             Name = "Valentine",
-                            StartDate = new DateTime(2024, 3, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(3807)
+                            StartDate = new DateTime(2024, 3, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8506)
                         });
                 });
 
@@ -1090,7 +1445,7 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DateTime = new DateTime(2024, 1, 7, 23, 8, 42, 452, DateTimeKind.Local).AddTicks(639),
+                            DateTime = new DateTime(2024, 1, 11, 1, 18, 6, 757, DateTimeKind.Local).AddTicks(8305),
                             Guest = 2,
                             Request = "None",
                             ReservationStatusId = 1,
@@ -1099,7 +1454,7 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 2,
-                            DateTime = new DateTime(2024, 1, 7, 23, 8, 42, 452, DateTimeKind.Local).AddTicks(656),
+                            DateTime = new DateTime(2024, 1, 11, 1, 18, 6, 757, DateTimeKind.Local).AddTicks(8323),
                             Guest = 3,
                             Request = "None",
                             ReservationStatusId = 2,
@@ -1108,7 +1463,7 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 3,
-                            DateTime = new DateTime(2024, 1, 7, 23, 8, 42, 452, DateTimeKind.Local).AddTicks(658),
+                            DateTime = new DateTime(2024, 1, 11, 1, 18, 6, 757, DateTimeKind.Local).AddTicks(8324),
                             Guest = 4,
                             Request = "None",
                             ReservationStatusId = 3,
@@ -1117,7 +1472,7 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 4,
-                            DateTime = new DateTime(2024, 1, 7, 23, 8, 42, 452, DateTimeKind.Local).AddTicks(659),
+                            DateTime = new DateTime(2024, 1, 11, 1, 18, 6, 757, DateTimeKind.Local).AddTicks(8326),
                             Guest = 2,
                             Request = "None",
                             ReservationStatusId = 4,
@@ -1218,6 +1573,7 @@ namespace RestaurantReservation.Server.Migrations
                             AddressId = 1,
                             Category = "Hotpot",
                             Cuisine = "Chinese",
+                            Email = "admissions@tp.edu.sg",
                             ImagePath = "images/haidilao.jpg",
                             Location = "East",
                             Name = "Hai Di Lao",
@@ -1229,6 +1585,7 @@ namespace RestaurantReservation.Server.Migrations
                             AddressId = 2,
                             Category = "Hotpot",
                             Cuisine = "Chinese",
+                            Email = "admissions@tp.edu.sg",
                             ImagePath = "images/sichuandouhua.jpg",
                             Location = "Central",
                             Name = "Si Chuan Dou Hua",
@@ -1240,6 +1597,7 @@ namespace RestaurantReservation.Server.Migrations
                             AddressId = 3,
                             Category = "Hotpot",
                             Cuisine = "Chinese",
+                            Email = "admissions@tp.edu.sg",
                             ImagePath = "images/beautyinthepot.jpg",
                             Location = "South",
                             Name = "Beauty In The Pot",
@@ -1251,6 +1609,7 @@ namespace RestaurantReservation.Server.Migrations
                             AddressId = 4,
                             Category = "Hotpot",
                             Cuisine = "Chinese",
+                            Email = "admissions@tp.edu.sg",
                             ImagePath = "images/shabusai.jpg",
                             Location = "East",
                             Name = "Shabu Sai",
@@ -1262,9 +1621,70 @@ namespace RestaurantReservation.Server.Migrations
                             AddressId = 5,
                             Category = "Hotpot",
                             Cuisine = "Chinese",
+                            Email = "admissions@tp.edu.sg",
                             ImagePath = "images/cityhotpot.jpg",
                             Location = "SouthWest",
                             Name = "City Hotpot",
+                            PhoneNumber = 67804201
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AddressId = 6,
+                            Category = "BBQ",
+                            Cuisine = "Korea",
+                            Email = "admissions@tp.edu.sg",
+                            ImagePath = "images/ssikkek.jpg",
+                            Location = "Central",
+                            Name = "Ssikkek",
+                            PhoneNumber = 67804201
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AddressId = 7,
+                            Category = "BBQ",
+                            Cuisine = "Korea",
+                            Email = "admissions@tp.edu.sg",
+                            ImagePath = "images/captainkim.jpg",
+                            Location = "East",
+                            Name = "Captain Kim",
+                            PhoneNumber = 67804201
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AddressId = 8,
+                            Category = "BBQ",
+                            Cuisine = "Korea",
+                            Email = "admissions@tp.edu.sg",
+                            ImagePath = "images/imkimkorean.jpg",
+                            Location = "North",
+                            Name = "I'm Kim Korean",
+                            PhoneNumber = 67804201
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AddressId = 9,
+                            Category = "BBQ",
+                            Cuisine = "Korea",
+                            Email = "admissions@tp.edu.sg",
+                            ImagePath = "images/seorae.jpg",
+                            Location = "Central",
+                            Name = "Seorae",
+                            PhoneNumber = 67804201
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AddressId = 10,
+                            Category = "BBQ",
+                            Cuisine = "Korea",
+                            Email = "admissions@tp.edu.sg",
+                            ImagePath = "images/seoulgarden.jpg",
+                            Location = "East",
+                            Name = "Seoul Garden",
                             PhoneNumber = 67804201
                         });
                 });
@@ -1390,7 +1810,7 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 1,
-                            DateTime = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(3996),
+                            DateTime = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8690),
                             Description = "Hai di lao staff very attentive",
                             Rating = 4,
                             RestaurantId = 1
@@ -1398,7 +1818,7 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 2,
-                            DateTime = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(4003),
+                            DateTime = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8693),
                             Description = "Good food",
                             Rating = 4,
                             RestaurantId = 2
@@ -1406,7 +1826,7 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 3,
-                            DateTime = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(4004),
+                            DateTime = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8694),
                             Description = "Nice soup",
                             Rating = 4,
                             RestaurantId = 3
@@ -1414,7 +1834,7 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 4,
-                            DateTime = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(4006),
+                            DateTime = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8696),
                             Description = "Cheap and affordable",
                             Rating = 4,
                             RestaurantId = 4
@@ -1422,7 +1842,7 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 5,
-                            DateTime = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(4007),
+                            DateTime = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8698),
                             Description = "Great restaurant",
                             Rating = 4,
                             RestaurantId = 5
@@ -1457,35 +1877,35 @@ namespace RestaurantReservation.Server.Migrations
                         {
                             Id = 1,
                             Capacity = 15,
-                            Date = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(1729),
+                            Date = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6266),
                             RestaurantId = 1
                         },
                         new
                         {
                             Id = 2,
                             Capacity = 15,
-                            Date = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(1755),
+                            Date = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6289),
                             RestaurantId = 2
                         },
                         new
                         {
                             Id = 3,
                             Capacity = 15,
-                            Date = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(1757),
+                            Date = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6291),
                             RestaurantId = 3
                         },
                         new
                         {
                             Id = 4,
                             Capacity = 15,
-                            Date = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(1758),
+                            Date = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6292),
                             RestaurantId = 4
                         },
                         new
                         {
                             Id = 5,
                             Capacity = 15,
-                            Date = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(1759),
+                            Date = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6293),
                             RestaurantId = 5
                         });
                 });
@@ -1561,16 +1981,16 @@ namespace RestaurantReservation.Server.Migrations
                         new
                         {
                             Id = 1,
-                            EndDate = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(1962),
+                            EndDate = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6526),
                             PlatformFee = 10.0,
-                            StartDate = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(1961)
+                            StartDate = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6524)
                         },
                         new
                         {
                             Id = 2,
-                            EndDate = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(1965),
+                            EndDate = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6529),
                             PlatformFee = 10.0,
-                            StartDate = new DateTime(2024, 1, 7, 23, 8, 42, 503, DateTimeKind.Local).AddTicks(1964)
+                            StartDate = new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6528)
                         });
                 });
 

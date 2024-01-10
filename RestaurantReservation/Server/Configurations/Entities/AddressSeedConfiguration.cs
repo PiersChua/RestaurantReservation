@@ -53,8 +53,53 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Level= 4,
 					UnitNumber= "#04-26/27/28",
 					PostalCode= 048616
+				},
+				new Address
+				{
+					Id = 6,
+					Street = "291 New Bridge Rd",
+					Building = "Oriental plaza",
+					Level = 1,
+					UnitNumber = "#01-01",
+					PostalCode = 088756
+				},
+				new Address
+				{
+					Id = 7,
+					Street = "300 Tampines Ave 5",
+					Building = "NTUC Income Tampines Junction",
+					Level = 1,
+					UnitNumber = "#01-06",
+					PostalCode = 529653
+				},
+				new Address
+				{
+					Id = 8,
+					Street = "53 Ang Mo Kio Ave 3",
+					Building = "AMK Hub",
+					Level = 4,
+					UnitNumber = "#04-04",
+					PostalCode = 569933
+				},
+				new Address
+				{
+					Id = 9,
+					Street = " 68 Orchard Rd",
+					Building = "Plaza Singapura",
+					Level = 2,
+					UnitNumber = "#02-01",
+					PostalCode = 238839
+				},
+				new Address
+				{
+					Id = 10,
+					Street = "4 Tampines Central 5",
+					Building = "Tampines Mall",
+					Level = 4,
+					UnitNumber = "#04-01",
+					PostalCode = 529510
 				}
-				
+
 				);
 		}
 	}

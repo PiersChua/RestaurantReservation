@@ -38,8 +38,38 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     Id = 5,
                     ImagePath = "images/cityhotpotMenu.jpg",
                     RestaurantId = 5
-                }
-                );
+                },
+				new Menu
+				{
+					Id = 6,
+					ImagePath = "images/ssikkekMenu.jpg",
+					RestaurantId = 6
+				},
+				new Menu
+				{
+					Id = 7,
+					ImagePath = "images/captainkimMenu.jpeg",
+					RestaurantId = 7
+				},
+				new Menu
+				{
+					Id = 8,
+					ImagePath = "images/imkimkoreanMenu.jpg",
+					RestaurantId = 8
+				},
+				new Menu
+				{
+					Id = 9,
+					ImagePath = "images/seoraeMenu.jpg",
+					RestaurantId = 9
+				},
+				new Menu
+				{
+					Id = 10,
+					ImagePath = "images/seoulgardenMenu.png",
+					RestaurantId = 10
+				}
+				);
 
         }
     }

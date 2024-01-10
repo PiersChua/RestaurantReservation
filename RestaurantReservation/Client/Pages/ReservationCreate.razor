@@ -23,7 +23,7 @@
 				<div class="col-md-6 form-group">
 					<label>Reservation Date</label>
 					<div>
-						<InputDate Type="InputDateType.DateTimeLocal" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="reservation.DateTime" class="form-control" />
+						<InputDate Type="InputDateType.DateTimeLocal" min="@DateTime.Today.ToString("yyyy-MM-ddTHH:mm")" @bind-Value="reservation.DateTime" class="form-control" />
 						<ValidationMessage For="@(() => reservation.DateTime)" />
 					</div>
 				</div>
@@ -38,7 +38,7 @@
 			</EditForm>
 		<div class="col-md-6 form-group">
 			<label>Promo Code</label>
-			<div class="input-groups">
+			<div class="input-group">
 				<input type="text" @bind="code" class="form-control" placeholder="Promo code">
 				<button @onclick="VerifyCode" class="btn btn-secondary">Redeem</button>
 			</div>

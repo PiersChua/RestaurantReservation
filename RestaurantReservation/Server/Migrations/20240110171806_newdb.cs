@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RestaurantReservation.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class createdNewDb : Migration
+    public partial class newdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -326,7 +326,7 @@ namespace RestaurantReservation.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     CardNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfExpiry = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CVV = table.Column<int>(type: "int", nullable: false),
@@ -595,7 +595,12 @@ namespace RestaurantReservation.Server.Migrations
                     { 2, "Parkroyal", 1, 199591, "7500 Beach Rd", null },
                     { 3, "VivoCity", 3, 98585, "1 HarbourFront Walk", "#03-08A" },
                     { 4, "Tampines 1", 2, 529536, " 10 Tampines Central 1", "#02-04" },
-                    { 5, "One Raffles Place", 4, 48616, "1 Raffles Place", "#04-26/27/28" }
+                    { 5, "One Raffles Place", 4, 48616, "1 Raffles Place", "#04-26/27/28" },
+                    { 6, "Oriental plaza", 1, 88756, "291 New Bridge Rd", "#01-01" },
+                    { 7, "NTUC Income Tampines Junction", 1, 529653, "300 Tampines Ave 5", "#01-06" },
+                    { 8, "AMK Hub", 4, 569933, "53 Ang Mo Kio Ave 3", "#04-04" },
+                    { 9, "Plaza Singapura", 2, 238839, " 68 Orchard Rd", "#02-01" },
+                    { 10, "Tampines Mall", 4, 529510, "4 Tampines Central 5", "#04-01" }
                 });
 
             migrationBuilder.InsertData(
@@ -610,15 +615,15 @@ namespace RestaurantReservation.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "900de75c-2b44-4069-8c0d-d7d3a7ae4ffb", 0, "2d042eff-8d84-40ea-b601-45fcfc7c34e0", "admin@localhost.com", false, false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAECoMU1ZcFAF2ebUUURV11Dt+YCdKWQ37gEC31713DaVQ+aYhohoHgQDyMa/iiJ7ePQ==", null, false, "16cb3e27-3160-4abe-a401-0163a3f43eea", false, "admin@localhost.com" });
+                values: new object[] { "900de75c-2b44-4069-8c0d-d7d3a7ae4ffb", 0, "f9b6be2c-1b97-4a45-a827-aa5d2eb7e28e", "admin@localhost.com", false, false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEHpmFTlv5G5i8FqJLEYT4hcGG9w4SP3F8jN/1dW0Y+eCMzpyknyxTq6eJO5e3vwo4w==", null, false, "736cf7a2-39b1-4535-b2b9-6cc56fe789e4", false, "admin@localhost.com" });
 
             migrationBuilder.InsertData(
                 table: "PaymentMethods",
                 columns: new[] { "Id", "CVV", "CardNumber", "CustomerId", "DateOfExpiry", "Name" },
                 values: new object[,]
                 {
-                    { 1, 123, "1234123412341234", null, new DateTime(2025, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(8763), "Josh" },
-                    { 2, 321, "1234123412341234", null, new DateTime(2025, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(8774), "Liza" }
+                    { 1, 123, "1234123412341234", null, new DateTime(2025, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(7563), "Josh" },
+                    { 2, 321, "1234123412341234", null, new DateTime(2025, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(7571), "Liza" }
                 });
 
             migrationBuilder.InsertData(
@@ -626,9 +631,9 @@ namespace RestaurantReservation.Server.Migrations
                 columns: new[] { "Id", "Code", "Description", "Discount", "EndDate", "Name", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, "NY2024", "New year discount!", 10.0, new DateTime(2024, 2, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(9606), "NewYear", new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(9604) },
-                    { 2, "CNY2024", "Chinese New Year discount!", 10.0, new DateTime(2024, 3, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(9611), "ChineseNewYear", new DateTime(2024, 2, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(9610) },
-                    { 3, "LOVE2024", "Valentine's discount!", 10.0, new DateTime(2024, 4, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(9614), "Valentine", new DateTime(2024, 3, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(9613) }
+                    { 1, "NY2024", "Celebrate the New Year with fantastic deals! Enjoy exclusive discounts on all reservations. Start 2024 in style with limited-time offers and extra savings just for you. Renew, refresh, and rejoice! Reserve now and make this year unforgettable. Cheers to a fantastic 2024!", 10.0, new DateTime(2024, 2, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8498), "NewYear", new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8496) },
+                    { 2, "CNY2024", "Celebrate the Lunar New Year at Bookbite! Reserve your table now for an exquisite culinary journey featuring luck-filled banquets and exclusive dining packages. Indulge in authentic flavors that capture the essence of the season. Make your celebrations memorable with us. Gong Xi Fa Cai!", 10.0, new DateTime(2024, 3, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8504), "ChineseNewYear", new DateTime(2024, 2, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8503) },
+                    { 3, "LOVE2024", "Celebrate love at Bookbite! Book your romantic evening for an unforgettable Valentine's experience. Indulge in exquisite dining with our special menu, crafted to ignite the flames of love. Enjoy a romantic ambiance and impeccable service, setting the stage for a memorable evening. Delight in exclusive dishes designed to make hearts flutter. Love is in the air at Bookbite!", 10.0, new DateTime(2024, 4, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8507), "Valentine", new DateTime(2024, 3, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8506) }
                 });
 
             migrationBuilder.InsertData(
@@ -656,8 +661,8 @@ namespace RestaurantReservation.Server.Migrations
                 columns: new[] { "Id", "EndDate", "PlatformFee", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(7746), 10.0, new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(7744) },
-                    { 2, new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(7749), 10.0, new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(7749) }
+                    { 1, new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6526), 10.0, new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6524) },
+                    { 2, new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6529), 10.0, new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6528) }
                 });
 
             migrationBuilder.InsertData(
@@ -670,11 +675,16 @@ namespace RestaurantReservation.Server.Migrations
                 columns: new[] { "Id", "AddressId", "Category", "Cuisine", "Email", "ImagePath", "Location", "Name", "PhoneNumber", "RestaurantOwnerId", "SubscriptionId" },
                 values: new object[,]
                 {
-                    { 1, 1, "Hotpot", "Chinese", null, "images/haidilao.jpg", "East", "Hai Di Lao", 67804201, null, null },
-                    { 2, 2, "Hotpot", "Chinese", null, "images/sichuandouhua.jpg", "Central", "Si Chuan Dou Hua", 67804201, null, null },
-                    { 3, 3, "Hotpot", "Chinese", null, "images/beautyinthepot.jpg", "South", "Beauty In The Pot", 67804201, null, null },
-                    { 4, 4, "Hotpot", "Chinese", null, "images/shabusai.jpg", "East", "Shabu Sai", 67804201, null, null },
-                    { 5, 5, "Hotpot", "Chinese", null, "images/cityhotpot.jpg", "SouthWest", "City Hotpot", 67804201, null, null }
+                    { 1, 1, "Hotpot", "Chinese", "admissions@tp.edu.sg", "images/haidilao.jpg", "East", "Hai Di Lao", 67804201, null, null },
+                    { 2, 2, "Hotpot", "Chinese", "admissions@tp.edu.sg", "images/sichuandouhua.jpg", "Central", "Si Chuan Dou Hua", 67804201, null, null },
+                    { 3, 3, "Hotpot", "Chinese", "admissions@tp.edu.sg", "images/beautyinthepot.jpg", "South", "Beauty In The Pot", 67804201, null, null },
+                    { 4, 4, "Hotpot", "Chinese", "admissions@tp.edu.sg", "images/shabusai.jpg", "East", "Shabu Sai", 67804201, null, null },
+                    { 5, 5, "Hotpot", "Chinese", "admissions@tp.edu.sg", "images/cityhotpot.jpg", "SouthWest", "City Hotpot", 67804201, null, null },
+                    { 6, 6, "BBQ", "Korea", "admissions@tp.edu.sg", "images/ssikkek.jpg", "Central", "Ssikkek", 67804201, null, null },
+                    { 7, 7, "BBQ", "Korea", "admissions@tp.edu.sg", "images/captainkim.jpg", "East", "Captain Kim", 67804201, null, null },
+                    { 8, 8, "BBQ", "Korea", "admissions@tp.edu.sg", "images/imkimkorean.jpg", "North", "I'm Kim Korean", 67804201, null, null },
+                    { 9, 9, "BBQ", "Korea", "admissions@tp.edu.sg", "images/seorae.jpg", "Central", "Seorae", 67804201, null, null },
+                    { 10, 10, "BBQ", "Korea", "admissions@tp.edu.sg", "images/seoulgarden.jpg", "East", "Seoul Garden", 67804201, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -697,7 +707,12 @@ namespace RestaurantReservation.Server.Migrations
                     { 2, "images/sichuandouhuaMenu.jpg", 2 },
                     { 3, "images/beautyinthepotMenu.jpg", 3 },
                     { 4, "images/shabusaiMenu.jpg", 4 },
-                    { 5, "images/cityhotpotMenu.jpg", 5 }
+                    { 5, "images/cityhotpotMenu.jpg", 5 },
+                    { 6, "images/ssikkekMenu.jpg", 6 },
+                    { 7, "images/captainkimMenu.jpeg", 7 },
+                    { 8, "images/imkimkoreanMenu.jpg", 8 },
+                    { 9, "images/seoraeMenu.jpg", 9 },
+                    { 10, "images/seoulgardenMenu.png", 10 }
                 });
 
             migrationBuilder.InsertData(
@@ -739,7 +754,42 @@ namespace RestaurantReservation.Server.Migrations
                     { 32, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Thursday", new DateTime(2024, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified), 5 },
                     { 33, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Friday", new DateTime(2024, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified), 5 },
                     { 34, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Saturday", new DateTime(2024, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified), 5 },
-                    { 35, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Sunday", new DateTime(2024, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified), 5 }
+                    { 35, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Sunday", new DateTime(2024, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified), 5 },
+                    { 36, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Monday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 6 },
+                    { 37, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Tuesday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 6 },
+                    { 38, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Wednesday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 6 },
+                    { 39, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Thursday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 6 },
+                    { 40, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Friday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 6 },
+                    { 41, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Saturday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 6 },
+                    { 42, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Sunday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 6 },
+                    { 43, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Monday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 7 },
+                    { 44, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Tuesday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 7 },
+                    { 45, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Wednesday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 7 },
+                    { 46, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Thursday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 7 },
+                    { 47, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Friday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 7 },
+                    { 48, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Saturday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 7 },
+                    { 49, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Sunday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 7 },
+                    { 50, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Monday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 8 },
+                    { 51, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Tuesday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 8 },
+                    { 52, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Wednesday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 8 },
+                    { 53, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Thursday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 8 },
+                    { 54, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Friday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 8 },
+                    { 55, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Saturday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 8 },
+                    { 56, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Sunday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 8 },
+                    { 57, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Monday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 9 },
+                    { 58, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Tuesday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 9 },
+                    { 59, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Wednesday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 9 },
+                    { 60, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Thursday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 9 },
+                    { 61, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Friday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 9 },
+                    { 62, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Saturday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 9 },
+                    { 63, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Sunday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 9 },
+                    { 64, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Monday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 10 },
+                    { 65, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Tuesday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 10 },
+                    { 66, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Wednesday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 10 },
+                    { 67, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Thursday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 10 },
+                    { 68, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Friday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 10 },
+                    { 69, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Saturday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 10 },
+                    { 70, new DateTime(2024, 1, 1, 23, 0, 0, 0, DateTimeKind.Unspecified), "Sunday", new DateTime(2024, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), 10 }
                 });
 
             migrationBuilder.InsertData(
@@ -747,10 +797,10 @@ namespace RestaurantReservation.Server.Migrations
                 columns: new[] { "Id", "CustomerId", "DateTime", "Guest", "PromotionId", "Request", "ReservationStatusId", "RestaurantId" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2024, 1, 7, 21, 43, 24, 994, DateTimeKind.Local).AddTicks(8019), 2, null, "None", 1, 1 },
-                    { 2, null, new DateTime(2024, 1, 7, 21, 43, 24, 994, DateTimeKind.Local).AddTicks(8035), 3, null, "None", 2, 2 },
-                    { 3, null, new DateTime(2024, 1, 7, 21, 43, 24, 994, DateTimeKind.Local).AddTicks(8036), 4, null, "None", 3, 3 },
-                    { 4, null, new DateTime(2024, 1, 7, 21, 43, 24, 994, DateTimeKind.Local).AddTicks(8038), 2, null, "None", 4, 5 }
+                    { 1, null, new DateTime(2024, 1, 11, 1, 18, 6, 757, DateTimeKind.Local).AddTicks(8305), 2, null, "None", 1, 1 },
+                    { 2, null, new DateTime(2024, 1, 11, 1, 18, 6, 757, DateTimeKind.Local).AddTicks(8323), 3, null, "None", 2, 2 },
+                    { 3, null, new DateTime(2024, 1, 11, 1, 18, 6, 757, DateTimeKind.Local).AddTicks(8324), 4, null, "None", 3, 3 },
+                    { 4, null, new DateTime(2024, 1, 11, 1, 18, 6, 757, DateTimeKind.Local).AddTicks(8326), 2, null, "None", 4, 5 }
                 });
 
             migrationBuilder.InsertData(
@@ -758,11 +808,11 @@ namespace RestaurantReservation.Server.Migrations
                 columns: new[] { "Id", "CustomerId", "DateTime", "Description", "Rating", "RestaurantId" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(9822), "Hai di lao staff very attentive", 4, 1 },
-                    { 2, null, new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(9825), "Good food", 4, 2 },
-                    { 3, null, new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(9826), "Nice soup", 4, 3 },
-                    { 4, null, new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(9828), "Cheap and affordable", 4, 4 },
-                    { 5, null, new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(9829), "Great restaurant", 4, 5 }
+                    { 1, null, new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8690), "Hai di lao staff very attentive", 4, 1 },
+                    { 2, null, new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8693), "Good food", 4, 2 },
+                    { 3, null, new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8694), "Nice soup", 4, 3 },
+                    { 4, null, new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8696), "Cheap and affordable", 4, 4 },
+                    { 5, null, new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(8698), "Great restaurant", 4, 5 }
                 });
 
             migrationBuilder.InsertData(
@@ -770,11 +820,11 @@ namespace RestaurantReservation.Server.Migrations
                 columns: new[] { "Id", "Capacity", "Date", "RestaurantId" },
                 values: new object[,]
                 {
-                    { 1, 15, new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(7439), 1 },
-                    { 2, 15, new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(7455), 2 },
-                    { 3, 15, new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(7457), 3 },
-                    { 4, 15, new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(7458), 4 },
-                    { 5, 15, new DateTime(2024, 1, 7, 21, 43, 25, 43, DateTimeKind.Local).AddTicks(7459), 5 }
+                    { 1, 15, new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6266), 1 },
+                    { 2, 15, new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6289), 2 },
+                    { 3, 15, new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6291), 3 },
+                    { 4, 15, new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6292), 4 },
+                    { 5, 15, new DateTime(2024, 1, 11, 1, 18, 6, 806, DateTimeKind.Local).AddTicks(6293), 5 }
                 });
 
             migrationBuilder.CreateIndex(
