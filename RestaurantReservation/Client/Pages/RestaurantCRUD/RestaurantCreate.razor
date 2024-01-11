@@ -1,0 +1,74 @@
+﻿@page "/restaurant/create"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+@inject NavigationManager Navigation
+@implements IDisposable
+
+<h3>Approve restaurant application -Admin Side</h3>
+<br />
+@if (RestaurantApplication != null)
+{
+    <table class="table table-responsive" id="bookingsTable">
+        <thead>
+            <tr>
+                <th>Restaurant Name</th>
+                <th>Cuisine</th>
+                <th>Application Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var RA in RestaurantApplication)
+            {
+                <tr>
+                    <td>@RA?.RestaurantName</td>
+                    <td>@RA?.Cuisine</td>
+                    <td>@RA?.Status</td>
+                    <td>
+                        <button class="bi bi-arrow-bar-right"></button>
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <div class="alert alert-info">Loading Reservations...</div>
+}
+
+@code {
+    private List<RestaurantApplication>? RestaurantApplication;
+    private List<Restaurant>? Restaurants;
+    private Menu? menu;
+    private List<OperatingHour>? OperatingHours;
+    private List<OperatingHour>? reshour;
+    private List<Menu>? Menus;
+
+    protected async override Task OnInitializedAsync()
+    {
+        RestaurantApplication = await _client.GetFromJsonAsync<List<RestaurantApplication>>($"{Endpoints.RestaurantApplicationsEndpoint}");
+    }
+    async Task CreateRestaurant()
+    {
+        await _client.PostAsJsonAsync($"{Endpoints.RestaurantApplicationsEndpoint}", Restaurants);
+        await js.InvokeVoidAsync("alert", "Restaurant Created!");
+        Navigation.NavigateTo("/restaurants");
+    }
+
+
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#bookingsTable");
+    }
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#bookingsTable");
+    }
+}
+
