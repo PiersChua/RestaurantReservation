@@ -17,15 +17,9 @@ namespace RestaurantReservation.Shared.Domain
 		public string? Status { get; set; }
 		public int? CustomerId { get; set; }
         public int? AddressId { get; set; }
-        public int? MenuId { get; set; }
-		public int? OperatingHourId { get; set; }
-        public int? SeatingCapacityId { get; set; }
         public virtual Address? Address { get; set; }
         public virtual Customer? Customer { get; set;}
-		public virtual Menu? Menu { get; set;}
-        public virtual OperatingHour? OperatingHour { get; set; }
-		public virtual SeatingCapacity? SeatingCapacity { get; set; }
-        public int? StaffId { get; set; }
+		public int? StaffId { get; set; }
 		public virtual Staff? Staff { get; set; }
     }
 }

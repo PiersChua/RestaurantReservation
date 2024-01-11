@@ -18,14 +18,9 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     PhoneNumber = 63864838,
                     Description = "good hotpot,must try!",
                     Status = "Active",
-
                     CustomerId = null,
                     StaffId = null,
                     AddressId = null,
-                    SeatingCapacityId = null,
-                    OperatingHourId = null,
-                    MenuId = null,
-                    
                 },
                 new RestaurantApplication
                 {
@@ -36,13 +31,9 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     PhoneNumber = 62601838,
                     Description = "good hotpot,must try!",
                     Status = "Active",
-
                     CustomerId = null,
                     StaffId = null,
-                    AddressId = null,
-                    SeatingCapacityId = null,
-                    OperatingHourId = null,
-                    MenuId = null,
+                    AddressId=null,
                 }
                 );
 
