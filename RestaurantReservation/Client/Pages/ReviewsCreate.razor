@@ -3,27 +3,28 @@
 @inject IJSRuntime js
 @inject NavigationManager _navManager
 
-<EditForm Model="@review" OnValidSubmit="CreateReview">
-	<DataAnnotationsValidator />
-	<ValidationSummary />
-	<div class="form-group">
-		<label>Rating</label>
-		<div>
-			<InputNumber min="0" max="5" @bind-Value="review.Rating" class="form-control" />
-			<ValidationMessage For="@(() => review.Rating)" />
+<div class="container">
+	<EditForm Model="@review" OnValidSubmit="CreateReview">
+		<DataAnnotationsValidator />
+		<ValidationSummary />
+		<div class="form-group">
+			<label>Rating</label>
+			<div>
+				<InputNumber min="0" max="5" @bind-Value="review.Rating" class="form-control" />
+				<ValidationMessage For="@(() => review.Rating)" />
+			</div>
 		</div>
-	</div>
-	<div class="form-group">
-		<label>Description</label>
-		<div>
-			<InputText @bind-Value="review.Description" class="form-control" />
-			<ValidationMessage For="@(() => review.Description)" />
+		<div class="form-group">
+			<label>Description</label>
+			<div>
+				<InputText @bind-Value="review.Description" class="form-control" />
+				<ValidationMessage For="@(() => review.Description)" />
+			</div>
 		</div>
-	</div>
-	<button type="submit" class="btn btn-success btn-block">Add Review</button>
+		<button type="submit" class="btn btn-success btn-block">Add Review</button>
 
-</EditForm>
-
+	</EditForm>
+</div>
 @code {
 	Review review = new Review();
 
@@ -31,6 +32,7 @@
 	private async Task CreateReview()
 	{
 		await _client.PostAsJsonAsync($"{Endpoints.ReviewsEndpoint}", review);
-		_navManager.NavigateTo("/models/");
+		await js.InvokeVoidAsync("alert", "Review created");
+		_navManager.NavigateTo("");
 	}
 }

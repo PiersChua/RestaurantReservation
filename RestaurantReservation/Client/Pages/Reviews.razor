@@ -4,10 +4,13 @@
 @inject NavigationManager Navigation
 @attribute [Authorize]
 
-@if (rev != null)
+@if (rev != null && res != null)
 {
 	<div>
-		<button class="btn btn-secondary" @onclick="Rate">Leave a feedback!</button>
+		<div class="review-head">
+			<h1><span class="oi bi bi-envelope-paper-fill"></span> @res.Name</h1>
+			<button class="btn btn-primary" @onclick="Rate">Leave a feedback!</button>
+		</div>
 		@foreach (var review in rev)
 		{
 			<div class="ratings">
@@ -15,7 +18,6 @@
 				{
 					<span class="bi bi-star-fill"></span>
 				}
-				<h1>@review.Restaurant?.Name</h1>
 				<p>@review.Description</p>
 			</div>
 		}
@@ -27,9 +29,11 @@
 	public int id { get; set; }
 	private List<Review>? Rev;
 	private List<Review>? rev;
+	private Restaurant? res;
 	protected override async Task OnInitializedAsync()
 	{
 		Rev = await _client.GetFromJsonAsync<List<Review>>($"{Endpoints.ReviewsEndpoint}");
+		res = await _client.GetFromJsonAsync<Restaurant>($"{Endpoints.RestaurantsEndpoint}/{id}");
 		if(Rev != null)
 		{
 			rev = Rev.Where(q => q.RestaurantId == id).ToList();
