@@ -3,7 +3,7 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @inject NavigationManager Navigation
-@* @attribute [Authorize(Roles = "Customer")] *@
+@* @attribute [Authorize(Roles = "Staff")] *@
 
 <div class="restaurant-search">
 	<AuthorizeView>
@@ -37,8 +37,10 @@
 				<option value="@item">@item</option>
 			}
 		</select>
-		<button type="submit" class="btn btn-primary" @onclick="ApplyFilter" >Apply</button>
-		<button type="submit" class="btn btn-secondary" @onclick="ResetFilter">Clear</button>
+		<div class="input-group">
+			<button type="submit" class="btn btn-primary" @onclick="ApplyFilter" >Apply</button>
+			<button type="submit" class="btn btn-secondary" @onclick="ResetFilter">Clear</button>
+		</div>
 	</div>
 </div>
 @if (Res != null)
@@ -97,13 +99,13 @@ else
 	[Parameter]
 	public string? searchTerm { get; set; }
 	private string? cuisine;
-	private List<string> cuisineSelections = new List<string> { "Chinese", "Malay", "Eurasian","Indian" };
+	private List<string> cuisineSelections = new List<string> { "Chinese", "Korea", "Eurasian","Indian" };
 
 	private string? location;
 	private List<string> locationSelections = new List<string> { "North", "South", "East","West","NorthEast","NorthWest","SouthEast","SouthWest", "Central"};
 
 	private string? category;
-	private List<string> priceSelections = new List<string> {"Hotpot","Buffet","High Tea"};
+	private List<string> priceSelections = new List<string> {"Hotpot","BBQ","High Tea"};
 
 	private List<Restaurant>? Res;
 	private List<Restaurant>? filteredRestaurant;

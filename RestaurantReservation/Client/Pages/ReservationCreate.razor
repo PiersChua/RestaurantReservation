@@ -9,7 +9,16 @@
 		<div class="text-center">
 			<img src="images/appIcon.png">
 		</div>
-		<EditForm Model="@restaurant" OnValidSubmit="CreateReservation">
+		<div class="col-md-12 form-group">
+			<label>Promo Code</label>
+			<div class="input-group">
+				<input type="text" @bind="code" class="form-control" placeholder="Promo code">
+				<button @onclick="VerifyCode" class="btn btn-secondary">Redeem</button>
+			</div>
+		</div>
+		<br />
+		<hr>
+		<EditForm Model="@restaurant" OnValidSubmit="CreateReservation" @ref="editForm">
 			<DataAnnotationsValidator />
 			<ValidationSummary />
 			<div class="row">
@@ -27,28 +36,22 @@
 						<ValidationMessage For="@(() => reservation.DateTime)" />
 					</div>
 				</div>
-				<div class="col-md-6 form-group">
+				<div class="col-md-12 form-group">
 					<label>Special Request</label>
 					<div>
 						<InputText @bind-Value="@reservation.Request" class="form-control" />
 						<ValidationMessage For="@(() => reservation.Request)" />
 					</div>
 				</div>
+				<div class="row">
+					<button type="button" class="btn btn-outline-dark btn-block col-md-2"><span class="oi oi-arrow-left"></span> Back</button>
+					<button type="submit" class="btn btn-secondary btn-block col-md-8">Submit Reservation</button>
+				</div>
 			</div>
 			</EditForm>
-		<div class="col-md-6 form-group">
-			<label>Promo Code</label>
-			<div class="input-group">
-				<input type="text" @bind="code" class="form-control" placeholder="Promo code">
-				<button @onclick="VerifyCode" class="btn btn-secondary">Redeem</button>
-			</div>
-		</div>
-			<br />
-			<hr>
-			<div class="row">
-				<button class="btn btn-outline-dark btn-block col-md-2"><span class="oi oi-arrow-left"></span> Back</button>
-				<button type="submit" class="btn btn-secondary btn-block col-md-9">Submit Reservation</button>
-			</div>
+		
+	
+			
 	</div>
 }
 @code {
@@ -58,6 +61,7 @@
 	public int id { get; set; }
 	Reservation reservation = new Reservation();
 	private string? code;
+	private EditForm editForm;
 	protected async override Task OnInitializedAsync()
 	{
 		Restaurants = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");

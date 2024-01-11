@@ -1,0 +1,43 @@
+﻿@page "/review/{id:int}"
+@inject HttpClient _client
+@inject IJSRuntime js
+@inject NavigationManager Navigation
+@attribute [Authorize]
+
+@if (rev != null)
+{
+	<div>
+		<button class="btn btn-secondary" @onclick="Rate">Leave a feedback!</button>
+		@foreach (var review in rev)
+		{
+			<div class="ratings">
+				@for(int i=0;i<review.Rating;i++)
+				{
+					<span class="bi bi-star-fill"></span>
+				}
+				<h1>@review.Restaurant?.Name</h1>
+				<p>@review.Description</p>
+			</div>
+		}
+	</div>
+}
+
+@code {
+	[Parameter]
+	public int id { get; set; }
+	private List<Review>? Rev;
+	private List<Review>? rev;
+	protected override async Task OnInitializedAsync()
+	{
+		Rev = await _client.GetFromJsonAsync<List<Review>>($"{Endpoints.ReviewsEndpoint}");
+		if(Rev != null)
+		{
+			rev = Rev.Where(q => q.RestaurantId == id).ToList();
+		}
+	}
+
+	private void Rate()
+	{
+		Navigation.NavigateTo($"/reviews/create");
+	}
+}

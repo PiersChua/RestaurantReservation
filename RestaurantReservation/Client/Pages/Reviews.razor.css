@@ -1,0 +1,16 @@
+﻿.ratings {
+    font-size: 100px;
+    color: #F8D568;
+    background-color:#EDEDED;
+}
+ .ratings h1{
+     font-size:50px;
+     font-weight:bold;
+     color:#000000;
+ }
+ .ratings p{
+     font-size:20px;
+     font-weight:100;
+     color:#000000;
+ }
+
