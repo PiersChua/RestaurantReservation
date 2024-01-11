@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -11,11 +12,11 @@ namespace RestaurantReservation.Shared.Domain
     public class Restaurant
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
+		public string? Name { get; set; } 
         public string? Email { get; set; }
         public string? Cuisine { get; set; }
         public string? Category { get; set; }
-        public int? PhoneNumber { get; set; }
+		public int? PhoneNumber { get; set; }
         public string? Location { get; set; } // North south east west
 		public string? ImagePath { get; set; }
 		public int AddressId { get; set; }

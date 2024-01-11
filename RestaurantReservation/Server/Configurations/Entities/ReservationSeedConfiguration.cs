@@ -55,7 +55,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     RestaurantId = 5,
                     //city hotpot
                     PromotionId = null,
-                    ReservationStatusId = 4
+                    ReservationStatusId = 1
                 }
                 );
         }

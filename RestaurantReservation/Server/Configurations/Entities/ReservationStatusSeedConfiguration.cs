@@ -17,17 +17,12 @@ namespace RestaurantReservation.Server.Configurations.Entities
                 new ReservationStatus
                 {
                     Id = 2,
-                    Status = "Pending"
+                    Status = "Confirmed"
                 },
                 new ReservationStatus
                 {
                     Id = 3,
-                    Status = "Pending"
-                },
-                new ReservationStatus
-                {
-                    Id = 4,
-                    Status = "Pending"
+                    Status = "Cancelled"
                 }
                 );
 
