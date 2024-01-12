@@ -113,7 +113,7 @@
     {
         await _client.PostAsJsonAsync($"{Endpoints.PaymentMethodsEndpoint}", paymentMethod);
         await _js.InvokeVoidAsync("alert", "Payment Method added!");
-        navigation.NavigateTo("");
+        navigation.NavigateTo("/paymentmethods");
     }
 
 

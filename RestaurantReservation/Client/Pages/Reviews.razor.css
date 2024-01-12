@@ -1,13 +1,15 @@
-﻿.review-head{
-    display:flex;
-    position:relative;
-    width:100%;
-    margin-bottom:80px;
+﻿.review-head {
+    padding: 30px;
+    display: flex;
+    position: relative;
+    width: 100%;
+    margin-bottom: 80px;
+    background-color: #EDEDED;
 }
     .review-head h1 {
         font-size: 60px;
         font-weight: bold;
-        color: #000080;
+        color: #0047AB;
     }
     .review-head button{
         position:absolute;
@@ -17,14 +19,48 @@
         width:200px;
     }
 
-.ratings {
-    font-size: 50px;
-    color: #F8D568;
-    background-color: #EDEDED;
+/* Carousel base class */
+.carousel {
+    margin-bottom: 4rem;
 }
- .ratings p{
-     font-size:20px;
-     font-weight:100;
-     color:#000000;
- }
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+    bottom: 3rem;
+    z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+    height: 20rem;
+    margin-bottom: 20px;
+}
+
+.carousel-control-next{
+    color:#000000;
+    font-size:30px;
+}
+.carousel-control-prev {
+    color: #000000;
+    font-size: 30px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    background-color: #0096FF;
+    height: 20rem;
+    border-radius: 30px;
+    width: 1200px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.5);
+}
+.col-lg-9{
+    margin-top:2rem;
+    height:16rem;
+    text-align:center;
+    font-size:30px;
+    border-radius:30px;
+}
+    .col-lg-9 h1 {
+        color: #E4D00A;
+    }
 
