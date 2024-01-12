@@ -96,6 +96,7 @@ else
 
 
 @code {
+
 	[Parameter]
 	public string? searchTerm { get; set; }
 	private string? cuisine;
@@ -112,6 +113,10 @@ else
 	private void ApplyFilter()
 	{
 		filteredRestaurant=Res.Where(r =>
+		(string.IsNullOrEmpty(searchTerm) || r.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+			r.Cuisine.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+			r.Location.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+			r.Category.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) &&
 		(string.IsNullOrEmpty(cuisine) || r.Cuisine == cuisine) &&
 		(string.IsNullOrEmpty(location) || r.Location == location) &&
 		(string.IsNullOrEmpty(category) || r.Category == category))
@@ -130,10 +135,10 @@ else
 		Navigation.NavigateTo($"/restaurant/{resid}");
 	}
 
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnParametersSetAsync()
 	{
 		Res = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
-		filteredRestaurant = Res;
+		ApplyFilter();
 	}
 		// // Get the current URL
 		// var uri = new Uri(Navigation.Uri);
