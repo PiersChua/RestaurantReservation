@@ -1,4 +1,4 @@
-﻿@page "/reviews/create"
+﻿@page "/reviews/create/{id:int}"
 @inject HttpClient _client
 @inject IJSRuntime js
 @inject NavigationManager _navManager
@@ -26,11 +26,14 @@
 	</EditForm>
 </div>
 @code {
+	[Parameter]
+	public int id { get; set; }
 	Review review = new Review();
 
 
 	private async Task CreateReview()
 	{
+		review.RestaurantId = id;
 		await _client.PostAsJsonAsync($"{Endpoints.ReviewsEndpoint}", review);
 		await js.InvokeVoidAsync("alert", "Review created");
 		_navManager.NavigateTo("");

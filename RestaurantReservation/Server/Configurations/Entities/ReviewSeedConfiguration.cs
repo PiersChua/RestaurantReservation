@@ -58,8 +58,59 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     CustomerId = null,
                     RestaurantId = 5
                     //city hotpot
-                }
-                );
+                },
+				new Review
+				{
+					Id = 6,
+					Rating = 4,
+					DateTime = DateTime.Now,
+					Description = "Hai di lao staff very attentive",
+					CustomerId = null,
+					RestaurantId = 1,
+					//haidilao
+				},
+				new Review
+				{
+					Id = 7,
+					Rating = 4,
+					DateTime = DateTime.Now,
+					Description = "Hai di lao staff very attentive",
+					CustomerId = null,
+					RestaurantId = 1,
+					//haidilao
+				},
+				new Review
+				{
+					Id = 8,
+					Rating = 4,
+					DateTime = DateTime.Now,
+					Description = "Hai di lao staff very attentive",
+					CustomerId = null,
+					RestaurantId = 1,
+					//haidilao
+				},
+				new Review
+				{
+					Id = 9,
+					Rating = 4,
+					DateTime = DateTime.Now,
+					Description = "Hai di lao staff very attentive",
+					CustomerId = null,
+					RestaurantId = 1,
+					//haidilao
+				},
+				new Review
+				{
+					Id = 10,
+					Rating = 4,
+					DateTime = DateTime.Now,
+					Description = "Hai di lao staff very attentive",
+					CustomerId = null,
+					RestaurantId = 1,
+					//haidilao
+				}
+
+				);
         }
     }
 }
