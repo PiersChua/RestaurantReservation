@@ -1,4 +1,4 @@
-﻿@page "/restaurant/create"
+﻿@page "/restaurantapplication/"
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
@@ -26,7 +26,11 @@
                     <td>@RA?.Cuisine</td>
                     <td>@RA?.Status</td>
                     <td>
-                        <button class="bi bi-arrow-bar-right"></button>
+                        <a href="/restaurantApplication/edit/@RA.Id" class="bi bi-pencil"></a>
+
+                        <a href="/restaurant/create/@RA.Id" class="bi bi-arrow-bar-right"></a>
+
+                        <button class="bi bi-trash" @onclick="@(()=>Delete(RA.Id))"></button>
                     </td>
                     
                 </tr>
@@ -37,29 +41,34 @@
 }
 else
 {
-    <div class="alert alert-info">Loading Reservations...</div>
+    <div class="alert alert-info">Loading...</div>
 }
 
 @code {
     private List<RestaurantApplication>? RestaurantApplication;
     private List<Restaurant>? Restaurants;
-    private Menu? menu;
-    private List<OperatingHour>? OperatingHours;
-    private List<OperatingHour>? reshour;
-    private List<Menu>? Menus;
 
     protected async override Task OnInitializedAsync()
     {
         RestaurantApplication = await _client.GetFromJsonAsync<List<RestaurantApplication>>($"{Endpoints.RestaurantApplicationsEndpoint}");
     }
-    async Task CreateRestaurant()
+
+    
+
+    async Task Delete(int RestaurantApplicationId)
     {
-        await _client.PostAsJsonAsync($"{Endpoints.RestaurantApplicationsEndpoint}", Restaurants);
-        await js.InvokeVoidAsync("alert", "Restaurant Created!");
-        Navigation.NavigateTo("/restaurants");
+        var restaurantApplication = RestaurantApplication.First(q => q.Id == RestaurantApplicationId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {restaurantApplication.RestaurantName}?");
+        if (RestaurantApplication != null)
+        {
+            if (confirm)
+            {
+                await _client.DeleteAsync($"{Endpoints.RestaurantApplicationsEndpoint}/{RestaurantApplicationId}");
+                await OnInitializedAsync();
+            }
+        }
+
     }
-
-
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {

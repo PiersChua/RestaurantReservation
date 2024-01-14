@@ -9,7 +9,8 @@
 @if ( Reservations != null)
 {
     <table class="table table-responsive" id="bookingsTable">
-        <thead>
+        
+        <thead class="table table-dark">
             <tr>
                 <th>Restaurant Name</th>
                 <th>Guest Count</th>
@@ -17,7 +18,7 @@
                 
             </tr>
         </thead>
-        <tbody>
+        <tbody class="tableGray">
             @foreach (var reservation in Reservations)
             {
                 <tr>

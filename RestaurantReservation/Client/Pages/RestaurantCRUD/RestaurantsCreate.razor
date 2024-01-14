@@ -1,0 +1,30 @@
+﻿@page "/restaurant/create/{id:int}"
+@inject HttpClient _client
+@inject IJSRuntime js
+@inject NavigationManager _navManager
+
+<FormComponent ButtonText="Approve" OnValidSubmit="ApproveApplication" RestaurantApplication="RestaurantApplication" />
+
+@code {
+    [Parameter] public int id { get; set; }
+
+    RestaurantApplication? RestaurantApplication = new RestaurantApplication();
+    Restaurant createdRestaurant = new Restaurant();
+
+    protected async override Task OnParametersSetAsync()
+    {
+        RestaurantApplication = await _client.GetFromJsonAsync<RestaurantApplication>($"{Endpoints.RestaurantApplicationsEndpoint}/{id}");
+    }
+
+    async Task ApproveApplication()
+    {
+        createdRestaurant.Name = RestaurantApplication.RestaurantName;
+        createdRestaurant.Cuisine = RestaurantApplication.Cuisine;
+        createdRestaurant.PhoneNumber = RestaurantApplication.PhoneNumber;
+
+
+        await _client.PostAsJsonAsync($"{Endpoints.RestaurantsEndpoint}", createdRestaurant);
+        await js.InvokeVoidAsync("alert", "Restaurant Created!");
+        _navManager.NavigateTo("/restaurants");
+    }
+}
