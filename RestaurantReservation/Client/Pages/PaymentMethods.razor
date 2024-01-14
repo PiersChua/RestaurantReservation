@@ -4,7 +4,7 @@
 @inject IJSRuntime _js
 
 <div class="container">
-    @if(PayMethods != null)
+    @if(PayMethods != null && PayMethods.Count>0)
 	{
 		<div class="row">
 			@foreach (var pay in PayMethods)

@@ -1,0 +1,52 @@
+﻿@page "/paymentmethods/edit/{id:int}"
+@inject HttpClient _client
+@inject IJSRuntime js
+@inject NavigationManager Navigation
+
+<EditForm Model=@paymentMethod OnValidSubmit="EditPaymentMethod">
+    <DataAnnotationsValidator />
+    <div class="row gy-3">
+        <div class="col-md-6">
+            <label for="cc-name" class="form-label">Name on card</label>
+            <InputText @bind-Value="paymentMethod.Name" class="form-control" />
+            <small class="text-body-secondary">Full name as displayed on card</small>
+            <ValidationMessage For="@(() => paymentMethod.Name)" />
+        </div>
+
+        <div class="col-md-6">
+            <label for="cc-number" class="form-label">Card number</label>
+            <InputText @bind-Value="paymentMethod.CardNumber" class="form-control" />
+            <small class="text-body-secondary">Ensure there's no spacing between the numbers</small>
+            <ValidationMessage For="@(() => paymentMethod.CardNumber)" />
+        </div>
+
+        <div class="col-md-3">
+            <label for="cc-expiration" class="form-label">Expiration</label>
+            <InputDate min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="paymentMethod.DateOfExpiry" class="form-control" />
+            <ValidationMessage For="@(() => paymentMethod.DateOfExpiry)" />
+        </div>
+
+        <div class="col-md-3">
+            <label for="cc-cvv" class="form-label">CVV</label>
+            <InputNumber @bind-Value="paymentMethod.CVV" class="form-control" />
+            <ValidationMessage For="@(() => paymentMethod.CVV)" />
+        </div>
+    </div>
+    <hr class="my-4">
+    <button class="w-100 btn btn-primary btn-lg" type="submit">Update Payment!</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    PaymentMethod paymentMethod = new PaymentMethod();
+    protected async override Task OnParametersSetAsync()
+    {
+        paymentMethod = await _client.GetFromJsonAsync<PaymentMethod>($"{Endpoints.PaymentMethodsEndpoint}/{id}");
+    }
+    async Task EditPaymentMethod()
+    {
+        await _client.PutAsJsonAsync("api/paymentmethods/{id}", paymentMethod);
+        Navigation.NavigateTo("/paymentmethods");
+    }
+}

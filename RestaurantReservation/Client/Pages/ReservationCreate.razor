@@ -23,6 +23,20 @@
 			<ValidationSummary />
 			<div class="row">
 				<div class="col-md-6 form-group">
+					<label>Reservation Date</label>
+					<div>
+						<InputDate min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="reservation.Date" class="form-control" />
+						<ValidationMessage For="@(() => reservation.Date)" />
+					</div>
+				</div>
+				<div class="col-md-6 form-group">
+					<label>Reservation Time</label>
+					<div>
+						<InputDate Type="InputDateType.Time" @bind-Value="reservation.Date" class="form-control" />
+						<ValidationMessage For="@(() => reservation.Date)" />
+					</div>
+				</div>
+				<div class="col-md-6 form-group">
 					<label>No. of guests</label>
 					<div>
 						<InputNumber min="1" max="30" @bind-Value="@reservation.Guest" class="form-control" />
@@ -30,13 +44,6 @@
 					</div>
 				</div>
 				<div class="col-md-6 form-group">
-					<label>Reservation Date</label>
-					<div>
-						<InputDate Type="InputDateType.DateTimeLocal" min="@DateTime.Today.ToString("yyyy-MM-ddTHH:mm")" @bind-Value="reservation.DateTime" class="form-control" />
-						<ValidationMessage For="@(() => reservation.DateTime)" />
-					</div>
-				</div>
-				<div class="col-md-12 form-group">
 					<label>Special Request</label>
 					<div>
 						<InputText @bind-Value="@reservation.Request" class="form-control" />
@@ -48,15 +55,14 @@
 					<button type="submit" class="btn btn-secondary btn-block col-md-8">Submit Reservation</button>
 				</div>
 			</div>
-			</EditForm>
-		
-	
-			
+			</EditForm>	
 	</div>
 }
 @code {
 	private Restaurant? restaurant;
 	private List<Restaurant>? Restaurants;
+	private List<Promotion>? Promotions;
+	private List<PaymentMethod>? PaymentMethods;
 	[Parameter]
 	public int id { get; set; }
 	Reservation reservation = new Reservation();
@@ -64,6 +70,8 @@
 	protected async override Task OnInitializedAsync()
 	{
 		Restaurants = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
+		Promotions = await _client.GetFromJsonAsync<List<Promotion>>($"{Endpoints.PromotionsEndpoint}");
+		PaymentMethods = await _client.GetFromJsonAsync<List<PaymentMethod>>($"{Endpoints.PaymentMethodsEndpoint}");
 		if (Restaurants != null)
 		{
 			restaurant = Restaurants.First(q => q.Id == id);
@@ -72,24 +80,36 @@
 
 	async Task CreateReservation()
 	{
-		reservation.RestaurantId = id;
-		reservation.ReservationStatusId = 1;
-		await _client.PostAsJsonAsync($"{Endpoints.ReservationsEndpoint}", reservation);
-		await js.InvokeVoidAsync("alert", "Reservation Created! Please check reservation details under Reservation History");
-		Navigation.NavigateTo("/reservationhistory");
+		if (PaymentMethods != null && PaymentMethods.Count > 0)
+		{
+			reservation.RestaurantId = id;
+			reservation.ReservationStatusId = 1;
+			await _client.PostAsJsonAsync($"{Endpoints.ReservationsEndpoint}", reservation);
+			await js.InvokeVoidAsync("alert", "Reservation Created! Please check reservation details under Reservation");
+			Navigation.NavigateTo("/reservationhistory");
+		}
+		else
+		{
+			await js.InvokeVoidAsync("alert", "Please add a payment method first before reserving");
+			Navigation.NavigateTo("/paymentmethods");
+		}
 	}
 
 	private void VerifyCode()
 	{
-		// if (code == restaurant.PromoCode)
-		// {
-		// 	reservation.PromoCode = code;
-		// 	Navigation.NavigateTo("/reservationhistory");
-		// }
-		// else
-		// {
-		// 	js.InvokeVoidAsync("alert", "Invalid Promo Code");
-		// }
+		if(Promotions != null)
+		{
+			var promotion = Promotions.FirstOrDefault(q => q.Code == code);
+			if(promotion != null)
+			{
+				reservation.PromotionId = promotion.Id;
+				js.InvokeVoidAsync("alert", $"Promotion code {code} applied! Discounted price is {promotion.Discount}%");
+			}
+			else
+			{
+				js.InvokeVoidAsync("alert", $"Promotion code {code} not found!");
+			}
+		}
 	}
 	private void NavigateToHome()
 	{

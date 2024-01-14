@@ -12,7 +12,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                 new Reservation
                 {
                     Id = 1,
-                    DateTime = DateTime.Now,
+                    Date = DateTime.Now,
                     Guest = 2,
                     Request = "None",
                     CustomerId = null,
@@ -24,7 +24,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                 new Reservation
                 {
                     Id = 2,
-                    DateTime = DateTime.Now,
+                    Date = DateTime.Now,
                     Guest = 3,
                     Request = "None",
                     CustomerId = null,
@@ -36,7 +36,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                 new Reservation
                 {
                     Id = 3,
-                    DateTime = DateTime.Now,
+                    Date = DateTime.Now,
                     Guest = 4,
                     Request = "None",
                     CustomerId = null,
@@ -48,7 +48,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                 new Reservation
                 {
                     Id = 4,
-                    DateTime = DateTime.Now,
+                    Date = DateTime.Now,
                     Guest = 2,
                     Request = "None",
                     CustomerId = null,

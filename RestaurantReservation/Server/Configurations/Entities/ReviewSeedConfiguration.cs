@@ -62,9 +62,9 @@ namespace RestaurantReservation.Server.Configurations.Entities
 				new Review
 				{
 					Id = 6,
-					Rating = 4,
+					Rating = 5,
 					DateTime = DateTime.Now,
-					Description = "Hai di lao staff very attentive",
+					Description = "Excellent service and outstanding food!",
 					CustomerId = null,
 					RestaurantId = 1,
 					//haidilao
@@ -72,9 +72,9 @@ namespace RestaurantReservation.Server.Configurations.Entities
 				new Review
 				{
 					Id = 7,
-					Rating = 4,
+					Rating = 3,
 					DateTime = DateTime.Now,
-					Description = "Hai di lao staff very attentive",
+					Description = "Good experience with room for improvement",
 					CustomerId = null,
 					RestaurantId = 1,
 					//haidilao
@@ -82,32 +82,184 @@ namespace RestaurantReservation.Server.Configurations.Entities
 				new Review
 				{
 					Id = 8,
-					Rating = 4,
+					Rating = 1,
 					DateTime = DateTime.Now,
-					Description = "Hai di lao staff very attentive",
+					Description = "Disappointing experience. Not recommended.",
 					CustomerId = null,
-					RestaurantId = 1,
-					//haidilao
+					RestaurantId = 2,
+					//Si chuan dou hua
 				},
 				new Review
 				{
 					Id = 9,
-					Rating = 4,
+					Rating = 5,
 					DateTime = DateTime.Now,
-					Description = "Hai di lao staff very attentive",
+					Description = "Amazing ambiance and top-notch cuisine!",
 					CustomerId = null,
-					RestaurantId = 1,
-					//haidilao
+					RestaurantId = 2,
+					//Si chuan dou hua
 				},
 				new Review
 				{
 					Id = 10,
-					Rating = 4,
+					Rating = 2,
 					DateTime = DateTime.Now,
-					Description = "Hai di lao staff very attentive",
+					Description = "Satisfactory visit but lacks a wow factor.",
 					CustomerId = null,
-					RestaurantId = 1,
-					//haidilao
+					RestaurantId = 3,
+				},
+				new Review
+				{
+					Id = 11,
+					Rating = 1,
+					DateTime = DateTime.Now,
+					Description = "Unpleasant experience. Would not recommend",
+					CustomerId = null,
+					RestaurantId = 3,
+				},
+				new Review
+				{
+					Id = 12,
+					Rating = 1,
+					DateTime = DateTime.Now,
+					Description = "Satisfactory visit but lacks a wow factor.",
+					CustomerId = null,
+					RestaurantId = 4,
+				},
+				new Review
+				{
+					Id = 13,
+					Rating = 5,
+					DateTime = DateTime.Now,
+					Description = "Outstanding service and exquisite dishes!",
+					CustomerId = null,
+					RestaurantId = 4,
+				},
+				new Review
+				{
+					Id = 14,
+					Rating = 1,
+					DateTime = DateTime.Now,
+					Description = "Poor service and disappointing menu",
+					CustomerId = null,
+					RestaurantId = 5,
+				},
+				new Review
+				{
+					Id = 15,
+					Rating = 5,
+					DateTime = DateTime.Now,
+					Description = "Exceptional dining experience with impeccable service!",
+					CustomerId = null,
+					RestaurantId = 5,
+				},
+				new Review
+				{
+					Id = 16,
+					Rating = 5,
+					DateTime = DateTime.Now,
+					Description = "Superb service and a menu that delights the taste buds!",
+					CustomerId = null,
+					RestaurantId = 6,
+				},
+				new Review
+				{
+					Id = 17,
+					Rating = 3,
+					DateTime = DateTime.Now,
+					Description = "Adequate experience, but lacks a special touch",
+					CustomerId = null,
+					RestaurantId = 6,
+				},
+				new Review
+				{
+					Id = 18,
+					Rating = 1,
+					DateTime = DateTime.Now,
+					Description = "Awful service and disappointing overall.",
+					CustomerId = null,
+					RestaurantId = 6,
+				},
+				new Review
+				{
+					Id = 19,
+					Rating = 5,
+					DateTime = DateTime.Now,
+					Description = "Superb service and a menu that delights the taste buds!",
+					CustomerId = null,
+					RestaurantId = 7,
+				},
+				new Review
+				{
+					Id = 20,
+					Rating = 3,
+					DateTime = DateTime.Now,
+					Description = "Adequate experience, but lacks a special touch",
+					CustomerId = null,
+					RestaurantId = 7,
+				},
+				new Review
+				{
+					Id = 21,
+					Rating = 1,
+					DateTime = DateTime.Now,
+					Description = "Awful service and disappointing overall.",
+					CustomerId = null,
+					RestaurantId = 7,
+				},
+				new Review
+				{
+					Id = 22,
+					Rating = 5,
+					DateTime = DateTime.Now,
+					Description = "Superb service and a menu that delights the taste buds!",
+					CustomerId = null,
+					RestaurantId = 8,
+				},
+				new Review
+				{
+					Id = 23,
+					Rating = 3,
+					DateTime = DateTime.Now,
+					Description = "Adequate experience, but lacks a special touch",
+					CustomerId = null,
+					RestaurantId = 8,
+				},
+				new Review
+				{
+					Id = 24,
+					Rating = 1,
+					DateTime = DateTime.Now,
+					Description = "Awful service and disappointing overall.",
+					CustomerId = null,
+					RestaurantId = 8,
+				},
+				new Review
+				{
+					Id = 25,
+					Rating = 5,
+					DateTime = DateTime.Now,
+					Description = "Superb service and a menu that delights the taste buds!",
+					CustomerId = null,
+					RestaurantId = 9,
+				},
+				new Review
+				{
+					Id = 26,
+					Rating = 3,
+					DateTime = DateTime.Now,
+					Description = "Adequate experience, but lacks a special touch",
+					CustomerId = null,
+					RestaurantId = 9,
+				},
+				new Review
+				{
+					Id = 27,
+					Rating = 1,
+					DateTime = DateTime.Now,
+					Description = "Awful service and disappointing overall.",
+					CustomerId = null,
+					RestaurantId = 9,
 				}
 
 				);

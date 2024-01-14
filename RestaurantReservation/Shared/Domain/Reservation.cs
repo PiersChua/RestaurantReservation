@@ -11,8 +11,11 @@ namespace RestaurantReservation.Shared.Domain
 	{
 		public int Id { get; set; }
 		[Required]
-		[DataType(DataType.DateTime)]
-		public DateTime DateTime { get; set; }
+		[DataType(DataType.Date)]
+		public DateTime Date { get; set; }
+		[Required]
+		[DataType(DataType.Time)]
+		public DateTime Time { get; set; }
 		[Required]
 		public int Guest { get; set; }
 		public string? Request { get; set; }
