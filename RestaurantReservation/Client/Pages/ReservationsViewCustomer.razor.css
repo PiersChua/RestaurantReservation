@@ -1,0 +1,17 @@
+﻿.upcoming-group{
+    margin:30px 0 30px 0;
+    display:flex;
+    height:200px;
+    background-color:#EDEDED;
+    text-align:center;
+    position:relative;
+}
+    .upcoming-group h3{
+        font-size:16px;
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        white-space:nowrap;
+    }
+

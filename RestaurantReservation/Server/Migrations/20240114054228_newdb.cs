@@ -374,7 +374,7 @@ namespace RestaurantReservation.Server.Migrations
                     PhoneNumber = table.Column<int>(type: "int", nullable: true),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddressId = table.Column<int>(type: "int", nullable: false),
+                    AddressId = table.Column<int>(type: "int", nullable: true),
                     RestaurantOwnerId = table.Column<int>(type: "int", nullable: true),
                     SubscriptionId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -385,8 +385,7 @@ namespace RestaurantReservation.Server.Migrations
                         name: "FK_Restaurants_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Restaurants_RestaurantOwners_RestaurantOwnerId",
                         column: x => x.RestaurantOwnerId,
@@ -634,15 +633,15 @@ namespace RestaurantReservation.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "900de75c-2b44-4069-8c0d-d7d3a7ae4ffb", 0, "f20c3134-8c86-4b99-82cc-3383a2f2d5af", "admin@localhost.com", false, false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEKo3y9q5jSqyTQg6wAz/Jh/wVHW8uwv444O35MFtcv0LAtV483Wtg+rLEA4wC5AfiQ==", null, false, "9a7375cc-021d-4b47-86a0-32d8039530b8", false, "admin@localhost.com" });
+                values: new object[] { "900de75c-2b44-4069-8c0d-d7d3a7ae4ffb", 0, "4982a701-7d90-46fe-bb34-748b5f8a58ba", "admin@localhost.com", false, false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEGoBjRL8aZ98uMR975HfGppaTV0jSvkSBz3/SepzTC/uozRF6OOiE2JTiTFyrZAOsw==", null, false, "8d569709-d32a-4d6a-b2e9-21120416be69", false, "admin@localhost.com" });
 
             migrationBuilder.InsertData(
                 table: "PaymentMethods",
                 columns: new[] { "Id", "CVV", "CardNumber", "CustomerId", "DateOfExpiry", "Name" },
                 values: new object[,]
                 {
-                    { 1, 123, "1234123412341234", null, new DateTime(2025, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(724), "Josh" },
-                    { 2, 321, "1234123412341234", null, new DateTime(2025, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(734), "Liza" }
+                    { 1, 123, "1234123412341234", null, new DateTime(2025, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(1123), "Josh" },
+                    { 2, 321, "1234123412341234", null, new DateTime(2025, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(1139), "Liza" }
                 });
 
             migrationBuilder.InsertData(
@@ -650,9 +649,9 @@ namespace RestaurantReservation.Server.Migrations
                 columns: new[] { "Id", "Code", "Description", "Discount", "EndDate", "Name", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, "NY2024", "Celebrate the New Year with fantastic deals! Enjoy exclusive discounts on all reservations. Start 2024 in style with limited-time offers and extra savings just for you. Renew, refresh, and rejoice! Reserve now and make this year unforgettable. Cheers to a fantastic 2024!", 10.0, new DateTime(2024, 2, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1780), "NewYear", new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1777) },
-                    { 2, "CNY2024", "Celebrate the Lunar New Year at Bookbite! Reserve your table now for an exquisite culinary journey featuring luck-filled banquets and exclusive dining packages. Indulge in authentic flavors that capture the essence of the season. Make your celebrations memorable with us. Gong Xi Fa Cai!", 10.0, new DateTime(2024, 3, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1785), "ChineseNewYear", new DateTime(2024, 2, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1784) },
-                    { 3, "LOVE2024", "Celebrate love at Bookbite! Book your romantic evening for an unforgettable Valentine's experience. Indulge in exquisite dining with our special menu, crafted to ignite the flames of love. Enjoy a romantic ambiance and impeccable service, setting the stage for a memorable evening. Delight in exclusive dishes designed to make hearts flutter. Love is in the air at Bookbite!", 10.0, new DateTime(2024, 4, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1787), "Valentine", new DateTime(2024, 3, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1787) }
+                    { 1, "NY2024", "Celebrate the New Year with fantastic deals! Enjoy exclusive discounts on all reservations. Start 2024 in style with limited-time offers and extra savings just for you. Renew, refresh, and rejoice! Reserve now and make this year unforgettable. Cheers to a fantastic 2024!", 10.0, new DateTime(2024, 2, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2184), "NewYear", new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2181) },
+                    { 2, "CNY2024", "Celebrate the Lunar New Year at Bookbite! Reserve your table now for an exquisite culinary journey featuring luck-filled banquets and exclusive dining packages. Indulge in authentic flavors that capture the essence of the season. Make your celebrations memorable with us. Gong Xi Fa Cai!", 10.0, new DateTime(2024, 3, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2194), "ChineseNewYear", new DateTime(2024, 2, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2191) },
+                    { 3, "LOVE2024", "Celebrate love at Bookbite! Book your romantic evening for an unforgettable Valentine's experience. Indulge in exquisite dining with our special menu, crafted to ignite the flames of love. Enjoy a romantic ambiance and impeccable service, setting the stage for a memorable evening. Delight in exclusive dishes designed to make hearts flutter. Love is in the air at Bookbite!", 10.0, new DateTime(2024, 4, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2196), "Valentine", new DateTime(2024, 3, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2196) }
                 });
 
             migrationBuilder.InsertData(
@@ -679,8 +678,8 @@ namespace RestaurantReservation.Server.Migrations
                 columns: new[] { "Id", "EndDate", "PlatformFee", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 1, 14, 13, 0, 47, 410, DateTimeKind.Local).AddTicks(9770), 10.0, new DateTime(2024, 1, 14, 13, 0, 47, 410, DateTimeKind.Local).AddTicks(9770) },
-                    { 2, new DateTime(2024, 1, 14, 13, 0, 47, 410, DateTimeKind.Local).AddTicks(9774), 10.0, new DateTime(2024, 1, 14, 13, 0, 47, 410, DateTimeKind.Local).AddTicks(9773) }
+                    { 1, new DateTime(2024, 1, 14, 13, 42, 28, 52, DateTimeKind.Local).AddTicks(9797), 10.0, new DateTime(2024, 1, 14, 13, 42, 28, 52, DateTimeKind.Local).AddTicks(9796) },
+                    { 2, new DateTime(2024, 1, 14, 13, 42, 28, 52, DateTimeKind.Local).AddTicks(9803), 10.0, new DateTime(2024, 1, 14, 13, 42, 28, 52, DateTimeKind.Local).AddTicks(9803) }
                 });
 
             migrationBuilder.InsertData(
@@ -815,10 +814,10 @@ namespace RestaurantReservation.Server.Migrations
                 columns: new[] { "Id", "CustomerId", "Date", "Guest", "PromotionId", "Request", "ReservationStatusId", "RestaurantId", "Time" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2024, 1, 14, 13, 0, 47, 362, DateTimeKind.Local).AddTicks(2883), 2, null, "None", 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, null, new DateTime(2024, 1, 14, 13, 0, 47, 362, DateTimeKind.Local).AddTicks(2899), 3, null, "None", 2, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, null, new DateTime(2024, 1, 14, 13, 0, 47, 362, DateTimeKind.Local).AddTicks(2901), 4, null, "None", 3, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, null, new DateTime(2024, 1, 14, 13, 0, 47, 362, DateTimeKind.Local).AddTicks(2902), 2, null, "None", 1, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, null, new DateTime(2024, 1, 14, 13, 42, 28, 3, DateTimeKind.Local).AddTicks(9498), 2, null, "None", 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, null, new DateTime(2024, 1, 14, 13, 42, 28, 3, DateTimeKind.Local).AddTicks(9515), 3, null, "None", 2, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, null, new DateTime(2024, 1, 14, 13, 42, 28, 3, DateTimeKind.Local).AddTicks(9517), 4, null, "None", 3, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, null, new DateTime(2024, 1, 14, 13, 42, 28, 3, DateTimeKind.Local).AddTicks(9518), 2, null, "None", 1, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -826,33 +825,33 @@ namespace RestaurantReservation.Server.Migrations
                 columns: new[] { "Id", "CustomerId", "DateTime", "Description", "Rating", "RestaurantId" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1962), "Hai di lao staff very attentive", 4, 1 },
-                    { 2, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1969), "Good food", 4, 2 },
-                    { 3, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1971), "Nice soup", 4, 3 },
-                    { 4, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1972), "Cheap and affordable", 4, 4 },
-                    { 5, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1974), "Great restaurant", 4, 5 },
-                    { 6, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1975), "Excellent service and outstanding food!", 5, 1 },
-                    { 7, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1976), "Good experience with room for improvement", 3, 1 },
-                    { 8, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1978), "Disappointing experience. Not recommended.", 1, 2 },
-                    { 9, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1979), "Amazing ambiance and top-notch cuisine!", 5, 2 },
-                    { 10, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1980), "Satisfactory visit but lacks a wow factor.", 2, 3 },
-                    { 11, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1981), "Unpleasant experience. Would not recommend", 1, 3 },
-                    { 12, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1983), "Satisfactory visit but lacks a wow factor.", 1, 4 },
-                    { 13, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1984), "Outstanding service and exquisite dishes!", 5, 4 },
-                    { 14, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1985), "Poor service and disappointing menu", 1, 5 },
-                    { 15, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1986), "Exceptional dining experience with impeccable service!", 5, 5 },
-                    { 16, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1988), "Superb service and a menu that delights the taste buds!", 5, 6 },
-                    { 17, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1989), "Adequate experience, but lacks a special touch", 3, 6 },
-                    { 18, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1990), "Awful service and disappointing overall.", 1, 6 },
-                    { 19, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1991), "Superb service and a menu that delights the taste buds!", 5, 7 },
-                    { 20, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1993), "Adequate experience, but lacks a special touch", 3, 7 },
-                    { 21, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1994), "Awful service and disappointing overall.", 1, 7 },
-                    { 22, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1995), "Superb service and a menu that delights the taste buds!", 5, 8 },
-                    { 23, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1996), "Adequate experience, but lacks a special touch", 3, 8 },
-                    { 24, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1998), "Awful service and disappointing overall.", 1, 8 },
-                    { 25, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(1999), "Superb service and a menu that delights the taste buds!", 5, 9 },
-                    { 26, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(2000), "Adequate experience, but lacks a special touch", 3, 9 },
-                    { 27, null, new DateTime(2024, 1, 14, 13, 0, 47, 411, DateTimeKind.Local).AddTicks(2002), "Awful service and disappointing overall.", 1, 9 }
+                    { 1, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2395), "Hai di lao staff very attentive", 4, 1 },
+                    { 2, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2403), "Good food", 4, 2 },
+                    { 3, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2405), "Nice soup", 4, 3 },
+                    { 4, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2407), "Cheap and affordable", 4, 4 },
+                    { 5, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2408), "Great restaurant", 4, 5 },
+                    { 6, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2409), "Excellent service and outstanding food!", 5, 1 },
+                    { 7, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2410), "Good experience with room for improvement", 3, 1 },
+                    { 8, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2412), "Disappointing experience. Not recommended.", 1, 2 },
+                    { 9, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2413), "Amazing ambiance and top-notch cuisine!", 5, 2 },
+                    { 10, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2415), "Satisfactory visit but lacks a wow factor.", 2, 3 },
+                    { 11, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2416), "Unpleasant experience. Would not recommend", 1, 3 },
+                    { 12, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2417), "Satisfactory visit but lacks a wow factor.", 1, 4 },
+                    { 13, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2419), "Outstanding service and exquisite dishes!", 5, 4 },
+                    { 14, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2420), "Poor service and disappointing menu", 1, 5 },
+                    { 15, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2421), "Exceptional dining experience with impeccable service!", 5, 5 },
+                    { 16, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2422), "Superb service and a menu that delights the taste buds!", 5, 6 },
+                    { 17, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2424), "Adequate experience, but lacks a special touch", 3, 6 },
+                    { 18, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2425), "Awful service and disappointing overall.", 1, 6 },
+                    { 19, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2427), "Superb service and a menu that delights the taste buds!", 5, 7 },
+                    { 20, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2428), "Adequate experience, but lacks a special touch", 3, 7 },
+                    { 21, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2429), "Awful service and disappointing overall.", 1, 7 },
+                    { 22, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2431), "Superb service and a menu that delights the taste buds!", 5, 8 },
+                    { 23, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2432), "Adequate experience, but lacks a special touch", 3, 8 },
+                    { 24, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2433), "Awful service and disappointing overall.", 1, 8 },
+                    { 25, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2434), "Superb service and a menu that delights the taste buds!", 5, 9 },
+                    { 26, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2436), "Adequate experience, but lacks a special touch", 3, 9 },
+                    { 27, null, new DateTime(2024, 1, 14, 13, 42, 28, 53, DateTimeKind.Local).AddTicks(2437), "Awful service and disappointing overall.", 1, 9 }
                 });
 
             migrationBuilder.InsertData(
@@ -860,11 +859,11 @@ namespace RestaurantReservation.Server.Migrations
                 columns: new[] { "Id", "Capacity", "Date", "RestaurantId" },
                 values: new object[,]
                 {
-                    { 1, 15, new DateTime(2024, 1, 14, 13, 0, 47, 410, DateTimeKind.Local).AddTicks(9549), 1 },
-                    { 2, 15, new DateTime(2024, 1, 14, 13, 0, 47, 410, DateTimeKind.Local).AddTicks(9566), 2 },
-                    { 3, 15, new DateTime(2024, 1, 14, 13, 0, 47, 410, DateTimeKind.Local).AddTicks(9567), 3 },
-                    { 4, 15, new DateTime(2024, 1, 14, 13, 0, 47, 410, DateTimeKind.Local).AddTicks(9569), 4 },
-                    { 5, 15, new DateTime(2024, 1, 14, 13, 0, 47, 410, DateTimeKind.Local).AddTicks(9570), 5 }
+                    { 1, 15, new DateTime(2024, 1, 14, 13, 42, 28, 52, DateTimeKind.Local).AddTicks(9486), 1 },
+                    { 2, 15, new DateTime(2024, 1, 14, 13, 42, 28, 52, DateTimeKind.Local).AddTicks(9511), 2 },
+                    { 3, 15, new DateTime(2024, 1, 14, 13, 42, 28, 52, DateTimeKind.Local).AddTicks(9512), 3 },
+                    { 4, 15, new DateTime(2024, 1, 14, 13, 42, 28, 52, DateTimeKind.Local).AddTicks(9513), 4 },
+                    { 5, 15, new DateTime(2024, 1, 14, 13, 42, 28, 52, DateTimeKind.Local).AddTicks(9514), 5 }
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,0 +1,105 @@
+﻿@page "/reservationsview"
+@inject HttpClient _client
+@inject NavigationManager navigation
+
+
+<h1>Upcoming Reservations</h1>
+@if (Reservations != null && GetUpcomingReservations()?.Count > 0)
+{
+    <div class="bd-example-snippet bd-code-snippet">
+        <div class="bd-example m-0 border-0">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Restaurant</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var res in GetUpcomingReservations())
+                    {
+                        <tr class="table-success">
+                            <td>@res.Date.Date.ToString("yyyy MMM dd")</td>
+                            <td>@res.Time.ToString("h:mm tt").ToUpper()</td>
+                            <td>@res.Restaurant?.Name</td>
+                            <td><button class="btn btn-secondary" @onclick="(()=>Edit(res.Id))"><span class="bi bi-pencil-square"></span></button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="upcoming-group">
+        <h3>You currently have no upcoming reservations, click <a href="restaurants">here</a> to make one now!</h3>
+    </div>
+}
+<h1>Past Reservations</h1>
+@if (Reservations != null && GetPastReservations()?.Count > 0)
+{
+    <div class="bd-example-snippet bd-code-snippet">
+        <div class="bd-example m-0 border-0">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Restaurant</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var res in GetPastReservations())
+                    {
+                        <tr class="table-warning">
+                            <td>@res.Date.Date.ToString("yyyy MMM dd")</td>
+                            <td>@res.Time.ToString("h:mm tt").ToUpper()</td>
+                            <td>@res.Restaurant?.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@code {
+    private List<Reservation>? Reservations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Reservations = await _client.GetFromJsonAsync<List<Reservation>>($"{Endpoints.ReservationsEndpoint}");
+    }
+
+    private List<Reservation>? GetUpcomingReservations()
+    {
+        if (Reservations != null)
+        {
+            return Reservations.Where(q => q.Date.Date >= DateTime.Today).ToList();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private List<Reservation>? GetPastReservations()
+    {
+        if (Reservations != null)
+        {
+            return Reservations.Where(q => q.Date.Date < DateTime.Today).ToList();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private void Edit(int id)
+	{
+		navigation.NavigateTo($"/reservationsview/edit/{id}");
+	}
+}

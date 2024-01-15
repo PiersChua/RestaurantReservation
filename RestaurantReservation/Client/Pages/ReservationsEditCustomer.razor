@@ -1,0 +1,19 @@
+﻿@page "/reservationsedit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager navigation
+
+
+@code {
+	private Reservation? reservation;
+	private List<Reservation>? Reservations;
+	[Parameter]
+	public int id { get; set; }
+	protected override async Task OnParametersSetAsync()
+	{
+		Reservations = await _client.GetFromJsonAsync<List<Reservation>>($"{Endpoints.ReservationsEndpoint}");
+		if (Reservations != null)
+		{
+			reservation = Reservations.First(q => q.Id == id);
+		}
+	}
+}

@@ -32,7 +32,7 @@
 				<div class="col-md-6 form-group">
 					<label>Reservation Time</label>
 					<div>
-						<InputDate Type="InputDateType.Time" @bind-Value="reservation.Date" class="form-control" />
+						<InputDate Type="InputDateType.Time" @bind-Value="reservation.Time" class="form-control" />
 						<ValidationMessage For="@(() => reservation.Date)" />
 					</div>
 				</div>
@@ -86,7 +86,7 @@
 			reservation.ReservationStatusId = 1;
 			await _client.PostAsJsonAsync($"{Endpoints.ReservationsEndpoint}", reservation);
 			await js.InvokeVoidAsync("alert", "Reservation Created! Please check reservation details under Reservation");
-			Navigation.NavigateTo("/reservationhistory");
+			Navigation.NavigateTo("/reservationsview");
 		}
 		else
 		{
