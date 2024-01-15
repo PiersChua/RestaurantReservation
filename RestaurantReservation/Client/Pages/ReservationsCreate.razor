@@ -3,66 +3,67 @@
 @inject IJSRuntime js
 @inject NavigationManager Navigation
 @attribute [Authorize]
-@if (restaurant != null)
-{
-	<div class="container">
-		<div class="text-center">
-			<img src="images/appIcon.png">
-		</div>
-		<div class="col-md-12 form-group">
-			<label>Promo Code</label>
-			<div class="input-group">
-				<input type="text" @bind="code" class="form-control" placeholder="Promo code">
-				<button @onclick="VerifyCode" class="btn btn-secondary">Redeem</button>
-			</div>
-		</div>
-		<br />
-		<hr>
-		<EditForm Model="@restaurant" OnValidSubmit="CreateReservation">
-			<DataAnnotationsValidator />
-			<ValidationSummary />
-			<div class="row">
-				<div class="col-md-6 form-group">
-					<label>Reservation Date</label>
-					<div>
-						<InputDate min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="reservation.Date" class="form-control" />
-						<ValidationMessage For="@(() => reservation.Date)" />
-					</div>
-				</div>
-				<div class="col-md-6 form-group">
-					<label>Reservation Time</label>
-					<div>
-						<InputDate Type="InputDateType.Time" @bind-Value="reservation.Time" class="form-control" />
-						<ValidationMessage For="@(() => reservation.Date)" />
-					</div>
-				</div>
-				<div class="col-md-6 form-group">
-					<label>No. of guests</label>
-					<div>
-						<InputNumber min="1" max="30" @bind-Value="@reservation.Guest" class="form-control" />
-						<ValidationMessage For="@(() => reservation.Guest)" />
-					</div>
-				</div>
-				<div class="col-md-6 form-group">
-					<label>Special Request</label>
-					<div>
-						<InputText @bind-Value="@reservation.Request" class="form-control" />
-						<ValidationMessage For="@(() => reservation.Request)" />
-					</div>
-				</div>
-				<div class="row">
-					<button type="button" @onclick="NavigateToHome" class="btn btn-outline-dark btn-block col-md-2"><span class="oi oi-arrow-left"></span> Back</button>
-					<button type="submit" class="btn btn-secondary btn-block col-md-8">Submit Reservation</button>
-				</div>
-			</div>
-			</EditForm>	
+
+<div class="container">
+	<div class="text-center">
+		<img src="images/appIcon.png">
 	</div>
-}
+	<div class="col-md-12 form-group">
+		<label>Promo Code</label>
+		<div class="input-group">
+			<input type="text" @bind="code" class="form-control" placeholder="Promo code">
+			<button @onclick="VerifyCode" class="btn btn-secondary">Redeem</button>
+		</div>
+	</div>
+	<br />
+	<hr>
+	<EditForm Model="@reservation" OnValidSubmit="CreateReservation">
+		<DataAnnotationsValidator />
+		<ValidationSummary />
+		<div class="row">
+			<div class="col-md-6 form-group">
+				<label>Reservation Date</label>
+				<div>
+					<InputDate min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="reservation.Date" class="form-control" />
+					<ValidationMessage For="@(() => reservation.Date)" />
+				</div>
+			</div>
+			<div class="col-md-6 form-group">
+				<label>Reservation Time</label>
+				<div>
+					<InputDate Type="InputDateType.Time" min="@reshour?.OpeningTime?.ToString("HH:mm")" max="@reshour?.ClosingTime?.AddMinutes(-45).ToString("HH:mm")" @bind-Value="reservation.Time" class="form-control" />
+					<ValidationMessage For="@(() => reservation.Time)" />
+				</div>
+			</div>
+			<div class="col-md-6 form-group">
+				<label>No. of guests</label>
+				<div>
+					<InputNumber min="1" max="30" @bind-Value="@reservation.Guest" class="form-control" />
+					<ValidationMessage For="@(() => reservation.Guest)" />
+				</div>
+			</div>
+			<div class="col-md-6 form-group">
+				<label>Special Request</label>
+				<div>
+					<InputText @bind-Value="@reservation.Request" class="form-control" />
+					<ValidationMessage For="@(() => reservation.Request)" />
+				</div>
+			</div>
+			<div class="row">
+				<button type="button" @onclick="NavigateToHome" class="btn btn-outline-dark btn-block col-md-2"><span class="oi oi-arrow-left"></span> Back</button>
+				<button type="submit" class="btn btn-secondary btn-block col-md-8">Submit Reservation</button>
+			</div>
+		</div>
+		</EditForm>	
+</div>
+
 @code {
 	private Restaurant? restaurant;
+	private OperatingHour? reshour;
 	private List<Restaurant>? Restaurants;
 	private List<Promotion>? Promotions;
 	private List<PaymentMethod>? PaymentMethods;
+	private List<OperatingHour>? OperatingHours;
 	[Parameter]
 	public int id { get; set; }
 	Reservation reservation = new Reservation();
@@ -72,9 +73,11 @@
 		Restaurants = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
 		Promotions = await _client.GetFromJsonAsync<List<Promotion>>($"{Endpoints.PromotionsEndpoint}");
 		PaymentMethods = await _client.GetFromJsonAsync<List<PaymentMethod>>($"{Endpoints.PaymentMethodsEndpoint}");
-		if (Restaurants != null)
+		OperatingHours = await _client.GetFromJsonAsync<List<OperatingHour>>($"{Endpoints.OperatingHoursEndpoint}");
+		if (Restaurants != null && OperatingHours != null)
 		{
 			restaurant = Restaurants.First(q => q.Id == id);
+			reshour = OperatingHours.First(x => x.RestaurantId == id && x.Day == DateTime.Now.DayOfWeek.ToString());
 		}
 	}
 
@@ -86,7 +89,7 @@
 			reservation.ReservationStatusId = 1;
 			await _client.PostAsJsonAsync($"{Endpoints.ReservationsEndpoint}", reservation);
 			await js.InvokeVoidAsync("alert", "Reservation Created! Please check reservation details under Reservation");
-			Navigation.NavigateTo("/reservationsview");
+			Navigation.NavigateTo("/reservations");
 		}
 		else
 		{

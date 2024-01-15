@@ -1,4 +1,4 @@
-﻿@page "/reservationsview"
+﻿@page "/reservations"
 @inject HttpClient _client
 @inject NavigationManager navigation
 
@@ -14,6 +14,7 @@
                         <th scope="col">Date</th>
                         <th scope="col">Time</th>
                         <th scope="col">Restaurant</th>
+                        <th scope="col">Status</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -24,6 +25,7 @@
                             <td>@res.Date.Date.ToString("yyyy MMM dd")</td>
                             <td>@res.Time.ToString("h:mm tt").ToUpper()</td>
                             <td>@res.Restaurant?.Name</td>
+                            <td>@res.ReservationStatus?.Status</td>
                             <td><button class="btn btn-secondary" @onclick="(()=>Edit(res.Id))"><span class="bi bi-pencil-square"></span></button></td>
                         </tr>
                     }
@@ -49,6 +51,7 @@ else
                         <th scope="col">Date</th>
                         <th scope="col">Time</th>
                         <th scope="col">Restaurant</th>
+                        <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,6 +61,7 @@ else
                             <td>@res.Date.Date.ToString("yyyy MMM dd")</td>
                             <td>@res.Time.ToString("h:mm tt").ToUpper()</td>
                             <td>@res.Restaurant?.Name</td>
+                            <td>@res.ReservationStatus?.Status</td>
                         </tr>
                     }
                 </tbody>
@@ -100,6 +104,6 @@ else
 
     private void Edit(int id)
 	{
-		navigation.NavigateTo($"/reservationsview/edit/{id}");
+		navigation.NavigateTo($"/reservations/edit/{id}");
 	}
 }

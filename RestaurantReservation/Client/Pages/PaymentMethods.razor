@@ -109,7 +109,7 @@
     private PaymentMethod paymethod;
     PaymentMethod paymentMethod = new PaymentMethod();
 
-    private async Task CreatePaymentMethod()
+    async Task CreatePaymentMethod()
     {
         await _client.PostAsJsonAsync($"{Endpoints.PaymentMethodsEndpoint}", paymentMethod);
         await _js.InvokeVoidAsync("alert", "Payment Method added!");
