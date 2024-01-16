@@ -1,0 +1,24 @@
+﻿.sidebar {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #808080; /* Medium grey background */
+    overflow-x: hidden;
+    transition: width 0.5s; /* Smooth transition effect */
+    padding-top: 60px; /* Space at the top */
+}
+
+    .sidebar a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #F0F0F0; /* Light grey for the text */
+        display: block;
+        transition: 0.3s;
+    }
+
+        .sidebar a:hover {
+            color: #D3D3D3; /* Slightly lighter grey on hover */
+        }

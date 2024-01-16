@@ -24,8 +24,11 @@ namespace RestaurantReservation.Shared.Domain
 		public int? PhoneNumber { get; set; }
 		[Required]
 		[StringLength(300, MinimumLength = 20, ErrorMessage = "Description too short!")]
-		public string? Description { get; set; }
-		public string? Status { get; set; }
+        public string? Description { get; set; }
+        public string? ImagePath { get; set; }
+        public string? Category { get; set; }
+        public string? Location { get; set; }
+        public string? Status { get; set; }
 		public int? CustomerId { get; set; }
         public int? AddressId { get; set; }
         public int? MenuId { get; set; }
