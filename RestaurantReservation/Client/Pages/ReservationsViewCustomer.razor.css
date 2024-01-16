@@ -15,3 +15,24 @@
         white-space:nowrap;
     }
 
+th{
+    font-size:30px;
+}
+td{
+    font-size:20px;
+}
+
+.confirm {
+    color: #4BB543;
+}
+
+.cancel {
+    color:#FF0000;
+}
+
+.custom-control-input{
+    width:20px;
+    height:20px;
+    cursor:pointer;
+}
+

@@ -12,6 +12,12 @@
         transform: translate(0,-50%);
         filter: drop-shadow(0 0 0.75rem crimson);
     }
+    .promo-hero button{
+        position:absolute;
+        top:5%;
+        left:2%;
+        transform:translate(-50%,0);
+    }
 .overlay-text-promo{
     position:absolute;
     text-align:center;

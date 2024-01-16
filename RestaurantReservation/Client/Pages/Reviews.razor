@@ -10,16 +10,6 @@
 			<h1><span class="oi bi bi-envelope-paper-fill"></span> @res.Name</h1>
 			<button class="btn btn-primary" @onclick="Rate">Leave a feedback!</button>
 		</div>
-		@* @foreach (var review in rev)
-		{
-			<div class="ratings">
-				@for(int i=0;i<review.Rating;i++)
-				{
-					<span class="bi bi-star-fill"></span>
-				}
-				<p>@review.Description</p>
-			</div>
-		} *@
 }
 else
 {
@@ -112,5 +102,9 @@ else
 	private void Rate()
 	{
 		Navigation.NavigateTo($"/reviews/create/{id}");
+	}
+	private void Edit()
+	{
+		Navigation.NavigateTo($"/reviews/edit/{id}");
 	}
 }

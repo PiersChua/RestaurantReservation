@@ -3,6 +3,7 @@
 @inject HttpClient _client
 
 <div class="promo-hero">
+	<button @onclick="Create" class="btn btn-secondary"><span class="bi bi-plus-square-fill"></span></button>
 	<div class="overlay-text-promo">
 		<h1>The No. 1 reservation app for all diners.</h1>
 		<p>Savor Exclusive Delights at Bookbite! Unleash a world of culinary bliss with our exclusive promotions, crafted just for you. <br />
@@ -33,5 +34,9 @@
 	private void ViewPromo(int id)
 	{
 		Navigation.NavigateTo($"/promotions/{id}");
+	}
+	private void Create()
+	{
+		Navigation.NavigateTo("/promotions/create");
 	}
 }

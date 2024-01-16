@@ -43,7 +43,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     RestaurantId = 3,
                     //beauty in the pot
                     PromotionId = null,
-                    ReservationStatusId = 3
+                    ReservationStatusId = 1
                 },
                 new Reservation
                 {

@@ -4,35 +4,55 @@
 
 
 <h1>Upcoming Reservations</h1>
+<button class="btn btn-danger" @onclick="toggleCheckBox">Delete</button>
 @if (Reservations != null && GetUpcomingReservations()?.Count > 0)
 {
-    <div class="bd-example-snippet bd-code-snippet">
-        <div class="bd-example m-0 border-0">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Restaurant</th>
-                        <th scope="col">Status</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var res in GetUpcomingReservations())
-                    {
-                        <tr class="table-success">
-                            <td>@res.Date.Date.ToString("yyyy MMM dd")</td>
-                            <td>@res.Time.ToString("h:mm tt").ToUpper()</td>
-                            <td>@res.Restaurant?.Name</td>
-                            <td>@res.ReservationStatus?.Status</td>
-                            <td><button class="btn btn-secondary" @onclick="(()=>Edit(res.Id))"><span class="bi bi-pencil-square"></span></button></td>
+    <fieldset disabled="@showCheckboxes">
+        <div class="bd-example-snippet bd-code-snippet">
+            <div class="bd-example m-0 border-0">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            @if(!showCheckboxes)
+                            {
+                                <th scope="col"></th>
+                            }
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Restaurant</th>
+                            <th scope="col">Status</th>
+                            <th scope="col"></th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var res in GetUpcomingReservations())
+                        {
+                            <tr>
+                                @if (!showCheckboxes)
+                                {
+                                    <td class="fs-5"><input type="checkbox" class="custom-control-input" id="customCheck1"></td>
+                                }
+                                <td>@res.Date.Date.ToString("yyyy MMM dd")</td>
+                                <td>@res.Time.ToString("h:mm tt").ToUpper()</td>
+                                <td>@res.Restaurant?.Name</td>
+                                @if(res.ReservationStatus?.Status == "Confirmed")
+							    {
+                                    <td class="confirm">@res.ReservationStatus?.Status</td>
+								    <td><button class="btn btn-secondary" @onclick="(()=>Edit(res.Id))"><span class="bi bi-pencil-square"></span></button></td>
+							    }
+							    else
+							    {
+                                    <td class="cancel">@res.ReservationStatus?.Status</td>
+                                    <td><button class="btn btn-danger"><span class="bi bi-x-square-fill"></span></button></td>
+							    }
+                            
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+    </fieldset>
 }
 else
 {
@@ -45,7 +65,7 @@ else
 {
     <div class="bd-example-snippet bd-code-snippet">
         <div class="bd-example m-0 border-0">
-            <table class="table table-hover">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Date</th>
@@ -57,11 +77,19 @@ else
                 <tbody>
                     @foreach (var res in GetPastReservations())
                     {
-                        <tr class="table-warning">
+                        <tr>
                             <td>@res.Date.Date.ToString("yyyy MMM dd")</td>
                             <td>@res.Time.ToString("h:mm tt").ToUpper()</td>
                             <td>@res.Restaurant?.Name</td>
-                            <td>@res.ReservationStatus?.Status</td>
+                            @if (res.ReservationStatus?.Status == "Confirmed")
+                            {
+                                <td class="confirm">@res.ReservationStatus?.Status</td>
+                  
+                            }
+                            else
+                            {
+                                <td class="cancel">@res.ReservationStatus?.Status</td>
+                            }
                         </tr>
                     }
                 </tbody>
@@ -69,10 +97,16 @@ else
         </div>
     </div>
 }
+else
+{
+    <div class="upcoming-group">
+        <h3>Track your past reservations here</h3>
+    </div>
+}
 
 @code {
     private List<Reservation>? Reservations;
-
+    private bool showCheckboxes = true;
     protected override async Task OnInitializedAsync()
     {
         Reservations = await _client.GetFromJsonAsync<List<Reservation>>($"{Endpoints.ReservationsEndpoint}");
@@ -103,7 +137,11 @@ else
     }
 
     private void Edit(int id)
-	{
-		navigation.NavigateTo($"/reservations/edit/{id}");
-	}
+    {
+        navigation.NavigateTo($"/reservations/edit/{id}");
+    }
+    private void toggleCheckBox()
+    {
+        showCheckboxes = !showCheckboxes;
+    }
 }

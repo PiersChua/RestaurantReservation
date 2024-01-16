@@ -1,0 +1,105 @@
+﻿@page "/promotions/create"
+@inject HttpClient _client
+@inject NavigationManager navigation
+
+@if (Promotions != null && GetUpcomingPromotions()?.Count > 0)
+{
+    <h1>Upcoming Promotions</h1>
+    <div class="bd-example-snippet bd-code-snippet">
+        <div class="bd-example m-0 border-0">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var promo in GetUpcomingPromotions())
+                    {
+                        <tr>
+                            <td>@promo.Name</td>
+                            <td>@promo.StartDate.Value.ToString("yyyy MMM dd")</td>
+                            <td>@promo.EndDate.Value.ToString("yyyy MMM dd")</td>
+                            <td>@promo.Discount%</td>
+                            <td><button class="btn btn-secondary" @onclick="(()=>Edit(promo.Id))"><span class="bi bi-pencil-square"></span></button></td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@if (Promotions != null && GetPastPromotions()?.Count > 0)
+{
+    <h1>Upcoming Promotions</h1>
+    <div class="bd-example-snippet bd-code-snippet">
+        <div class="bd-example m-0 border-0">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var promo in GetPastPromotions())
+                    {
+                        <tr class="table table-striped">
+                            <td>@promo.Name</td>
+                            <td>@promo.StartDate.Value.ToString("yyyy MMM dd")</td>
+                            <td>@promo.EndDate.Value.ToString("yyyy MMM dd")</td>
+                            <td>@promo.Discount%</td>
+                            <td><button class="btn btn-secondary" @onclick="(()=>Edit(promo.Id))"><span class="bi bi-pencil-square"></span></button></td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+@code {
+	private List<Promotion>? Promotions;
+	protected override async Task OnInitializedAsync()
+	{
+		Promotions = await _client.GetFromJsonAsync<List<Promotion>>($"{Endpoints.PromotionsEndpoint}");
+	}
+
+    private List<Promotion>? GetUpcomingPromotions()
+    {
+        if (Promotions != null)
+        {
+            return Promotions.Where(q => q.StartDate.Value >= DateTime.Today && DateTime.Today < q.EndDate.Value).ToList();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private List<Promotion>? GetPastPromotions()
+    {
+        if (Promotions != null)
+        {
+            return Promotions.Where(q => q.StartDate.Value <= DateTime.Today).ToList();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private void Edit(int id)
+	{
+		navigation.NavigateTo($"/promotions/edit/{id}");
+	}
+}
