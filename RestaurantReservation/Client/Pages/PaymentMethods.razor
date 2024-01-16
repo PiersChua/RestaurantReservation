@@ -106,13 +106,13 @@
 
 @code{
     private List<PaymentMethod>? PayMethods;
-    private PaymentMethod paymethod;
     PaymentMethod paymentMethod = new PaymentMethod();
 
     async Task CreatePaymentMethod()
     {
         await _client.PostAsJsonAsync($"{Endpoints.PaymentMethodsEndpoint}", paymentMethod);
         await _js.InvokeVoidAsync("alert", "Payment Method added!");
+        await OnInitializedAsync();
         navigation.NavigateTo("/paymentmethods");
     }
 

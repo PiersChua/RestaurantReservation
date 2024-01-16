@@ -4,55 +4,68 @@
 
 
 <h1>Upcoming Reservations</h1>
-<button class="btn btn-danger" @onclick="toggleCheckBox">Delete</button>
+<div>
+    @if (!showCheckboxes)
+    {
+        <button class="btn btn-danger" @onclick="toggleCheckBox">Cancel</button>
+        <button class="btn btn-secondary" @onclick="Delete">Confirm Delete</button>
+    }
+    else
+    {
+        <button class="btn btn-danger" @onclick="toggleCheckBox">Delete</button>
+    }
+</div>
+
 @if (Reservations != null && GetUpcomingReservations()?.Count > 0)
 {
-    <fieldset disabled="@showCheckboxes">
-        <div class="bd-example-snippet bd-code-snippet">
-            <div class="bd-example m-0 border-0">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            @if(!showCheckboxes)
-                            {
-                                <th scope="col"></th>
-                            }
-                            <th scope="col">Date</th>
-                            <th scope="col">Time</th>
-                            <th scope="col">Restaurant</th>
-                            <th scope="col">Status</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var res in GetUpcomingReservations())
+    <div class="bd-example-snippet bd-code-snippet">
+        <div class="bd-example m-0 border-0">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        @if(!showCheckboxes)
                         {
-                            <tr>
-                                @if (!showCheckboxes)
-                                {
-                                    <td class="fs-5"><input type="checkbox" class="custom-control-input" id="customCheck1"></td>
-                                }
-                                <td>@res.Date.Date.ToString("yyyy MMM dd")</td>
-                                <td>@res.Time.ToString("h:mm tt").ToUpper()</td>
-                                <td>@res.Restaurant?.Name</td>
-                                @if(res.ReservationStatus?.Status == "Confirmed")
-							    {
-                                    <td class="confirm">@res.ReservationStatus?.Status</td>
-								    <td><button class="btn btn-secondary" @onclick="(()=>Edit(res.Id))"><span class="bi bi-pencil-square"></span></button></td>
-							    }
-							    else
-							    {
-                                    <td class="cancel">@res.ReservationStatus?.Status</td>
-                                    <td><button class="btn btn-danger"><span class="bi bi-x-square-fill"></span></button></td>
-							    }
-                            
-                            </tr>
+                            <th scope="col"></th>
                         }
-                    </tbody>
-                </table>
-            </div>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Restaurant</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var res in GetUpcomingReservations())
+                    {
+                        <tr>
+                            @if (!showCheckboxes && res.ReservationStatus.Id != 2)
+                            {
+                                <td class="fs-5"><input type="checkbox" class="custom-control-input" id="customCheck1"></td>
+                            }
+                            else if (!showCheckboxes && res.ReservationStatus.Id == 2)
+                            {
+                                <td></td>
+                            }
+                            <td>@res.Date.Date.ToString("yyyy MMM dd")</td>
+                            <td>@res.Time.ToString("h:mm tt").ToUpper()</td>
+                            <td>@res.Restaurant?.Name</td>
+                            @if(res.ReservationStatus?.Status == "Confirmed")
+							{
+                                <td class="confirm">@res.ReservationStatus?.Status</td>
+								<td><button class="btn btn-secondary" @onclick="(()=>Edit(res.Id))"><span class="bi bi-pencil-square"></span></button></td>
+							}
+							else
+							{
+                                <td class="cancel">@res.ReservationStatus?.Status</td>
+                                <td><button class="btn btn-danger"><span class="bi bi-x-square-fill"></span></button></td>
+							}
+                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
-    </fieldset>
+    </div>
 }
 else
 {
@@ -143,5 +156,9 @@ else
     private void toggleCheckBox()
     {
         showCheckboxes = !showCheckboxes;
+    }
+    private void Delete()
+    {
+        
     }
 }
