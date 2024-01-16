@@ -1,4 +1,6 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
