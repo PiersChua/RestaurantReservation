@@ -1,19 +1,82 @@
-﻿@page "/reservationsedit/{id:int}"
+﻿@page "/reservations/edit/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager navigation
-
+@inject IJSRuntime js
+@if(reservation != null && address != null)
+{
+	<div>
+		<p>@reservation.Restaurant?.Name</p>
+		<p>@address.Street</p>
+		<p>@address.UnitNumber</p>
+		<p>@address.Building</p>
+		<p>@address.PostalCode</p>
+	</div>
+}
+<div class="container">
+	<EditForm Model="@reservation" OnValidSubmit="UpdateReservation">
+		<DataAnnotationsValidator />
+		<ValidationSummary />
+		<div class="row">
+			<div class="col-md-6 form-group">
+				<label>Reservation Date</label>
+				<div>
+					<InputDate min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="reservation.Date" class="form-control" />
+					<ValidationMessage For="@(() => reservation.Date)" />
+				</div>
+			</div>
+			<div class="col-md-6 form-group">
+				<label>Reservation Time</label>
+				<div>
+					<InputDate Type="InputDateType.Time" min="@reshour?.OpeningTime?.ToString("HH:mm")" max="@reshour?.ClosingTime?.AddMinutes(-45).ToString("HH:mm")" @bind-Value="reservation.Time" class="form-control" />
+					<ValidationMessage For="@(() => reservation.Time)" />
+				</div>
+			</div>
+			<div class="col-md-6 form-group">
+				<label>No. of guests</label>
+				<div>
+					<InputNumber min="1" max="30" @bind-Value="@reservation.Guest" class="form-control" />
+					<ValidationMessage For="@(() => reservation.Guest)" />
+				</div>
+			</div>
+			<div class="col-md-6 form-group">
+				<label>Special Request</label>
+				<div>
+					<InputText @bind-Value="@reservation.Request" class="form-control" />
+					<ValidationMessage For="@(() => reservation.Request)" />
+				</div>
+			</div>
+			<button type="submit" class="btn btn-secondary btn-block mt-3">Update</button>
+		</div>
+	</EditForm>
+</div>
 
 @code {
-	private Reservation? reservation;
+	Reservation reservation = new Reservation();
+	private Address? address;
+	private List<Address>? Addresses;
 	private List<Reservation>? Reservations;
+	private OperatingHour? reshour;
+	private List<OperatingHour>? OperatingHours;
 	[Parameter]
 	public int id { get; set; }
 	protected override async Task OnParametersSetAsync()
 	{
 		Reservations = await _client.GetFromJsonAsync<List<Reservation>>($"{Endpoints.ReservationsEndpoint}");
-		if (Reservations != null)
+		Addresses = await _client.GetFromJsonAsync<List<Address>>($"{Endpoints.AddressesEndpoint}");
+		OperatingHours = await _client.GetFromJsonAsync<List<OperatingHour>>($"{Endpoints.OperatingHoursEndpoint}");
+		if (Reservations != null && Addresses != null)
 		{
 			reservation = Reservations.First(q => q.Id == id);
+			address = Addresses.First(x => x.Id == reservation.Restaurant?.AddressId);
+			reshour = OperatingHours.First(x => x.RestaurantId == id && x.Day == DateTime.Now.DayOfWeek.ToString());
+
 		}
+	}
+
+	async Task UpdateReservation()
+	{
+		await _client.PutAsJsonAsync($"{Endpoints.ReservationsEndpoint}/{id}", reservation);
+		await js.InvokeVoidAsync("alert", "Reservation updated!");
+		navigation.NavigateTo("/reservations");
 	}
 }

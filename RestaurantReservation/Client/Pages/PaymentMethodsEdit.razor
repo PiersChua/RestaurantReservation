@@ -47,6 +47,7 @@
     async Task EditPaymentMethod()
     {
         await _client.PutAsJsonAsync($"{Endpoints.PaymentMethodsEndpoint}/{id}", paymentMethod);
+        await js.InvokeVoidAsync("alert", "Payment Method Updated");
         Navigation.NavigateTo("/paymentmethods");
     }
 }

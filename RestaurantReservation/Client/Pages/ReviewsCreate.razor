@@ -31,7 +31,7 @@
 	Review review = new Review();
 
 
-	private async Task CreateReview()
+	async Task CreateReview()
 	{
 		review.RestaurantId = id;
 		await _client.PostAsJsonAsync($"{Endpoints.ReviewsEndpoint}", review);
