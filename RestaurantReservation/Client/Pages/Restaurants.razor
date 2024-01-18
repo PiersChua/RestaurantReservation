@@ -45,38 +45,6 @@
 </div>
 @if (Res != null)
 {
-	@* <table class="table table-responsive">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Cusine</th>
-				<th>Category</th>
-			</tr>
-		</thead>
-		<tbody>
-			@if (filteredRestaurant != null)
-			{
-				@foreach (var res in filteredRestaurant)
-				{
-					<tr>
-						<td>
-							@res.Name
-						</td>
-						<td>
-							@res.Cuisine
-						</td>
-						<td>
-							@res.Category
-						</td>
-					</tr>
-				}
-			}
-			else
-			{
-				<h1>Restuarant Not Found</h1>
-			}
-		</tbody>
-	</table> *@
 	<div>
 		@if(filteredRestaurant!=null)
 		{
@@ -86,6 +54,10 @@
 					<p>@res.Name</p>
 				</div>
 			}
+		}
+		else
+		{
+			<h1>No restaurants found</h1>
 		}
 	</div>
 }

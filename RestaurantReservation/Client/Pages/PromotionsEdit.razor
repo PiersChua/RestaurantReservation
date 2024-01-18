@@ -1,0 +1,101 @@
+﻿@page "/promotions/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager navigation
+@inject IJSRuntime js
+
+
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img src="/images/promoIcon.png" width="300" height="200">
+    </div>
+    <EditForm Model="@promo" OnValidSubmit="UpdatePromotion">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label>Name</label>
+                <div>
+                    <InputText @bind-Value="promo.Name" class="form-control" />
+                    <ValidationMessage For="@(() => promo.Name)" />
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Promo code</label>
+                <div>
+                    <InputText @bind-Value="promo.Code" class="form-control" @oninput="Capitalize" />
+                    <ValidationMessage For="@(() => promo.Code)" />
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Description</label>
+                <div>
+                    <InputText @bind-Value="promo.Description" class="form-control" />
+                    <ValidationMessage For="@(() => promo.Description)" />
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Discount</label>
+                <div>
+                    <InputSelect @bind-Value="promo.Discount" class="form-control">
+                        <option value="" disabled selected hidden></option>
+                        @foreach (var dis in discount)
+                        {
+                            <option value="@dis">@dis%</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => promo.Discount)" />
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Promotion Start Date</label>
+                <div>
+                    <InputDate min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="promo.StartDate" class="form-control" />
+                    <ValidationMessage For="@(() => promo.StartDate)" />
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Promotion End Date</label>
+                <div>
+                    <InputDate min="@promo.StartDate.AddDays(1).ToString("yyyy-MM-dd")" @bind-Value="promo.EndDate" class="form-control" />
+                    <ValidationMessage For="@(() => promo.EndDate)" />
+                </div>
+            </div>
+            <hr class="my-4">
+            <button type="submit" class="w-100 btn btn-primary btn-lg">Update Promotion</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    Promotion? promo = new Promotion();
+    List<Double> discount = new List<Double>
+    {
+        10.0,
+        20.0,
+        30.0,
+        40.0,
+        50.0,
+        60.0,
+        70.0,
+        80.0,
+        90.0,
+        100.0
+    };
+    protected override async Task OnParametersSetAsync()
+    {
+        promo = await _client.GetFromJsonAsync<Promotion>($"{Endpoints.PromotionsEndpoint}/{id}");
+    }
+    async Task UpdatePromotion()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.PromotionsEndpoint}/{id}", promo);
+        await js.InvokeVoidAsync("alert", "Promotion updated!");
+        navigation.NavigateTo("/promotions");
+	}
+    private void Capitalize(ChangeEventArgs e)
+    {
+        promo.Code = ((string)e.Value)?.ToUpper();
+    }
+}

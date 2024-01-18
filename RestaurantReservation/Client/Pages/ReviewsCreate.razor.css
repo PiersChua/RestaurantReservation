@@ -1,3 +1,17 @@
 ﻿.container{
     max-width:960px;
+    padding-top:30px;
+}
+
+.rating-container {
+    font-size: 24px;
+}
+
+.star {
+    color: black;
+    cursor: pointer;
+}
+
+.filled {
+    color: gold;
 }

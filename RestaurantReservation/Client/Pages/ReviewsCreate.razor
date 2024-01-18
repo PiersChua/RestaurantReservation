@@ -21,6 +21,9 @@
 				<ValidationMessage For="@(() => review.Description)" />
 			</div>
 		</div>
+		<SfRating Value="3"></SfRating>
+
+		<hr class="my-4" />
 		<button type="submit" class="btn btn-success btn-block">Add Review</button>
 
 	</EditForm>
@@ -38,4 +41,5 @@
 		await js.InvokeVoidAsync("alert", "Review created");
 		_navManager.NavigateTo("");
 	}
+
 }
