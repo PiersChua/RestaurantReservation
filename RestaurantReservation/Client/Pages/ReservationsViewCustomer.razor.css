@@ -36,3 +36,15 @@ td{
     cursor:pointer;
 }
 
+.btn-grp{
+    position:relative;
+}
+.btn-grp div{
+    position:absolute;
+    right:1%;
+    top:0;
+    transform:translate(0,-50%);
+}
+h1{
+    margin-top:20px;
+}

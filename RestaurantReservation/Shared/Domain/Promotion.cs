@@ -19,10 +19,10 @@ namespace RestaurantReservation.Shared.Domain
 		public string? Description { get; set; }
 		[Required]
 		[DataType(DataType.Date)]
-		public DateTime? StartDate { get; set; }
+		public DateTime StartDate { get; set; }
 		[Required]
 		[DataType(DataType.Date)]
-		public DateTime? EndDate { get; set; }
+		public DateTime EndDate { get; set; }
 		[Required]
 		[Range(1, 100, ErrorMessage = "Discount must be between 0 and 100")]
 		public double? Discount { get; set; }

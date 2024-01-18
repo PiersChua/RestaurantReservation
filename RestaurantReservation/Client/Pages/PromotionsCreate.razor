@@ -2,31 +2,68 @@
 @inject HttpClient _client
 @inject NavigationManager navigation
 @inject IJSRuntime js
-
-<EditForm Model="@promo" OnValidSubmit="CreatePromotion">
+<div class="container">
+    <div class="py-5 text-center">
+        <img src="/images/promoIcon.png" width="300" height="200">
+    </div>
+    <EditForm Model="@promo" OnValidSubmit="CreatePromotion">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <div class="row">
-        <div class="col-md-6 form-group">
-            <label>Promotion Start Date</label>
-            <div>
-                <InputDate min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="promo.StartDate" class="form-control" />
-                <ValidationMessage For="@(() => promo.StartDate)" />
-            </div>
-        </div>
-        <div class="col-md-6 form-group">
-            <label>Promotion End Date</label>
-            <div>
-                <InputDate min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="promo.StartDate" class="form-control" />
-                <ValidationMessage For="@(() => promo.EndDate)" />
-            </div>
-        </div>
         <div class="row">
-            <button type="button" @onclick="NavigateToHome" class="btn btn-outline-dark btn-block col-md-2"><span class="oi oi-arrow-left"></span> Back</button>
-            <button type="submit" class="btn btn-secondary btn-block col-md-8">Create Promotion</button>
+            <div class="col-md-6 form-group">
+                <label>Name</label>
+                <div>
+                    <InputText @bind-Value="promo.Name" class="form-control" />
+                    <ValidationMessage For="@(() => promo.Name)" />
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Promo code</label>
+                <div>
+                    <InputText @bind-Value="promo.Code" class="form-control" @oninput="Capitalize"/>
+                    <ValidationMessage For="@(() => promo.Code)" />
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Description</label>
+                <div>
+                    <InputText @bind-Value="promo.Description" class="form-control" />
+                    <ValidationMessage For="@(() => promo.Description)" />
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Discount</label>
+                <div>
+                    <InputSelect @bind-Value="promo.Discount" class="form-control">
+                        <option value="" disabled selected hidden></option>
+                            @foreach (var dis in discount)
+                            {
+                                <option value="@dis">@dis%</option>
+                            }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => promo.Discount)" />
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Promotion Start Date</label>
+                <div>
+                    <InputDate min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="promo.StartDate" class="form-control" />
+                    <ValidationMessage For="@(() => promo.StartDate)" />
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Promotion End Date</label>
+                <div>
+                    <InputDate min="@promo.StartDate.AddDays(1).ToString("yyyy-MM-dd")" @bind-Value="promo.EndDate" class="form-control" />
+                    <ValidationMessage For="@(() => promo.EndDate)" />
+                </div>
+            </div>
+            <hr class="my-4">
+            <button type="submit" class="w-100 btn btn-primary btn-lg">Create Promotion</button>
         </div>
-    </div>
-</EditForm>
+    </EditForm>
+</div>
+<hr class="my-4">
 @if (Promotions != null && GetUpcomingPromotions()?.Count > 0)
 {
     <h1>Upcoming Promotions</h1>
@@ -47,8 +84,8 @@
                     {
                         <tr>
                             <td>@promo.Name</td>
-                            <td>@promo.StartDate.Value.ToString("yyyy MMM dd")</td>
-                            <td>@promo.EndDate.Value.ToString("yyyy MMM dd")</td>
+                            <td>@promo.StartDate.Date.ToString("yyyy MMM dd")</td>
+                            <td>@promo.EndDate.Date.ToString("yyyy MMM dd")</td>
                             <td>@promo.Discount%</td>
                             <td><button class="btn btn-secondary" @onclick="(()=>Edit(promo.Id))"><span class="bi bi-pencil-square"></span></button></td>
 
@@ -80,8 +117,8 @@
                     {
                         <tr class="table table-striped">
                             <td>@promo.Name</td>
-                            <td>@promo.StartDate.Value.ToString("yyyy MMM dd")</td>
-                            <td>@promo.EndDate.Value.ToString("yyyy MMM dd")</td>
+                            <td>@promo.StartDate.Date.ToString("yyyy MMM dd")</td>
+                            <td>@promo.EndDate.Date.ToString("yyyy MMM dd")</td>
                             <td>@promo.Discount%</td>
                             <td><button class="btn btn-secondary" @onclick="(()=>Edit(promo.Id))"><span class="bi bi-pencil-square"></span></button></td>
 
@@ -95,6 +132,19 @@
 @code {
     private List<Promotion>? Promotions;
     Promotion promo = new Promotion();
+    List<Double> discount = new List<Double>
+    {
+        10.0,
+        20.0,
+        30.0,
+        40.0,
+        50.0,
+        60.0,
+        70.0,
+        80.0,
+        90.0,
+        100.0
+    };
     protected override async Task OnInitializedAsync()
     {
         Promotions = await _client.GetFromJsonAsync<List<Promotion>>($"{Endpoints.PromotionsEndpoint}");
@@ -103,13 +153,14 @@
     {
         await _client.PostAsJsonAsync<Promotion>($"{Endpoints.PromotionsEndpoint}", promo);
         await js.InvokeVoidAsync("alert", "Promotion Created!");
+        await OnInitializedAsync();
     }
 
     private List<Promotion>? GetUpcomingPromotions()
     {
         if (Promotions != null)
         {
-            return Promotions.Where(q => q.StartDate.Value >= DateTime.Today && DateTime.Today < q.EndDate.Value).ToList();
+            return Promotions.Where(q => DateTime.Today < q.EndDate.Date).ToList();
         }
         else
         {
@@ -121,7 +172,7 @@
     {
         if (Promotions != null)
         {
-            return Promotions.Where(q => q.StartDate.Value <= DateTime.Today).ToList();
+            return Promotions.Where(q => q.EndDate.Date < DateTime.Today).ToList();
         }
         else
         {
@@ -137,4 +188,8 @@
     {
         navigation.NavigateTo("/");
     }
+    private void Capitalize(ChangeEventArgs e)
+	{
+        promo.Code = ((string)e.Value)?.ToUpper();
+	}
 }

@@ -16,7 +16,6 @@
 		</div>
 	</div>
 	<br />
-	<hr>
 	<EditForm Model="@reservation" OnValidSubmit="CreateReservation">
 		<DataAnnotationsValidator />
 		<ValidationSummary />
@@ -49,13 +48,14 @@
 					<ValidationMessage For="@(() => reservation.Request)" />
 				</div>
 			</div>
+			<hr class="my-4">
 			<div class="row">
 				<button type="button" @onclick="NavigateToHome" class="btn btn-outline-dark btn-block col-md-2"><span class="oi oi-arrow-left"></span> Back</button>
 				<button type="submit" class="btn btn-secondary btn-block col-md-8">Submit Reservation</button>
 			</div>
 		</div>
 		</EditForm>	
-</div>
+</div> 
 
 @code {
 	private Restaurant? restaurant;

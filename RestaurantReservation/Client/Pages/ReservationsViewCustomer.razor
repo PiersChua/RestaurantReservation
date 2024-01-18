@@ -1,18 +1,22 @@
 ﻿@page "/reservations"
 @inject HttpClient _client
 @inject NavigationManager navigation
-
+@inject IJSRuntime js
 
 <h1>Upcoming Reservations</h1>
-<div>
+<div class="btn-grp">
     @if (!showCheckboxes)
     {
-        <button class="btn btn-danger" @onclick="toggleCheckBox">Cancel</button>
-        <button class="btn btn-secondary" @onclick="Delete">Confirm Delete</button>
+        <div class="btn-group">
+            <button class="btn btn-danger" @onclick="Cancel">Confirm</button>
+            <button class="btn btn-secondary" @onclick="toggleCheckBox">Back</button>
+        </div>
     }
     else
     {
-        <button class="btn btn-danger" @onclick="toggleCheckBox">Delete</button>
+        <div>
+            <button class="btn btn-danger" @onclick="toggleCheckBox"><span class="oi bi bi-database-fill-x"></span> Cancel Reservation</button>
+        </div>
     }
 </div>
 
@@ -40,7 +44,7 @@
                         <tr>
                             @if (!showCheckboxes && res.ReservationStatus.Id != 2)
                             {
-                                <td class="fs-5"><input type="checkbox" class="custom-control-input" id="customCheck1"></td>
+                                <td class="fs-5"><input type="checkbox" @onchange="e => ToggleSelection(res.Id)" class="custom-control-input" id="customCheck1"></td>
                             }
                             else if (!showCheckboxes && res.ReservationStatus.Id == 2)
                             {
@@ -120,6 +124,8 @@ else
 @code {
     private List<Reservation>? Reservations;
     private bool showCheckboxes = true;
+    List<int> selectedIds = new List<int>();
+    Reservation reservation = new Reservation();
     protected override async Task OnInitializedAsync()
     {
         Reservations = await _client.GetFromJsonAsync<List<Reservation>>($"{Endpoints.ReservationsEndpoint}");
@@ -157,8 +163,36 @@ else
     {
         showCheckboxes = !showCheckboxes;
     }
-    private void Delete()
+    async Task Cancel()
     {
-        
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Are you sure you want to cancel {selectedIds[0]}");
+        if (confirm)
+        {
+            // foreach (var resId in selectedIds)
+            // {
+            //     reservation = Reservations?.First(q => q.Id == resId);
+            //     reservation.ReservationStatusId = 2;
+            //     await _client.PutAsJsonAsync($"{Endpoints.ReservationsEndpoint}/{resId}", reservation);
+            //     // await _client.DeleteAsync($"{Endpoints.ReservationsEndpoint}/{reservation.Id}");    
+            // }
+            // await OnInitializedAsync();
+            reservation = Reservations?.First(q => q.Id == selectedIds[0]);
+            var confirm2 = await js.InvokeAsync<bool>("confirm", $"Are you sure you want to cancel {reservation.Id}");
+            reservation.ReservationStatusId = 2;
+            await _client.PutAsJsonAsync($"{Endpoints.ReservationsEndpoint}/{selectedIds[0]}", reservation);
+        }
     }
+    private void ToggleSelection(int id)
+    {
+        if (selectedIds.Contains(id))
+        {
+            selectedIds.Remove(id);
+        }
+        else
+        {
+            selectedIds.Add(id);
+        }
+    }
+
+
 }

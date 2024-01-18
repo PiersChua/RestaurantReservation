@@ -13,14 +13,14 @@
 		<div class="menu-img">
 			@if(menu.ImagePath!=null)
 			{
-				<a href="@menu.ImagePath" target="_blank">
+				<a data-bs-toggle="tooltip" title="Open Image" href="@menu.ImagePath" target="_blank">
 					<img src="@menu.ImagePath" />
 					<span class="bi bi-box-arrow-up-right"></span>
 				</a>
 			}
 			else
 			{
-				<a href="404" target="_blank">
+				<a title= "Open Menu" href="404" target="_blank">
 					<img src="/images/notFound.jpg" />
 					<span class="bi bi-box-arrow-up-right"></span>
 				</a>
