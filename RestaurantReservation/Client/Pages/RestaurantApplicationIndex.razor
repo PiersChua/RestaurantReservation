@@ -53,8 +53,6 @@ else
         RestaurantApplication = await _client.GetFromJsonAsync<List<RestaurantApplication>>($"{Endpoints.RestaurantApplicationsEndpoint}");
     }
 
-    
-
     async Task Delete(int RestaurantApplicationId)
     {
         var restaurantApplication = RestaurantApplication.First(q => q.Id == RestaurantApplicationId);

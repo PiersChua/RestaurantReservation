@@ -21,8 +21,9 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     Category = "Hotpot",
                     Location = "East",
 
-                    ImagePath = "/image",
+                    ImagePath = "images/noImage.jpg",
                     CustomerId = null,
+                    SubscriptionId = null,
                     StaffId = null,
                     AddressId = null,
                     SeatingCapacityId = null,
@@ -42,8 +43,9 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     Category = "Hotpot",
                     Location = "East",
 
-                    ImagePath = "/image",
+                    ImagePath = "images/noImage.jpg",
                     CustomerId = null,
+                    SubscriptionId = null,
                     StaffId = null,
                     AddressId = null,
                     SeatingCapacityId = null,
@@ -62,15 +64,15 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     Category = "BBQ",
                     Location = "East",
 
-                    ImagePath = "/image",
+                    ImagePath = "images/noImage.jpg",
                     CustomerId = null,
+                    SubscriptionId = null,
                     StaffId = null,
                     AddressId = null,
                     SeatingCapacityId = null,
                     OperatingHourId = null,
                     MenuId = null,
                 }
-
                 );
 
         }

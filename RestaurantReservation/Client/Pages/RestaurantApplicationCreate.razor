@@ -10,52 +10,148 @@
         <div class="mb-3 col-md-6 form-group">
             <label class="white-color">Restaurant Name:</label>
             <div>
-                <InputText @bind-Value="@restaurantapplication.RestaurantName" class="form-control" />
+                <InputText @bind-Value="@restaurantapplication.RestaurantName" class="form-control" placeholder="Restaurant Name" />
                 <ValidationMessage For="@(() => restaurantapplication.RestaurantName)" />
             </div>
         </div>
         <div class="mb-3 col-md-6 form-group">
             <label class="white-color">Email: </label>
             <div>
-                <InputText @bind-Value="@restaurantapplication.Email" class="form-control" />
+                <InputText @bind-Value="@restaurantapplication.Email" class="form-control" placeholder="Email" />
                 <ValidationMessage For="@(() => restaurantapplication.Email)" />
             </div>
         </div>
         <div class="mb-3 col-md-6 form-group">
             <label class="white-color">Cuisine:</label>
             <div>
-                <InputText @bind-Value="@restaurantapplication.Cuisine" class="form-control" />
+                <InputText @bind-Value="@restaurantapplication.Cuisine" class="form-control" placeholder="Cuisine eg.Chinese/Korea" />
                 <ValidationMessage For="@(() => restaurantapplication.Cuisine)" />
+            </div>
+        </div>
+        <div class="mb-3 col-md-6 form-group">
+            <label class="white-color">Category:</label>
+            <div>
+                <InputText @bind-Value="@restaurantapplication.Category" class="form-control" placeholder="Category eg.Hotpot/BBQ" />
+                <ValidationMessage For="@(() => restaurantapplication.Category)" />
             </div>
         </div>
         <div class="mb-3 col-md-6 form-group">
             <label class="white-color">Phone Number: </label>
             <div>
-                <InputNumber @bind-Value="@restaurantapplication.PhoneNumber" class="form-control" />
+                <InputNumber @bind-Value="@restaurantapplication.PhoneNumber" class="form-control" placeholder="Phone Number : XXXXXXXX" />
                 <ValidationMessage For="@(() => restaurantapplication.PhoneNumber)" />
             </div>
         </div>
         <div class="mb-3 col-md-6 form-group">
             <label class="white-color">Description:</label>
             <div>
-                <InputText @bind-Value="@restaurantapplication.Description" class="form-control" />
+                <InputText @bind-Value="@restaurantapplication.Description" class="form-control" placeholder="Describe your restaurant" />
                 <ValidationMessage For="@(() => restaurantapplication.Description)" />
             </div>
         </div>
+        <div class="mb-3 col-md-6 form-group">
+            <label class="white-color">Image Path:</label>
+            <div>
+                <InputText @bind-Value="@restaurantapplication.ImagePath" class="form-control" placeholder="Image Name eg.Image.jpg" />
+                <ValidationMessage For="@(() => restaurantapplication.ImagePath)" />
+            </div>
+        </div>
+
+
+        <div>
+            <p2>Your Restaurant Address</p2>
+        </div>
+
+
+        <div class="mb-3 col-md-6 form-group">
+            <label class="white-color">Street Name:</label>
+            <div>
+                <InputText @bind-Value="@newaddress.Street" class="form-control" placeholder="Street Name: eg. 2 Tampines Central 5" />
+                <ValidationMessage For="@(() => newaddress.Street)" />
+            </div>
+        </div>
+        <div class="mb-3 col-md-6 form-group">
+            <label class="white-color">Building Name:</label>
+            <div>
+                <InputText @bind-Value="@newaddress.Building" class="form-control" placeholder="Building: eg. Century Square" />
+                <ValidationMessage For="@(() => newaddress.Building)" />
+            </div>
+        </div>
+        <div class="mb-3 col-md-6 form-group">
+            <label class="white-color">Level:</label>
+            <div>
+                <InputNumber @bind-Value="@newaddress.Level" class="form-control" placeholder="Level: eg. 1" />
+                <ValidationMessage For="@(() => newaddress.Level)" />
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <button type="submit" class="btn btn-primary">Submit Application</button>
+
+
     </EditForm>
+
+
+
     <img src="images/form.jpg" />
-    <button type="submit" class="btn btn-primary">Submit Application</button>
+
+    <button class="btn btn-primary"> Back
+        <a href="/"></a>
+    </button>
 </div>
 
 @code {
-    RestaurantApplication restaurantapplication = new RestaurantApplication();
+    RestaurantApplication restaurantapplication = new RestaurantApplication(); //done
+    Address newaddress = new Address();
+    Menu newMenu = new Menu();
+    SeatingCapacity seatCap = new SeatingCapacity();
+    Subscription subscribe = new Subscription();
+
+    OperatingHour monday = new OperatingHour();
+    OperatingHour tuesday = new OperatingHour();
+    OperatingHour wednesday = new OperatingHour();
+    OperatingHour thursday = new OperatingHour();
+    OperatingHour friday = new OperatingHour();
+    OperatingHour saturday = new OperatingHour();
+    OperatingHour sunday = new OperatingHour();
 
 
+    //   	int Id 
+		// string? RestaurantName 
+		// string? Email 
+		// string? Cuisine 
+		// int? PhoneNumber 
+  //       string? Description 
+  //       string? ImagePath 
+  //       string? Category 
+  //       string? Location 
+  //       string? Status 
+  
     private async Task CreateRestaurantApplication()
     {
         await _client.PostAsJsonAsync($"{Endpoints.RestaurantApplicationsEndpoint}", restaurantapplication);
+        await _client.PostAsJsonAsync($"{Endpoints.AddressesEndpoint}", newaddress);
+        await _client.PostAsJsonAsync($"{Endpoints.MenusEndpoint}", newMenu);
+        await _client.PostAsJsonAsync($"{Endpoints.SeatingCapacitiesEndpoint}", seatCap);
+        await _client.PostAsJsonAsync($"{Endpoints.SubscriptionsEndpoint}", subscribe);
+
+        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", monday);
+        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", tuesday);
+        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", wednesday);
+        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", thursday);
+        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", friday);
+        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", saturday);
+        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", sunday);
+
         _navManager.NavigateTo("/");
     }
+
 }
 
 

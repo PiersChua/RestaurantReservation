@@ -3,7 +3,7 @@
 @inject IJSRuntime js
 @inject NavigationManager _navManager
 
-<FormComponent ButtonText="Save" OnValidSubmit="EditRestaurantApplication" RestaurantApplication="RestaurantApplication" />
+<RestaurantApplicationFormComponent ButtonText="Save" OnValidSubmit="EditRestaurantApplication" RestaurantApplication="RestaurantApplication" />
 
 @code {
     [Parameter] public int id { get; set; }
