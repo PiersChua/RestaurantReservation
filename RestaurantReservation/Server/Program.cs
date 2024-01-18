@@ -5,7 +5,6 @@ using RestaurantReservation.Server.Data;
 using RestaurantReservation.Server.Models;
 using Microsoft.AspNetCore.Identity;
 using RestaurantReservation.Server.IRepository;
-using RestaurantReservation.Server.Repository;
 using RestaurantReservationServer.Repository;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -165,21 +165,17 @@ else
     }
     async Task Cancel()
     {
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Are you sure you want to cancel {selectedIds[0]}");
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Are you sure you want to cancel?");
         if (confirm)
         {
-            // foreach (var resId in selectedIds)
-            // {
-            //     reservation = Reservations?.First(q => q.Id == resId);
-            //     reservation.ReservationStatusId = 2;
-            //     await _client.PutAsJsonAsync($"{Endpoints.ReservationsEndpoint}/{resId}", reservation);
-            //     // await _client.DeleteAsync($"{Endpoints.ReservationsEndpoint}/{reservation.Id}");    
-            // }
-            // await OnInitializedAsync();
-            reservation = Reservations?.First(q => q.Id == selectedIds[0]);
-            var confirm2 = await js.InvokeAsync<bool>("confirm", $"Are you sure you want to cancel {reservation.Id}");
-            reservation.ReservationStatusId = 2;
-            await _client.PutAsJsonAsync($"{Endpoints.ReservationsEndpoint}/{selectedIds[0]}", reservation);
+            foreach (var resId in selectedIds)
+            {
+                reservation = await _client.GetFromJsonAsync<Reservation>($"{Endpoints.ReservationsEndpoint}/{resId}");
+                reservation.ReservationStatusId = 2;
+                await _client.PutAsJsonAsync($"{Endpoints.ReservationsEndpoint}/{resId}", reservation);  
+            }
+            await OnInitializedAsync();
+            toggleCheckBox();
         }
     }
     private void ToggleSelection(int id)

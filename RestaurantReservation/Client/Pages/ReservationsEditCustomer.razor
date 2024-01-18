@@ -45,13 +45,6 @@
 					<ValidationMessage For="@(() => reservation.Request)" />
 				</div>
 			</div>
-			<div class="col-md-6 form-group">
-				<label>Special Request</label>
-				<div>
-					<InputNumber @bind-Value="@reservation.ReservationStatusId" class="form-control" />
-					<ValidationMessage For="@(() => reservation.ReservationStatusId)" />
-				</div>
-			</div>
 			<button type="submit" class="btn btn-secondary btn-block mt-3">Update</button>
 		</div>
 	</EditForm>
