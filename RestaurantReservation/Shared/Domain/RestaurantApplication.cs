@@ -34,6 +34,8 @@ namespace RestaurantReservation.Shared.Domain
         public int? MenuId { get; set; }
 		public int? OperatingHourId { get; set; }
         public int? SeatingCapacityId { get; set; }
+        public int? SubscriptionId { get; set; }
+		public virtual Subscription? Subscription { get; set; }
         public virtual Address? Address { get; set; }
         public virtual Customer? Customer { get; set;}
 		public virtual Menu? Menu { get; set;}
