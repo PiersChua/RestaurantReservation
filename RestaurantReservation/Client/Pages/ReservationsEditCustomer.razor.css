@@ -1,3 +1,13 @@
-﻿.container{
-    max-width:960px;
+﻿.container {
+    max-width: 1080px;
+    padding-top: 30px;
+}
+
+.grey{
+    background-color: #EDEDED;
+}
+img{
+    width: 300px;
+    height: 250px;
+    object-fit:cover;
 }

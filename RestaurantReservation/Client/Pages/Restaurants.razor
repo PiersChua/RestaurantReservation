@@ -15,7 +15,7 @@
 		</NotAuthorized>
 	</AuthorizeView>
 	<div class="filter-search">
-		<h4> Filter <span class="oi bi bi-funnel"></span></h4>
+		<h4><span class="oi bi bi-funnel"></span> Filter</h4>
 		<select @bind="cuisine">
 			<option value="" disabled selected hidden>--Cuisine--</option>
 			@foreach (var item in cuisineSelections)
@@ -46,7 +46,7 @@
 @if (Res != null)
 {
 	<div>
-		@if(filteredRestaurant!=null)
+		@if(filteredRestaurant!=null && filteredRestaurant.Count>0)
 		{
 			foreach(var res in filteredRestaurant)
 			{

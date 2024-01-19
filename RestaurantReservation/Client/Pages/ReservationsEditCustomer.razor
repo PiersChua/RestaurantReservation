@@ -2,17 +2,37 @@
 @inject HttpClient _client
 @inject NavigationManager navigation
 @inject IJSRuntime js
-@if(reservation != null && address != null)
-{
-	<div>
-		<p>@reservation.Restaurant?.Name</p>
-		<p>@address.Street</p>
-		<p>@address.UnitNumber</p>
-		<p>@address.Building</p>
-		<p>@address.PostalCode</p>
-	</div>
-}
+
 <div class="container">
+	@if (reservation != null && address != null)
+	{
+		<div>
+			<div class="card mb-2 shadow-sm">
+				<div class="card-body d-flex">
+					<div>
+						<h1><b>@reservation.Restaurant?.Name</b></h1>
+						<img src="@reservation.Restaurant.ImagePath"/>
+					</div>
+					<div class="card mb-2 shadow-sm flex-grow-1 p-2 ps-4 m-4 grey">
+						<h3>Address</h3>
+						<p>Street: @address.Street</p>
+						<p>Unit: @address.UnitNumber</p>
+						<p>Building: @address.Building</p>
+						<p>Postal Code: @address.PostalCode</p>
+						@if (promo != null)
+						{
+							<p>Promotion: <b>@promo.Discount%</b> Discount</p>
+						}
+						else
+						{
+							<p>Promotion: None</p>
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+	<hr class="my-4" />
 	<EditForm Model="@reservation" OnValidSubmit="UpdateReservation">
 		<DataAnnotationsValidator />
 		<ValidationSummary />
@@ -45,6 +65,7 @@
 					<ValidationMessage For="@(() => reservation.Request)" />
 				</div>
 			</div>
+			<hr class="my-4" />
 			<button type="submit" class="btn btn-secondary btn-block mt-3">Update</button>
 		</div>
 	</EditForm>
@@ -57,6 +78,8 @@
 	private List<Reservation>? Reservations;
 	private OperatingHour? reshour;
 	private List<OperatingHour>? OperatingHours;
+	private List<Promotion>? Promos;
+	private Promotion? promo;
 	[Parameter]
 	public int id { get; set; }
 	protected override async Task OnParametersSetAsync()
@@ -64,11 +87,13 @@
 		Reservations = await _client.GetFromJsonAsync<List<Reservation>>($"{Endpoints.ReservationsEndpoint}");
 		Addresses = await _client.GetFromJsonAsync<List<Address>>($"{Endpoints.AddressesEndpoint}");
 		OperatingHours = await _client.GetFromJsonAsync<List<OperatingHour>>($"{Endpoints.OperatingHoursEndpoint}");
+		Promos = await _client.GetFromJsonAsync<List<Promotion>>($"{Endpoints.PromotionsEndpoint}");
 		if (Reservations != null && Addresses != null)
 		{
 			reservation = Reservations.First(q => q.Id == id);
 			address = Addresses.First(x => x.Id == reservation.Restaurant?.AddressId);
 			reshour = OperatingHours.First(x => x.RestaurantId == id && x.Day == DateTime.Now.DayOfWeek.ToString());
+			promo = Promos.FirstOrDefault(x => x.Id == reservation.PromotionId);
 
 		}
 	}

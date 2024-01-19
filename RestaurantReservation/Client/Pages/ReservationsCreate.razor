@@ -11,7 +11,7 @@
 	<div class="col-md-12 form-group">
 		<label>Promo Code</label>
 		<div class="input-group">
-			<input type="text" @bind="code" class="form-control" placeholder="Promo code">
+			<input type="text" @bind="code" @oninput="Capitalize" class="form-control" placeholder="Promo code">
 			<button @onclick="VerifyCode" class="btn btn-secondary">Redeem</button>
 		</div>
 	</div>
@@ -117,5 +117,9 @@
 	private void NavigateToHome()
 	{
 		Navigation.NavigateTo("");
+	}
+	private void Capitalize(ChangeEventArgs e)
+	{
+		code = ((string)e.Value)?.ToUpper();
 	}
 }
