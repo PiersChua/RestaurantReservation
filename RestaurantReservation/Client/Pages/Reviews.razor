@@ -81,13 +81,40 @@ else
 	<h1>Loading Reviews...</h1>
 }
 
+@if(!more)
+{
+	<div class="review-expand"><a @onclick="Toggle"> <span class="oi bi bi-chevron-bar-down"></span> View more</a></div>
+}
+else
+{
+	@if(remainingReviews != null)
+	{
+		foreach (var rev in remainingReviews)
+		{
+			<div class="review-body">
+				<img src="/images/anonymous.png" width="140" height="140">
+				<h1>
+					@for (int i = 0; i < rev.Rating; i++)
+					{
+						<span class="bi bi-star-fill"></span>
+					}
+				</h1>
+				<div>@rev.Description</div>
+				<small>Created on: @rev.DateTime.ToString("dd MMM yyyy")</small>
+			</div>
+		}
+	}
+	<div class="review-expand"><a @onclick="Toggle"><span class="oi bi bi-chevron-bar-up"></span> View less</a></div>
+}
 @code {
 	[Parameter]
 	public int id { get; set; }
 	private List<Review>? Rev;
 	private List<Review>? rev;
 	private List<Review>? top3;
+	private List<Review>? remainingReviews;
 	private Restaurant? res;
+	private bool more = false;
 	protected override async Task OnInitializedAsync()
 	{
 		Rev = await _client.GetFromJsonAsync<List<Review>>($"{Endpoints.ReviewsEndpoint}");
@@ -96,6 +123,7 @@ else
 		{
 			rev = Rev.Where(q => q.RestaurantId == id).ToList();
 			top3 = rev.Take(3).ToList();
+			remainingReviews = rev.Skip(3).ToList();
 		}
 	}
 
@@ -106,5 +134,10 @@ else
 	private void Edit()
 	{
 		Navigation.NavigateTo($"/reviews/edit/{id}");
+	}
+
+	private void Toggle()
+	{
+		more = !more;
 	}
 }

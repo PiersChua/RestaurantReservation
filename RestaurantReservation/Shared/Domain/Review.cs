@@ -14,7 +14,7 @@ namespace RestaurantReservation.Shared.Domain
         [Required]
         public int? Rating { get; set; }
 
-        public DateTime? DateTime { get; set; }
+        public DateTime DateTime { get; set; }
         [Required]
 		[StringLength(300, MinimumLength = 2, ErrorMessage = "Please write a longer description!")]
 		public string? Description { get; set; }

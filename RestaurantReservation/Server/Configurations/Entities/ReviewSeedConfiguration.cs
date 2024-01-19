@@ -260,6 +260,15 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Awful service and disappointing overall.",
 					CustomerId = null,
 					RestaurantId = 9,
+				},
+				new Review
+				{
+					Id = 28,
+					Rating = 5,
+					DateTime = DateTime.Now,
+					Description = "I recently had the pleasure of dining at Haidilao, and I must say it was an unforgettable experience that tantalized my taste buds and left me craving more. From the moment I stepped into the restaurant, the warm and inviting atmosphere set the stage for a culinary adventure like no other",
+					CustomerId = null,
+					RestaurantId = 1,
 				}
 
 				);

@@ -21,7 +21,6 @@
 				<ValidationMessage For="@(() => review.Description)" />
 			</div>
 		</div>
-		<SfRating Value="3"></SfRating>
 
 		<hr class="my-4" />
 		<button type="submit" class="btn btn-success btn-block">Add Review</button>
@@ -37,9 +36,10 @@
 	async Task CreateReview()
 	{
 		review.RestaurantId = id;
+		review.DateTime = DateTime.Now;
 		await _client.PostAsJsonAsync($"{Endpoints.ReviewsEndpoint}", review);
 		await js.InvokeVoidAsync("alert", "Review created");
-		_navManager.NavigateTo("");
+		_navManager.NavigateTo($"/review/{id}");
 	}
 
 }

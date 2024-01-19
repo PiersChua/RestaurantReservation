@@ -64,3 +64,41 @@
         color: #E4D00A;
     }
 
+.review-expand {
+    padding:10px;
+    text-align: center;
+    font-size: 30px;
+    background-color: #EDEDED;
+}
+
+    .review-expand a {
+        cursor: pointer;
+        color: #0096FF;
+    }
+        .review-expand a:hover {
+            color: #0066CC;
+        }
+.review-body {
+    padding:10px;
+    display: flex;
+    align-items: center;
+    background-color: #EDEDED;
+    border-style: outset;
+    position:relative;
+}
+    .review-body h1 {
+        padding-left:20px;
+        color: #E4D00A;
+        white-space:nowrap;
+    }
+    .review-body div{
+        margin-left:2rem;
+        font-size:14px;
+    }
+    .review-body small {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        transform:translate(-5%,0);
+    }
+

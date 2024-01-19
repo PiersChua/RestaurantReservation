@@ -13,11 +13,11 @@ main {
 }
 
 .top-row {
-    background-color: #f7f7f7;
     justify-content: space-between;
     height: 3.5rem;
     display: flex;
     align-items: center;
+    z-index:999;
 }
 
     .top-row ::deep a, .top-row ::deep .btn-link {
