@@ -7,7 +7,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        animation: animate2 6s linear infinite;
+        filter:brightness(80%);
     }
 
 .overlay-text {
@@ -21,16 +21,17 @@
 }
 
     .overlay-text h4{
-        font-size:30px;
+        font-size:40px;
         color:#FFFFFF;
-        font-weight:bold;
+        font-weight:500;
         font-family:sans-serif;
+        white-space:nowrap;
     }
 
     .overlay-text h2 {
         font-size: 80px;
         color: transparent;
-        font-weight: bold;
+        font-weight: 400;
         font-family:sans-serif;
         position: relative;
     }
@@ -41,10 +42,10 @@
             left: 0;
             width: 0;
             height: 100%;
-            color: #FFFD37;
-            border-right: 2px solid #FFFD37;
+            color: #FFFFFF;
+            border-right: 2px solid #FFFFFF;
             overflow: hidden;
-            animation: animate 6s linear infinite
+            animation: animate 6s steps(19) infinite
         }
         @keyframes animate {
             0%,10%,100% {
@@ -52,15 +53,6 @@
             }
             70%,90% {
                 width: 100%;
-            }
-        }
-        @keyframes animate2 {
-            10%{
-                filter: brightness(50%);
-            }
-
-            95% {
-                filter: brightness(100%);
             }
         }
 
