@@ -2,6 +2,8 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @inject NavigationManager Navigation
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 @attribute [Authorize]
 
 
@@ -64,6 +66,7 @@ else
 
 	protected override async Task OnInitializedAsync()
 	{
+		_interceptor.MonitorEvent();
 		Restaurants = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
 	}
 
@@ -79,6 +82,10 @@ else
 				await OnInitializedAsync();
 			}
 		}
+	}
+	public void Dispose()
+	{
+		_interceptor.DisposeEvent();
 	}
 	// private void Reserve(Restaurant res)
 	// {
