@@ -111,6 +111,11 @@
 			var promotion = Promotions.FirstOrDefault(q => q.Code == code);
 			if(promotion != null)
 			{
+				if(promotion.StartDate.Date > DateTime.Today || promotion.EndDate.Date < DateTime.Today)
+				{
+					js.InvokeVoidAsync("alert", $"Promotion code {code} is not valid!");
+					return;
+				}
 				reservation.PromotionId = promotion.Id;
 				js.InvokeVoidAsync("alert", $"Promotion code {code} applied! Discounted price is {promotion.Discount}%");
 			}
