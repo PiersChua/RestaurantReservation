@@ -39,7 +39,7 @@
 @code {
     [Parameter]
     public int id { get; set; }
-    PaymentMethod paymentMethod = new PaymentMethod();
+    PaymentMethod? paymentMethod = new PaymentMethod();
     protected async override Task OnParametersSetAsync()
     {
         paymentMethod = await _client.GetFromJsonAsync<PaymentMethod>($"{Endpoints.PaymentMethodsEndpoint}/{id}");

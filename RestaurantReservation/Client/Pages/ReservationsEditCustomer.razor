@@ -78,6 +78,7 @@
 	private List<Reservation>? Reservations;
 	private OperatingHour? reshour;
 	private List<OperatingHour>? OperatingHours;
+	private List<OperatingHour>? ResOperatingHours;
 	private List<Promotion>? Promos;
 	private Promotion? promo;
 	[Parameter]
@@ -88,20 +89,34 @@
 		Addresses = await _client.GetFromJsonAsync<List<Address>>($"{Endpoints.AddressesEndpoint}");
 		OperatingHours = await _client.GetFromJsonAsync<List<OperatingHour>>($"{Endpoints.OperatingHoursEndpoint}");
 		Promos = await _client.GetFromJsonAsync<List<Promotion>>($"{Endpoints.PromotionsEndpoint}");
-		if (Reservations != null && Addresses != null)
+		if (Reservations != null && Addresses != null && OperatingHours != null)
 		{
 			reservation = Reservations.First(q => q.Id == id);
 			address = Addresses.First(x => x.Id == reservation.Restaurant?.AddressId);
-			reshour = OperatingHours.First(x => x.RestaurantId == id && x.Day == DateTime.Now.DayOfWeek.ToString());
 			promo = Promos.FirstOrDefault(x => x.Id == reservation.PromotionId);
+			ResOperatingHours = OperatingHours.Where(x => x.RestaurantId == id).ToList();
+			reshour = OperatingHours.First(x => x.RestaurantId == reservation.RestaurantId && x.Day == reservation.Date.DayOfWeek.ToString());
 
 		}
 	}
 
 	async Task UpdateReservation()
 	{
+		if (!ValidateDate(reservation.Date))
+		{
+			return;
+		}
 		await _client.PutAsJsonAsync($"{Endpoints.ReservationsEndpoint}/{id}", reservation);
 		await js.InvokeVoidAsync("alert", "Reservation updated!");
 		navigation.NavigateTo("/reservations");
+	}
+	private bool ValidateDate(DateTime date)
+	{
+		if (!ResOperatingHours.Any(x => x.Day == date.DayOfWeek.ToString()))
+		{
+			js.InvokeVoidAsync("alert", $"Restaurant is closed on {date.DayOfWeek.ToString()}!");
+			return false;
+		}
+		return true;
 	}
 }

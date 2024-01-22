@@ -1,10 +1,10 @@
-﻿@page "/reviews/create/{id:int}"
+﻿@page "/reviews/edit/{id:int}"
 @inject HttpClient _client
 @inject IJSRuntime js
 @inject NavigationManager _navManager
 
 <div class="container">
-	<EditForm Model="@review" OnValidSubmit="CreateReview">
+	<EditForm Model="@review" OnValidSubmit="UpdateReview">
 		<DataAnnotationsValidator />
 		<ValidationSummary />
 		<div class="form-group">
@@ -23,23 +23,26 @@
 		</div>
 
 		<hr class="my-4" />
-		<button type="submit" class="btn btn-success btn-block">Add Review</button>
+		<button type="submit" class="btn btn-success btn-block">Update Review</button>
 
 	</EditForm>
 </div>
+
 @code {
 	[Parameter]
 	public int id { get; set; }
-	Review review = new Review();
 
+	Review? review = new Review();
 
-	async Task CreateReview()
+	protected override async Task OnParametersSetAsync()
 	{
-		review.RestaurantId = id;
-		review.DateTime = DateTime.Now;
-		await _client.PostAsJsonAsync($"{Endpoints.ReviewsEndpoint}", review);
-		await js.InvokeVoidAsync("alert", "Review created");
-		_navManager.NavigateTo($"/review/{id}");
+		review = await _client.GetFromJsonAsync<Review>($"{Endpoints.ReviewsEndpoint}/{id}");
 	}
 
+	async Task UpdateReview()
+	{
+		await _client.PutAsJsonAsync($"{Endpoints.ReviewsEndpoint}/{id}", review);
+		await js.InvokeVoidAsync("alert", "Review Updated");
+		_navManager.NavigateTo($"/reviews/{review.RestaurantId}");
+	}
 }

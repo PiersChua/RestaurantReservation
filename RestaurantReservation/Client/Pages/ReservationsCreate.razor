@@ -50,8 +50,8 @@
 			</div>
 			<hr class="my-4">
 			<div class="row">
-				<button type="button" @onclick="NavigateToHome" class="btn btn-outline-dark btn-block col-md-2"><span class="oi oi-arrow-left"></span> Back</button>
-				<button type="submit" class="btn btn-secondary btn-block col-md-8">Submit Reservation</button>
+				<button type="button" @onclick="Back" class="btn btn-warning col-md-2"><span class="oi oi-arrow-left"></span> Back</button>
+				<button type="submit" class="btn btn-warning col-md-8 flex-grow-1">Submit Reservation</button>
 			</div>
 		</div>
 		</EditForm>	
@@ -64,6 +64,7 @@
 	private List<Promotion>? Promotions;
 	private List<PaymentMethod>? PaymentMethods;
 	private List<OperatingHour>? OperatingHours;
+	private List<OperatingHour>? ResOperatingHours;
 	[Parameter]
 	public int id { get; set; }
 	Reservation reservation = new Reservation();
@@ -77,12 +78,17 @@
 		if (Restaurants != null && OperatingHours != null)
 		{
 			restaurant = Restaurants.First(q => q.Id == id);
-			reshour = OperatingHours.First(x => x.RestaurantId == id && x.Day == DateTime.Now.DayOfWeek.ToString());
+			ResOperatingHours= OperatingHours.Where(x => x.RestaurantId == id).ToList();
+			reshour = OperatingHours.First(x => x.RestaurantId == id && x.Day == reservation.Date.DayOfWeek.ToString());
 		}
 	}
 
 	async Task CreateReservation()
 	{
+		if(!ValidateDate(reservation.Date))
+		{
+			return;
+		}
 		if (PaymentMethods != null && PaymentMethods.Count > 0)
 		{
 			reservation.RestaurantId = id;
@@ -114,12 +120,21 @@
 			}
 		}
 	}
-	private void NavigateToHome()
+	private void Back()
 	{
-		Navigation.NavigateTo("");
+		Navigation.NavigateTo($"/restaurant/{id}");
 	}
 	private void Capitalize(ChangeEventArgs e)
 	{
 		code = ((string)e.Value)?.ToUpper();
+	}
+	private bool ValidateDate(DateTime date)
+	{
+		if(!ResOperatingHours.Any(x => x.Day == date.DayOfWeek.ToString()))
+		{
+			js.InvokeVoidAsync("alert", $"Restaurant is closed on {date.DayOfWeek.ToString()}!");
+			return false;
+		}
+		return true;
 	}
 }
