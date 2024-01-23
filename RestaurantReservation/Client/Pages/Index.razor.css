@@ -45,14 +45,23 @@
             color: #FFFFFF;
             border-right: 2px solid #FFFFFF;
             overflow: hidden;
-            animation: animate 6s steps(19) infinite
+            animation: animate 8s steps(19) infinite
         }
         @keyframes animate {
-            0%,10%,100% {
+            0%, 10%, 100%{
                 width: 0;
             }
-            70%,90% {
-                width: 100%;
+
+            30% {
+                width: 45%; /* Animate to 100% over 2 seconds */
+            }
+
+            50% {
+                width: 45%; /* Hold at 100% for 2 seconds */
+            }
+
+            70%, 80% {
+                width:100%
             }
         }
 

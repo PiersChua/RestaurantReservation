@@ -5,7 +5,7 @@
 @attribute [Authorize]
 @if (restaurant != null && menu != null && reshour != null)
 {
-	<div class="res-container">
+	<div class="res-container pb-5">
 		<div class="res-img">
 			<h2>@restaurant.Name<span class="oi bi bi-bookmark-plus bookmark"></span></h2>
 			<img src="@restaurant.ImagePath" />
@@ -20,16 +20,19 @@
 			}
 			else
 			{
-				<a data-bs-toggle="tooltip" title="Open Image" href="@menu.ImagePath" target="_blank">
-					<img src="/images/notFound.jpg" />
+				<a data-bs-toggle="tooltip" title="Open Image" href="/404" target="_blank">
+					<img src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg" />
 					<span class="bi bi-box-arrow-up-right"></span>
 				</a>
 			}
 		</div>
-		<div class="buttons">
-			<button class="btn btn-warning" @onclick="NavigateToReview"><span class="bi bi-star-fill"></span> View Ratings</button>
-			<button class="btn btn-warning" @onclick="Reserve"><span class="bi bi-calendar-plus"></span> Reserve Now</button>
-		</div>
+			<div class="shadow-sm">
+				<h1></h1>
+				<div class="card-body">
+					<button class="w-100 btn btn-warning btn-lg" @onclick="NavigateToReview"><span class="bi bi-star-fill"></span> View Ratings</button>
+					<button class=" w-100 btn btn-warning btn-lg" @onclick="Reserve"><span class="bi bi-calendar-plus"></span> Reserve Now</button>
+				</div>
+			</div>
 	</div>
 	<div class="accordion" id="accordionExample">
 		<div class="accordion-item">

@@ -58,6 +58,14 @@
                     <ValidationMessage For="@(() => promo.EndDate)" />
                 </div>
             </div>
+            <div class="col-md-12 form-group">
+                <label>Promotion Image</label>
+                <div>
+                    <InputText @bind-Value="promo.ImagePath" class="form-control" />
+                    <ValidationMessage For="@(() => promo.ImagePath)" />
+                </div>
+                <small>Image path should be an absolute link</small>
+            </div>
             <hr class="my-4">
             <button type="submit" class="w-100 btn btn-primary btn-lg">Create Promotion</button>
         </div>
@@ -67,11 +75,30 @@
 @if (Promotions != null && GetUpcomingPromotions()?.Count > 0)
 {
     <h1>Upcoming Promotions</h1>
+    <div class="btn-grp">
+        @if (!showCheckboxes)
+        {
+            <div class="btn-group">
+                <button class="btn btn-danger" @onclick="Delete">Confirm</button>
+                <button class="btn btn-secondary" @onclick="toggleCheckBox">Back</button>
+            </div>
+        }
+        else
+        {
+            <div>
+                <button class="btn btn-danger" @onclick="toggleCheckBox"><span class="oi bi bi-trash3-fill"></span> Remove Promotion</button>
+            </div>
+        }
+    </div>
     <div class="bd-example-snippet bd-code-snippet">
         <div class="bd-example m-0 border-0">
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        @if (!showCheckboxes)
+                        {
+                            <th scope="col"></th>
+                        }
                         <th scope="col">Name</th>
                         <th scope="col">Start Date</th>
                         <th scope="col">End Date</th>
@@ -83,6 +110,10 @@
                     @foreach (var promo in GetUpcomingPromotions())
                     {
                         <tr>
+                            @if (!showCheckboxes)
+                            {
+                                <td class="fs-5"><input type="checkbox" @onchange="e => ToggleSelection(promo.Id)" class="custom-control-input" id="customCheck1"></td>
+                            }
                             <td>@promo.Name</td>
                             <td>@promo.StartDate.Date.ToString("yyyy MMM dd")</td>
                             <td>@promo.EndDate.Date.ToString("yyyy MMM dd")</td>
@@ -130,6 +161,8 @@
 }
 @code {
     private List<Promotion>? Promotions;
+    private bool showCheckboxes = true;
+    List<int> selectedIds = new List<int>();
     Promotion promo = new Promotion();
     List<Double> discount = new List<Double>
     {
@@ -144,6 +177,7 @@
         90.0,
         100.0
     };
+
     protected override async Task OnInitializedAsync()
     {
         Promotions = await _client.GetFromJsonAsync<List<Promotion>>($"{Endpoints.PromotionsEndpoint}");
@@ -188,7 +222,40 @@
         navigation.NavigateTo("/");
     }
     private void Capitalize(ChangeEventArgs e)
-	{
+    {
         promo.Code = ((string)e.Value)?.ToUpper();
-	}
+    }
+    private void ToggleSelection(int id)
+    {
+        if (selectedIds.Contains(id))
+        {
+            selectedIds.Remove(id);
+        }
+        else
+        {
+            selectedIds.Add(id);
+        }
+    }
+    private void toggleCheckBox()
+    {
+        showCheckboxes = !showCheckboxes;
+    }
+    async Task Delete()
+    {
+        if (selectedIds.Count == 0)
+        {
+            await js.InvokeVoidAsync("alert", "Please select at least one promotion to delete!");
+            return;
+        }
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Are you sure you want to delete?");
+        if (confirm)
+        {
+            foreach (var promoId in selectedIds)
+			{
+				await _client.DeleteAsync($"{Endpoints.PromotionsEndpoint}/{promoId}");
+			}
+			await OnInitializedAsync();
+			toggleCheckBox();
+        }
+    }
 }

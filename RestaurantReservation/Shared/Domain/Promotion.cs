@@ -26,5 +26,6 @@ namespace RestaurantReservation.Shared.Domain
 		[Required]
 		[Range(1, 100, ErrorMessage = "Discount must be between 0 and 100")]
 		public double? Discount { get; set; }
+		public string? ImagePath { get; set; }
 	}
 }

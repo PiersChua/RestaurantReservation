@@ -1,4 +1,22 @@
 ﻿.container{
     max-width:960px;
     padding-top:30px;
+    background-color:#EDEDED;
+}
+.btn-grp {
+    position: relative;
+}
+
+.btn-grp div {
+    position: absolute;
+    right:1%;
+    transform: translate(0,-50%);
+}
+
+th {
+    font-size: 30px;
+}
+
+td {
+    font-size: 20px;
 }
