@@ -2,13 +2,38 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @inject NavigationManager _navManager
+@layout StaffLayout
 
-<RestaurantApplicationFormComponent ButtonText="Save" OnValidSubmit="EditRestaurantApplication" RestaurantApplication="RestaurantApplication" />
+<EditForm Model="@RestaurantApplication" OnValidSubmit="@EditRestaurantApplication">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label>Name: </label>
+        <InputText @bind-Value="RestaurantApplication.RestaurantName" />
+    </div>
+    <div class="form-group">
+        <label>Name: </label>
+        <InputText @bind-Value="RestaurantApplication.Cuisine" />
+    </div>
+    <div class="form-group">
+        <label>Email: </label>
+        <InputText @bind-Value="RestaurantApplication.Email" />
+    </div>
+    <div class="form-group">
+        <label>Phone Number</label>
+        <InputNumber @bind-Value="RestaurantApplication.PhoneNumber" />
+    </div>
+
+
+    <br />
+    <button type="submit" class="btn btn-success btn-block">Update</button>
+</EditForm>
 
 @code {
     [Parameter] public int id { get; set; }
 
     RestaurantApplication? RestaurantApplication = new RestaurantApplication();
+
 
     protected async override Task OnParametersSetAsync()
     {
@@ -18,6 +43,9 @@
     async Task EditRestaurantApplication()
     {
         await _client.PutAsJsonAsync($"{Endpoints.RestaurantApplicationsEndpoint}/{id}", RestaurantApplication);
+
+
         _navManager.NavigateTo("/restaurantapplication");
     }
+    
 }

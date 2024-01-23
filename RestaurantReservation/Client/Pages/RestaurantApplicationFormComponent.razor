@@ -1,4 +1,5 @@
-﻿
+﻿@inject HttpClient _client
+
 <EditForm Model="@RestaurantApplication"OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary/>
@@ -18,7 +19,10 @@
         <label >Phone Number</label>
         <InputNumber @bind-Value="RestaurantApplication.PhoneNumber" />
     </div>
-
+    <div class="form-group">
+        <label>Address</label>
+        <InputNumber @bind-Value="resAddress.Level" />
+    </div>
 
     <br/>
     <button type="submit" class="btn btn-success btn-block">@ButtonText</button>
@@ -28,4 +32,12 @@
     [Parameter] public RestaurantApplication? RestaurantApplication { get; set; }
     [Parameter] public string? ButtonText { get; set; }
     [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private List<Address>? Addresses;
+    private Address resAddress;
+    protected async override Task OnInitializedAsync()
+    {
+        Addresses = await _client.GetFromJsonAsync<List<Address>>($"{Endpoints.AddressesEndpoint}");
+        resAddress = Addresses.First(q => q.Id == RestaurantApplication.AddressId);
+    }
 }
