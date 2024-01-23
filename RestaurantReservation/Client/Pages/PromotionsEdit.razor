@@ -61,6 +61,14 @@
                     <ValidationMessage For="@(() => promo.EndDate)" />
                 </div>
             </div>
+            <div class="col-md-12 form-group">
+                <label>Promotion Image</label>
+                <div>
+                    <InputText @bind-Value="promo.ImagePath" class="form-control" />
+                    <ValidationMessage For="@(() => promo.ImagePath)" />
+                </div>
+                <small>Image path should be an absolute link</small>
+            </div>
             <hr class="my-4">
             <button type="submit" class="w-100 btn btn-primary btn-lg">Update Promotion</button>
         </div>

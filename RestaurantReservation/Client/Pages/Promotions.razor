@@ -14,13 +14,34 @@
 </div>
 @if (Promos != null)
 {
-	@foreach (var promo in Promos)
-	{
-		<div class="promo-item" @onclick="() => ViewPromo(promo.Id)">
-			<h2>@promo.Name</h2>
-			<h4>Enjoy @promo.Discount% Discount</h4>
+	<div class="album py-5 bg-body-tertiary">
+		<div class="container">
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+				@foreach (var promo in Promos)
+				{
+					<div class="col">
+						<div class="card shadow-sm">
+							@if (promo.ImagePath != null)
+							{
+								<img src="@promo.ImagePath">
+							}
+							else
+							{
+								<img src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg">
+							}
+							<div class="card-body">
+								<h2><b>@promo.Name</b></h2>
+								<p class="card-text">Enjoy @promo.Discount% Discount</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<button type="button" class="btn btn-sm btn-outline-warning w-100" @onclick="() => ViewPromo(promo.Id)">See Detail</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
 		</div>
-	}
+	</div>
 }		
 
 @code {
