@@ -25,7 +25,9 @@
         createdRestaurant.Category = RA.Category;
         createdRestaurant.Location = RA.Location;
         createdRestaurant.ImagePath = RA.ImagePath;
-        
+
+        createdRestaurant.AddressId = RA.AddressId;
+        createdRestaurant.SubscriptionId = RA.SubscriptionId;
 
         await _client.PostAsJsonAsync($"{Endpoints.RestaurantsEndpoint}", createdRestaurant);
         await js.InvokeVoidAsync("alert", "Restaurant Created!");
