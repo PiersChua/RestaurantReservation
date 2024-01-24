@@ -2,6 +2,7 @@
 @inject HttpClient _client
 @inject NavigationManager navigation
 @inject IJSRuntime _js
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <div class="container">
     @if(PayMethods != null && PayMethods.Count>0)
@@ -115,9 +116,11 @@
 @code{
     private List<PaymentMethod>? PayMethods;
     PaymentMethod paymentMethod = new PaymentMethod();
+    private string? Username;
 
     async Task CreatePaymentMethod()
     {
+        paymentMethod.Username = Username;
         await _client.PostAsJsonAsync($"{Endpoints.PaymentMethodsEndpoint}", paymentMethod);
         await _js.InvokeVoidAsync("alert", "Payment Method added!");
         await OnInitializedAsync();
@@ -142,6 +145,12 @@
     protected override async Task OnInitializedAsync()
     {
         PayMethods = await _client.GetFromJsonAsync<List<PaymentMethod>>($"{Endpoints.PaymentMethodsEndpoint}");
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        Username = authState.User.Identity.Name;
+        if (PayMethods != null)
+		{
+			PayMethods = PayMethods.Where(q => q.Username == Username).ToList();
+		}
     }
     private string MaskCardNumber(string CardNumber)
     {

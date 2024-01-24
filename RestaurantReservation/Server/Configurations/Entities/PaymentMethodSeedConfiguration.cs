@@ -16,8 +16,9 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     CardNumber = "1234123412341234",
                     DateOfExpiry = DateTime.Now.AddYears(1),
                     CVV = 123,
-                    CustomerId = null
-                }, 
+                    CustomerId = null,
+					Username = "admin@localhost.com"
+				}, 
                 new PaymentMethod
                 {
                     Name = "Liza",
@@ -25,8 +26,9 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     CardNumber = "1234123412341234",
                     DateOfExpiry = DateTime.Now.AddYears(1),
                     CVV = 321,
-                    CustomerId = null
-                }
+                    CustomerId = null,
+					Username = "admin@localhost.com"
+				}
 
                 );
             

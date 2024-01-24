@@ -8,6 +8,7 @@
 
 
 
+
 <div class="hero">
 	<img src="images/hero.jpg">
 	<div class="overlay-text">
@@ -87,14 +88,7 @@ else
 	{
 		_interceptor.DisposeEvent();
 	}
-	// private void Reserve(Restaurant res)
-	// {
-	// 	if (Restaurants!=null)
-	// 		{
-	// 			string serializedObject = System.Text.Json.JsonSerializer.Serialize(res);
-	// 			Navigation.NavigateTo($"/reservations?data={Uri.EscapeDataString(serializedObject)}");
-	// 		}
-	// }
+	[CascadingParameter] public Task<AuthenticationState> AuthenticationState { get; set; }
 
 } 
 

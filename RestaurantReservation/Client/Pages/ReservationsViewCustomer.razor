@@ -2,6 +2,7 @@
 @inject HttpClient _client
 @inject NavigationManager navigation
 @inject IJSRuntime js
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <h1>Upcoming Reservations</h1>
 <div class="btn-grp">
@@ -128,9 +129,17 @@ else
     private bool showCheckboxes = true;
     List<int> selectedIds = new List<int>();
     Reservation reservation = new Reservation();
+    private string? Username;
     protected override async Task OnInitializedAsync()
     {
         Reservations = await _client.GetFromJsonAsync<List<Reservation>>($"{Endpoints.ReservationsEndpoint}");
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        Username = authState.User.Identity.Name;
+        if(Reservations != null)
+        {
+            Reservations = Reservations.Where(r => r.Username == Username).ToList();
+        }
+       
     }
 
     private List<Reservation>? GetUpcomingReservations()

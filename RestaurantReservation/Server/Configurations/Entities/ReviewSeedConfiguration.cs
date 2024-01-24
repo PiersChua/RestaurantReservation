@@ -17,6 +17,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     Description = "Hai di lao staff very attentive",
                     CustomerId = null,
                     RestaurantId = 1,
+					Username = "admin@localhost.com"
                     //haidilao
                 },
                 new Review
@@ -27,8 +28,9 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     Description = "Good food",
                     CustomerId = null,
                     RestaurantId = 2,
-                    //Si chuan dou hua
-                },
+					Username = "admin@localhost.com"
+					//Si chuan dou hua
+				},
                 new Review
                 {
                     Id = 3,
@@ -36,9 +38,10 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     DateTime = DateTime.Now,
                     Description = "Nice soup",
                     CustomerId = null,
-                    RestaurantId = 3
-                    //beauty in the pot
-                },
+                    RestaurantId = 3,
+					Username = "admin@localhost.com"
+					//beauty in the pot
+				},
                 new Review
                 {
                     Id = 4,
@@ -46,9 +49,10 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     DateTime = DateTime.Now,
                     Description = "Cheap and affordable",
                     CustomerId = null,
-                    RestaurantId = 4
-                    //shabu sai
-                },
+                    RestaurantId = 4,
+					Username = "admin@localhost.com"
+					//shabu sai
+				},
                 new Review
                 {
                     Id = 5,
@@ -56,9 +60,10 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     DateTime = DateTime.Now,
                     Description = "Great restaurant",
                     CustomerId = null,
-                    RestaurantId = 5
-                    //city hotpot
-                },
+                    RestaurantId = 5,
+					Username = "admin@localhost.com"
+					//city hotpot
+				},
 				new Review
 				{
 					Id = 6,
@@ -67,6 +72,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Excellent service and outstanding food!",
 					CustomerId = null,
 					RestaurantId = 1,
+					Username = "admin@localhost.com"
 					//haidilao
 				},
 				new Review
@@ -77,6 +83,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Good experience with room for improvement",
 					CustomerId = null,
 					RestaurantId = 1,
+					Username = "admin@localhost.com"
 					//haidilao
 				},
 				new Review
@@ -87,6 +94,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Disappointing experience. Not recommended.",
 					CustomerId = null,
 					RestaurantId = 2,
+					Username = "admin@localhost.com"
 					//Si chuan dou hua
 				},
 				new Review
@@ -97,6 +105,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Amazing ambiance and top-notch cuisine!",
 					CustomerId = null,
 					RestaurantId = 2,
+					Username = "admin@localhost.com"
 					//Si chuan dou hua
 				},
 				new Review
@@ -107,6 +116,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Satisfactory visit but lacks a wow factor.",
 					CustomerId = null,
 					RestaurantId = 3,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -116,6 +126,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Unpleasant experience. Would not recommend",
 					CustomerId = null,
 					RestaurantId = 3,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -125,6 +136,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Satisfactory visit but lacks a wow factor.",
 					CustomerId = null,
 					RestaurantId = 4,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -134,6 +146,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Outstanding service and exquisite dishes!",
 					CustomerId = null,
 					RestaurantId = 4,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -143,6 +156,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Poor service and disappointing menu",
 					CustomerId = null,
 					RestaurantId = 5,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -152,6 +166,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Exceptional dining experience with impeccable service!",
 					CustomerId = null,
 					RestaurantId = 5,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -161,6 +176,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Superb service and a menu that delights the taste buds!",
 					CustomerId = null,
 					RestaurantId = 6,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -170,6 +186,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Adequate experience, but lacks a special touch",
 					CustomerId = null,
 					RestaurantId = 6,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -179,6 +196,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Awful service and disappointing overall.",
 					CustomerId = null,
 					RestaurantId = 6,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -188,6 +206,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Superb service and a menu that delights the taste buds!",
 					CustomerId = null,
 					RestaurantId = 7,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -197,6 +216,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Adequate experience, but lacks a special touch",
 					CustomerId = null,
 					RestaurantId = 7,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -206,6 +226,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Awful service and disappointing overall.",
 					CustomerId = null,
 					RestaurantId = 7,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -215,6 +236,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Superb service and a menu that delights the taste buds!",
 					CustomerId = null,
 					RestaurantId = 8,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -224,6 +246,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Adequate experience, but lacks a special touch",
 					CustomerId = null,
 					RestaurantId = 8,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -233,6 +256,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Awful service and disappointing overall.",
 					CustomerId = null,
 					RestaurantId = 8,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -242,6 +266,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Superb service and a menu that delights the taste buds!",
 					CustomerId = null,
 					RestaurantId = 9,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -251,6 +276,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Adequate experience, but lacks a special touch",
 					CustomerId = null,
 					RestaurantId = 9,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -260,6 +286,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "Awful service and disappointing overall.",
 					CustomerId = null,
 					RestaurantId = 9,
+					Username = "admin@localhost.com"
 				},
 				new Review
 				{
@@ -269,6 +296,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Description = "I recently had the pleasure of dining at Haidilao, and I must say it was an unforgettable experience that tantalized my taste buds and left me craving more. From the moment I stepped into the restaurant, the warm and inviting atmosphere set the stage for a culinary adventure like no other",
 					CustomerId = null,
 					RestaurantId = 1,
+					Username = "admin@localhost.com"
 				}
 
 				);

@@ -28,5 +28,6 @@ namespace RestaurantReservation.Shared.Domain
 
 		public int? CustomerId { get; set; }
 		public virtual Customer? Customer { get; set; }
+        public string? Username { get; set; }
 	}
 }

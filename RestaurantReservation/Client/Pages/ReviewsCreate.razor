@@ -2,6 +2,7 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @inject NavigationManager _navManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <div class="container">
 	<EditForm Model="@review" OnValidSubmit="CreateReview">
@@ -31,12 +32,19 @@
 	[Parameter]
 	public int id { get; set; }
 	Review review = new Review();
+	private string? Username;
 
+	protected override async Task OnInitializedAsync()
+	{
+		var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+		Username = authState.User.Identity.Name;
+	}
 
 	async Task CreateReview()
 	{
 		review.RestaurantId = id;
 		review.DateTime = DateTime.Now;
+		review.Username = Username;
 		await _client.PostAsJsonAsync($"{Endpoints.ReviewsEndpoint}", review);
 		await js.InvokeVoidAsync("alert", "Review created");
 		_navManager.NavigateTo($"/reviews/{id}");

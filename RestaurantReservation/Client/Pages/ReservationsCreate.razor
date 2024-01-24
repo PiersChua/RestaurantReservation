@@ -2,6 +2,7 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @attribute [Authorize]
 
 <div class="container">
@@ -65,6 +66,7 @@
 	private List<PaymentMethod>? PaymentMethods;
 	private List<OperatingHour>? OperatingHours;
 	private List<OperatingHour>? ResOperatingHours;
+	private string? Username;
 	[Parameter]
 	public int id { get; set; }
 	Reservation reservation = new Reservation();
@@ -75,6 +77,9 @@
 		Promotions = await _client.GetFromJsonAsync<List<Promotion>>($"{Endpoints.PromotionsEndpoint}");
 		PaymentMethods = await _client.GetFromJsonAsync<List<PaymentMethod>>($"{Endpoints.PaymentMethodsEndpoint}");
 		OperatingHours = await _client.GetFromJsonAsync<List<OperatingHour>>($"{Endpoints.OperatingHoursEndpoint}");
+		var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+		Username = authState.User.Identity.Name;
+		PaymentMethods = PaymentMethods.Where(q => q.Username == Username).ToList();
 		if (Restaurants != null && OperatingHours != null)
 		{
 			restaurant = Restaurants.First(q => q.Id == id);
@@ -93,6 +98,7 @@
 		{
 			reservation.RestaurantId = id;
 			reservation.ReservationStatusId = 1;
+			reservation.Username = Username;
 			await _client.PostAsJsonAsync($"{Endpoints.ReservationsEndpoint}", reservation);
 			await js.InvokeVoidAsync("alert", "Reservation Created! Please check reservation details under Reservation");
 			Navigation.NavigateTo("/reservations");

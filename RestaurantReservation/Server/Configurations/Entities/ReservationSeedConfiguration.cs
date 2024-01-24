@@ -19,7 +19,8 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     RestaurantId = 1,
                     //haidilao
                     PromotionId = null,
-                    ReservationStatusId = 1
+                    ReservationStatusId = 1,
+                    Username ="admin@localhost.com"
                 },
                 new Reservation
                 {
@@ -31,8 +32,9 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     RestaurantId = 2,
                     //Si chuan dou hua
                     PromotionId = null,
-                    ReservationStatusId = 2
-                },
+                    ReservationStatusId = 2,
+					Username = "admin@localhost.com"
+				},
                 new Reservation
                 {
                     Id = 3,
@@ -43,8 +45,9 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     RestaurantId = 3,
                     //beauty in the pot
                     PromotionId = null,
-                    ReservationStatusId = 1
-                },
+                    ReservationStatusId = 1,
+					Username = "admin@localhost.com"
+				},
                 new Reservation
                 {
                     Id = 4,
@@ -55,8 +58,9 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     RestaurantId = 5,
                     //city hotpot
                     PromotionId = null,
-                    ReservationStatusId = 1
-                }
+                    ReservationStatusId = 1,
+					Username = "admin@localhost.com"
+				}
                 );
         }
     }
