@@ -22,6 +22,27 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
+                },
+                new Subscription
+                {
+                    Id = 3,
+                    PlatformFee = 10.00,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                },
+                new Subscription
+                {
+                    Id = 4,
+                    PlatformFee = 10.00,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                },
+                new Subscription
+                {
+                    Id = 5,
+                    PlatformFee = 10.00,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
                 }
                 );
         }

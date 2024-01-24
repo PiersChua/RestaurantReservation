@@ -644,7 +644,197 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
                     RestaurantId = 10
                     //Seorae
+                },
+                new OperatingHour
+                {
+                    Id = 71,
+                    Day = "Monday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 72,
+                    Day = "Tuesday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 73,
+                    Day = "Wednesday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 74,
+                    Day = "Thursday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 75,
+                    Day = "Friday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 76,
+                    Day = "Saturday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 77,
+                    Day = "Sunday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 78,
+                    Day = "Monday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 79,
+                    Day = "Tuesday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 80,
+                    Day = "Wednesday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 81,
+                    Day = "Thursday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 82,
+                    Day = "Friday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 83,
+                    Day = "Saturday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 84,
+                    Day = "Sunday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 85,
+                    Day = "Monday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 86,
+                    Day = "Tuesday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 87,
+                    Day = "Wednesday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 88,
+                    Day = "Thursday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 89,
+                    Day = "Friday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 90,
+                    Day = "Saturday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
+                },
+                new OperatingHour
+                {
+                    Id = 91,
+                    Day = "Sunday",
+                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                    RestaurantId = null
+                    //for Restaurant App
                 }
+
                 );
         }
     }

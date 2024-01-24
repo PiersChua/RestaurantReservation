@@ -23,12 +23,12 @@ namespace RestaurantReservation.Server.Configurations.Entities
 
                     ImagePath = "images/noImage.jpg",
                     CustomerId = null,
-                    SubscriptionId = null,
+                    SubscriptionId = 3,
                     StaffId = null,
-                    AddressId = null,
+                    AddressId = 11,
                     SeatingCapacityId = null,
-                    OperatingHourId = null,
-                    MenuId = null,
+                    OperatingHourId = 71,
+                    MenuId = 11,
                     
                 },
                 new RestaurantApplication
@@ -45,12 +45,12 @@ namespace RestaurantReservation.Server.Configurations.Entities
 
                     ImagePath = "images/noImage.jpg",
                     CustomerId = null,
-                    SubscriptionId = null,
+                    SubscriptionId = 4,
                     StaffId = null,
-                    AddressId = null,
+                    AddressId = 12,
                     SeatingCapacityId = null,
-                    OperatingHourId = null,
-                    MenuId = null,
+                    OperatingHourId = 78,
+                    MenuId = 12,
                 },
                 new RestaurantApplication
                 {
@@ -66,12 +66,12 @@ namespace RestaurantReservation.Server.Configurations.Entities
 
                     ImagePath = "images/noImage.jpg",
                     CustomerId = null,
-                    SubscriptionId = null,
+                    SubscriptionId = 5,
                     StaffId = null,
-                    AddressId = null,
+                    AddressId = 13,
                     SeatingCapacityId = null,
-                    OperatingHourId = null,
-                    MenuId = null,
+                    OperatingHourId = 85,
+                    MenuId = 13,
                 }
                 );
 

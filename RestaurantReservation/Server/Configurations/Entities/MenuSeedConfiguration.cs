@@ -68,8 +68,26 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Id = 10,
 					ImagePath = "images/seoulgardenMenu.png",
 					RestaurantId = 10
+				},
+                new Menu
+                {
+                    Id = 11,
+                    ImagePath = "images/seoulgardenMenu.png",
+                    RestaurantId = null
+                },
+                new Menu
+                {
+                    Id = 12,
+                    ImagePath = "images/seoulgardenMenu.png",
+                    RestaurantId = null
+                },
+                new Menu
+				{
+					Id = 13,
+					ImagePath = "images/seoulgardenMenu.png",
+					RestaurantId = null
 				}
-				);
+                );
 
         }
     }

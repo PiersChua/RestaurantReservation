@@ -98,9 +98,38 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					Level = 4,
 					UnitNumber = "#04-01",
 					PostalCode = 529510
-				}
+				},
+                new Address
+                {
+                    Id = 11,
+                    Street = "4 Tampines Central 5",
+                    Building = "Tampines Mall",
+                    Level = 4,
+                    UnitNumber = "#04-01",
+                    PostalCode = 529510
+                },
+                new Address
+                {
+                    Id = 12,
+                    Street = "4 Tampines Central 5",
+                    Building = "Tampines Mall",
+                    Level = 4,
+                    UnitNumber = "#04-01",
+                    PostalCode = 529510
+                },
 
-				);
+                new Address
+                {
+                    Id = 13,
+                    Street = "4 Tampines Central 5",
+                    Building = "Tampines Mall",
+                    Level = 4,
+                    UnitNumber = "#04-01",
+                    PostalCode = 529510
+                }
+
+
+                );
 		}
 	}
 }
