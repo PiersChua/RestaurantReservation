@@ -1,8 +1,54 @@
-﻿@attribute [Authorize]
-@page "/favourites"
-
-<h3>Favourites</h3>
+﻿@page "/favourites"
+@inject HttpClient _client
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+@attribute [Authorize]
+@if(userFavourites != null && userFavourites.Count > 0)
+{
+	<div class="container">
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+			@foreach (var fav in userFavourites)
+			{
+				int favoriteCount = GetFavouriteCount(fav.Restaurant.Id);
+				<div class="col">
+					<div class="card shadow-sm" @onclick="()=>NavigateToFavourite(fav.Restaurant.Id)">
+						<img src="@fav.Restaurant.ImagePath">
+						<div class="card-body">
+						<h2>@fav.Restaurant.Name</h2>
+						<p><span class="oi bi bi-heart-fill"></span> @favoriteCount</p>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+}
+else
+{
+	<h1>No Favourites</h1>
+}
 
 @code {
-
+	private List<Favourite>? favourites;
+	private List<Favourite>? userFavourites;
+	private string? Username;
+	protected override async Task OnInitializedAsync()
+	{
+		favourites = await _client.GetFromJsonAsync<List<Favourite>>($"{Endpoints.FavouritesEndpoint}");
+		var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+		Username = authState.User.Identity.Name;
+		userFavourites = favourites.Where(r => r.Username == Username).ToList();
+	}
+	private void ViewRestaurant(int id)
+	{
+		Navigation.NavigateTo($"/restaurant/{id}");
+	}
+	private int GetFavouriteCount(int id)
+	{
+		return favourites.Where(r => r.RestaurantId == id).Count();
+	}
+	private void NavigateToFavourite(int id)
+	{
+		Navigation.NavigateTo($"/restaurant/{id}");
+	}
 }

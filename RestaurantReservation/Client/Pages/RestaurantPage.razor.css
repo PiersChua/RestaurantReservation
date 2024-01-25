@@ -7,8 +7,12 @@
     cursor:pointer;
 }
     .bookmark:hover {
-        color: #D9B73C;
+        color: #F8D568;
     }
+.bookmark-yellow {
+    cursor: pointer;
+    color: #F8D568;
+}
 .res-img {
     padding: 10px 0 10px 10px;
     margin-left: 50px;
