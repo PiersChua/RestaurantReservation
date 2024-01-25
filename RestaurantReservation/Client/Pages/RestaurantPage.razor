@@ -2,12 +2,13 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @attribute [Authorize]
 @if (restaurant != null && menu != null && reshour != null)
 {
 	<div class="res-container pb-5">
 		<div class="res-img">
-			<h2>@restaurant.Name<span class="oi bi bi-bookmark-plus bookmark"></span></h2>
+			<h2>@restaurant.Name <span data-bs-toggle="tooltip" title="@(IsFavourite ? "Remove from favourites" : "Add to favourites")" @onclick="ChangeFavourite" class="oi bi bi-bookmark-star-fill @(IsFavourite ? "bookmark-yellow" : "bookmark")"></span></h2>
 			<img src="@restaurant.ImagePath" />
 		</div>
 		<div class="menu-img">
@@ -89,7 +90,11 @@
 	private List<OperatingHour>? reshour;
 	private List<Restaurant>? Restaurants;
 	private List<Menu>? Menus;
+	private List<Favourite>? Favourites;
+	private Favourite favourite; // user's favourites in this restaurant
 	private string empty="NA";
+	private string? Username;
+	private bool IsFavourite { get; set; }
 
 
 	[Parameter]
@@ -99,6 +104,11 @@
 		Restaurants = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
 		Menus = await _client.GetFromJsonAsync<List<Menu>>($"{Endpoints.MenusEndpoint}");
 		OperatingHours= await _client.GetFromJsonAsync<List<OperatingHour>>($"{Endpoints.OperatingHoursEndpoint}");
+		Favourites = await _client.GetFromJsonAsync<List<Favourite>>($"{Endpoints.FavouritesEndpoint}");
+		var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+		Username = authState.User.Identity.Name;
+		favourite = Favourites.FirstOrDefault(q => q.RestaurantId == id && q.Username == Username);
+		IsFavourite = Favourites.Contains(favourite);
 		if (Restaurants != null && Menus != null && OperatingHours != null) 
 		{
 			restaurant = Restaurants.First(q => q.Id == id);
@@ -121,6 +131,23 @@
 	private void Reserve()
 	{
 		Navigation.NavigateTo($"/reservation/create/{id}");
+	}
+	async Task ChangeFavourite()
+	{
+		if (IsFavourite)
+		{
+			await _client.DeleteAsync($"{Endpoints.FavouritesEndpoint}/{favourite.Id}");
+			await js.InvokeVoidAsync("alert", $"{restaurant?.Name} removed from favourites");
+		}
+		else
+		{
+			Favourite fav = new Favourite();
+			fav.Username = Username;
+			fav.RestaurantId =  id;
+			await _client.PostAsJsonAsync($"{Endpoints.FavouritesEndpoint}", fav);
+			await js.InvokeVoidAsync("alert", $"{restaurant?.Name} added to Favourites");
+		}
+		await OnInitializedAsync();
 	}
 }
 	

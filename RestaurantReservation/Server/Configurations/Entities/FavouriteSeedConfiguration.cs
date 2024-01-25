@@ -12,34 +12,34 @@ namespace RestaurantReservation.Server.Configurations.Entities
                 new Favourite
                 {
                     Id = 1,
-                    Name = "Hai Di Lao",
                     RestaurantId = 1,
                     CustomerId = null,
+                    Username = "admin@localhost.com"
                 },
                 new Favourite
                 {
                     Id = 2,
-                    Name = "Hai Di Lao",
                     RestaurantId = 2,
                     //Si chuan dou hua
                     CustomerId = null,
-                },
+					Username = "admin@localhost.com"
+				},
                 new Favourite
                 {
                     Id = 3,
-                    Name = "Hai Di Lao",
                     RestaurantId = 3,
                     //beauty in the pot
                     CustomerId = null,
-                },
+					Username = "admin@localhost.com"
+				},
                 new Favourite
                 {
                     Id = 4,
-                    Name = "Hai Di Lao",
                     RestaurantId = 5,
                     //city hotpot
                     CustomerId = null,
-                }
+					Username = "admin@localhost.com"
+				}
                 );
 
         }
