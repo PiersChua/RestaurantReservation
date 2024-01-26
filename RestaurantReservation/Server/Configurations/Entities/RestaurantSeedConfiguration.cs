@@ -21,7 +21,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					ImagePath= "images/haidilao.jpg",
 					AddressId = 1,
 					RestaurantOwnerId = null,
-					SubscriptionId = null
+					SubscriptionId = 6
 
 				},
 				new Restaurant
@@ -36,7 +36,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					ImagePath = "images/sichuandouhua.jpg",
 					AddressId = 2,
 					RestaurantOwnerId = null,
-					SubscriptionId = null
+					SubscriptionId = 7
 				},
 				new Restaurant
 				{
@@ -50,7 +50,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					ImagePath = "images/beautyinthepot.jpg",
 					AddressId = 3,
 					RestaurantOwnerId = null,
-					SubscriptionId = null
+					SubscriptionId = 8
 				},
 				new Restaurant
 				{
@@ -64,7 +64,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					ImagePath = "images/shabusai.jpg",
 					AddressId = 4,
 					RestaurantOwnerId = null,
-					SubscriptionId = null
+					SubscriptionId = 9
 				},
 				new Restaurant
 				{
@@ -78,7 +78,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					ImagePath = "images/cityhotpot.jpg",
 					AddressId = 5,
 					RestaurantOwnerId = null,
-					SubscriptionId = null
+					SubscriptionId = 10
 				},
 				new Restaurant
 				{
@@ -92,7 +92,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					ImagePath = "images/ssikkek.jpg",
 					AddressId = 6,
 					RestaurantOwnerId = null,
-					SubscriptionId = null
+					SubscriptionId = 11
 				},
 				new Restaurant
 				{
@@ -106,7 +106,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					ImagePath = "images/captainkim.jpg",
 					AddressId = 7,
 					RestaurantOwnerId = null,
-					SubscriptionId = null
+					SubscriptionId = 12
 				},
 				new Restaurant
 				{
@@ -120,7 +120,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					ImagePath = "images/imkimkorean.jpg",
 					AddressId = 8,
 					RestaurantOwnerId = null,
-					SubscriptionId = null
+					SubscriptionId = 13
 				},
 				new Restaurant
 				{
@@ -134,7 +134,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					ImagePath = "images/seorae.jpg",
 					AddressId = 9,
 					RestaurantOwnerId = null,
-					SubscriptionId = null
+					SubscriptionId = 14
 				},
 				new Restaurant
 				{
@@ -148,7 +148,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					ImagePath = "images/seoulgarden.jpg",
 					AddressId = 10,
 					RestaurantOwnerId = null,
-					SubscriptionId = null
+					SubscriptionId = 15
 				}
 
 

@@ -1,0 +1,310 @@
+﻿@page "/restaurant/edit/{id:int}"
+@inject HttpClient _client
+@inject IJSRuntime js
+@inject NavigationManager _navManager
+@layout StaffLayout
+
+
+<div class="restaurant-form">
+
+    <EditForm Model="@editRestaurant" OnValidSubmit="ApproveApplication">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="row justify-content-center">
+            <h2 class="text-center">Create Restaurant / View Restaurant Application</h2>
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="mb-3 col-md-3 form-group">
+                <label class="white-color">Restaurant Name:</label>
+                <div>
+                    <InputText @bind-Value="@editRestaurant.Name" class="form-control" placeholder="Restaurant Name" />
+                    <ValidationMessage For="@(() => editRestaurant.Name)" />
+                </div>
+            </div>
+            <div class="mb-3 col-md-3 form-group">
+                <label class="white-color">Email: </label>
+                <div>
+                    <InputText @bind-Value="@editRestaurant.Email" class="form-control" placeholder="Email" />
+                    <ValidationMessage For="@(() => editRestaurant.Email)" />
+                </div>
+            </div>
+            <div class="mb-3 col-md-3 form-group">
+                <label class="white-color">Cuisine:</label>
+                <div>
+                    <InputText @bind-Value="@editRestaurant.Cuisine" class="form-control" placeholder="Cuisine eg.Chinese/Korea" />
+                    <ValidationMessage For="@(() => editRestaurant.Cuisine)" />
+                </div>
+            </div>
+            <div class="mb-3 col-md-3 form-group">
+                <label class="white-color">Category:</label>
+                <div>
+                    <InputText @bind-Value="@editRestaurant.Category" class="form-control" placeholder="Category eg.Hotpot/BBQ" />
+                    <ValidationMessage For="@(() => editRestaurant.Category)" />
+                </div>
+            </div>
+            <div class="mb-3 col-md-4 form-group">
+                <label class="white-color">Location:</label>
+                <div>
+                    <InputSelect @bind-Value="@editRestaurant.Location" class="form-control">
+                        <option value="">-- Select Location --</option>
+                        @foreach (var location in locationSelections)
+                        {
+                            <option>@location</option>
+                        }
+                    </InputSelect>
+                </div>
+            </div>
+
+            <div class="mb-3 col-md-4 form-group">
+                <label class="white-color">Phone Number: </label>
+                <div>
+                    <InputNumber @bind-Value="@editRestaurant.PhoneNumber" class="form-control" placeholder="Phone Number : XXXXXXXX" />
+                    <ValidationMessage For="@(() => editRestaurant.PhoneNumber)" />
+                </div>
+            </div>
+            <div class="mb-3 col-md-4 form-group">
+                <label class="white-color">Image Path:</label>
+                <div>
+                    <InputText @bind-Value="@editRestaurant.ImagePath" class="form-control" placeholder="Image Name eg.Image.jpg" />
+                    <ValidationMessage For="@(() => editRestaurant.ImagePath)" />
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <h2 class="text-center">Restaurant Address</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="mb-3 col-md-6 form-group">
+                <label class="white-color">Street Name:</label>
+                <div>
+                    <InputText @bind-Value="@newaddress.Street" class="form-control" placeholder="Street Name: eg. 2 Tampines Central 5" />
+                    <ValidationMessage For="@(() => newaddress.Street)" />
+                </div>
+            </div>
+            <div class="mb-3 col-md-6 form-group">
+                <label class="white-color">Building Name:</label>
+                <div>
+                    <InputText @bind-Value="@newaddress.Building" class="form-control" placeholder="Building: eg. Century Square" />
+                    <ValidationMessage For="@(() => newaddress.Building)" />
+                </div>
+            </div>
+            <div class="mb-3 col-md-6 form-group">
+                <label class="white-color">Level:</label>
+                <div>
+                    <InputNumber @bind-Value="@newaddress.Level" class="form-control" placeholder="Level: eg. 1" />
+                    <ValidationMessage For="@(() => newaddress.Level)" />
+                </div>
+            </div>
+            <div class="mb-3 col-md-6 form-group">
+                <label class="white-color">Unit Number:</label>
+                <div>
+                    <InputText @bind-Value="@newaddress.UnitNumber" class="form-control" placeholder="Unit Number: eg. #02-22" />
+                    <ValidationMessage For="@(() => newaddress.UnitNumber)" />
+                </div>
+            </div>
+            <div class="mb-3 col-md-6 form-group">
+                <label class="white-color">Postal Code:</label>
+                <div>
+                    <InputNumber @bind-Value="@newaddress.PostalCode" class="form-control" placeholder="Postal Code: eg. 529509" />
+                    <ValidationMessage For="@(() => newaddress.PostalCode)" />
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <h2 class="text-center">Menu</h2>
+        </div>
+        <div class="row justify-content-center">
+
+            <div class="mb-3 col-md-6 form-group">
+                <label class="white-color">Menu Image Path:</label>
+                <div>
+                    <InputText @bind-Value="@newMenu.ImagePath" class="form-control" placeholder="Image Name eg.Image.jpg" />
+                    <ValidationMessage For="@(() => newMenu.ImagePath)" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="mb-3 col-md-6 form-group">
+                <label class="white-color">Subscription Fees:</label>
+                <div>
+                    <InputSelect @bind-Value="@subscribe.PlatformFee" class="form-control">
+                        <option value="">-- Select Plan --</option>
+                        @foreach (var price in SubscribtionList)
+                        {
+                            <option>@price</option>
+                        }
+                    </InputSelect>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <h2 class="text-center">On days when the restaurant is closed, the opening and closing times should be identical.</h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="row mb-3">
+                <div class="col-md-6 form-group">
+                    <label class="white-color">Monday Opening Time:</label>
+                    <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@monday.OpeningTime" class="form-control" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="white-color">Monday Closing Time:</label>
+                    <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@monday.ClosingTime" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6 form-group">
+                    <label class="white-color">Tuesday Opening Time:</label>
+                    <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@tuesday.OpeningTime" class="form-control" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="white-color">Tuesday Closing Time:</label>
+                    <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@tuesday.ClosingTime" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6 form-group">
+                    <label class="white-color">Wednesday Opening Time:</label>
+                    <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@wednesday.OpeningTime" class="form-control" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="white-color">Wednesday Closing Time:</label>
+                    <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@wednesday.ClosingTime" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6 form-group">
+                    <label class="white-color">Thursday Opening Time:</label>
+                    <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@thursday.OpeningTime" class="form-control" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="white-color">Thursday Closing Time:</label>
+                    <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@thursday.ClosingTime" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6 form-group">
+                    <label class="white-color">Friday Opening Time:</label>
+                    <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@friday.OpeningTime" class="form-control" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="white-color">Friday Closing Time:</label>
+                    <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@friday.ClosingTime" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6 form-group">
+                    <label class="white-color">Saturday Opening Time:</label>
+                    <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@saturday.OpeningTime" class="form-control" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="white-color">Saturday Closing Time:</label>
+                    <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@saturday.ClosingTime" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6 form-group">
+                    <label class="white-color">Sunday Opening Time:</label>
+                    <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@sunday.OpeningTime" class="form-control" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="white-color">Sunday Closing Time:</label>
+                    <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@sunday.ClosingTime" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-auto py-2">
+                <button style="width:712.5px" type="submit" class="btn btn-primary btn-block">Edit Restaurants</button>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-auto py-2">
+                <a style="width:712.5px" class="btn btn-secondary btn-block" href="/restaurantapplication">Back</a>
+            </div>
+        </div>
+
+    </EditForm>
+
+
+</div>
+
+@code {
+    [Parameter] public int id { get; set; }
+
+    Restaurant editRestaurant = new Restaurant();
+
+    Address newaddress = new Address();
+    Menu newMenu = new Menu();
+    Subscription subscribe = new Subscription();
+    OperatingHour monday = new OperatingHour();
+    OperatingHour tuesday = new OperatingHour();
+    OperatingHour wednesday = new OperatingHour();
+    OperatingHour thursday = new OperatingHour();
+    OperatingHour friday = new OperatingHour();
+    OperatingHour saturday = new OperatingHour();
+    OperatingHour sunday = new OperatingHour();
+
+    private List<Address>? address;
+    private List<Menu>? menu;
+    private List<Subscription>? subscription;
+    private List<OperatingHour>? operatinghour;
+
+
+    List<int> SubscribtionList = new List<int> { 10, 15, 20 };
+    List<string> locationSelections = new List<string> { "North", "South", "East", "West", "NorthEast", "NorthWest", "SouthEast", "SouthWest", "Central" };
+
+    protected async override Task OnParametersSetAsync()
+    {
+        editRestaurant = await _client.GetFromJsonAsync<Restaurant>($"{Endpoints.RestaurantsEndpoint}/{id}");
+
+        address = await _client.GetFromJsonAsync<List<Address>>($"{Endpoints.AddressesEndpoint}");
+        menu = await _client.GetFromJsonAsync<List<Menu>>($"{Endpoints.MenusEndpoint}");
+        subscription = await _client.GetFromJsonAsync<List<Subscription>>($"{Endpoints.SubscriptionsEndpoint}");
+        operatinghour = await _client.GetFromJsonAsync<List<OperatingHour>>($"{Endpoints.OperatingHoursEndpoint}");
+
+        newaddress = address.First(q => q.Id == editRestaurant.AddressId);
+        newMenu = menu.First(q => q.RestaurantId == id);
+        subscribe = subscription.First(q => q.Id == editRestaurant.SubscriptionId);
+
+        monday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Monday");
+        tuesday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Tuesday");
+        wednesday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Wednesday");
+        thursday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Thursday");
+        friday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Friday");
+        saturday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Saturday");
+        sunday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Sunday");
+
+    }
+
+
+
+    private async Task ApproveApplication()
+    {
+        await js.InvokeVoidAsync("alert", "Restaurant Updated!");
+
+        await _client.PutAsJsonAsync($"{Endpoints.RestaurantsEndpoint}/{id}", editRestaurant);
+
+        await _client.PutAsJsonAsync($"{Endpoints.AddressesEndpoint}/{newaddress.Id}", newaddress);
+        await _client.PutAsJsonAsync($"{Endpoints.SubscriptionsEndpoint}/{subscribe.Id}", subscribe);
+        await _client.PutAsJsonAsync($"{Endpoints.MenusEndpoint}/{newMenu.Id}", newMenu);
+
+        await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{monday.Id}", monday);
+        await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{tuesday.Id}", tuesday);
+        await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{wednesday.Id}", wednesday);
+        await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{thursday.Id}", thursday);
+        await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{friday.Id}", friday);
+        await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{saturday.Id}", saturday);
+        await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{sunday.Id}", sunday);
+
+
+        _navManager.NavigateTo("/restaurantapplication");
+    }
+
+}
