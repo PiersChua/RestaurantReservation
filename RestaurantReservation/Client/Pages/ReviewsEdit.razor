@@ -8,12 +8,18 @@
 		<DataAnnotationsValidator />
 		<ValidationSummary />
 		<div class="form-group">
-			<label>Rating</label>
-			<div>
-				<InputNumber min="1" max="5" @bind-Value="review.Rating" class="form-control" />
+			<div class="rating">
+				@foreach (var rate in RatingDetails)
+				{
+					<div>
+						<span @onclick="() => SetRating(rate.Value)" class="bi bi-star-fill @(review.Rating >= rate.Value ? "yellow" : "")"></span>
+						<label>@rate.Description</label>
+					</div>
+				}
 				<ValidationMessage For="@(() => review.Rating)" />
 			</div>
 		</div>
+		<br />
 		<div class="form-group">
 			<label>Description</label>
 			<div>
@@ -23,7 +29,7 @@
 		</div>
 
 		<hr class="my-4" />
-		<button type="submit" class="btn btn-success btn-block">Update Review</button>
+		<button type="submit" class="btn btn-warning btn-block w-100">Update Review</button>
 
 	</EditForm>
 </div>
@@ -33,6 +39,14 @@
 	public int id { get; set; }
 
 	Review? review = new Review();
+	List<(int Value, string Description)> RatingDetails = new List<(int, string)>
+	{
+		(1, "Very Dissatisfied"),
+		(2, "Dissatisfied"),
+		(3, "Average"),
+		(4, "Satisfied"),
+		(5, "Very Satisfied")
+	};
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -44,5 +58,9 @@
 		await _client.PutAsJsonAsync($"{Endpoints.ReviewsEndpoint}/{id}", review);
 		await js.InvokeVoidAsync("alert", "Review Updated");
 		_navManager.NavigateTo($"/reviews/{review.RestaurantId}");
+	}
+	private void SetRating(int rating)
+	{
+		review.Rating = rating;
 	}
 }
