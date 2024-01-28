@@ -43,7 +43,79 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
+                },
+
+                new Subscription
+                {
+                    Id = 6,
+                    PlatformFee = 10.00,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                },
+                new Subscription
+                {
+                    Id = 7,
+                    PlatformFee = 10.00,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                },
+                new Subscription
+                {
+                    Id = 8,
+                    PlatformFee = 10.00,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                },
+                new Subscription
+                {
+                    Id = 9,
+                    PlatformFee = 10.00,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                },
+                new Subscription
+                {
+                    Id = 10,
+                    PlatformFee = 10.00,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                },
+                new Subscription
+                {
+                    Id = 11,
+                    PlatformFee = 10.00,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                },
+                new Subscription
+                {
+                    Id = 12,
+                    PlatformFee = 10.00,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                },
+                new Subscription
+                {
+                    Id = 13,
+                    PlatformFee = 10.00,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                },
+                new Subscription
+                {
+                    Id = 14,
+                    PlatformFee = 10.00,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                },
+                new Subscription
+                {
+                    Id = 15,
+                    PlatformFee = 10.00,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
                 }
+
                 );
         }
     }
