@@ -1,6 +1,6 @@
 ﻿@page "/reviews/edit/{id:int}"
 @inject HttpClient _client
-@inject IJSRuntime js
+@inject SweetAlertService Swal
 @inject NavigationManager _navManager
 
 <div class="container">
@@ -56,7 +56,12 @@
 	async Task UpdateReview()
 	{
 		await _client.PutAsJsonAsync($"{Endpoints.ReviewsEndpoint}/{id}", review);
-		await js.InvokeVoidAsync("alert", "Review Updated");
+		await Swal.FireAsync(new SweetAlertOptions
+			{
+				Title = "Updated",
+				Text = "Review updated",
+				Icon = "info",
+			});
 		_navManager.NavigateTo($"/reviews/{review.RestaurantId}");
 	}
 	private void SetRating(int rating)

@@ -1,7 +1,7 @@
 ﻿@page "/paymentmethods/edit/{id:int}"
 @inject HttpClient _client
-@inject IJSRuntime js
 @inject NavigationManager Navigation
+@inject SweetAlertService Swal
 <div class="container">
     <EditForm Model=@paymentMethod OnValidSubmit="EditPaymentMethod">
         <DataAnnotationsValidator />
@@ -47,7 +47,12 @@
     async Task EditPaymentMethod()
     {
         await _client.PutAsJsonAsync($"{Endpoints.PaymentMethodsEndpoint}/{id}", paymentMethod);
-        await js.InvokeVoidAsync("alert", "Payment Method Updated");
+        await Swal.FireAsync(new SweetAlertOptions
+				{
+					Title = "Updated",
+					Text = "Payment Method updated",
+					Icon = "info",
+				});
         Navigation.NavigateTo("/paymentmethods");
     }
 }

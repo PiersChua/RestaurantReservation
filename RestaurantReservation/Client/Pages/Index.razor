@@ -1,6 +1,5 @@
 ﻿@page "/"
 @inject HttpClient _client
-@inject IJSRuntime js
 @inject NavigationManager Navigation
 @inject HttpInterceptorService _interceptor
 @implements IDisposable
@@ -68,25 +67,10 @@ else
 		_interceptor.MonitorEvent();
 		Restaurants = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
 	}
-
-	async Task Delete(int restaurantId)
-	{
-		if (Restaurants != null)
-		{
-			var restaurant = Restaurants.First(q => q.Id == restaurantId);
-			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete? {restaurant.Name}?");
-			if (confirm)
-			{
-				await _client.DeleteAsync($"{Endpoints.RestaurantsEndpoint}/{restaurantId}");
-				await OnInitializedAsync();
-			}
-		}
-	}
 	public void Dispose()
 	{
 		_interceptor.DisposeEvent();
 	}
-	[CascadingParameter] public Task<AuthenticationState> AuthenticationState { get; set; }
 
 } 
 

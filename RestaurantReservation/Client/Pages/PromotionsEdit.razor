@@ -1,7 +1,7 @@
 ﻿@page "/promotions/edit/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager navigation
-@inject IJSRuntime js
+@inject SweetAlertService Swal
 
 
 
@@ -99,7 +99,12 @@
     async Task UpdatePromotion()
     {
         await _client.PutAsJsonAsync($"{Endpoints.PromotionsEndpoint}/{id}", promo);
-        await js.InvokeVoidAsync("alert", "Promotion updated!");
+        await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Updated",
+                Text = "Promotion updated",
+                Icon = "info",
+            });
         navigation.NavigateTo("/promotions");
 	}
     private void Capitalize(ChangeEventArgs e)

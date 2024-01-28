@@ -635,16 +635,16 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					RestaurantId = 10
 					//Seoul Garden
 				},
-
-                new OperatingHour
-                {
-                    Id = 70,
-                    Day = "Sunday",
-                    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
-                    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
-                    RestaurantId = 10
-                    //Seorae
-                },
+                //removed Sunday
+                //new OperatingHour
+                //{
+                //    Id = 70,
+                //    Day = "Sunday",
+                //    OpeningTime = new DateTime(2024, 1, 1, 9, 0, 0),
+                //    ClosingTime = new DateTime(2024, 1, 1, 23, 0, 0),
+                //    RestaurantId = 10
+                //    //Seorae
+                //},
                 new OperatingHour
                 {
                     Id = 71,

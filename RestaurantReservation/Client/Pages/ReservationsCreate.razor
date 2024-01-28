@@ -1,8 +1,8 @@
 ﻿@page "/reservation/create/{id:int}"
 @inject HttpClient _client
-@inject IJSRuntime js
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject SweetAlertService Swal
 @attribute [Authorize]
 
 <div class="container">
@@ -90,7 +90,8 @@
 
 	async Task CreateReservation()
 	{
-		if(!ValidateDate(reservation.Date))
+		var result = await ValidateDate(reservation.Date);
+		if(!result)
 		{
 			return;
 		}
@@ -100,17 +101,28 @@
 			reservation.ReservationStatusId = 1;
 			reservation.Username = Username;
 			await _client.PostAsJsonAsync($"{Endpoints.ReservationsEndpoint}", reservation);
-			await js.InvokeVoidAsync("alert", "Reservation Created! Please check reservation details under Reservation");
+			await Swal.FireAsync(new SweetAlertOptions
+				{
+					Title = "Success",
+					Text = "Reservation Created! Please check reservation details under Reservation",
+					Icon = "success",
+				});
+			await OnInitializedAsync();
 			Navigation.NavigateTo("/reservations");
 		}
 		else
 		{
-			await js.InvokeVoidAsync("alert", "Please add a payment method first before reserving");
+			await Swal.FireAsync(new SweetAlertOptions
+				{
+					Title = "Oops",
+					Text = "Please add a payment method first before reserving",
+					Icon = "warning",
+				});
 			Navigation.NavigateTo("/paymentmethods");
 		}
 	}
 
-	private void VerifyCode()
+	async Task VerifyCode()
 	{
 		if(Promotions != null)
 		{
@@ -119,15 +131,30 @@
 			{
 				if(promotion.StartDate.Date > DateTime.Today || promotion.EndDate.Date < DateTime.Today)
 				{
-					js.InvokeVoidAsync("alert", $"Promotion code {code} is not valid!");
+					await Swal.FireAsync(new SweetAlertOptions
+						{
+							Title = "Oops",
+							Text = "Promotion code is not valid",
+							Icon = "error",
+						});
 					return;
 				}
 				reservation.PromotionId = promotion.Id;
-				js.InvokeVoidAsync("alert", $"Promotion code {code} applied! Discounted price is {promotion.Discount}%");
+				await Swal.FireAsync(new SweetAlertOptions
+					{
+						Title = "Success",
+						Text = $"Promotion code applied! Discounted price is {promotion.Discount}%",
+						Icon = "success",
+					});
 			}
 			else
 			{
-				js.InvokeVoidAsync("alert", $"Promotion code {code} not found!");
+				await Swal.FireAsync(new SweetAlertOptions
+					{
+						Title = "Oops",
+						Text = "Promotion code not found",
+						Icon = "error",
+					});
 			}
 		}
 	}
@@ -139,11 +166,16 @@
 	{
 		code = ((string)e.Value)?.ToUpper();
 	}
-	private bool ValidateDate(DateTime date)
+	async Task <bool> ValidateDate(DateTime date)
 	{
 		if(!ResOperatingHours.Any(x => x.Day == date.DayOfWeek.ToString()))
 		{
-			js.InvokeVoidAsync("alert", $"Restaurant is closed on {date.DayOfWeek.ToString()}!");
+			await Swal.FireAsync(new SweetAlertOptions
+				{
+					Title = "Oops",
+					Text = $"Restaurant is closed on {date.DayOfWeek.ToString()}!",
+					Icon = "error",
+				});
 			return false;
 		}
 		return true;

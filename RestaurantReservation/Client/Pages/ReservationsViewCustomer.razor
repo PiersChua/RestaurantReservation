@@ -1,7 +1,7 @@
 ﻿@page "/reservations"
 @inject HttpClient _client
 @inject NavigationManager navigation
-@inject IJSRuntime js
+@inject SweetAlertService Swal
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 <h1>Upcoming Reservations</h1>
@@ -139,7 +139,7 @@ else
         {
             Reservations = Reservations.Where(r => r.Username == Username).ToList();
         }
-       
+
     }
 
     private List<Reservation>? GetUpcomingReservations()
@@ -176,23 +176,54 @@ else
     }
     async Task Cancel()
     {
-        if(selectedIds.Count == 0)
-		{
-			await js.InvokeVoidAsync("alert", "Please select at least one reservation to cancel!");
-			return;
-		}
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Are you sure you want to cancel?");
-        if (confirm)
+        if (selectedIds.Count == 0)
+        {
+            await Swal.FireAsync(new SweetAlertOptions
+                {
+                    Title = "Oops",
+                    Text = "Please select at least one reservation to cancel",
+                    Icon = "error",
+                });
+            return;
+        }
+        var result = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Are you sure?",
+                Text = "You won't be able to revert this!",
+                Icon = "warning",
+                ConfirmButtonColor = "#3085d6",
+                CancelButtonColor = "#d33",
+                ShowCancelButton = true,
+                ConfirmButtonText = "Yes, cancel it!",
+                CancelButtonText = "No, keep it"
+            });
+        if (!string.IsNullOrEmpty(result.Value))
         {
             foreach (var resId in selectedIds)
             {
                 reservation = await _client.GetFromJsonAsync<Reservation>($"{Endpoints.ReservationsEndpoint}/{resId}");
                 reservation.ReservationStatusId = 2;
-                await _client.PutAsJsonAsync($"{Endpoints.ReservationsEndpoint}/{resId}", reservation);  
+                await _client.PutAsJsonAsync($"{Endpoints.ReservationsEndpoint}/{resId}", reservation);
             }
-            await OnInitializedAsync();
+            await Swal.FireAsync(
+              "Success",
+              "Reservation cancelled",
+              "success"
+              );
             toggleCheckBox();
+            await OnInitializedAsync();
         }
+        else if (result.Dismiss == DismissReason.Cancel)
+        {
+            await Swal.FireAsync(
+              "Cancelled",
+              "Your request has been cancelled",
+              "error"
+              );
+            toggleCheckBox();
+            selectedIds.Clear();
+        }
+        
     }
     private void ToggleSelection(int id)
     {

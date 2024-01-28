@@ -1,8 +1,8 @@
 ﻿@page "/paymentmethods"
 @inject HttpClient _client
 @inject NavigationManager navigation
-@inject IJSRuntime _js
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject SweetAlertService Swal
 
 <div class="container">
     @if(PayMethods != null && PayMethods.Count>0)
@@ -108,7 +108,12 @@
     {
         paymentMethod.Username = Username;
         await _client.PostAsJsonAsync($"{Endpoints.PaymentMethodsEndpoint}", paymentMethod);
-        await _js.InvokeVoidAsync("alert", "Payment Method added!");
+        await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Success",
+                Text = "Payment Method created",
+                Icon = "success",
+            });
         await OnInitializedAsync();
         navigation.NavigateTo("/paymentmethods");
     }
@@ -119,11 +124,34 @@
         if (PayMethods != null)
         {
             var paymethod = PayMethods.First(q => q.Id == payMethodid);
-            var confirm = await _js.InvokeAsync<bool>("confirm", $"Do you want to delete {paymethod.Name}?");
-            if (confirm)
+            var result = await Swal.FireAsync(new SweetAlertOptions
+                {
+                    Title = "Are you sure?",
+                    Text = "You won't be able to revert this!",
+                    Icon = "warning",
+                    ConfirmButtonColor = "#3085d6",
+                    CancelButtonColor = "#d33",
+                    ShowCancelButton = true,
+                    ConfirmButtonText = "Yes, delete it!",
+                    CancelButtonText = "No, keep it"
+                });
+            if (!string.IsNullOrEmpty(result.Value))
             {
                 await _client.DeleteAsync($"{Endpoints.PaymentMethodsEndpoint}/{payMethodid}");
+                await Swal.FireAsync(
+                  "Success",
+                  "Your payment method has been deleted.",
+                  "success"
+                  );
                 await OnInitializedAsync();
+            }
+            else if (result.Dismiss == DismissReason.Cancel)
+            {
+                await Swal.FireAsync(
+                  "Cancelled",
+                  "Your request has been cancelled",
+                  "error"
+                  );
             }
         }
     }

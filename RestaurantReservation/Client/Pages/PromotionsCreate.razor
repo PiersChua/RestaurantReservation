@@ -1,7 +1,7 @@
 ﻿@page "/promotions/create"
 @inject HttpClient _client
 @inject NavigationManager navigation
-@inject IJSRuntime js
+@inject SweetAlertService Swal
 <div class="container">
     <div class="py-5 text-center">
         <img src="/images/promoIcon.png" width="300" height="200">
@@ -185,7 +185,12 @@
     async Task CreatePromotion()
     {
         await _client.PostAsJsonAsync<Promotion>($"{Endpoints.PromotionsEndpoint}", promo);
-        await js.InvokeVoidAsync("alert", "Promotion Created!");
+        await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Success",
+                Text = "Promotion created",
+                Icon = "success",
+            });
         await OnInitializedAsync();
     }
 
@@ -244,18 +249,48 @@
     {
         if (selectedIds.Count == 0)
         {
-            await js.InvokeVoidAsync("alert", "Please select at least one promotion to delete!");
+            await Swal.FireAsync(new SweetAlertOptions
+                {
+                    Title = "Oops",
+                    Text = "Please select at least one promotion to delete",
+                    Icon = "error",
+                });
             return;
         }
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Are you sure you want to delete?");
-        if (confirm)
+        var result = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Are you sure?",
+                Text = "You won't be able to revert this!",
+                Icon = "warning",
+                ConfirmButtonColor = "#3085d6",
+                CancelButtonColor = "#d33",
+                ShowCancelButton = true,
+                ConfirmButtonText = "Yes, delete it!",
+                CancelButtonText = "No, keep it"
+            });
+        if (!string.IsNullOrEmpty(result.Value))
         {
             foreach (var promoId in selectedIds)
-			{
-				await _client.DeleteAsync($"{Endpoints.PromotionsEndpoint}/{promoId}");
-			}
-			await OnInitializedAsync();
-			toggleCheckBox();
+            {
+                await _client.DeleteAsync($"{Endpoints.PromotionsEndpoint}/{promoId}");
+            }
+            await Swal.FireAsync(
+              "Success",
+              "Promotion deleted",
+              "success"
+              );
+            toggleCheckBox();
+            await OnInitializedAsync();
+        }
+        else if (result.Dismiss == DismissReason.Cancel)
+        {
+            await Swal.FireAsync(
+              "Cancelled",
+              "Your request has been cancelled",
+              "error"
+              );
+            toggleCheckBox();
+            selectedIds.Clear();
         }
     }
 }

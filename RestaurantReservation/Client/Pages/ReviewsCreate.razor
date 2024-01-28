@@ -1,6 +1,6 @@
 ﻿@page "/reviews/create/{id:int}"
 @inject HttpClient _client
-@inject IJSRuntime js
+@inject SweetAlertService Swal
 @inject NavigationManager _navManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
@@ -65,7 +65,12 @@
 		review.DateTime = DateTime.Now;
 		review.Username = Username;
 		await _client.PostAsJsonAsync($"{Endpoints.ReviewsEndpoint}", review);
-		await js.InvokeVoidAsync("alert", "Review created");
+		await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Success",
+                Text = "Review created",
+                Icon = "success",
+            });
 		_navManager.NavigateTo($"/reviews/{id}");
 	}
 	private void SetRating(int rating)

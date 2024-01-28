@@ -1,7 +1,7 @@
 ﻿@page "/reservations/edit/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager navigation
-@inject IJSRuntime js
+@inject SweetAlertService Swal
 
 <div class="container">
 	@if (reservation != null && address != null)
@@ -102,19 +102,30 @@
 
 	async Task UpdateReservation()
 	{
-		if (!ValidateDate(reservation.Date))
+		var result = await ValidateDate(reservation.Date);
+		if (!result)
 		{
 			return;
 		}
 		await _client.PutAsJsonAsync($"{Endpoints.ReservationsEndpoint}/{id}", reservation);
-		await js.InvokeVoidAsync("alert", "Reservation updated!");
+		await Swal.FireAsync(new SweetAlertOptions
+			{
+				Title = "Updated",
+				Text = "Reservation updated",
+				Icon = "info",
+			});
 		navigation.NavigateTo("/reservations");
 	}
-	private bool ValidateDate(DateTime date)
+	async Task<bool> ValidateDate(DateTime date)
 	{
 		if (!ResOperatingHours.Any(x => x.Day == date.DayOfWeek.ToString()))
 		{
-			js.InvokeVoidAsync("alert", $"Restaurant is closed on {date.DayOfWeek.ToString()}!");
+			await Swal.FireAsync(new SweetAlertOptions
+				{
+					Title = "Oops",
+					Text = $"Restaurant is closed on {date.DayOfWeek.ToString()}!",
+					Icon = "error",
+				});
 			return false;
 		}
 		return true;

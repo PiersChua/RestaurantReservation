@@ -1,6 +1,6 @@
 ﻿@page "/restaurant/{id:int}"
 @inject HttpClient _client
-@inject IJSRuntime js
+@inject SweetAlertService Swal
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @attribute [Authorize]
@@ -137,7 +137,17 @@
 		if (IsFavourite)
 		{
 			await _client.DeleteAsync($"{Endpoints.FavouritesEndpoint}/{favourite.Id}");
-			await js.InvokeVoidAsync("alert", $"{restaurant?.Name} removed from favourites");
+			await Swal.FireAsync(new SweetAlertOptions
+				{
+					Title = "Updated",
+					Text = $"{restaurant?.Name} removed from favourites",
+					Icon = "info",
+					Timer = 1500,
+					TimerProgressBar = true,
+					ShowCancelButton = false,
+					ShowConfirmButton = false,
+					
+				});
 		}
 		else
 		{
@@ -145,7 +155,16 @@
 			fav.Username = Username;
 			fav.RestaurantId =  id;
 			await _client.PostAsJsonAsync($"{Endpoints.FavouritesEndpoint}", fav);
-			await js.InvokeVoidAsync("alert", $"{restaurant?.Name} added to Favourites");
+			await Swal.FireAsync(new SweetAlertOptions
+				{
+					Title = "Updated",
+					Text = $"{restaurant?.Name} added to favourites",
+					Icon = "info",
+					Timer = 1500,
+					TimerProgressBar = true,
+					ShowCancelButton = false,
+					ShowConfirmButton = false,
+				});
 		}
 		await OnInitializedAsync();
 	}
