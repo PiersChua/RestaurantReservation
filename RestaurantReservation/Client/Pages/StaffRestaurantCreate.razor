@@ -1,54 +1,52 @@
-﻿@page "/restaurant/create/{id:int}"
+﻿@page "/restaurant/staffCreate"
 @inject HttpClient _client
-@inject IJSRuntime js
 @inject NavigationManager _navManager
 @layout StaffLayout
 
-
 <div class="restaurant-form">
 
-    <EditForm Model="@restaurantapplication" OnValidSubmit="ApproveApplication">
+    <EditForm Model="@newrestaurant" OnValidSubmit="CreateRestaurant">
         <DataAnnotationsValidator />
         <ValidationSummary />
 
         <div class="row justify-content-center">
-            <h2 class="text-center">Create Restaurant / View Restaurant Application</h2>
+            <h2 class="text-center">Manual Restaurant Creation!</h2>
         </div>
 
         <div class="row justify-content-center">
-
+            
             <div class="mb-3 col-md-3 form-group">
                 <label class="white-color">Restaurant Name:</label>
                 <div>
-                    <InputText @bind-Value="@restaurantapplication.RestaurantName" class="form-control" placeholder="Restaurant Name" />
-                    <ValidationMessage For="@(() => restaurantapplication.RestaurantName)" />
+                    <InputText @bind-Value="@newrestaurant.Name" class="form-control" placeholder="Restaurant Name" />
+                    <ValidationMessage For="@(() => newrestaurant.Name)" />
                 </div>
             </div>
             <div class="mb-3 col-md-3 form-group">
                 <label class="white-color">Email: </label>
                 <div>
-                    <InputText @bind-Value="@restaurantapplication.Email" class="form-control" placeholder="Email" />
-                    <ValidationMessage For="@(() => restaurantapplication.Email)" />
+                    <InputText @bind-Value="@newrestaurant.Email" class="form-control" placeholder="Email" />
+                    <ValidationMessage For="@(() => newrestaurant.Email)" />
                 </div>
             </div>
             <div class="mb-3 col-md-3 form-group">
                 <label class="white-color">Cuisine:</label>
                 <div>
-                    <InputText @bind-Value="@restaurantapplication.Cuisine" class="form-control" placeholder="Cuisine eg.Chinese/Korea" />
-                    <ValidationMessage For="@(() => restaurantapplication.Cuisine)" />
+                    <InputText @bind-Value="@newrestaurant.Cuisine" class="form-control" placeholder="Cuisine eg.Chinese/Korea" />
+                    <ValidationMessage For="@(() => newrestaurant.Cuisine)" />
                 </div>
             </div>
             <div class="mb-3 col-md-3 form-group">
                 <label class="white-color">Category:</label>
                 <div>
-                    <InputText @bind-Value="@restaurantapplication.Category" class="form-control" placeholder="Category eg.Hotpot/BBQ" />
-                    <ValidationMessage For="@(() => restaurantapplication.Category)" />
+                    <InputText @bind-Value="@newrestaurant.Category" class="form-control" placeholder="Category eg.Hotpot/BBQ" />
+                    <ValidationMessage For="@(() => newrestaurant.Category)" />
                 </div>
             </div>
             <div class="mb-3 col-md-4 form-group">
                 <label class="white-color">Location:</label>
                 <div>
-                    <InputSelect @bind-Value="@restaurantapplication.Location" class="form-control">
+                    <InputSelect @bind-Value="@newrestaurant.Location" class="form-control">
                         <option value="">-- Select Location --</option>
                         @foreach (var location in locationSelections)
                         {
@@ -61,25 +59,20 @@
             <div class="mb-3 col-md-4 form-group">
                 <label class="white-color">Phone Number: </label>
                 <div>
-                    <InputNumber @bind-Value="@restaurantapplication.PhoneNumber" class="form-control" placeholder="Phone Number : XXXXXXXX" />
-                    <ValidationMessage For="@(() => restaurantapplication.PhoneNumber)" />
+                    <InputNumber @bind-Value="@newrestaurant.PhoneNumber" class="form-control" placeholder="Phone Number : XXXXXXXX" />
+                    <ValidationMessage For="@(() => newrestaurant.PhoneNumber)" />
                 </div>
             </div>
             <div class="mb-3 col-md-4 form-group">
                 <label class="white-color">Image Path:</label>
                 <div>
-                    <InputText @bind-Value="@restaurantapplication.ImagePath" class="form-control" placeholder="Image Name eg.Image.jpg" />
-                    <ValidationMessage For="@(() => restaurantapplication.ImagePath)" />
-                </div>
-            </div>
-            <div class="mb-3 col-md-d form-group">
-                <label class="white-color">Description:</label>
-                <div>
-                    <InputText @bind-Value="@restaurantapplication.Description" class="form-control" placeholder="Describe your restaurant" />
-                    <ValidationMessage For="@(() => restaurantapplication.Description)" />
+                    <InputText @bind-Value="@newrestaurant.ImagePath" class="form-control" placeholder="Image Name eg.Image.jpg" />
+                    <ValidationMessage For="@(() => newrestaurant.ImagePath)" />
                 </div>
             </div>
         </div>
+
+
         <div class="row justify-content-center">
             <h2 class="text-center">Restaurant Address</h2>
         </div>
@@ -124,7 +117,7 @@
             <h2 class="text-center">Menu</h2>
         </div>
         <div class="row justify-content-center">
-
+            
             <div class="mb-3 col-md-6 form-group">
                 <label class="white-color">Menu Image Path:</label>
                 <div>
@@ -228,12 +221,12 @@
 
         <div class="row justify-content-center">
             <div class="col-md-auto py-2">
-                <button style="width:712.5px" type="submit" class="btn btn-primary btn-block">Approve Application</button>
+                <button style="width:712.5px" type="submit" class="btn btn-primary btn-block">Submit Application</button>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-auto py-2">
-                <a style="width:712.5px" class="btn btn-secondary btn-block" href="/restaurantapplication">Back</a>
+                <a style="width:712.5px" class="btn btn-secondary btn-block" href="/restaurantStaff">Back</a>
             </div>
         </div>
 
@@ -243,14 +236,14 @@
 </div>
 
 @code {
-    [Parameter] public int id { get; set; }
 
-    Restaurant createdRestaurant = new Restaurant();
-    RestaurantApplication restaurantapplication = new RestaurantApplication();
+    Restaurant newrestaurant = new Restaurant();
 
-    Address newaddress = new Address();
-    Menu newMenu = new Menu();
-    Subscription subscribe = new Subscription();
+    Address newaddress = new Address(); //created
+    Menu newMenu = new Menu(); //created
+
+    Subscription subscribe = new Subscription(); 
+
     OperatingHour monday = new OperatingHour();
     OperatingHour tuesday = new OperatingHour();
     OperatingHour wednesday = new OperatingHour();
@@ -263,63 +256,44 @@
     private List<Menu>? menu;
     private List<Subscription>? subscription;
     private List<OperatingHour>? operatinghour;
-    private List<Restaurant>? restaurant;
+    private List<Restaurant>? restaurantlist;
 
     private int createdRestaurantID;
 
     List<int> SubscribtionList = new List<int> { 10, 15, 20 };
     List<string> locationSelections = new List<string> { "North", "South", "East", "West", "NorthEast", "NorthWest", "SouthEast", "SouthWest", "Central" };
 
-    protected async override Task OnParametersSetAsync()
+    protected async override Task OnInitializedAsync()
     {
-        restaurantapplication = await _client.GetFromJsonAsync<RestaurantApplication>($"{Endpoints.RestaurantApplicationsEndpoint}/{id}");
+        restaurantlist = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
         address = await _client.GetFromJsonAsync<List<Address>>($"{Endpoints.AddressesEndpoint}");
         menu = await _client.GetFromJsonAsync<List<Menu>>($"{Endpoints.MenusEndpoint}");
         subscription = await _client.GetFromJsonAsync<List<Subscription>>($"{Endpoints.SubscriptionsEndpoint}");
         operatinghour = await _client.GetFromJsonAsync<List<OperatingHour>>($"{Endpoints.OperatingHoursEndpoint}");
-        restaurant = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
 
-        newaddress = address.First(q => q.Id == restaurantapplication.AddressId);
-        newMenu = menu.First(q => q.Id == restaurantapplication.MenuId);
-        subscribe = subscription.First(q => q.Id == restaurantapplication.SubscriptionId);
-
-        monday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId);
-        tuesday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 1);
-        wednesday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 2);
-        thursday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 3);
-        friday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 4);
-        saturday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 5);
-        sunday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 6);
-
-        createdRestaurantID = restaurant.LastOrDefault().Id + 1;
+        createdRestaurantID = restaurantlist.LastOrDefault().Id + 1;
     }
 
-
-
-    private async Task ApproveApplication()
+    private async Task CreateRestaurant()
     {
-        await js.InvokeVoidAsync("alert", "Restaurant Created!");
 
-        createdRestaurant.Name = restaurantapplication.RestaurantName;
-        createdRestaurant.Cuisine = restaurantapplication.Cuisine;
-        createdRestaurant.PhoneNumber = restaurantapplication.PhoneNumber;
-        createdRestaurant.Email = restaurantapplication.Email;
-        createdRestaurant.Category = restaurantapplication.Category;
-        createdRestaurant.Location = restaurantapplication.Location;
-        createdRestaurant.ImagePath = restaurantapplication.ImagePath;
-        createdRestaurant.Status = "Active";
+        await _client.PostAsJsonAsync($"{Endpoints.AddressesEndpoint}", newaddress);
 
-        createdRestaurant.AddressId = restaurantapplication.AddressId;
-        createdRestaurant.SubscriptionId = restaurantapplication.SubscriptionId;
-        createdRestaurant.Status = "Active";
+        await _client.PostAsJsonAsync($"{Endpoints.SubscriptionsEndpoint}", subscribe);
 
-        await _client.PostAsJsonAsync($"{Endpoints.RestaurantsEndpoint}", createdRestaurant);
+        newrestaurant.AddressId = address?.LastOrDefault().Id + 1;
+        newrestaurant.SubscriptionId = subscription?.LastOrDefault().Id + 1;
+        newrestaurant.Status = "Active";
 
-        restaurantapplication.Status = "Approved";
-        await _client.PutAsJsonAsync($"{Endpoints.RestaurantApplicationsEndpoint}/{id}", restaurantapplication);
+        await _client.PostAsJsonAsync($"{Endpoints.RestaurantsEndpoint}", newrestaurant);
 
-        newMenu.RestaurantId = createdRestaurantID;
-        await _client.PutAsJsonAsync($"{Endpoints.MenusEndpoint}/{restaurantapplication.MenuId}", newMenu);
+        monday.Day = "Monday";
+        tuesday.Day = "Tuesday";
+        wednesday.Day = "Wednesday";
+        thursday.Day = "Thursday";
+        friday.Day = "Friday";
+        saturday.Day = "Saturday";
+        sunday.Day = "Sunday";
 
         monday.RestaurantId = createdRestaurantID;
         tuesday.RestaurantId = createdRestaurantID;
@@ -329,16 +303,21 @@
         saturday.RestaurantId = createdRestaurantID;
         sunday.RestaurantId = createdRestaurantID;
 
-        await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{restaurantapplication.OperatingHourId}", monday);
-        await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{restaurantapplication.OperatingHourId + 1}", tuesday);
-        await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{restaurantapplication.OperatingHourId + 2}", wednesday);
-        await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{restaurantapplication.OperatingHourId + 3}", thursday);
-        await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{restaurantapplication.OperatingHourId + 4}", friday);
-        await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{restaurantapplication.OperatingHourId + 5}", saturday);
-        await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{restaurantapplication.OperatingHourId + 6}", sunday);
+        newMenu.RestaurantId = createdRestaurantID;
+
+        await _client.PostAsJsonAsync($"{Endpoints.MenusEndpoint}", newMenu);
+        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", monday);
+        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", tuesday);
+        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", wednesday);
+        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", thursday);
+        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", friday);
+        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", saturday);
+        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", sunday);
 
 
-        _navManager.NavigateTo("/restaurantStaff");
+
+        _navManager.NavigateTo("/restaurantapplication");
     }
-
 }
+
+

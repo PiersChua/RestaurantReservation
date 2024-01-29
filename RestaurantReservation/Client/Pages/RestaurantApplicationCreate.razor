@@ -305,7 +305,7 @@
         restaurantapplication.Status = "Active";
         await _client.PostAsJsonAsync($"{Endpoints.RestaurantApplicationsEndpoint}", restaurantapplication);
 
-        _navManager.NavigateTo("/restaurantapplication");
+        _navManager.NavigateTo("/");
     }
 
 

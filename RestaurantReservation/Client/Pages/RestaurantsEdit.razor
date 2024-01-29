@@ -226,7 +226,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-auto py-2">
-                <a style="width:712.5px" class="btn btn-secondary btn-block" href="/restaurantapplication">Back</a>
+                <a style="width:712.5px" class="btn btn-secondary btn-block" href="/restaurantStaff">Back</a>
             </div>
         </div>
 
@@ -304,7 +304,7 @@
         await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{sunday.Id}", sunday);
 
 
-        _navManager.NavigateTo("/restaurantapplication");
+        _navManager.NavigateTo("/restaurantStaff");
     }
 
 }

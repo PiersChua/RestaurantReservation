@@ -19,6 +19,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					PhoneNumber= 67804201,
 					Location= "East",
 					ImagePath= "images/haidilao.jpg",
+					Status = "Active",
 					AddressId = 1,
 					RestaurantOwnerId = null,
 					SubscriptionId = 6
@@ -34,7 +35,8 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					PhoneNumber = 67804201,
 					Location= "Central",
 					ImagePath = "images/sichuandouhua.jpg",
-					AddressId = 2,
+                    Status = "Active",
+                    AddressId = 2,
 					RestaurantOwnerId = null,
 					SubscriptionId = 7
 				},
@@ -48,7 +50,8 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					PhoneNumber = 67804201,
 					Location="South",
 					ImagePath = "images/beautyinthepot.jpg",
-					AddressId = 3,
+                    Status = "Active",
+                    AddressId = 3,
 					RestaurantOwnerId = null,
 					SubscriptionId = 8
 				},
@@ -62,7 +65,8 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					PhoneNumber = 67804201,
 					Location="East",
 					ImagePath = "images/shabusai.jpg",
-					AddressId = 4,
+                    Status = "Active",
+                    AddressId = 4,
 					RestaurantOwnerId = null,
 					SubscriptionId = 9
 				},
@@ -76,7 +80,8 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					PhoneNumber = 67804201,
 					Location="SouthWest",
 					ImagePath = "images/cityhotpot.jpg",
-					AddressId = 5,
+                    Status = "Active",
+                    AddressId = 5,
 					RestaurantOwnerId = null,
 					SubscriptionId = 10
 				},
@@ -90,7 +95,8 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					PhoneNumber = 67804201,
 					Location = "Central",
 					ImagePath = "images/ssikkek.jpg",
-					AddressId = 6,
+                    Status = "Active",
+                    AddressId = 6,
 					RestaurantOwnerId = null,
 					SubscriptionId = 11
 				},
@@ -104,7 +110,8 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					PhoneNumber = 67804201,
 					Location = "East",
 					ImagePath = "images/captainkim.jpg",
-					AddressId = 7,
+                    Status = "Active",
+                    AddressId = 7,
 					RestaurantOwnerId = null,
 					SubscriptionId = 12
 				},
@@ -118,7 +125,8 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					PhoneNumber = 67804201,
 					Location = "North",
 					ImagePath = "images/imkimkorean.jpg",
-					AddressId = 8,
+                    Status = "Active",
+                    AddressId = 8,
 					RestaurantOwnerId = null,
 					SubscriptionId = 13
 				},
@@ -132,7 +140,8 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					PhoneNumber = 67804201,
 					Location = "Central",
 					ImagePath = "images/seorae.jpg",
-					AddressId = 9,
+                    Status = "Active",
+                    AddressId = 9,
 					RestaurantOwnerId = null,
 					SubscriptionId = 14
 				},
@@ -146,7 +155,8 @@ namespace RestaurantReservation.Server.Configurations.Entities
 					PhoneNumber = 67804201,
 					Location = "East",
 					ImagePath = "images/seoulgarden.jpg",
-					AddressId = 10,
+                    Status = "Active",
+                    AddressId = 10,
 					RestaurantOwnerId = null,
 					SubscriptionId = 15
 				}
