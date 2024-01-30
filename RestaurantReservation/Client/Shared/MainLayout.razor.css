@@ -166,11 +166,25 @@ main {
       80% { transform: translateX(5px) rotate(-5deg); }
       100% { transform: translateX(0); }
     }
+.bell {
+    position: relative;
+    display: inline-block;
+}
 .bell:hover {
     animation: shake 0.5s ease-in-out;
 }
 .grey-color{
     color:#575757;
+}
+.badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red; /* Adjust as needed */
+    color: white; /* Adjust as needed */
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 12px;
 }
 
 
