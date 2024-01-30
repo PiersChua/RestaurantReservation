@@ -1,7 +1,9 @@
 ﻿.promo-page {
-    display: flex;
-    min-height: 300px;
     background: linear-gradient(to right, #87CEFA, #FFECB3);
+    min-height:300px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
 
@@ -13,26 +15,32 @@
         justify-content: center;
     }
 
-    .promo-head h1 {
-        font-weight: 900;
-        font-size: 70px;
-    }
+        .promo-head h1 {
+            line-height:5rem;
+            font-weight: 900;
+            font-size: 6rem;
+        }
 
     .promo-head h2 {
         font-size: 50px;
     }
+    .promo-head h4{
+        font-size:5rem;
+
+    }
 
     .promo-desc {
-        flex: 1;
-        padding-top: 80px;
-        padding-right:20px;
+        padding: 3rem 6rem 3rem 6rem;
         text-align:left;
         font-family: sans-serif;
-        position: relative;
+        font-size:20px;
     }
 
-    .promo-desc div {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-    }
+        .promo-desc div {
+            font-family: sans-serif;
+            text-align: right;
+        }
+        .promo-desc div small{
+            padding:20px;
+            border:1px solid #000000;
+        }

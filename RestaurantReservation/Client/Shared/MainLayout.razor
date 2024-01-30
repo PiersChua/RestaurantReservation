@@ -1,7 +1,7 @@
 ﻿@inject NavigationManager Navigation
 @inherits LayoutComponentBase
 @inject HttpClient _client
-@inject IJSRuntime js
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <div class="page">
 
@@ -20,6 +20,7 @@
                     <div class="bell">
                         <a class="adjust-icon" href="#">
                             <span class="grey-color oi bi bi-bell-fill" aria-hidden="true"></span>
+                            <span class="badge">@upcomingReservations</span>
                         </a>
                     </div>
                     <div>
@@ -98,6 +99,7 @@
 
 @code{
     private bool collapseNavMenu = true;
+    private int upcomingReservations;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
@@ -116,5 +118,18 @@
         // Use NavigationManager to navigate to the target page with the parameter
         Navigation.NavigateTo($"/restaurants/{Uri.EscapeDataString(searchTerm)}");
     }
+    async Task<int> GetUpcomingReservationsCountAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var username = authState.User.Identity.Name;
+        var reservations = await _client.GetFromJsonAsync<List<Reservation>>(Endpoints.ReservationsEndpoint);
+        //get upcoming reservations that are confirmed
+        return reservations
+            .Count(q => q.Username == username && q.Date.Date >= DateTime.Today && q.ReservationStatusId == 1);
+    }
+    protected override async Task OnInitializedAsync()
+	{
+        upcomingReservations = await GetUpcomingReservationsCountAsync();
+	}
 
 }

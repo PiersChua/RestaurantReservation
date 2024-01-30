@@ -12,7 +12,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                 new Promotion
                 {
                     Id = 1,
-                    Name = "NewYear",//promo code name
+                    Name = "New Year",//promo code name
                     Code="NY2024",//promo code
                     ImagePath="https://cdn.tatlerasia.com/tatlerasia/i/2022/12/28171650-andrew-jk-tan_cover_1500x1050.jpeg",
 					Description = "Celebrate the New Year with fantastic deals! Enjoy exclusive discounts on all reservations. Start 2024 in style with limited-time offers and extra savings just for you. Renew, refresh, and rejoice! Reserve now and make this year unforgettable. Cheers to a fantastic 2024!",
@@ -23,7 +23,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                 new Promotion
                 {
                     Id = 2,
-                    Name = "ChineseNewYear",
+                    Name = "Chinese New Year",
                     Code = "CNY2024",
                     ImagePath= "https://img.freepik.com/premium-vector/chinese-new-year-2024-with-cartoon-cute-dragon-zodiac-riding-oriental-cloud-year-dragon_438266-910.jpg",
 					Description = "Celebrate the Lunar New Year at Bookbite! Reserve your table now for an exquisite culinary journey featuring luck-filled banquets and exclusive dining packages. Indulge in authentic flavors that capture the essence of the season. Make your celebrations memorable with us. Gong Xi Fa Cai!",
