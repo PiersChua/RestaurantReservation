@@ -7,6 +7,85 @@
     <EditForm Model="@restaurantapplication" OnValidSubmit="CreateRestaurantApplication">
         <DataAnnotationsValidator />
         <ValidationSummary />
+        <div class="row justify-content-center">
+            <h2 class="text-center">Pick a subscription!</h2>
+        </div>
+
+        <InputRadioGroup @bind-Value="@subscribe.PlatformFee" class="form-control">
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Normal</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">$10<small class="text-body-secondary fw-light">/mo</small></h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Email support</li>
+                                <li>Help center access</li>
+                                <li>-</li>
+                                <li>-</li>
+                            </ul>
+                            <InputRadio Value="10" />
+                            <label class="text-black" for="normalPlan">Choose Plan</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Pro</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">$15<small class="text-body-secondary fw-light">/mo</small></h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Customised support</li>
+                                <li>Priority email support</li>
+                                <li>Help center access</li>
+                                <li>-</li>
+                            </ul>
+                            <InputRadio Value="15" />
+                            <label class="text-black" for="proPlan">Choose Plan</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3 ">
+                            <h4 class="my-0 fw-normal">Enterprise</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">$20<small class="text-body-secondary fw-light">/mo</small></h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Dashboard</li>
+                                <li>Speedy reply</li>
+                                <li>Phone and email support</li>
+                                <li>Help center access</li>
+                            </ul>
+                            <InputRadio Value="20" />
+                            <label class="text-black" for="enterprisePlan">Choose Plan</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </InputRadioGroup>
+
+
+
+        <div class="row justify-content-center">
+            <div class="mb-3 col-md-6 form-group">
+                <label class="white-color">Subscription Fees:</label>
+                <div>
+                    <InputSelect @bind-Value="@subscribe.PlatformFee" class="form-control">
+                        <option value="">-- Select Plan --</option>
+                        @foreach (var price in SubscribtionList)
+                        {
+                            <option>@price</option>
+                        }
+                    </InputSelect>
+                </div>
+            </div>
+        </div>
 
         <div class="row justify-content-center">
             <h2 class="text-center">Tell us more about your restaurant!</h2>
@@ -131,20 +210,7 @@
             </div>
         </div>
 
-        <div class="row justify-content-center">
-            <div class="mb-3 col-md-6 form-group">
-                <label class="white-color">Subscription Fees:</label>
-                <div>
-                    <InputSelect @bind-Value="@subscribe.PlatformFee" class="form-control">
-                        <option value="">-- Select Plan --</option>
-                        @foreach (var price in SubscribtionList)
-                        {
-                            <option>@price</option>
-                        }
-                    </InputSelect>
-                </div>
-            </div>
-        </div>
+
 
         <div class="row justify-content-center">
             <h2 class="text-center">On days when the restaurant is closed, the opening and closing times should be identical.</h2>
