@@ -96,6 +96,12 @@
 
     </main>
 </div>
+<BlazoredToasts Position="Blazored.Toast.Configuration.ToastPosition.TopRight"
+    Timeout="10"
+    ShowProgressBar="true"
+    SuccessIcon="bi bi-check-square-fill">
+
+</BlazoredToasts>
 
 @code{
     private bool collapseNavMenu = true;
@@ -128,8 +134,16 @@
             .Count(q => q.Username == username && q.Date.Date >= DateTime.Today && q.ReservationStatusId == 1);
     }
     protected override async Task OnInitializedAsync()
-	{
+    {
         upcomingReservations = await GetUpcomingReservationsCountAsync();
-	}
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            upcomingReservations = await GetUpcomingReservationsCountAsync();
+            StateHasChanged(); // Ensures the component re-renders after async operation
+        }
+    }
 
 }

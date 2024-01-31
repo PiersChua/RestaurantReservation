@@ -5,6 +5,7 @@ using RestaurantReservation.Client;
 using RestaurantReservation.Client.Services;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 using CurrieTechnologies.Razor.SweetAlert2;
+using Blazored.Toast;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -25,5 +26,6 @@ builder.Services.AddHttpClientInterceptor();
 builder.Services.AddScoped<HttpInterceptorService>();
 builder.Services.AddApiAuthorization();
 builder.Services.AddSweetAlert2();
+builder.Services.AddBlazoredToast();
 
 await builder.Build().RunAsync();
