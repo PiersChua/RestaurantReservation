@@ -32,7 +32,7 @@
 			<div class="col-md-6 form-group">
 				<label>Reservation Time</label>
 				<div>
-					<InputDate Type="InputDateType.Time" min="@reshour?.OpeningTime?.ToString("HH:mm")" max="@reshour?.ClosingTime?.AddMinutes(-45).ToString("HH:mm")" @bind-Value="reservation.Time" class="form-control" />
+					<InputDate Type="InputDateType.Time" min="@reshour?.OpeningTime?.AddMinutes(30).ToString("HH:mm")" max="@reshour?.ClosingTime?.AddMinutes(-45).ToString("HH:mm")" @bind-Value="reservation.Time" class="form-control" />
 					<ValidationMessage For="@(() => reservation.Time)" />
 				</div>
 			</div>

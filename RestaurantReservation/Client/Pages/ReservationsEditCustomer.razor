@@ -94,7 +94,7 @@
 			reservation = Reservations.First(q => q.Id == id);
 			address = Addresses.First(x => x.Id == reservation.Restaurant?.AddressId);
 			promo = Promos.FirstOrDefault(x => x.Id == reservation.PromotionId);
-			ResOperatingHours = OperatingHours.Where(x => x.RestaurantId == id).ToList();
+			ResOperatingHours = OperatingHours.Where(x => x.RestaurantId == reservation.Restaurant.Id).ToList();
 			reshour = OperatingHours.First(x => x.RestaurantId == reservation.RestaurantId && x.Day == reservation.Date.DayOfWeek.ToString());
 
 		}
@@ -105,6 +105,16 @@
 		var result = await ValidateDate(reservation.Date);
 		if (!result)
 		{
+			return;
+		}
+		if (reservation.Date == DateTime.Today && reservation.Time < DateTime.Now)
+		{
+			await Swal.FireAsync(new SweetAlertOptions
+				{
+					Title = "Oops",
+					Text = "Invalid Timing, Please try a later time",
+					Icon = "warning",
+				});
 			return;
 		}
 		await _client.PutAsJsonAsync($"{Endpoints.ReservationsEndpoint}/{id}", reservation);

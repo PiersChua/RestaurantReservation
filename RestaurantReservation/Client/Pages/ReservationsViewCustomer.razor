@@ -20,11 +20,10 @@
         </div>
     }
 </div>
-
+<br />
 @if (Reservations != null && GetUpcomingReservations()?.Count > 0)
 {
-    <div class="bd-example-snippet bd-code-snippet">
-        <div class="bd-example m-0 border-0">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -59,7 +58,12 @@
                                 <td class="confirm">@res.ReservationStatus?.Status</td>
 								<td><button class="btn btn-secondary" @onclick="(()=>Edit(res.Id))"><span class="bi bi-pencil-square"></span></button></td>
 							}
-							else
+                            else if (res.ReservationStatus?.Status == "Confirmed" && res.Time<DateTime.Now.AddMinutes(30) )
+                            {
+                                <td class="ongoing">Ongoing</td>
+                                <td><button class="btn btn-danger"><span class="bi bi-calendar-check-fill"></span></button></td>
+                            }
+                            else
 							{
                                 <td class="cancel">@res.ReservationStatus?.Status</td>
                                 <td><button class="btn btn-danger"><span class="bi bi-x-square-fill"></span></button></td>
@@ -70,7 +74,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
 }
 else
 {
@@ -83,8 +86,7 @@ else
 <h1>Past Reservations</h1>
 @if (Reservations != null && GetPastReservations()?.Count > 0)
 {
-    <div class="bd-example-snippet bd-code-snippet">
-        <div class="bd-example m-0 border-0">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -115,7 +117,6 @@ else
                 </tbody>
             </table>
         </div>
-    </div>
 }
 else
 {
@@ -133,6 +134,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         Reservations = await _client.GetFromJsonAsync<List<Reservation>>($"{Endpoints.ReservationsEndpoint}");
+        Reservations = Reservations.OrderBy(x => x.Date).ToList();
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         Username = authState.User.Identity.Name;
         if(Reservations != null)
@@ -146,7 +148,7 @@ else
     {
         if (Reservations != null)
         {
-            return Reservations.Where(q => q.Date.Date >= DateTime.Today).ToList();
+            return Reservations.Where(q => q.Date.Date >= DateTime.Now).ToList();
         }
         else
         {
@@ -158,7 +160,7 @@ else
     {
         if (Reservations != null)
         {
-            return Reservations.Where(q => q.Date.Date < DateTime.Today).ToList();
+            return Reservations.Where(q => q.Date.Date < DateTime.Now).ToList();
         }
         else
         {
@@ -212,7 +214,6 @@ else
               );
             toggleCheckBox();
             await OnInitializedAsync();
-            navigation.NavigateTo("/reservations", true);
         }
         else if (result.Dismiss == DismissReason.Cancel)
         {
