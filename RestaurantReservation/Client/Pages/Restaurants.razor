@@ -18,9 +18,12 @@
 		<h4><span class="oi bi bi-funnel"></span> Filter</h4>
 		<select @bind="cuisine">
 			<option value="" disabled selected hidden>--Cuisine--</option>
-			@foreach (var item in cuisineSelections)
+			@if (cuisineSelections != null)
 			{
-				<option value="@item">@item</option>
+				foreach (var item in cuisineSelections)
+				{
+					<option value="@item">@item</option>
+				}
 			}
 		</select>
 		<select @bind="location">
@@ -32,9 +35,12 @@
 		</select>
 		<select @bind="category">
 			<option value="" disabled selected hidden>--Category--</option>
-			@foreach (var item in priceSelections)
+			@if(categorySelections != null)
 			{
-				<option value="@item">@item</option>
+				foreach (var item in categorySelections)
+				{
+					<option value="@item">@item</option>
+				}
 			}
 		</select>
 		<div class="input-group">
@@ -72,13 +78,13 @@ else
 	[Parameter]
 	public string? searchTerm { get; set; }
 	private string? cuisine;
-	private List<string> cuisineSelections = new List<string> { "Chinese", "Korea", "Eurasian","Indian" };
+	private List<string>? cuisineSelections;
 
 	private string? location;
 	private List<string> locationSelections = new List<string> { "North", "South", "East","West","NorthEast","NorthWest","SouthEast","SouthWest", "Central"};
 
 	private string? category;
-	private List<string> priceSelections = new List<string> {"Hotpot","BBQ","High Tea"};
+	private List<string>? categorySelections;
 
 	private List<Restaurant>? Res;
 	private List<Restaurant>? filteredRestaurant;
@@ -112,10 +118,13 @@ else
 		Res = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
 		ApplyFilter();
 	}
-	// protected override async Task OnInitializedAsync()
-	// {
-	// 	var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-	// 	var user = authState.User;
-	// 	var role = user.FindFirst(ClaimTypes.Role)?.Value;
-	// }
+	protected override async Task OnInitializedAsync()
+	{
+		Res = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
+		if(Res != null)
+		{
+			categorySelections = Res.Select(x => x.Category).Distinct().ToList();
+			cuisineSelections = Res.Select(x=> x.Cuisine).Distinct().ToList();
+		}
+	}
 }

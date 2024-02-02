@@ -42,27 +42,32 @@
                     @foreach (var res in GetUpcomingReservations())
                     {
                         <tr>
-                            @if (!showCheckboxes && res.ReservationStatus.Id != 2)
-                            {
-                                <td class="fs-5"><input type="checkbox" @onchange="e => ToggleSelection(res.Id)" class="custom-control-input" id="customCheck1"></td>
-                            }
-                            else if (!showCheckboxes && res.ReservationStatus.Id == 2)
-                            {
-                                <td></td>
-                            }
-                            <td>@res.Date.Date.ToString("yyyy MMM dd")</td>
+                        @if (!showCheckboxes && res.ReservationStatus.Id == 1 && (res.Date == DateTime.Today && res.Time < DateTime.Now.AddMinutes(30)))
+                        {
+                            <td></td>
+                        }
+                        else if (!showCheckboxes && res.ReservationStatus.Id == 2)
+                        {
+                            <td></td>
+                        }
+                        else if(!showCheckboxes && res.ReservationStatus.Id != 2 )
+                        {
+                            <td class="fs-5"><input type="checkbox" @onchange="e => ToggleSelection(res.Id)" class="custom-control-input" id="customCheck1"></td>
+                        }
+                        <td>@res.Date.Date.ToString("yyyy MMM dd")</td>
                             <td>@res.Time.ToString("h:mm tt").ToUpper()</td>
                             <td>@res.Restaurant?.Name</td>
-                            @if(res.ReservationStatus?.Status == "Confirmed")
+                            @if (res.ReservationStatus?.Status == "Confirmed" && (res.Date == DateTime.Today && res.Time<DateTime.Now.AddMinutes(30)) )
+                            {
+                                <td class="ongoing">Ongoing</td>
+                                <td><button class="btn btn-success"><span class="bi bi-calendar-check-fill"></span></button></td>
+                            }
+                            else if(res.ReservationStatus?.Status == "Confirmed")
 							{
                                 <td class="confirm">@res.ReservationStatus?.Status</td>
 								<td><button class="btn btn-secondary" @onclick="(()=>Edit(res.Id))"><span class="bi bi-pencil-square"></span></button></td>
 							}
-                            else if (res.ReservationStatus?.Status == "Confirmed" && res.Time<DateTime.Now.AddMinutes(30) )
-                            {
-                                <td class="ongoing">Ongoing</td>
-                                <td><button class="btn btn-danger"><span class="bi bi-calendar-check-fill"></span></button></td>
-                            }
+                            
                             else
 							{
                                 <td class="cancel">@res.ReservationStatus?.Status</td>
@@ -105,7 +110,7 @@ else
                             <td>@res.Restaurant?.Name</td>
                             @if (res.ReservationStatus?.Status == "Confirmed")
                             {
-                                <td class="confirm">@res.ReservationStatus?.Status</td>
+                                <td class="confirm">Completed</td>
                   
                             }
                             else
@@ -134,7 +139,8 @@ else
     protected override async Task OnInitializedAsync()
     {
         Reservations = await _client.GetFromJsonAsync<List<Reservation>>($"{Endpoints.ReservationsEndpoint}");
-        Reservations = Reservations.OrderBy(x => x.Date).ToList();
+        //Ordering of reservation by ascending date and time
+        Reservations = Reservations.OrderBy(x => x.Date + x.Time.TimeOfDay).ToList();
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         Username = authState.User.Identity.Name;
         if(Reservations != null)
@@ -148,7 +154,7 @@ else
     {
         if (Reservations != null)
         {
-            return Reservations.Where(q => q.Date.Date >= DateTime.Now).ToList();
+            return Reservations.Where(q => q.Date.Date >= DateTime.Today).ToList();
         }
         else
         {
@@ -160,7 +166,7 @@ else
     {
         if (Reservations != null)
         {
-            return Reservations.Where(q => q.Date.Date < DateTime.Now).ToList();
+            return Reservations.Where(q => q.Date.Date < DateTime.Today).ToList();
         }
         else
         {
