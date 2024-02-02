@@ -3,6 +3,7 @@
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject SweetAlertService Swal
+@inject IToastService ToastService
 @attribute [Authorize]
 
 <div class="container">
@@ -31,7 +32,7 @@
 			<div class="col-md-6 form-group">
 				<label>Reservation Time</label>
 				<div>
-					<InputDate Type="InputDateType.Time" min="@reshour?.OpeningTime?.ToString("HH:mm")" max="@reshour?.ClosingTime?.AddMinutes(-45).ToString("HH:mm")" @bind-Value="reservation.Time" class="form-control" />
+					<InputDate Type="InputDateType.Time" min="@reshour?.OpeningTime?.AddMinutes(30).ToString("HH:mm")" max="@reshour?.ClosingTime?.AddMinutes(-45).ToString("HH:mm")" @bind-Value="reservation.Time" class="form-control" />
 					<ValidationMessage For="@(() => reservation.Time)" />
 				</div>
 			</div>
@@ -119,7 +120,8 @@
 					Text = "Reservation Created! Please check reservation details under Reservation",
 					Icon = "success",
 				});
-			Navigation.NavigateTo("/reservations",true);
+			Navigation.NavigateTo("/");
+			ToastService.ShowSuccess($"Your reservation booked at {restaurant.Name} is successful");
 		}
 		else
 		{
@@ -184,7 +186,7 @@
 			await Swal.FireAsync(new SweetAlertOptions
 				{
 					Title = "Oops",
-					Text = $"Restaurant is closed on {date.DayOfWeek.ToString()}!",
+					Text = $"{restaurant.Name} is closed on {date.DayOfWeek.ToString()}!",
 					Icon = "error",
 				});
 			return false;

@@ -90,8 +90,8 @@
             </div>
         }
     </div>
-    <div class="bd-example-snippet bd-code-snippet">
-        <div class="bd-example m-0 border-0">
+    <br />
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -124,14 +124,12 @@
                 </tbody>
             </table>
         </div>
-    </div>
 }
 
 @if (Promotions != null && GetPastPromotions()?.Count > 0)
 {
     <h1>Upcoming Promotions</h1>
-    <div class="bd-example-snippet bd-code-snippet">
-        <div class="bd-example m-0 border-0">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -157,7 +155,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
 }
 @code {
     private List<Promotion>? Promotions;

@@ -18,9 +18,9 @@
             <AuthorizeView>
                 <Authorized>
                     <div class="bell">
-                        <a class="adjust-icon" href="#">
+                        <a class="adjust-icon" href="/promotions">
                             <span class="grey-color oi bi bi-bell-fill" aria-hidden="true"></span>
-                            <span class="badge">@upcomingReservations</span>
+                            <span class="badge">@upcomingPromotions</span>
                         </a>
                     </div>
                     <div>
@@ -69,11 +69,6 @@
                 </a>
             </div>
             <div class="nav-div">
-                <a class="nav-a" href="/promotions">
-                    <span class="oi bi bi-megaphone-fill" aria-hidden="true"></span> Promotions
-                </a>
-            </div>
-            <div class="nav-div">
                 <a class="nav-a" href="/favourites">
                     <span class="oi bi bi-suit-heart-fill" aria-hidden="true"></span> Favourites
                 </a>
@@ -96,10 +91,16 @@
 
     </main>
 </div>
+<BlazoredToasts Position="Blazored.Toast.Configuration.ToastPosition.TopRight"
+    Timeout="10"
+    ShowProgressBar="true"
+    SuccessIcon="bi bi-check-square-fill">
+
+</BlazoredToasts>
 
 @code{
     private bool collapseNavMenu = true;
-    private int upcomingReservations;
+    private int upcomingPromotions;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
@@ -118,18 +119,15 @@
         // Use NavigationManager to navigate to the target page with the parameter
         Navigation.NavigateTo($"/restaurants/{Uri.EscapeDataString(searchTerm)}");
     }
-    async Task<int> GetUpcomingReservationsCountAsync()
+    async Task<int> GetUpcomingPromotionsCount()
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var username = authState.User.Identity.Name;
-        var reservations = await _client.GetFromJsonAsync<List<Reservation>>(Endpoints.ReservationsEndpoint);
+        var promotions = await _client.GetFromJsonAsync<List<Promotion>>(Endpoints.PromotionsEndpoint);
         //get upcoming reservations that are confirmed
-        return reservations
-            .Count(q => q.Username == username && q.Date.Date >= DateTime.Today && q.ReservationStatusId == 1);
+        return promotions.Where(q => DateTime.Today < q.EndDate.Date).Count();
     }
     protected override async Task OnInitializedAsync()
-	{
-        upcomingReservations = await GetUpcomingReservationsCountAsync();
-	}
+    {
+        upcomingPromotions = await GetUpcomingPromotionsCount();
+    }
 
 }

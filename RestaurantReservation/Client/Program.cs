@@ -6,6 +6,7 @@ using RestaurantReservation.Client.Services;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 using CurrieTechnologies.Razor.SweetAlert2;
 using Syncfusion.Blazor;
+using Blazored.Toast;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -30,5 +31,6 @@ builder.Services.AddSyncfusionBlazor(); //for charts
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NAaF1cXmhKYVJpR2Nbe05xdF9GZVZQR2Y/P1ZhSXxXdkRgWH1ccHFUQmJVU00=");
 
 
+builder.Services.AddBlazoredToast();
 
 await builder.Build().RunAsync();

@@ -1,0 +1,13 @@
+﻿.container{
+    padding-top:30px;
+    max-width:90vw;
+    align-items:center;
+    text-align:left;
+}
+.container-head {
+    text-align: center;
+}
+
+.card{
+    margin-bottom:20px;
+}
