@@ -9,122 +9,104 @@
         <div class="overview-boxes">
         <div class="box">
             <div class="right-side">
-                    <div class="box-topic">Still thinking</div>
-            <div class="number">40,876</div>
-            <div class="indicator">
-                <i class='bx bx-up-arrow-alt'></i>
-            </div>
+                    <div class="box-topic">Total Restaurants</div>
+                    <div class="number">@totalRestaurant</div>
+
             </div>
             <i class='bx bx-cart-alt cart'></i>
         </div>
         <div class="box">
             <div class="right-side">
-                    <div class="box-topic">Still thinking</div>
-            <div class="number">38,876</div>
-            <div class="indicator">
-                <i class='bx bx-up-arrow-alt'></i>
-            </div>
+                    <div class="box-topic">To Approve</div>
+                    <div class="number">@toApprove</div>
+
             </div>
             <i class='bx bxs-cart-add cart two' ></i>
         </div>
         <div class="box">
             <div class="right-side">
-                    <div class="box-topic">Still thinking</div>
-            <div class="number">$12,876</div>
-            <div class="indicator">
-                <i class='bx bx-up-arrow-alt'></i>
-            </div>
+                    <div class="box-topic">Monthly Profit</div>
+                    <div class="number">$@monthlyProfit?.ToString("F2")</div>
+
             </div>
             <i class='bx bx-cart cart three' ></i>
         </div>
         <div class="box">
             <div class="right-side">
-            <div class="box-topic">Still thinking</div>
-            <div class="number">11,086</div>
-            <div class="indicator">
-                <i class='bx bx-down-arrow-alt down'></i>
-            </div>
+                <div class="box-topic">Total Applications</div>
+                <div class="number">@totalApplications</div>
+
             </div>
             <i class='bx bxs-cart-download cart four' ></i>
         </div>
         </div>
         <div class="sales-boxes">
             <div class="recent-sales box">
-                <div class="title">Restaurants</div>
+                <div class="title text-center">Restaurants</div>
+                @if (restaurants != null)
+                {
+                    <table class="table table-responsive table-striped" id="bookingsTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Charts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-
-                <div class="sales-details">
-                    <ul class="details">
-                        <li class="topic">Name</li>
-                        @if (restaurants != null)
-                        {
-                            foreach (var R in restaurants)
-                            {
-                                <li>@R.Name</li>
-                            }
-                        }
-
-                    </ul>
-                    <ul class="details">
-                        <li class="topic">Contact</li>
-                        @if (restaurants != null)
-                        {
                             @foreach (var R in restaurants)
                             {
-                                <li>@R.PhoneNumber</li>
+                                <tr>
+                                    <td>@R.Name</td>
+                                    <td>@R.PhoneNumber</td>
+                                    <td>@R.Email</td>
+                                    <td>@R.Status</td>
+                                    <td>
+                                        <a href="/chart/@R.Id" class="bi bi-pencil btn btn-secondary"> Charts</a>
+                                    </td>
+
+                                </tr>
                             }
-                        }
-                    </ul>
-                    <ul class="details">
-                        <li class="topic">Email</li>
-                        @if (restaurants != null)
-                        {
-                            @foreach (var R in restaurants)
-                            {
-                                <li>@R.Email</li>
-                            }
-                        }
-                    </ul>
-                    <ul class="details">
-                        <li class="topic">Status</li>
-                        @if (restaurants != null)
-                        {
-                            @foreach (var R in restaurants)
-                            {
-                                <li>@R.Status</li>
-                            }
-                        }
-                    </ul>
-                </div>
-                    
+
+
+                        </tbody>
+                    </table>
+                }
 
             </div>
         <div class="top-sales box">
-            <div class="title">Application Require Approval</div>
-            <ul class="sales-details">
-           
-                <ul class="details">
-                    <li class="topic">Name</li>
-                    @if (restaurantapp != null)
-                    {
-                        @foreach (var RA in restaurantapp)
-                        {
-                            <li>@RA.RestaurantName</li>
-                        }
-                    }
-                </ul>
-                <ul class="details">
-                    <li class="topic">Status</li>
-                    @if (restaurantapp != null)
-                    {
-                        @foreach (var RA in restaurantapp)
-                        {
-                            <li>@RA.Status</li>
-                        }
-                    }
-                </ul>
+                <div class="text-center title" >Restaurant Application</div>
+                @if (restaurantapp != null)
+                {
+                    <table class="table table-responsive table-striped" id="bookingsTable1">
+                        <thead>
+                            <tr>
+                                <th>Restaurant Name</th>
+                                <th>Application Status</th>
+                                <th>Approve</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var RA in restaurantapp)
+                            {
+                                @if (RA.Status == "Active"){
+                                <tr>
+                                    <td>@RA?.RestaurantName</td>
+                                    <td>@RA?.Status</td>
+                                    <td>
+                                        <a href="/restaurant/create/@RA.Id" class="bi bi-arrow-bar-right btn btn-secondary" > Approve</a>
+                                    </td>
 
-            </ul>
+                                </tr>
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                }
         </div>
         </div>
     </div>
@@ -134,11 +116,45 @@
 @code {
     private List<Restaurant>? restaurants;
     private List<RestaurantApplication>? restaurantapp;
+    private List<Subscription>? subscription;
+
+    private int totalRestaurant;
+    private double? monthlyProfit;
+    private int toApprove;
+    private int totalApplications;
 
     protected async override Task OnInitializedAsync()
     {
         restaurants = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
         restaurantapp = await _client.GetFromJsonAsync<List<RestaurantApplication>>($"{Endpoints.RestaurantApplicationsEndpoint}");
+        subscription = await _client.GetFromJsonAsync<List<Subscription>>($"{Endpoints.SubscriptionsEndpoint}");
+
+
+        totalRestaurant = restaurants.Count;
+        toApprove = restaurantapp.Count(q => q.Status == "Active");
+
+        monthlyProfit = subscription.Sum(q => q.PlatformFee);
+
+
+
+        totalApplications = restaurantapp.Count;
 
     }
+
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#bookingsTable");
+        await js.InvokeVoidAsync("AddDataTable", "#bookingsTable1");
+
+    }
+
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#bookingsTable");
+        js.InvokeVoidAsync("DataTablesDispose", "#bookingsTable1");
+
+    }
+
 }

@@ -10,7 +10,7 @@
 <br />
 @if (RestaurantApplication != null)
 {
-    <table class="table table-responsive" id="bookingsTable">
+    <table class="table table-responsive table-striped" id="bookingsTable">
         <thead>
             <tr>
                 <th>Restaurant Name</th>
@@ -27,10 +27,11 @@
                     <td>@RA?.Cuisine</td>
                     <td>@RA?.Status</td>
                     <td>
-                        <a href="/restaurantApplication/edit/@RA.Id" class="bi bi-pencil"></a>
+                        @if (@RA.Status == "Active"){
+                            <a href="/restaurantApplication/edit/@RA.Id" class="bi bi-pencil"></a>
 
-                        <a href="/restaurant/create/@RA.Id" class="bi bi-arrow-bar-right"></a>
-
+                            <a href="/restaurant/create/@RA.Id" class="bi bi-arrow-bar-right"></a>
+                        }
                         <button class="bi bi-trash" @onclick="@(()=>Delete(RA.Id))"></button>
                     </td>
                     

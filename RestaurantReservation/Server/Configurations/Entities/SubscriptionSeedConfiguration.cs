@@ -14,35 +14,35 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     Id = 1,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 },
                 new Subscription
                 {
                     Id = 2,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 },
                 new Subscription
                 {
                     Id = 3,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 },
                 new Subscription
                 {
                     Id = 4,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 },
                 new Subscription
                 {
                     Id = 5,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 },
 
                 new Subscription
@@ -50,70 +50,70 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     Id = 6,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 },
                 new Subscription
                 {
                     Id = 7,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 },
                 new Subscription
                 {
                     Id = 8,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 },
                 new Subscription
                 {
                     Id = 9,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 },
                 new Subscription
                 {
                     Id = 10,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 },
                 new Subscription
                 {
                     Id = 11,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 },
                 new Subscription
                 {
                     Id = 12,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 },
                 new Subscription
                 {
                     Id = 13,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 },
                 new Subscription
                 {
                     Id = 14,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 },
                 new Subscription
                 {
                     Id = 15,
                     PlatformFee = 10.00,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMonths(1),
                 }
 
                 );

@@ -1,0 +1,146 @@
+﻿@page "/chart/{id:int}"
+
+@inject HttpClient _client
+@inject IJSRuntime js
+@inject NavigationManager _navManager
+@layout StaffLayout
+
+<section class="home-section">
+    <h3 class="text-center">Total guest counts of @chartRestaurant.Name</h3>
+
+    <div class="home-content">
+        <div class="overview-boxes">
+        <div class="box">
+            <div class="right-side">
+                    <div class="box-topic">Total Guest</div>
+                    <div class="number">@totalguest</div>
+
+            </div>
+            <i class='bx bx-cart-alt cart'></i>
+        </div>
+        <div class="box">
+            <div class="right-side">
+                    <div class="box-topic">To Approve</div>
+                    <div class="number">=</div>
+
+            </div>
+            <i class='bx bxs-cart-add cart two' ></i>
+        </div>
+        <div class="box">
+            <div class="right-side">
+                    <div class="box-topic">Monthly Profit</div>
+                    <div class="number">=</div>
+
+            </div>
+            <i class='bx bx-cart cart three' ></i>
+        </div>
+        <div class="box">
+            <div class="right-side">
+                <div class="box-topic">Total Applications</div>
+                <div class="number">=</div>
+
+            </div>
+        </div>
+        </div>
+    </div>
+    <div/>
+    <SfChart Title="Monthly Guest Count Analysis" Palettes="@palettes">
+        <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category" Title="Month">
+        </ChartPrimaryXAxis>
+        <ChartPrimaryYAxis Title="Number of Guests">
+        </ChartPrimaryYAxis>
+        <ChartSeriesCollection>
+            <ChartSeries DataSource="@Sales" XName="Month" YName="SalesValue" Type="ChartSeriesType.Column" BearFillColor="Blue">
+                <ChartSeriesBorder Width="0.5" Color="Gray"></ChartSeriesBorder>
+                <ChartSeriesAnimation Enable="true"></ChartSeriesAnimation>
+            </ChartSeries>
+        </ChartSeriesCollection>
+        <ChartTooltipSettings Enable="true"></ChartTooltipSettings>
+        <ChartBorder Width="2" Color="LightGray"></ChartBorder>
+    </SfChart>
+
+</section>
+
+
+
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    public double januaryCount;
+    public double febuaryCount;
+    public double marchCount;
+    public double aprilCount;
+    public double mayCount;
+    public double juneCount;
+    public double julyCount;
+    public double augustCount;
+    public double septemberCount;
+    public double octoberCount;
+    public double novemberCount;
+    public double decemberCount;
+
+    private double totalguest;
+
+    public class SalesInfo
+    {
+        public string Month { get; set; }
+        public double SalesValue { get; set; }
+    }
+
+    Restaurant chartRestaurant = new Restaurant();
+    private List<Reservation>? Reservations;
+
+    public List<SalesInfo> Sales;
+
+    protected override async Task OnParametersSetAsync()
+    {
+
+        chartRestaurant = await _client.GetFromJsonAsync<Restaurant>($"{Endpoints.RestaurantsEndpoint}/{id}");
+        Reservations = await _client.GetFromJsonAsync<List<Reservation>>($"{Endpoints.ReservationsEndpoint}");
+
+        totalguest = Reservations.Where(r => r.RestaurantId == id).Sum(r => r.Guest);
+
+
+
+
+
+
+
+        januaryCount = Reservations.Where(r => r.Date.Month == 1 && r.RestaurantId == id).Sum(r => r.Guest);
+        febuaryCount = Reservations.Where(r => r.Date.Month == 2 && r.RestaurantId == id).Sum(r => r.Guest);
+        marchCount = Reservations.Where(r => r.Date.Month == 3 && r.RestaurantId == id).Sum(r => r.Guest);
+        aprilCount = Reservations.Where(r => r.Date.Month == 4 && r.RestaurantId == id).Sum(r => r.Guest);
+        mayCount = Reservations.Where(r => r.Date.Month == 5 && r.RestaurantId == id).Sum(r => r.Guest);
+        juneCount = Reservations.Where(r => r.Date.Month == 6 && r.RestaurantId == id).Sum(r => r.Guest);
+        julyCount = Reservations.Where(r => r.Date.Month == 7 && r.RestaurantId == id).Sum(r => r.Guest);
+        augustCount = Reservations.Where(r => r.Date.Month == 8 && r.RestaurantId == id).Sum(r => r.Guest);
+        septemberCount = Reservations.Where(r => r.Date.Month == 9 && r.RestaurantId == id).Sum(r => r.Guest);
+        octoberCount = Reservations.Where(r => r.Date.Month == 10 && r.RestaurantId == id).Sum(r => r.Guest);
+        novemberCount = Reservations.Where(r => r.Date.Month == 11 && r.RestaurantId == id).Sum(r => r.Guest);
+        decemberCount = Reservations.Where(r => r.Date.Month == 12 && r.RestaurantId == id).Sum(r => r.Guest);
+
+
+        Sales = new List<SalesInfo>
+        {
+            new SalesInfo { Month = "January", SalesValue = januaryCount },
+            new SalesInfo { Month = "Febuary", SalesValue = febuaryCount },
+            new SalesInfo { Month = "March", SalesValue = marchCount },
+            new SalesInfo { Month = "April", SalesValue = aprilCount },
+            new SalesInfo { Month = "May", SalesValue = mayCount },
+            new SalesInfo { Month = "June", SalesValue = juneCount },
+            new SalesInfo { Month = "July", SalesValue = julyCount },
+            new SalesInfo { Month = "August", SalesValue = augustCount },
+            new SalesInfo { Month = "September", SalesValue = septemberCount },
+            new SalesInfo { Month = "October", SalesValue = octoberCount },
+            new SalesInfo { Month = "November", SalesValue = novemberCount },
+            new SalesInfo { Month = "December", SalesValue = decemberCount },
+        };
+
+    }
+
+    public String[] palettes = new String[] {"#F6B53F"};
+
+
+}

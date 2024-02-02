@@ -15,7 +15,6 @@ namespace RestaurantReservation.Shared.Domain
         [Required]
         public string? Building { get; set; }
         [Required]
-        [RegularExpression(@"^\d{2}$", ErrorMessage = "Invalid level")]
         public int? Level { get; set; }
         public string? UnitNumber { get; set; }
         [Required]

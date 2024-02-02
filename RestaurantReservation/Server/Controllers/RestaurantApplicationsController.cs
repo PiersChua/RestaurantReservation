@@ -35,7 +35,7 @@ namespace RestaurantReservation.Server.Controllers
         {
             //Refactored
             //return await _context.RestaurantApplications.ToListAsync();
-            var restaurantapplications = await _unitOfWork.RestaurantApplications.GetAll(includes: q => q.Include(x => x.Customer).Include(x => x.Staff));
+            var restaurantapplications = await _unitOfWork.RestaurantApplications.GetAll(includes: q => q.Include(x => x.Customer).Include(x => x.Staff).Include(x => x.Address).Include(x => x.Menu).Include(x => x.OperatingHour).Include(x => x.Subscription));
             return Ok(restaurantapplications);
         }
 

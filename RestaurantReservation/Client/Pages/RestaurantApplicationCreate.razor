@@ -7,85 +7,8 @@
     <EditForm Model="@restaurantapplication" OnValidSubmit="CreateRestaurantApplication">
         <DataAnnotationsValidator />
         <ValidationSummary />
-        <div class="row justify-content-center">
-            <h2 class="text-center">Pick a subscription!</h2>
-        </div>
 
-        <InputRadioGroup @bind-Value="@subscribe.PlatformFee" class="form-control">
-            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal">Normal</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$10<small class="text-body-secondary fw-light">/mo</small></h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>Email support</li>
-                                <li>Help center access</li>
-                                <li>-</li>
-                                <li>-</li>
-                            </ul>
-                            <InputRadio Value="10" />
-                            <label class="text-black" for="normalPlan">Choose Plan</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal">Pro</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$15<small class="text-body-secondary fw-light">/mo</small></h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>Customised support</li>
-                                <li>Priority email support</li>
-                                <li>Help center access</li>
-                                <li>-</li>
-                            </ul>
-                            <InputRadio Value="15" />
-                            <label class="text-black" for="proPlan">Choose Plan</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-header py-3 ">
-                            <h4 class="my-0 fw-normal">Enterprise</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$20<small class="text-body-secondary fw-light">/mo</small></h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>Dashboard</li>
-                                <li>Speedy reply</li>
-                                <li>Phone and email support</li>
-                                <li>Help center access</li>
-                            </ul>
-                            <InputRadio Value="20" />
-                            <label class="text-black" for="enterprisePlan">Choose Plan</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </InputRadioGroup>
-
-
-
-        <div class="row justify-content-center">
-            <div class="mb-3 col-md-6 form-group">
-                <label class="white-color">Subscription Fees:</label>
-                <div>
-                    <InputSelect @bind-Value="@subscribe.PlatformFee" class="form-control">
-                        <option value="">-- Select Plan --</option>
-                        @foreach (var price in SubscribtionList)
-                        {
-                            <option>@price</option>
-                        }
-                    </InputSelect>
-                </div>
-            </div>
-        </div>
+        <div class="focus"></div>
 
         <div class="row justify-content-center">
             <h2 class="text-center">Tell us more about your restaurant!</h2>
@@ -209,9 +132,67 @@
                 </div>
             </div>
         </div>
-
-
-
+        <div class="row justify-content-center">
+            <h2 class="text-center">Pick a subscription!</h2>
+        </div>
+        <div class="row row-cols-md-3 mb-3 text-center">
+            <InputRadioGroup @bind-Value="@subscribe.PlatformFee" class="form-control">
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Normal</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">$10<small class="text-body-secondary fw-light">/mo</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Email support</li>
+                            <li>Help center access</li>
+                            <li>-</li>
+                            <li>-</li>
+                        </ul>
+                        <InputRadio Value="10" />
+                        <label class="text-black" for="normalPlan">Choose Plan</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Pro</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">$15<small class="text-body-secondary fw-light">/mo</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Customised support</li>
+                            <li>Priority email support</li>
+                            <li>Help center access</li>
+                            <li>-</li>
+                        </ul>
+                        <InputRadio Value="15" />
+                        <label class="text-black" for="proPlan">Choose Plan</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3 ">
+                        <h4 class="my-0 fw-normal">Enterprise</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">$20<small class="text-body-secondary fw-light">/mo</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Dashboard</li>
+                            <li>Speedy reply</li>
+                            <li>Phone and email support</li>
+                            <li>Help center access</li>
+                        </ul>
+                        <InputRadio Value="20" />
+                        <label class="text-black" for="enterprisePlan">Choose Plan</label>
+                    </div>
+                </div>
+            </div>
+        </InputRadioGroup>
+        </div>
         <div class="row justify-content-center">
             <h2 class="text-center">On days when the restaurant is closed, the opening and closing times should be identical.</h2>
         </div>
@@ -341,8 +322,30 @@
 
     private async Task CreateRestaurantApplication()
     {
+        if (newMenu.ImagePath == null)
+        {
+            newMenu.ImagePath = "images/noImage.jpg";
+        }
+        if (restaurantapplication.ImagePath == null)
+        {
+            restaurantapplication.ImagePath = "images/noImage.jpg";
+        }
 
-        await _client.PostAsJsonAsync($"{Endpoints.AddressesEndpoint}", newaddress); //created
+        HttpResponseMessage response = await _client.PostAsJsonAsync($"{Endpoints.AddressesEndpoint}", newaddress);
+
+        if (response.IsSuccessStatusCode)
+        {
+            // Read the Address object from the response body
+            Address createdAddress = await response.Content.ReadFromJsonAsync<Address>();
+
+            // Use the address object, which should include the ID after the insert
+            restaurantapplication.AddressId = createdAddress.Id;
+
+
+        }
+
+
+
         await _client.PostAsJsonAsync($"{Endpoints.MenusEndpoint}", newMenu);
         await _client.PostAsJsonAsync($"{Endpoints.SubscriptionsEndpoint}", subscribe);
 
@@ -362,7 +365,6 @@
         await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", saturday);
         await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", sunday);
 
-        restaurantapplication.AddressId = address?.LastOrDefault().Id + 1;
         restaurantapplication.MenuId = menu?.LastOrDefault().Id + 1;
         restaurantapplication.SubscriptionId = subscription?.LastOrDefault().Id + 1;
         restaurantapplication.OperatingHourId = operatinghour?.LastOrDefault().Id + 1; //binding monday foreign key to restaurant application
