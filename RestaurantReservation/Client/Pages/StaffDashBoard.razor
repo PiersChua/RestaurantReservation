@@ -133,8 +133,19 @@
         totalRestaurant = restaurants.Count;
         toApprove = restaurantapp.Count(q => q.Status == "Active");
 
-        monthlyProfit = subscription.Sum(q => q.PlatformFee);
+        monthlyProfit = 0.00;
 
+        foreach (var res in restaurants)
+        {
+            foreach (var sub in subscription)
+            {
+                if (sub.Id == res.SubscriptionId)
+                {
+                    monthlyProfit += sub.PlatformFee;
+                }
+            }
+
+        }
 
 
         totalApplications = restaurantapp.Count;

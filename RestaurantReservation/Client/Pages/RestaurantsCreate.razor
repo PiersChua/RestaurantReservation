@@ -291,7 +291,6 @@
         saturday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 5);
         sunday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 6);
 
-        createdRestaurantID = restaurant.LastOrDefault().Id + 1;
     }
 
 
@@ -311,9 +310,16 @@
 
         createdRestaurant.AddressId = restaurantapplication.AddressId;
         createdRestaurant.SubscriptionId = restaurantapplication.SubscriptionId;
-        createdRestaurant.Status = "Active";
 
-        await _client.PostAsJsonAsync($"{Endpoints.RestaurantsEndpoint}", createdRestaurant);
+        HttpResponseMessage responseRestaurant = await _client.PostAsJsonAsync($"{Endpoints.RestaurantsEndpoint}", createdRestaurant);
+
+        if (responseRestaurant.IsSuccessStatusCode)
+        {
+            Restaurant createdRestaurant = await responseRestaurant.Content.ReadFromJsonAsync<Restaurant>();
+            createdRestaurantID = createdRestaurant.Id;
+
+        }
+
 
         restaurantapplication.Status = "Approved";
         await _client.PutAsJsonAsync($"{Endpoints.RestaurantApplicationsEndpoint}/{id}", restaurantapplication);

@@ -2,6 +2,7 @@
 @inject HttpClient _client
 @inject NavigationManager _navManager
 
+
 <div class="restaurant-form">
 
     <EditForm Model="@restaurantapplication" OnValidSubmit="CreateRestaurantApplication">
@@ -54,6 +55,8 @@
                             <option>@location</option>
                         }
                     </InputSelect>
+                    <ValidationMessage For="@(() => restaurantapplication.Location)" />
+
                 </div>
             </div>
 
@@ -79,6 +82,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row justify-content-center">
             <h2 class="text-center">Restaurant Address</h2>
         </div>
@@ -119,6 +123,8 @@
                 </div>
             </div>
         </div>
+
+
         <div class="row justify-content-center">
             <h2 class="text-center">Menu</h2>
         </div>
@@ -132,6 +138,9 @@
                 </div>
             </div>
         </div>
+
+        
+
         <div class="row justify-content-center">
             <h2 class="text-center">Pick a subscription!</h2>
         </div>
@@ -191,7 +200,8 @@
                     </div>
                 </div>
             </div>
-        </InputRadioGroup>
+            </InputRadioGroup>
+            <ValidationMessage For="@(() => subscribe.PlatformFee)" />
         </div>
         <div class="row justify-content-center">
             <h2 class="text-center">On days when the restaurant is closed, the opening and closing times should be identical.</h2>
@@ -202,70 +212,98 @@
                 <div class="col-md-6 form-group">
                     <label class="white-color">Monday Opening Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@monday.OpeningTime" class="form-control" />
+                    <ValidationMessage For="@(() => monday.OpeningTime)" />
+
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="white-color">Monday Closing Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@monday.ClosingTime" class="form-control" />
+                    <ValidationMessage For="@(() => monday.ClosingTime)" />
+
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label class="white-color">Tuesday Opening Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@tuesday.OpeningTime" class="form-control" />
+                    <ValidationMessage For="@(() => tuesday.OpeningTime)" />
+
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="white-color">Tuesday Closing Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@tuesday.ClosingTime" class="form-control" />
+                    <ValidationMessage For="@(() => tuesday.ClosingTime)" />
+
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label class="white-color">Wednesday Opening Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@wednesday.OpeningTime" class="form-control" />
+                    <ValidationMessage For="@(() => wednesday.OpeningTime)" />
+
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="white-color">Wednesday Closing Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@wednesday.ClosingTime" class="form-control" />
+                    <ValidationMessage For="@(() => wednesday.ClosingTime)" />
+
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label class="white-color">Thursday Opening Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@thursday.OpeningTime" class="form-control" />
+                    <ValidationMessage For="@(() => thursday.OpeningTime)" />
+
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="white-color">Thursday Closing Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@thursday.ClosingTime" class="form-control" />
+                    <ValidationMessage For="@(() => thursday.ClosingTime)" />
+
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label class="white-color">Friday Opening Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@friday.OpeningTime" class="form-control" />
+                    <ValidationMessage For="@(() => friday.OpeningTime)" />
+
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="white-color">Friday Closing Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@friday.ClosingTime" class="form-control" />
+                    <ValidationMessage For="@(() => friday.ClosingTime)" />
+
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label class="white-color">Saturday Opening Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@saturday.OpeningTime" class="form-control" />
+                    <ValidationMessage For="@(() => saturday.OpeningTime)" />
+
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="white-color">Saturday Closing Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@saturday.ClosingTime" class="form-control" />
+                    <ValidationMessage For="@(() => saturday.ClosingTime)" />
+
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label class="white-color">Sunday Opening Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@sunday.OpeningTime" class="form-control" />
+                    <ValidationMessage For="@(() => sunday.OpeningTime)" />
+
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="white-color">Sunday Closing Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@sunday.ClosingTime" class="form-control" />
+                    <ValidationMessage For="@(() => sunday.ClosingTime)" />
+
                 </div>
             </div>
         </div>
@@ -331,23 +369,36 @@
             restaurantapplication.ImagePath = "images/noImage.jpg";
         }
 
-        HttpResponseMessage response = await _client.PostAsJsonAsync($"{Endpoints.AddressesEndpoint}", newaddress);
+        HttpResponseMessage responseAddress = await _client.PostAsJsonAsync($"{Endpoints.AddressesEndpoint}", newaddress);
 
-        if (response.IsSuccessStatusCode)
+        if (responseAddress.IsSuccessStatusCode)
         {
             // Read the Address object from the response body
-            Address createdAddress = await response.Content.ReadFromJsonAsync<Address>();
+            Address createdAddress = await responseAddress.Content.ReadFromJsonAsync<Address>();
 
             // Use the address object, which should include the ID after the insert
             restaurantapplication.AddressId = createdAddress.Id;
 
+        }
+
+        HttpResponseMessage responseMenu = await _client.PostAsJsonAsync($"{Endpoints.MenusEndpoint}", newMenu);
+
+        if (responseMenu.IsSuccessStatusCode)
+        {
+            Menu createdMenu = await responseMenu.Content.ReadFromJsonAsync<Menu>();
+            restaurantapplication.MenuId = createdMenu.Id;
 
         }
 
+        HttpResponseMessage responseSubscription = await _client.PostAsJsonAsync($"{Endpoints.SubscriptionsEndpoint}", subscribe);
 
+        if (responseSubscription.IsSuccessStatusCode)
+        {
+            Subscription createdSubscription = await responseSubscription.Content.ReadFromJsonAsync<Subscription>();
+            restaurantapplication.SubscriptionId = createdSubscription.Id;
 
-        await _client.PostAsJsonAsync($"{Endpoints.MenusEndpoint}", newMenu);
-        await _client.PostAsJsonAsync($"{Endpoints.SubscriptionsEndpoint}", subscribe);
+        }
+
 
         monday.Day = "Monday";
         tuesday.Day = "Tuesday";
@@ -357,18 +408,22 @@
         saturday.Day = "Saturday";
         sunday.Day = "Sunday";
 
-        await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", monday);
+
+        HttpResponseMessage responseOperatingHourMonday = await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", monday);
+
+        if (responseSubscription.IsSuccessStatusCode)
+        {
+            OperatingHour createdOperatingHour = await responseOperatingHourMonday.Content.ReadFromJsonAsync<OperatingHour>();
+            restaurantapplication.OperatingHourId = createdOperatingHour.Id; //bind monday operating hour to RA
+
+        }
+
         await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", tuesday);
         await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", wednesday);
         await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", thursday);
         await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", friday);
         await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", saturday);
         await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", sunday);
-
-        restaurantapplication.MenuId = menu?.LastOrDefault().Id + 1;
-        restaurantapplication.SubscriptionId = subscription?.LastOrDefault().Id + 1;
-        restaurantapplication.OperatingHourId = operatinghour?.LastOrDefault().Id + 1; //binding monday foreign key to restaurant application
-
 
         restaurantapplication.Status = "Active";
         await _client.PostAsJsonAsync($"{Endpoints.RestaurantApplicationsEndpoint}", restaurantapplication);

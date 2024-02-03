@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +9,8 @@ namespace RestaurantReservation.Shared.Domain
 {
     public class Subscription
     {   
-        public int Id { get; set; } 
-
+        public int Id { get; set; }
+        [Required]
         public double? PlatformFee { get; set; }
 
         public DateTime? StartDate { get; set; }

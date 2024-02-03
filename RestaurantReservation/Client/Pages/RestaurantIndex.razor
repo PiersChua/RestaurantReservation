@@ -61,7 +61,8 @@ else
         {
             if (confirm)
             {
-                await _client.DeleteAsync($"{Endpoints.RestaurantsEndpoint}/{restaurantId}");
+                deletedRestaurant.Status = "Deleted";
+                await _client.PutAsJsonAsync($"{Endpoints.RestaurantsEndpoint}/{restaurantId}",deletedRestaurant);
                 await OnInitializedAsync();
             }
         }

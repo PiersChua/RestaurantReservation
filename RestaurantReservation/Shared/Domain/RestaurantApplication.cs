@@ -23,10 +23,12 @@ namespace RestaurantReservation.Shared.Domain
 		[RegularExpression(@"(6|8|9)\d{7}", ErrorMessage = "Contact Number is invalid")]
 		public int? PhoneNumber { get; set; }
 		[Required]
-		[StringLength(300, MinimumLength = 20, ErrorMessage = "Description too short!")]
+		[StringLength(300, MinimumLength = 10, ErrorMessage = "Description too short!")]
         public string? Description { get; set; }
         public string? ImagePath { get; set; }
+        [Required]
         public string? Category { get; set; }
+        [Required]
         public string? Location { get; set; }
         public string? Status { get; set; }
 		public int? CustomerId { get; set; }

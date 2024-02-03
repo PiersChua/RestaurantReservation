@@ -238,6 +238,7 @@
         </div>
 
     </EditForm>
+    <td><a href="@GetGoogleMapsLink(newaddress)" target="_self">@newaddress.PostalCode</a></td>
 
 
 </div>
@@ -309,7 +310,12 @@
         _navManager.NavigateTo("/restaurantapplication");
     }
 
-
+    string GetGoogleMapsLink(Address newaddress)
+    {
+        string address = $"{newaddress.PostalCode}";
+        string googleMapsUrl = $"https://www.google.com/maps?q={Uri.EscapeDataString(address)}";
+        return googleMapsUrl;
+    }
 }
 
 
