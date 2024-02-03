@@ -52,13 +52,17 @@
 @if (Res != null)
 {
 	<div>
-		@if(filteredRestaurant!=null && filteredRestaurant.Count>0)
+		@if(filteredRestaurant!=null && filteredRestaurant.Count>0 )
 		{
 			foreach(var res in filteredRestaurant)
 			{
-				<div @onclick="(() => Reserve(res.Id))" class="res-link">
-					<p>@res.Name</p>
-				</div>
+				if (res.Status == "Active")
+				{
+					<div @onclick="(() => Reserve(res.Id))" class="res-link">
+						<p>@res.Name</p>
+					</div>
+				}
+
 			}
 		}
 		else

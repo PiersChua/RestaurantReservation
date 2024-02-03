@@ -19,7 +19,7 @@
 	<div class="wrapper">
 		@foreach (var restaurant in Restaurants)
 		{
-			if (restaurant.Category == "Hotpot")
+			if (restaurant.Category == "Hotpot" && restaurant.Status == "Active")
 			{
 				<div class="item">
 					<a href="/restaurant/@restaurant.Id"><img src="@restaurant.ImagePath" /></a>	
@@ -37,7 +37,7 @@
 	<div class="wrapper">
 		@foreach (var restaurant in Restaurants)
 		{
-			if (restaurant.Category == "BBQ")
+			if (restaurant.Category == "BBQ" && restaurant.Status == "Active")
 			{
 				<div class="item">
 					<a href="/restaurant/@restaurant.Id"><img src="@restaurant.ImagePath" /></a>
@@ -50,18 +50,19 @@
 		}
 	</div>
 
-	<h2 class="menu-title"><span class="bi bi-shop"></span> All Restaurants</h2>
+	<h2 class="menu-title"><span class="oi bi bi-shop"></span> Randomised Restaurants</h2>
 	<div class="wrapper">
 		@foreach (var restaurant in RandomisedRestaurants)
 		{
-
-			<div class="item">
-				<a href="/restaurant/@restaurant.Id"><img src="@restaurant.ImagePath" /></a>	
-				<div class="overlay-name">
-					<p>@restaurant.Name</p>
-				</div>
-			</div>
-
+			if (restaurant.Status == "Active")
+			{
+				<div class="item">
+					<a href="/restaurant/@restaurant.Id"><img src="@restaurant.ImagePath" /></a>	
+					<div class="overlay-name">
+						<p>@restaurant.Name</p>
+					</div>
+				</div>				
+			}
 		}
 
 	</div>

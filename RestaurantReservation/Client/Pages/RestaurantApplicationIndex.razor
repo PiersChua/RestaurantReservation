@@ -63,7 +63,10 @@ else
         {
             if (confirm)
             {
-                await _client.DeleteAsync($"{Endpoints.RestaurantApplicationsEndpoint}/{RestaurantApplicationId}");
+                restaurantApplication.Status = "Denied";
+                await _client.PutAsJsonAsync($"{Endpoints.RestaurantApplicationsEndpoint}/{RestaurantApplicationId}", restaurantApplication);
+
+                // await _client.DeleteAsync($"{Endpoints.RestaurantApplicationsEndpoint}/{RestaurantApplicationId}");
                 await OnInitializedAsync();
             }
         }

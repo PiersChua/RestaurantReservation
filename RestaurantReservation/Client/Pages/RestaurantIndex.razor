@@ -1,10 +1,10 @@
 ﻿@page "/restaurantStaff/"
 @inject HttpClient _client
 @inject IJSRuntime js
-@attribute [Authorize]
 @inject NavigationManager Navigation
 @implements IDisposable
 @layout StaffLayout
+@attribute [Authorize]
 
 <h3>Approve restaurant application -Admin Side</h3>
 <br />
@@ -30,7 +30,7 @@
                     <td>
                         <a href="/restaurant/edit/@R.Id" class="bi bi-pencil"></a>
 
-                        <button class="bi bi-trash" @onclick="@(()=>Delete(R.Id))"></button>
+                        <button class="bi bi-trash" @onclick="@(()=>Delete(@R.Id))"></button>
                     </td>
                     
                 </tr>
@@ -63,7 +63,6 @@ else
             {
                 deletedRestaurant.Status = "Deleted";
                 await _client.PutAsJsonAsync($"{Endpoints.RestaurantsEndpoint}/{restaurantId}",deletedRestaurant);
-                await OnInitializedAsync();
             }
         }
         
