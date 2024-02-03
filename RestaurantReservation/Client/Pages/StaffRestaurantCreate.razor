@@ -3,7 +3,7 @@
 @inject NavigationManager _navManager
 @layout StaffLayout
 
-<div class="restaurant-form">
+<div class="restaurant-form" style="background-color:#e3e3e6;">
 
     <EditForm Model="@newrestaurant" OnValidSubmit="CreateRestaurant">
         <DataAnnotationsValidator />
@@ -16,7 +16,7 @@
         <div class="row justify-content-center">
             
             <div class="mb-3 col-md-3 form-group">
-                <label class="white-color">Restaurant Name:</label>
+                <label>Restaurant Name:</label>
                 <div>
                     <InputText @bind-Value="@newrestaurant.Name" class="form-control" placeholder="Restaurant Name" />
                     <ValidationMessage For="@(() => newrestaurant.Name)" />
@@ -64,10 +64,11 @@
                 </div>
             </div>
             <div class="mb-3 col-md-4 form-group">
-                <label class="white-color">Image Path:</label>
+                <label class="white-color">Upload Your Restaurant Image:</label>
                 <div>
-                    <InputText @bind-Value="@newrestaurant.ImagePath" class="form-control" placeholder="Image Name eg.Image.jpg" />
-                    <ValidationMessage For="@(() => newrestaurant.ImagePath)" />
+                    <div class="mb-3 col-md-3 form-group">
+                        <InputFile OnChange="OnFileChangeForResImage" style="color:white" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -113,33 +114,82 @@
                 </div>
             </div>
         </div>
+
         <div class="row justify-content-center">
             <h2 class="text-center">Menu</h2>
         </div>
         <div class="row justify-content-center">
-            
-            <div class="mb-3 col-md-6 form-group">
-                <label class="white-color">Menu Image Path:</label>
+
+            <div class="mb-3 col-md-3 form-group">
+                <label class="white-color">Upload Your Menu Image</label>
                 <div>
-                    <InputText @bind-Value="@newMenu.ImagePath" class="form-control" placeholder="Image Name eg.Image.jpg" />
-                    <ValidationMessage For="@(() => newMenu.ImagePath)" />
+                    <InputFile OnChange="OnFileChangeForMenuImage" style="color:white" />
                 </div>
+
             </div>
         </div>
 
         <div class="row justify-content-center">
-            <div class="mb-3 col-md-6 form-group">
-                <label class="white-color">Subscription Fees:</label>
-                <div>
-                    <InputSelect @bind-Value="@subscribe.PlatformFee" class="form-control">
-                        <option value="">-- Select Plan --</option>
-                        @foreach (var price in SubscribtionList)
-                        {
-                            <option>@price</option>
-                        }
-                    </InputSelect>
+            <h2 class="text-center">Pick a subscription!</h2>
+        </div>
+        <div class="row row-cols-md-3 mb-3 text-center">
+            <InputRadioGroup @bind-Value="@subscribe.PlatformFee" class="form-control">
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Normal</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">$10<small class="text-body-secondary fw-light">/mo</small></h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Email support</li>
+                                <li>Help center access</li>
+                                <li>-</li>
+                                <li>-</li>
+                            </ul>
+                            <InputRadio Value="10" />
+                            <label class="text-black" for="normalPlan">Choose Plan</label>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Pro</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">$15<small class="text-body-secondary fw-light">/mo</small></h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Customised support</li>
+                                <li>Priority email support</li>
+                                <li>Help center access</li>
+                                <li>-</li>
+                            </ul>
+                            <InputRadio Value="15" />
+                            <label class="text-black" for="proPlan">Choose Plan</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3 ">
+                            <h4 class="my-0 fw-normal">Enterprise</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">$20<small class="text-body-secondary fw-light">/mo</small></h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Dashboard</li>
+                                <li>Speedy reply</li>
+                                <li>Phone and email support</li>
+                                <li>Help center access</li>
+                            </ul>
+                            <InputRadio Value="20" />
+                            <label class="text-black" for="enterprisePlan">Choose Plan</label>
+                        </div>
+                    </div>
+                </div>
+            </InputRadioGroup>
+            <ValidationMessage For="@(() => subscribe.PlatformFee)" />
         </div>
 
         <div class="row justify-content-center">
@@ -340,6 +390,28 @@
 
 
         _navManager.NavigateTo("/restaurantapplication");
+    }
+
+    private async Task OnFileChangeForResImage(InputFileChangeEventArgs e)
+    {
+        var format = "image/png";
+        var resizedImage = await e.File.RequestImageFileAsync(format, 300, 300);
+        var buffer = new byte[resizedImage.Size];
+        await resizedImage.OpenReadStream().ReadAsync(buffer);
+        var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+        newrestaurant.ImagePath = imageData;
+
+    }
+
+    private async Task OnFileChangeForMenuImage(InputFileChangeEventArgs e)
+    {
+        var format = "image/png";
+        var resizedImage = await e.File.RequestImageFileAsync(format, 300, 300);
+        var buffer = new byte[resizedImage.Size];
+        await resizedImage.OpenReadStream().ReadAsync(buffer);
+        var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+        newMenu.ImagePath = imageData;
+
     }
 }
 

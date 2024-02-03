@@ -68,10 +68,11 @@
                 </div>
             </div>
             <div class="mb-3 col-md-4 form-group">
-                <label class="white-color">Image Path:</label>
+                <label class="white-color">Upload Your Restaurant Image:</label>
                 <div>
-                    <InputText @bind-Value="@restaurantapplication.ImagePath" class="form-control" placeholder="Image Name eg.Image.jpg" />
-                    <ValidationMessage For="@(() => restaurantapplication.ImagePath)" />
+                    <div class="mb-3 col-md-3 form-group">
+                        <InputFile OnChange="OnFileChangeForRAImage" style="color:white" />
+                    </div>
                 </div>
             </div>
             <div class="mb-3 col-md-d form-group">
@@ -81,6 +82,12 @@
                     <ValidationMessage For="@(() => restaurantapplication.Description)" />
                 </div>
             </div>
+            <div class="mb-3 col-md-d form-group">
+                <div>
+                    <img src="@restaurantapplication.ImagePath" width="500" />
+                </div>
+            </div>
+
         </div>
 
         <div class="row justify-content-center">
@@ -130,12 +137,12 @@
         </div>
         <div class="row justify-content-center">
             
-            <div class="mb-3 col-md-6 form-group">
-                <label class="white-color">Menu Image Path:</label>
+            <div class="mb-3 col-md-3 form-group">
+                <label class="white-color">Upload Your Menu Image</label>
                 <div>
-                    <InputText @bind-Value="@newMenu.ImagePath" class="form-control" placeholder="Image Name eg.Image.jpg" />
-                    <ValidationMessage For="@(() => newMenu.ImagePath)" />
+                    <InputFile OnChange="OnFileChangeForMenuImage" style="color:white"/>
                 </div>
+                
             </div>
         </div>
 
@@ -203,6 +210,7 @@
             </InputRadioGroup>
             <ValidationMessage For="@(() => subscribe.PlatformFee)" />
         </div>
+
         <div class="row justify-content-center">
             <h2 class="text-center">On days when the restaurant is closed, the opening and closing times should be identical.</h2>
         </div>
@@ -431,7 +439,27 @@
         _navManager.NavigateTo("/");
     }
 
+    private async Task OnFileChangeForRAImage(InputFileChangeEventArgs e)
+    {
+        var format = "image/png";
+        var resizedImage = await e.File.RequestImageFileAsync(format, 300, 300);
+        var buffer = new byte[resizedImage.Size];
+        await resizedImage.OpenReadStream().ReadAsync(buffer);
+        var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+        restaurantapplication.ImagePath = imageData;
 
+    }
+
+    private async Task OnFileChangeForMenuImage(InputFileChangeEventArgs e)
+    {
+        var format = "image/png";
+        var resizedImage = await e.File.RequestImageFileAsync(format, 300, 300);
+        var buffer = new byte[resizedImage.Size];
+        await resizedImage.OpenReadStream().ReadAsync(buffer);
+        var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+        newMenu.ImagePath = imageData;
+
+    }
 }
 
 

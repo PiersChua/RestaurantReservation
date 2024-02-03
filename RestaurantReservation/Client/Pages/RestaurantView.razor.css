@@ -4,6 +4,12 @@
     background-color: #EDEDED;
 }
 
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .bookmark {
     cursor: pointer;
 }

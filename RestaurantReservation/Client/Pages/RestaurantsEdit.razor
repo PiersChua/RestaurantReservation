@@ -12,7 +12,7 @@
         <ValidationSummary />
 
         <div class="row justify-content-center">
-            <h2 class="text-center">Create Restaurant / View Restaurant Application</h2>
+            <h2 class="text-center">Edit Restaurant</h2>
         </div>
 
         <div class="row justify-content-center">
@@ -66,13 +66,19 @@
                 </div>
             </div>
             <div class="mb-3 col-md-4 form-group">
-                <label class="white-color">Image Path:</label>
+                <label class="white-color">Upload Your Restaurant Image:</label>
                 <div>
-                    <InputText @bind-Value="@editRestaurant.ImagePath" class="form-control" placeholder="Image Name eg.Image.jpg" />
-                    <ValidationMessage For="@(() => editRestaurant.ImagePath)" />
+                    <div class="mb-3 col-md-3 form-group">
+                        <InputFile OnChange="OnFileChangeForResImage"/>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="row justify-content-center">
+            <div><img src="@editRestaurant.ImagePath" width="500" /></div>
+        </div>
+
         <div class="row justify-content-center">
             <h2 class="text-center">Restaurant Address</h2>
         </div>
@@ -126,7 +132,19 @@
                 </div>
             </div>
         </div>
+        <div class="row justify-content-center">
 
+            <div class="mb-3 col-md-3 form-group">
+                <label class="white-color">Upload Your Menu Image</label>
+                <div>
+                    <InputFile OnChange="OnFileChangeForMenuImage" />
+                </div>
+
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div><img src="@newMenu.ImagePath" width="500"/></div>
+        </div>
         <div class="row justify-content-center">
             <div class="mb-3 col-md-6 form-group">
                 <label class="white-color">Subscription Fees:</label>
@@ -307,4 +325,25 @@
         _navManager.NavigateTo("/restaurantStaff");
     }
 
+    private async Task OnFileChangeForResImage(InputFileChangeEventArgs e)
+    {
+        var format = "image/png";
+        var resizedImage = await e.File.RequestImageFileAsync(format, 300, 300);
+        var buffer = new byte[resizedImage.Size];
+        await resizedImage.OpenReadStream().ReadAsync(buffer);
+        var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+        editRestaurant.ImagePath = imageData;
+
+    }
+
+    private async Task OnFileChangeForMenuImage(InputFileChangeEventArgs e)
+    {
+        var format = "image/png";
+        var resizedImage = await e.File.RequestImageFileAsync(format, 300, 300);
+        var buffer = new byte[resizedImage.Size];
+        await resizedImage.OpenReadStream().ReadAsync(buffer);
+        var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+        newMenu.ImagePath = imageData;
+
+    }
 }

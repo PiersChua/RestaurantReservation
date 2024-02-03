@@ -50,6 +50,22 @@
 		}
 	</div>
 
+	<h2 class="menu-title"><span class="bi bi-shop"></span> All Restaurants</h2>
+	<div class="wrapper">
+		@foreach (var restaurant in RandomisedRestaurants)
+		{
+
+			<div class="item">
+				<a href="/restaurant/@restaurant.Id"><img src="@restaurant.ImagePath" /></a>	
+				<div class="overlay-name">
+					<p>@restaurant.Name</p>
+				</div>
+			</div>
+
+		}
+
+	</div>
+
 	<MainFooter></MainFooter>
 }
 else
@@ -61,11 +77,16 @@ else
 @code{
 
 	private List<Restaurant>? Restaurants;
+	private List<Restaurant>? RandomisedRestaurants;
+	private Random rng = new Random();
 
 	protected override async Task OnInitializedAsync()
 	{
 		_interceptor.MonitorEvent();
 		Restaurants = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
+
+		RandomisedRestaurants = Restaurants.OrderBy(a => rng.Next()).ToList();
+
 	}
 	public void Dispose()
 	{

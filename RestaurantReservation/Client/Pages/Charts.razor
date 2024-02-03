@@ -102,12 +102,6 @@
 
         totalguest = Reservations.Where(r => r.RestaurantId == id).Sum(r => r.Guest);
 
-
-
-
-
-
-
         januaryCount = Reservations.Where(r => r.Date.Month == 1 && r.RestaurantId == id).Sum(r => r.Guest);
         febuaryCount = Reservations.Where(r => r.Date.Month == 2 && r.RestaurantId == id).Sum(r => r.Guest);
         marchCount = Reservations.Where(r => r.Date.Month == 3 && r.RestaurantId == id).Sum(r => r.Guest);
