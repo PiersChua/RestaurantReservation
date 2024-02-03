@@ -3,48 +3,48 @@
 @inject NavigationManager _navManager
 @layout StaffLayout
 
-<div class="restaurant-form" style="background-color:#e3e3e6;">
+<div class="restaurant-form" style="background-color:#f6f7f8;">
 
     <EditForm Model="@newrestaurant" OnValidSubmit="CreateRestaurant">
         <DataAnnotationsValidator />
         <ValidationSummary />
 
         <div class="row justify-content-center">
-            <h2 class="text-center">Manual Restaurant Creation!</h2>
+            <h2 class="text-center text-black">Manual Restaurant Creation!</h2>
         </div>
 
         <div class="row justify-content-center">
             
             <div class="mb-3 col-md-3 form-group">
-                <label>Restaurant Name:</label>
+                <label class="text-black">Restaurant Name:</label>
                 <div>
                     <InputText @bind-Value="@newrestaurant.Name" class="form-control" placeholder="Restaurant Name" />
                     <ValidationMessage For="@(() => newrestaurant.Name)" />
                 </div>
             </div>
             <div class="mb-3 col-md-3 form-group">
-                <label class="white-color">Email: </label>
+                <label class="text-black">Email: </label>
                 <div>
                     <InputText @bind-Value="@newrestaurant.Email" class="form-control" placeholder="Email" />
                     <ValidationMessage For="@(() => newrestaurant.Email)" />
                 </div>
             </div>
             <div class="mb-3 col-md-3 form-group">
-                <label class="white-color">Cuisine:</label>
+                <label class="text-black">Cuisine:</label>
                 <div>
                     <InputText @bind-Value="@newrestaurant.Cuisine" class="form-control" placeholder="Cuisine eg.Chinese/Korea" />
                     <ValidationMessage For="@(() => newrestaurant.Cuisine)" />
                 </div>
             </div>
             <div class="mb-3 col-md-3 form-group">
-                <label class="white-color">Category:</label>
+                <label class="text-black">Category:</label>
                 <div>
                     <InputText @bind-Value="@newrestaurant.Category" class="form-control" placeholder="Category eg.Hotpot/BBQ" />
                     <ValidationMessage For="@(() => newrestaurant.Category)" />
                 </div>
             </div>
             <div class="mb-3 col-md-4 form-group">
-                <label class="white-color">Location:</label>
+                <label class="text-black">Location:</label>
                 <div>
                     <InputSelect @bind-Value="@newrestaurant.Location" class="form-control">
                         <option value="">-- Select Location --</option>
@@ -57,17 +57,17 @@
             </div>
 
             <div class="mb-3 col-md-4 form-group">
-                <label class="white-color">Phone Number: </label>
+                <label class="text-black">Phone Number: </label>
                 <div>
                     <InputNumber @bind-Value="@newrestaurant.PhoneNumber" class="form-control" placeholder="Phone Number : XXXXXXXX" />
                     <ValidationMessage For="@(() => newrestaurant.PhoneNumber)" />
                 </div>
             </div>
             <div class="mb-3 col-md-4 form-group">
-                <label class="white-color">Upload Your Restaurant Image:</label>
+                <label class="text-black">Upload Your Restaurant Image:</label>
                 <div>
                     <div class="mb-3 col-md-3 form-group">
-                        <InputFile OnChange="OnFileChangeForResImage" style="color:white" />
+                        <InputFile OnChange="OnFileChangeForResImage" />
                     </div>
                 </div>
             </div>
@@ -75,39 +75,39 @@
 
 
         <div class="row justify-content-center">
-            <h2 class="text-center">Restaurant Address</h2>
+            <h2 class="text-center text-black">Restaurant Address</h2>
         </div>
         <div class="row justify-content-center">
             <div class="mb-3 col-md-6 form-group">
-                <label class="white-color">Street Name:</label>
+                <label class="text-black">Street Name:</label>
                 <div>
                     <InputText @bind-Value="@newaddress.Street" class="form-control" placeholder="Street Name: eg. 2 Tampines Central 5" />
                     <ValidationMessage For="@(() => newaddress.Street)" />
                 </div>
             </div>
             <div class="mb-3 col-md-6 form-group">
-                <label class="white-color">Building Name:</label>
+                <label class="text-black">Building Name:</label>
                 <div>
                     <InputText @bind-Value="@newaddress.Building" class="form-control" placeholder="Building: eg. Century Square" />
                     <ValidationMessage For="@(() => newaddress.Building)" />
                 </div>
             </div>
             <div class="mb-3 col-md-6 form-group">
-                <label class="white-color">Level:</label>
+                <label class="text-black">Level:</label>
                 <div>
                     <InputNumber @bind-Value="@newaddress.Level" class="form-control" placeholder="Level: eg. 1" />
                     <ValidationMessage For="@(() => newaddress.Level)" />
                 </div>
             </div>
             <div class="mb-3 col-md-6 form-group">
-                <label class="white-color">Unit Number:</label>
+                <label class="text-black">Unit Number:</label>
                 <div>
                     <InputText @bind-Value="@newaddress.UnitNumber" class="form-control" placeholder="Unit Number: eg. #02-22" />
                     <ValidationMessage For="@(() => newaddress.UnitNumber)" />
                 </div>
             </div>
             <div class="mb-3 col-md-6 form-group">
-                <label class="white-color">Postal Code:</label>
+                <label class="text-black">Postal Code:</label>
                 <div>
                     <InputNumber @bind-Value="@newaddress.PostalCode" class="form-control" placeholder="Postal Code: eg. 529509" />
                     <ValidationMessage For="@(() => newaddress.PostalCode)" />
@@ -116,21 +116,21 @@
         </div>
 
         <div class="row justify-content-center">
-            <h2 class="text-center">Menu</h2>
+            <h2 class="text-center text-black">Menu</h2>
         </div>
         <div class="row justify-content-center">
 
             <div class="mb-3 col-md-3 form-group">
-                <label class="white-color">Upload Your Menu Image</label>
+                <label class="text-black">Upload Your Menu Image</label>
                 <div>
-                    <InputFile OnChange="OnFileChangeForMenuImage" style="color:white" />
+                    <InputFile OnChange="OnFileChangeForMenuImage"  />
                 </div>
 
             </div>
         </div>
 
         <div class="row justify-content-center">
-            <h2 class="text-center">Pick a subscription!</h2>
+            <h2 class="text-center text-black">Pick a subscription!</h2>
         </div>
         <div class="row row-cols-md-3 mb-3 text-center">
             <InputRadioGroup @bind-Value="@subscribe.PlatformFee" class="form-control">
@@ -193,77 +193,77 @@
         </div>
 
         <div class="row justify-content-center">
-            <h2 class="text-center">On days when the restaurant is closed, the opening and closing times should be identical.</h2>
+            <h2 class="text-center text-black">On days when the restaurant is closed, the opening and closing times should be identical.</h2>
         </div>
 
         <div class="row justify-content-center">
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
-                    <label class="white-color">Monday Opening Time:</label>
+                    <label class="text-black">Monday Opening Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@monday.OpeningTime" class="form-control" />
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="white-color">Monday Closing Time:</label>
+                    <label class="text-black">Monday Closing Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@monday.ClosingTime" class="form-control" />
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
-                    <label class="white-color">Tuesday Opening Time:</label>
+                    <label class="text-black">Tuesday Opening Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@tuesday.OpeningTime" class="form-control" />
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="white-color">Tuesday Closing Time:</label>
+                    <label class="text-black">Tuesday Closing Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@tuesday.ClosingTime" class="form-control" />
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
-                    <label class="white-color">Wednesday Opening Time:</label>
+                    <label class="text-black">Wednesday Opening Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@wednesday.OpeningTime" class="form-control" />
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="white-color">Wednesday Closing Time:</label>
+                    <label class="text-black">Wednesday Closing Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@wednesday.ClosingTime" class="form-control" />
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
-                    <label class="white-color">Thursday Opening Time:</label>
+                    <label class="text-black">Thursday Opening Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@thursday.OpeningTime" class="form-control" />
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="white-color">Thursday Closing Time:</label>
+                    <label class="text-black">Thursday Closing Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@thursday.ClosingTime" class="form-control" />
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
-                    <label class="white-color">Friday Opening Time:</label>
+                    <label class="text-black">Friday Opening Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@friday.OpeningTime" class="form-control" />
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="white-color">Friday Closing Time:</label>
+                    <label class="text-black">Friday Closing Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@friday.ClosingTime" class="form-control" />
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
-                    <label class="white-color">Saturday Opening Time:</label>
+                    <label class="text-black">Saturday Opening Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@saturday.OpeningTime" class="form-control" />
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="white-color">Saturday Closing Time:</label>
+                    <label class="text-black">Saturday Closing Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@saturday.ClosingTime" class="form-control" />
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
-                    <label class="white-color">Sunday Opening Time:</label>
+                    <label class="text-black">Sunday Opening Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@sunday.OpeningTime" class="form-control" />
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="white-color">Sunday Closing Time:</label>
+                    <label class="text-black">Sunday Closing Time:</label>
                     <InputDate Type="InputDateType.Time" min="@DateTime.Today.ToString("yyyy-MM-dd")" @bind-Value="@sunday.ClosingTime" class="form-control" />
                 </div>
             </div>
