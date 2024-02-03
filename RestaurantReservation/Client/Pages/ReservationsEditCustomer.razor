@@ -54,7 +54,7 @@
 			<div class="col-md-6 form-group">
 				<label>No. of guests</label>
 				<div>
-					<InputNumber min="1" max="30" @bind-Value="@reservation.Guest" class="form-control" />
+					<InputNumber min="1" max="15" @bind-Value="@reservation.Guest" class="form-control" />
 					<ValidationMessage For="@(() => reservation.Guest)" />
 				</div>
 			</div>
@@ -107,12 +107,27 @@
 		{
 			return;
 		}
-		if (reservation.Date == DateTime.Today && reservation.Time < DateTime.Now)
+		var totalReservations = await _client.GetFromJsonAsync<List<Reservation>>($"{Endpoints.ReservationsEndpoint}");
+		// calculates the number of confirmed reservations 30 minute before and after the time of the reservation, excluding this reservation
+		var reservations = totalReservations.Where(r => r.RestaurantId == reservation.RestaurantId && r.ReservationStatusId == 1 && r.Id != id && r.Date == reservation.Date && r.Time > reservation.Time.AddMinutes(-30) && r.Time < reservation.Time.AddMinutes(30));
+		// add number of guests in the reservation to the total number of guests
+		var guest = reservations.Sum(r => r.Guest) + reservation.Guest;
+		if (guest > 20)
 		{
 			await Swal.FireAsync(new SweetAlertOptions
 				{
 					Title = "Oops",
-					Text = "Invalid Timing, Please try a later time",
+					Text = $" It appears {reservation.Restaurant?.Name} is packed during this time, please try a different time",
+					Icon = "error",
+				});
+			return;
+		}
+		if (reservation.Date == DateTime.Today && reservation.Time < DateTime.Now.AddMinutes(14))
+		{
+			await Swal.FireAsync(new SweetAlertOptions
+				{
+					Title = "Oops",
+					Text = "Please choose a time at least 15 minutes from now",
 					Icon = "warning",
 				});
 			return;
