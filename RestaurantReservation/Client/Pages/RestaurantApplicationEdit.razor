@@ -248,8 +248,6 @@
         </div>
 
     </EditForm>
-    <td><a href="@GetGoogleMapsLink(newaddress)" target="_self">@newaddress.PostalCode</a></td>
-
 
 </div>
 
@@ -277,6 +275,8 @@
     List<int> SubscribtionList = new List<int> { 10, 15, 20 };
     List<string> locationSelections = new List<string> { "North", "South", "East", "West", "NorthEast", "NorthWest", "SouthEast", "SouthWest", "Central" };
 
+    private Boolean error;
+
     protected async override Task OnParametersSetAsync()
     {
         restaurantapplication = await _client.GetFromJsonAsync<RestaurantApplication>($"{Endpoints.RestaurantApplicationsEndpoint}/{id}");
@@ -285,16 +285,57 @@
         subscription = await _client.GetFromJsonAsync<List<Subscription>>($"{Endpoints.SubscriptionsEndpoint}");
         operatinghour = await _client.GetFromJsonAsync<List<OperatingHour>>($"{Endpoints.OperatingHoursEndpoint}");
 
-        newaddress = address.First(q => q.Id == restaurantapplication.AddressId);
-        newMenu = menu.First(q => q.Id == restaurantapplication.MenuId);
-        subscribe = subscription.First(q => q.Id == restaurantapplication.SubscriptionId);
-        monday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId);
-        tuesday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 1);
-        wednesday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 2);
-        thursday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 3);
-        friday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 4);
-        saturday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 5);
-        sunday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 6);
+        if (restaurantapplication.AddressId != null)
+        {
+            newaddress = address.First(q => q.Id == restaurantapplication.AddressId);
+
+        }
+        else
+        {
+            error = true;
+        }
+
+        if (restaurantapplication.MenuId != null)
+        {
+            newMenu = menu.First(q => q.Id == restaurantapplication.MenuId);
+
+        }
+        else
+        {
+            error = true;
+        }
+
+        if (restaurantapplication.SubscriptionId != null)
+        {
+            subscribe = subscription.First(q => q.Id == restaurantapplication.SubscriptionId);
+
+        }
+        else
+        {
+            error = true;
+        }
+
+        if (restaurantapplication.OperatingHourId != null)
+        {
+            monday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId);
+            tuesday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 1);
+            wednesday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 2);
+            thursday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 3);
+            friday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 4);
+            saturday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 5);
+            sunday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 6);
+        }
+        else
+        {
+            error = true;
+        }
+
+        if (error)
+        {
+            await Swal.FireAsync("Oops...", "Some of the entities is empty, deny this application!", "error");
+            _navManager.NavigateTo("/restaurantapplication");
+
+        }
     }
 
 
@@ -326,12 +367,7 @@
         _navManager.NavigateTo("/restaurantapplication");
     }
 
-    string GetGoogleMapsLink(Address newaddress)
-    {
-        string address = $"{newaddress.PostalCode}";
-        string googleMapsUrl = $"https://www.google.com/maps?q={Uri.EscapeDataString(address)}";
-        return googleMapsUrl;
-    }
+
 
         private async Task OnFileChangeForRAImage(InputFileChangeEventArgs e)
     {

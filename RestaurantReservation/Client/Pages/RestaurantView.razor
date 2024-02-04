@@ -3,6 +3,7 @@
 @inject IJSRuntime js
 @inject NavigationManager _navManager
 @layout StaffLayout
+@inject SweetAlertService Swal
 
  
 <div class="restaurant-form" style="background-color:#f6f7f8;">
@@ -12,7 +13,7 @@
         <ValidationSummary />
         <fieldset disabled="true">
             <div class="row justify-content-center">
-                <h2 class="text-center">Create Restaurant / View Restaurant Application</h2>
+                <h2 class="text-center">View Restaurant</h2>
             </div>
 
             <div class="row justify-content-center">
@@ -113,8 +114,8 @@
                 <div class="mb-3 col-md-6 form-group">
                     <label class="white-color">Postal Code:</label>
                     <div>
-                        <InputNumber @bind-Value="@newaddress.PostalCode" class="form-control" placeholder="Postal Code: eg. 529509" />
-                        <ValidationMessage For="@(() => newaddress.PostalCode)" />
+                        <a href="@googleMapsUrl" target="_blank">@newaddress.PostalCode</a>
+
                     </div>
                 </div>
             </div>
@@ -259,9 +260,15 @@
     private List<Subscription>? subscription;
     private List<OperatingHour>? operatinghour;
 
+    private Boolean error;
+    private Boolean errormenu = true;
+    private Boolean errorOH = true;
 
     List<int> SubscribtionList = new List<int> { 10, 15, 20 };
     List<string> locationSelections = new List<string> { "North", "South", "East", "West", "NorthEast", "NorthWest", "SouthEast", "SouthWest", "Central" };
+
+    string googleMapsUrl;
+    string googleaddress;
 
     protected async override Task OnParametersSetAsync()
     {
@@ -272,18 +279,60 @@
         subscription = await _client.GetFromJsonAsync<List<Subscription>>($"{Endpoints.SubscriptionsEndpoint}");
         operatinghour = await _client.GetFromJsonAsync<List<OperatingHour>>($"{Endpoints.OperatingHoursEndpoint}");
 
-        newaddress = address.First(q => q.Id == editRestaurant.AddressId);
-        newMenu = menu.First(q => q.RestaurantId == id);
-        subscribe = subscription.First(q => q.Id == editRestaurant.SubscriptionId);
+        if (editRestaurant.AddressId != null)
+        {
+            newaddress = address.First(q => q.Id == editRestaurant.AddressId);
 
-        monday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Monday");
-        tuesday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Tuesday");
-        wednesday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Wednesday");
-        thursday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Thursday");
-        friday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Friday");
-        saturday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Saturday");
-        sunday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Sunday");
+        }
+        else
+        {
+            error = true;
+        }
 
+        if (editRestaurant.SubscriptionId != null)
+        {
+            subscribe = subscription.First(q => q.Id == editRestaurant.SubscriptionId);
+
+        }
+        else
+        {
+            error = true;
+        }
+
+        foreach (var singlemenu in menu)
+        {
+            if (singlemenu.RestaurantId == id)
+            {
+                newMenu = menu.First(q => q.RestaurantId == id);
+                errormenu = false;
+            }
+        }
+
+        foreach (var singleOH in operatinghour)
+        {
+            if (singleOH.RestaurantId == id)
+            {
+                monday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Monday");
+                tuesday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Tuesday");
+                wednesday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Wednesday");
+                thursday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Thursday");
+                friday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Friday");
+                saturday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Saturday");
+                sunday = operatinghour.First(q => q.RestaurantId == id && q.Day == "Sunday");
+                errorOH = false;
+            }
+        }
+
+        if (error || errormenu || errorOH)
+        {
+            await Swal.FireAsync("Oops...", "Some of the entities is empty, please delete and create again!", "error");
+            _navManager.NavigateTo("/restaurantStaff");
+        }
+
+
+
+        googleaddress = $"{newaddress.PostalCode}";
+        googleMapsUrl = $"https://www.google.com/maps?q={Uri.EscapeDataString(googleaddress)}";
     }
 
 

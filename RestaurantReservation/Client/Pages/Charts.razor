@@ -29,7 +29,7 @@
         <div class="box">
             <div class="right-side">
                     <div class="box-topic">Average Ratings</div>
-                    <div class="number">@averageRating</div>
+                    <div class="number">@averageRating?.ToString("F2")</div>
 
             </div>
             <i class='bx bx-cart cart three' ></i>
@@ -40,6 +40,8 @@
                     <div class="number">@totalReservations</div>
 
             </div>
+                <i class='bx bxs-cart-download cart four'></i>
+
         </div>
         </div>
     </div>
@@ -84,7 +86,8 @@
     private double totalguest;
 
     private int totalReviews;
-    private double averageRating;
+
+    private double? averageRating;
     private double totalReservations;
 
 
@@ -96,6 +99,8 @@
 
     Restaurant chartRestaurant = new Restaurant();
     private List<Reservation>? Reservations;
+    private List<Review>? reviews;
+
 
     public List<SalesInfo> Sales;
 
@@ -104,6 +109,26 @@
 
         chartRestaurant = await _client.GetFromJsonAsync<Restaurant>($"{Endpoints.RestaurantsEndpoint}/{id}");
         Reservations = await _client.GetFromJsonAsync<List<Reservation>>($"{Endpoints.ReservationsEndpoint}");
+        reviews = await _client.GetFromJsonAsync<List<Review>>($"{Endpoints.ReviewsEndpoint}");
+
+        totalReviews = reviews.Where(r => r.RestaurantId == id).Count();
+
+        averageRating = 0.00;
+
+        if (totalReviews != 0)
+        {
+            foreach (var review in reviews)
+            {
+                if (review.RestaurantId == id)
+                {
+                    averageRating += review.Rating;
+                }
+            }
+            averageRating = averageRating / totalReviews;
+        }
+
+        totalReservations = Reservations.Where(r => r.RestaurantId == id).Count();
+
 
         totalguest = Reservations.Where(r => r.RestaurantId == id).Sum(r => r.Guest);
 

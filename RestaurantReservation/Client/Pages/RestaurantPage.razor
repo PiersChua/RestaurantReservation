@@ -46,7 +46,9 @@
 					<div class="res-details">
 						<div>
 							<h4 class="text-decoration-underline">Address</h4>
-							<p>Street: @restaurant.Address?.Street<br />Building: @restaurant.Address?.Building<br />Level @restaurant.Address?.Level<br />Unit: @restaurant.Address?.UnitNumber<br />Postal Code: @restaurant.Address?.PostalCode</p>
+							<p>
+								Street: @restaurant.Address?.Street<br />Building: @restaurant.Address?.Building<br />Level @restaurant.Address?.Level<br />Unit: @restaurant.Address?.UnitNumber<br />Postal Code:<a href="@googleMapsUrl" target="_blank"> @restaurant.Address?.PostalCode</a>
+							</p>
 						</div>
 						<div class="vl"></div>
 						<div>
@@ -94,7 +96,8 @@
 	private string empty="NA";
 	private string? Username;
 	private bool IsFavourite { get; set; }
-
+	private string googleaddress;
+	private string googleMapsUrl;
 
 	[Parameter]
 	public int id { get; set; }
@@ -118,6 +121,9 @@
 			menu=Menus.First(q=>q.RestaurantId==id);
 			reshour=OperatingHours.Where(q=>q.RestaurantId==id).ToList();
 		}
+
+		googleaddress = $"{restaurant.Address?.PostalCode}";
+		googleMapsUrl = $"https://www.google.com/maps?q={Uri.EscapeDataString(googleaddress)}";
 	}
 	private void NavigateToReview()
 	{

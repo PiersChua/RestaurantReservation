@@ -122,8 +122,7 @@
                 <div class="mb-3 col-md-6 form-group">
                     <label class="white-color">Postal Code:</label>
                     <div>
-                        <InputNumber @bind-Value="@newaddress.PostalCode" class="form-control" placeholder="Postal Code: eg. 529509" />
-                        <ValidationMessage For="@(() => newaddress.PostalCode)" />
+                        <a href="@googleMapsUrl" target="_blank">@newaddress.PostalCode</a>
                     </div>
                 </div>
             </div>
@@ -240,12 +239,19 @@
         </fieldset>
         <div class="row justify-content-center">
             <div class="col-md-auto py-2">
-                <button style="width:712.5px" type="submit" class="btn btn-primary btn-block">Approve Application</button>
+                <button style="width:712.5px" type="submit" class="bi bi-check btn btn-primary btn-block">Approve Application</button>
             </div>
         </div>
+
         <div class="row justify-content-center">
             <div class="col-md-auto py-2">
-                <a style="width:712.5px" class="btn btn-secondary btn-block" href="/restaurantapplication">Back</a>
+                <button style="width:712.5px" type="button" class="bi bi-trash btn btn-danger" @onclick="@(()=>Delete(id))"> Deny Application</button>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-auto py-2">
+                <a style="width:712.5px" class="bi bi-arrow-left-short btn btn-secondary btn-block" href="/restaurantapplication">Back</a>
             </div>
         </div>
     </EditForm>
@@ -281,6 +287,11 @@
     List<int> SubscribtionList = new List<int> { 10, 15, 20 };
     List<string> locationSelections = new List<string> { "North", "South", "East", "West", "NorthEast", "NorthWest", "SouthEast", "SouthWest", "Central" };
 
+    string googleaddress;
+    string googleMapsUrl;
+
+    private Boolean error;
+
     protected async override Task OnParametersSetAsync()
     {
         restaurantapplication = await _client.GetFromJsonAsync<RestaurantApplication>($"{Endpoints.RestaurantApplicationsEndpoint}/{id}");
@@ -290,17 +301,59 @@
         operatinghour = await _client.GetFromJsonAsync<List<OperatingHour>>($"{Endpoints.OperatingHoursEndpoint}");
         restaurant = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
 
-        newaddress = address.First(q => q.Id == restaurantapplication.AddressId);
-        newMenu = menu.First(q => q.Id == restaurantapplication.MenuId);
-        subscribe = subscription.First(q => q.Id == restaurantapplication.SubscriptionId);
+        if (restaurantapplication.AddressId != null)
+        {
+            newaddress = address.First(q => q.Id == restaurantapplication.AddressId);
 
-        monday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId);
-        tuesday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 1);
-        wednesday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 2);
-        thursday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 3);
-        friday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 4);
-        saturday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 5);
-        sunday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 6);
+        }
+        else
+        {
+            error = true;
+        }
+
+        if (restaurantapplication.MenuId != null)
+        {
+            newMenu = menu.First(q => q.Id == restaurantapplication.MenuId);
+
+        }
+        else
+        {
+            error = true;
+        }
+
+        if (restaurantapplication.SubscriptionId != null)
+        {
+            subscribe = subscription.First(q => q.Id == restaurantapplication.SubscriptionId);
+
+        }
+        else
+        {
+            error = true;
+        }
+
+        if (restaurantapplication.OperatingHourId != null)
+        {
+            monday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId);
+            tuesday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 1);
+            wednesday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 2);
+            thursday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 3);
+            friday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 4);
+            saturday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 5);
+            sunday = operatinghour.First(q => q.Id == restaurantapplication.OperatingHourId + 6);
+        }
+        else
+        {
+            error = true;
+        }
+
+        if (error)
+        {
+            await Swal.FireAsync("Oops...", "Some of the entities is empty, deny this application!", "error");
+        }
+
+        googleaddress = $"{newaddress.PostalCode}";
+        googleMapsUrl = $"https://www.google.com/maps?q={Uri.EscapeDataString(googleaddress)}";
+
 
     }
 
@@ -365,4 +418,41 @@
         _navManager.NavigateTo("/restaurantStaff");
     }
 
+    async Task Delete(int RestaurantApplicationId)
+    {
+
+        SweetAlertResult result = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Are you sure?",
+                Text = "This application will be changed to denied!",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Yes, deny it!",
+                CancelButtonText = "No, leave it for now"
+            });
+
+        if (!string.IsNullOrEmpty(result.Value))
+        {
+            await Swal.FireAsync(
+              "Denied",
+              "This Restaurant Application has been denied.",
+              SweetAlertIcon.Success
+              );
+
+            restaurantapplication.Status = "Denied";
+            await _client.PutAsJsonAsync($"{Endpoints.RestaurantApplicationsEndpoint}/{RestaurantApplicationId}", restaurantapplication);
+
+            _navManager.NavigateTo("/restaurantapplication");
+
+        }
+        else if (result.Dismiss == DismissReason.Cancel)
+        {
+            await Swal.FireAsync(
+              "Cancelled",
+              "Your Restaurant Application is safe :)",
+              SweetAlertIcon.Error
+              );
+            _navManager.NavigateTo("/restaurantapplication");
+        }
+    }
 }

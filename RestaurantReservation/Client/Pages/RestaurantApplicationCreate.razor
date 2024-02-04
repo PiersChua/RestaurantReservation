@@ -83,12 +83,10 @@
                     <ValidationMessage For="@(() => restaurantapplication.Description)" />
                 </div>
             </div>
-            <div class="mb-3 col-md-d form-group">
-                <div>
-                    <img src="@restaurantapplication.ImagePath" width="500" />
-                </div>
-            </div>
+        </div>
 
+        <div class="row justify-content-center">
+            <div><img src="@restaurantapplication.ImagePath" width="500" /></div>
         </div>
 
         <div class="row justify-content-center">
@@ -147,7 +145,9 @@
             </div>
         </div>
 
-        
+        <div class="row justify-content-center">
+            <div><img src="@newMenu.ImagePath" width="500" /></div>
+        </div>
 
         <div class="row justify-content-center">
             <h2 class="text-center">Pick a subscription!</h2>
@@ -365,15 +365,18 @@
         menu = await _client.GetFromJsonAsync<List<Menu>>($"{Endpoints.MenusEndpoint}");
         subscription = await _client.GetFromJsonAsync<List<Subscription>>($"{Endpoints.SubscriptionsEndpoint}");
         operatinghour = await _client.GetFromJsonAsync<List<OperatingHour>>($"{Endpoints.OperatingHoursEndpoint}");
+
+        newMenu.ImagePath = "";
+        restaurantapplication.ImagePath = "";
     }
 
     private async Task CreateRestaurantApplication()
     {
-        if (newMenu.ImagePath == null)
+        if (newMenu.ImagePath == "")
         {
             newMenu.ImagePath = "images/noImage.jpg";
         }
-        if (restaurantapplication.ImagePath == null)
+        if (restaurantapplication.ImagePath == "")
         {
             restaurantapplication.ImagePath = "images/noImage.jpg";
         }

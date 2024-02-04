@@ -122,7 +122,7 @@
         <div class="row justify-content-center">
 
             <div class="mb-3 col-md-3 form-group">
-                <label class="text-black">Upload Your Menu Image</label>
+                <label class="text-black">Upload Your Menu Image:</label>
                 <div>
                     <InputFile OnChange="OnFileChangeForMenuImage"  />
                 </div>
@@ -323,6 +323,9 @@
         operatinghour = await _client.GetFromJsonAsync<List<OperatingHour>>($"{Endpoints.OperatingHoursEndpoint}");
 
         createdRestaurantID = restaurantlist.LastOrDefault().Id + 1;
+
+        newMenu.ImagePath = "";
+        newrestaurant.ImagePath = "";
     }
 
     private async Task CreateRestaurant()
@@ -349,6 +352,11 @@
 
         }
 
+        if (newrestaurant.ImagePath == "")
+        {
+            newrestaurant.ImagePath = "images/noImage.jpg";
+        }
+        
         newrestaurant.Status = "Active";
 
         HttpResponseMessage responseRestaurant = await _client.PostAsJsonAsync($"{Endpoints.RestaurantsEndpoint}", newrestaurant);
@@ -377,6 +385,11 @@
         sunday.RestaurantId = createdRestaurantID;
 
         newMenu.RestaurantId = createdRestaurantID;
+
+        if (newMenu.ImagePath == "")
+        {
+            newMenu.ImagePath = "images/noImage.jpg";
+        }
 
         await _client.PostAsJsonAsync($"{Endpoints.MenusEndpoint}", newMenu);
 

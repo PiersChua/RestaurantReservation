@@ -7,7 +7,7 @@
 @attribute [Authorize]
 @inject SweetAlertService Swal
 
-<h2 class="text-center">Restaurants</h2>
+<h2 class="text-center text-black">Restaurants</h2>
 <div class="d-flex justify-content-center align-items-center">
     <a href="/restaurant/staffCreate" class="bi bi-plus-square-fill btn btn-success"> Create Restaurant</a>
 </div>
@@ -35,16 +35,16 @@
                     <td>
                         @if (R.Status == "Deleted")
                         {
-                            <button class="bi bi-arrow-counterclockwise btn btn-outline-dark" @onclick="@(()=>UndoDelete(@R.Id))"></button>
-                            <button class="bi bi-trash btn btn-outline-danger" @onclick="@(()=>ActualDelete(@R.Id))"></button>
+                            <button class="bi bi-arrow-counterclockwise btn btn-dark" @onclick="@(()=>UndoDelete(@R.Id))"></button>
+                            <button class="bi bi-trash btn btn-danger" @onclick="@(()=>ActualDelete(@R.Id))"></button>
                         }
                         else
                         {
-                            <a href="/restaurant/view/@R.Id" class="bi bi-view-list btn btn-outline-primary"></a>
+                            <a href="/restaurant/view/@R.Id" style="margin-right: 6px;" class="bi bi-view-list btn btn-primary"></a>
 
-                            <a href="/restaurant/edit/@R.Id" class="bi bi-pencil btn btn-outline-warning"></a>
+                            <a href="/restaurant/edit/@R.Id" style="margin-right: 6px;" class="bi bi-pencil btn btn-warning"></a>
 
-                            <button class="bi bi-trash btn btn-outline-danger" @onclick="@(()=>Delete(@R.Id))"></button>
+                            <button class="bi bi-trash btn btn-danger" @onclick="@(()=>Delete(@R.Id))"></button>
                         }
 
                     </td>

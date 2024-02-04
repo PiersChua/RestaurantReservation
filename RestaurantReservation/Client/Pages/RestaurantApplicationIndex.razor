@@ -7,7 +7,7 @@
 @layout StaffLayout
 @inject SweetAlertService Swal
 
-<h2 class="text-center">Approve restaurant application</h2>
+<h2 class="text-center text-black">Approve restaurant application</h2>
 <br />
 @if (RestaurantApplication != null)
 {
@@ -30,16 +30,16 @@
                     <td>
                         @if (@RA.Status == "Denied")
                         {
-                            <button class="bi bi-arrow-counterclockwise btn btn-outline-dark" @onclick="@(()=>UndoDelete(RA.Id))"></button>
-                            <button class="bi bi-trash btn btn-outline-danger" @onclick="@(()=>ActualDelete(RA.Id))"></button>
+                            <button class="bi bi-arrow-counterclockwise btn btn-dark" @onclick="@(()=>UndoDelete(RA.Id))"></button>
+                            <button class="bi bi-trash btn btn-danger" @onclick="@(()=>ActualDelete(RA.Id))"></button>
 
                         }
                         else{
-                            <a href="/restaurantApplication/edit/@RA.Id" class="bi bi-pencil btn btn-outline-warning"></a>
+                            <a href="/restaurantApplication/edit/@RA.Id" class="bi bi-pencil btn btn-warning" style="margin-right: 6px;"></a>
 
-                            <a href="/restaurant/create/@RA.Id" class="bi bi-arrow-bar-right btn btn-outline-primary"></a>
+                            <a href="/restaurant/create/@RA.Id" class="bi bi-arrow-bar-right btn btn-primary" style="margin-right: 6px;"></a>
 
-                            <button class="bi bi-trash btn btn-outline-danger" @onclick="@(()=>Delete(RA.Id))"></button>
+                            <button class="bi bi-trash btn btn-danger" @onclick="@(()=>Delete(RA.Id))" style="margin-right: 6px;"></button>
                         }
 
 
