@@ -5,9 +5,14 @@
 @implements IDisposable
 @layout StaffLayout
 @attribute [Authorize]
+@inject SweetAlertService Swal
 
-<h3>Approve restaurant application -Admin Side</h3>
-<br />
+<h2 class="text-center">Restaurants</h2>
+<div class="d-flex justify-content-center align-items-center">
+    <a href="/restaurant/staffCreate" class="bi bi-plus-square-fill btn btn-success"> Create Restaurant</a>
+</div>
+
+
 @if (restaurants != null)
 {
     <table class="table table-responsive table-striped" id="bookingsTable">
@@ -28,9 +33,20 @@
                     <td>@R.Cuisine</td>
                     <td>@R.Status</td>
                     <td>
-                        <a href="/restaurant/edit/@R.Id" class="bi bi-pencil"></a>
+                        @if (R.Status == "Deleted")
+                        {
+                            <button class="bi bi-arrow-counterclockwise btn btn-outline-dark" @onclick="@(()=>UndoDelete(@R.Id))"></button>
+                            <button class="bi bi-trash btn btn-outline-danger" @onclick="@(()=>ActualDelete(@R.Id))"></button>
+                        }
+                        else
+                        {
+                            <a href="/restaurant/view/@R.Id" class="bi bi-view-list btn btn-outline-primary"></a>
 
-                        <button class="bi bi-trash" @onclick="@(()=>Delete(@R.Id))"></button>
+                            <a href="/restaurant/edit/@R.Id" class="bi bi-pencil btn btn-outline-warning"></a>
+
+                            <button class="bi bi-trash btn btn-outline-danger" @onclick="@(()=>Delete(@R.Id))"></button>
+                        }
+
                     </td>
                     
                 </tr>
@@ -52,20 +68,89 @@ else
         restaurants = await _client.GetFromJsonAsync<List<Restaurant>>($"{Endpoints.RestaurantsEndpoint}");
     }
 
-    private async Task Delete(int restaurantId)
+    private async Task UndoDelete(int restaurantId)
     {
         var deletedRestaurant = restaurants.First(q => q.Id == restaurantId);
 
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {deletedRestaurant.Name}?");
-        if (restaurants != null)
-        {
-            if (confirm)
+        await Swal.FireAsync(
+            "Deleted",
+            "The Restaurant is Back!",
+            SweetAlertIcon.Success
+        );
+
+        deletedRestaurant.Status = "Active";
+        await _client.PutAsJsonAsync($"{Endpoints.RestaurantsEndpoint}/{restaurantId}", deletedRestaurant);
+    }
+
+    
+    private async Task Delete(int restaurantId)
+    {
+        var deletedRestaurant = restaurants.First(q => q.Id == restaurantId);
+        SweetAlertResult result = await Swal.FireAsync(new SweetAlertOptions
             {
-                deletedRestaurant.Status = "Deleted";
-                await _client.PutAsJsonAsync($"{Endpoints.RestaurantsEndpoint}/{restaurantId}",deletedRestaurant);
-            }
+                Title = "Are you sure?",
+                Text = "You will not be able to recover this Restaurant!",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Yes, delete it!",
+                CancelButtonText = "No, keep it"
+            });
+
+        if (!string.IsNullOrEmpty(result.Value))
+        {
+            await Swal.FireAsync(
+              "Deleted",
+              "This Restaurant has been deleted.",
+              SweetAlertIcon.Success
+              );
+
+            deletedRestaurant.Status = "Deleted";
+            await _client.PutAsJsonAsync($"{Endpoints.RestaurantsEndpoint}/{restaurantId}", deletedRestaurant);
+
         }
-        
+        else if (result.Dismiss == DismissReason.Cancel)
+        {
+            await Swal.FireAsync(
+              "Cancelled",
+              "Your Restaurant is safe :)",
+              SweetAlertIcon.Error
+              );
+        }
+    }
+
+    private async Task ActualDelete(int restaurantId)
+    {
+        var deletedRestaurant = restaurants.First(q => q.Id == restaurantId);
+        SweetAlertResult result = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Are you sure?",
+                Text = "You will not be able to recover this Restaurant!",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Yes, delete it!",
+                CancelButtonText = "No, keep it"
+            });
+
+        if (!string.IsNullOrEmpty(result.Value))
+        {
+            await Swal.FireAsync(
+              "Deleted",
+              "This Restaurant has been deleted.",
+              SweetAlertIcon.Success
+              );
+
+            deletedRestaurant.Status = "Deleted";
+            await _client.DeleteAsync($"{Endpoints.RestaurantsEndpoint}/{restaurantId}");
+
+        }
+        else if (result.Dismiss == DismissReason.Cancel)
+        {
+            await Swal.FireAsync(
+              "Cancelled",
+              "Your Restaurant is safe :)",
+              SweetAlertIcon.Error
+              );
+        }
     }
 
     protected async override Task OnAfterRenderAsync(bool firstRender)

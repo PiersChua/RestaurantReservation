@@ -65,7 +65,7 @@
                                     <td>@R.Email</td>
                                     <td>@R.Status</td>
                                     <td>
-                                        <a href="/chart/@R.Id" class="bi bi-pencil btn btn-secondary"> Charts</a>
+                                        <a href="/chart/@R.Id" class="bi bi-pencil btn btn-primary"> Charts</a>
                                     </td>
 
                                 </tr>
@@ -92,12 +92,12 @@
                         <tbody>
                             @foreach (var RA in restaurantapp)
                             {
-                                @if (RA.Status == "Active"){
+                                @if (RA.Status == "Pending"){
                                 <tr>
                                     <td>@RA?.RestaurantName</td>
                                     <td>@RA?.Status</td>
                                     <td>
-                                        <a href="/restaurant/create/@RA.Id" class="bi bi-arrow-bar-right btn btn-secondary" > Approve</a>
+                                        <a href="/restaurant/create/@RA.Id" class="bi bi-arrow-bar-right btn btn-primary"> Approve</a>
                                     </td>
 
                                 </tr>

@@ -3,11 +3,12 @@
 @inject IJSRuntime js
 @inject NavigationManager _navManager
 @layout StaffLayout
+@inject SweetAlertService Swal
 
 
 <div class="restaurant-form" style="background-color:#f6f7f8;">
 
-    <EditForm Model="@editRestaurant" OnValidSubmit="ApproveApplication">
+    <EditForm Model="@editRestaurant" OnValidSubmit="EditRestaurant">
         <DataAnnotationsValidator />
         <ValidationSummary />
 
@@ -303,9 +304,8 @@
 
 
 
-    private async Task ApproveApplication()
+    private async Task EditRestaurant()
     {
-        await js.InvokeVoidAsync("alert", "Restaurant Updated!");
 
         await _client.PutAsJsonAsync($"{Endpoints.RestaurantsEndpoint}/{id}", editRestaurant);
 
@@ -321,6 +321,12 @@
         await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{saturday.Id}", saturday);
         await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{sunday.Id}", sunday);
 
+        await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Success",
+                Text = "Restaurant Edited!",
+                Icon = "success",
+            });
 
         _navManager.NavigateTo("/restaurantStaff");
     }

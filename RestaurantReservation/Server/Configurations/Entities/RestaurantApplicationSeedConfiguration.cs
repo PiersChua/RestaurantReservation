@@ -17,7 +17,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     Cuisine = "Chinese",
                     PhoneNumber = 63864838,
                     Description = "good hotpot,must try!",
-                    Status = "Active",
+                    Status = "Pending",
                     Category = "Hotpot",
                     Location = "East",
 
@@ -39,7 +39,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     Cuisine = "Chinese",
                     PhoneNumber = 62601838,
                     Description = "good hotpot,must try!",
-                    Status = "Active",
+                    Status = "Pending",
                     Category = "Hotpot",
                     Location = "East",
 
@@ -60,7 +60,7 @@ namespace RestaurantReservation.Server.Configurations.Entities
                     Cuisine = "Korea",
                     PhoneNumber = 62601838,
                     Description = "good bbq,100% must try!",
-                    Status = "Active",
+                    Status = "Pending",
                     Category = "BBQ",
                     Location = "East",
 

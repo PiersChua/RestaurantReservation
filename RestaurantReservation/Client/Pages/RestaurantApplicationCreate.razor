@@ -1,6 +1,7 @@
 ﻿@page "/restaurantapplication/create"
 @inject HttpClient _client
 @inject NavigationManager _navManager
+@inject SweetAlertService Swal
 
 
 <div class="restaurant-form">
@@ -433,8 +434,15 @@
         await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", saturday);
         await _client.PostAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}", sunday);
 
-        restaurantapplication.Status = "Active";
+        restaurantapplication.Status = "Pending";
         await _client.PostAsJsonAsync($"{Endpoints.RestaurantApplicationsEndpoint}", restaurantapplication);
+
+        await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Success",
+                Text = "Restaurant Application Created! Contact us if there is any problem!",
+                Icon = "success",
+            });
 
         _navManager.NavigateTo("/");
     }

@@ -3,6 +3,7 @@
 @inject IJSRuntime js
 @inject NavigationManager _navManager
 @layout StaffLayout
+@inject SweetAlertService Swal
 
 
 <div class="restaurant-form " style="background-color:#f6f7f8;">
@@ -352,6 +353,13 @@
         await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{restaurantapplication.OperatingHourId + 4}", friday);
         await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{restaurantapplication.OperatingHourId + 5}", saturday);
         await _client.PutAsJsonAsync($"{Endpoints.OperatingHoursEndpoint}/{restaurantapplication.OperatingHourId + 6}", sunday);
+
+        await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Success",
+                Text = "Restaurant Created!",
+                Icon = "success",
+            });
 
 
         _navManager.NavigateTo("/restaurantStaff");
