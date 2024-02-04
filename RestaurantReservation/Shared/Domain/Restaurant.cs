@@ -12,11 +12,17 @@ namespace RestaurantReservation.Shared.Domain
     public class Restaurant
     {
         public int Id { get; set; }
-		public string? Name { get; set; } 
+        [Required]
+        public string? Name { get; set; }
+        [Required]
         public string? Email { get; set; }
+        [Required]
         public string? Cuisine { get; set; }
+        [Required]
         public string? Category { get; set; }
-		public int? PhoneNumber { get; set; }
+        [Required]
+        public int? PhoneNumber { get; set; }
+        [Required]
         public string? Location { get; set; } // North south east west
 		public string? ImagePath { get; set; }
         public string? Status { get; set; }
